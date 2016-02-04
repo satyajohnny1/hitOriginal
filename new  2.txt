@@ -1,0 +1,6 @@
+										<a href="" class="btn btn-success btn-rounded">Success</a>                                        
+                                        <a href="" class="btn btn-primary btn-rounded">Primary</a>
+                                        <a href="" class="btn btn-default btn-rounded">Default</a>
+                                        <a href="" class="btn btn-info btn-rounded">Info</a>
+                                        <a href="" class="btn btn-warning btn-rounded">Warning</a>
+                                        <a href="" class="btn btn-danger btn-rounded">Danger</a>

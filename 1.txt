@@ -1,0 +1,14 @@
+$b  = strtoupper($_GET["b"]);
+$p  = strtoupper($_GET["p"]);
+$d = strtoupper($_GET["d"]);
+$a  = strtoupper($_GET["a"]);
+$ac = strtoupper($_GET["ac"]);
+$c  = strtoupper($_GET["c"]);
+$e = strtoupper($_GET["e"]);
+$m = strtoupper($_GET["m"]);
+$w = strtoupper($_GET["w"]);
+$tit  = strtoupper($_GET["tit"]);
+$fif = strtoupper($_GET["fif"]);
+$hun = strtoupper($_GET["hun"]);
+$fiv = strtoupper($_GET["fiv"]);
+$rid  = strtoupper($_GET["rid"]);

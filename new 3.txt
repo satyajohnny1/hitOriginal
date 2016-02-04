@@ -1,0 +1,51 @@
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Achu',1000000, 'A', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Ramana gogula',1000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Sasi pretham',100000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Sai kaarthik',800000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	China',1000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Raj-koti',1000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Illayaraja',10000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Deva',5000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Kalyan koduri',1000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Mm srilekha',500000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Ragu kunche',300000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Hemachandra',100000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Sa rajkumar',1800000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Sandeep chowtha',1500000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Sunil kasyap',1000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Bobo sasi',500000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Devi sri',50000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Mm keervani',30000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Thaman s',30000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Mani sharma',5000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Mikky j mayer',6000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	R.p.patnayak',1000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Harris jai raj',7000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	A.r.rehman',150000000, 'B', 'AVL', 7);
+INSERT INTO `tolly_music` (`music_name`, `music_rate`, `music_grade`, `music_status`, `music_rating`) VALUES ('	Yavan Shankar raja',100000000, 'B', 'AVL', 7);
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
