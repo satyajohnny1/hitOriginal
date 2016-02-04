@@ -1,0 +1,1256 @@
+<?
+.$uid." and s.rid = ".$sid.
+
+//============================================================== AJAX CALLS ==========================================
+            
+            
+            //******************** s1 DEV AJAX CALLS  START ************************************
+            
+                $("#s1_a_btn").click(function() {
+                    var s1_a_cost = <?php echo  $s1_a_cost?>        
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s1_a&s1_a_cost='+s1_a_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status1 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s1_rateid").text(rate1);           	     		
+
+
+           	     			$("#s1_a_cost").hide();
+              				$("#s1_a_btn").hide();
+              		
+           	     			
+                  			$("#s1_b_cost").show();
+                  			$("#s1_b_btn").show();
+                  			$("#s1_nxt_s2").show();
+                          	$("#s1_prv_s1").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	
+                	//=================================================================================
+                	
+                	  $("#s1_b_btn").click(function() {
+                    var s1_b_cost = <?php echo  $s1_b_cost?> 
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s1_b&s1_b_cost='+s1_b_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status1 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s1_rateid").text(rate1);           	     		
+
+
+           	     		$("#s1_a_cost").hide();
+          				$("#s1_a_btn").hide();
+          		
+          				$("#s1_b_cost").hide();
+          				$("#s1_b_btn").hide();
+          		
+       	     			
+                  			$("#s1_c_cost").show();
+                  			$("#s1_c_btn").show();
+                  			
+                  			$("#s1_nxt_s2").show();
+                          	$("#s1_prv_s1").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                
+                	
+                	//=================================================================================
+                	
+                	  $("#s1_c_btn").click(function() {
+                    var s1_c_cost = <?php echo  $s1_c_cost?>  
+
+
+                   
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s1_c&s1_c_cost='+s1_c_cost;
+                    $("#curr").text(link);
+                    //alert(link); 
+                    
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status1 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s1_rateid").text(rate1);           	     		
+
+
+           	     		$("#s1_a_cost").hide();
+          				$("#s1_a_btn").hide();
+          		
+          				$("#s1_b_cost").hide();
+          				$("#s1_b_btn").hide();
+          		
+       	     			
+                  			$("#s1_c_cost").hide();
+                  			$("#s1_c_btn").hide();
+
+                  			$("#s1_nxt_s2").show();
+                          	$("#s1_prv_s1").show();
+
+                          	
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	  //******************** s1 DEV AJAX CALLS  END ************************************
+                	
+                	
+                	  //******************** s2 DEV AJAX CALLS  START ************************************
+            
+                $("#s2_a_btn").click(function() {
+                    var s2_a_cost = <?php echo  $s2_a_cost?>        
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s2_a&s2_a_cost='+s2_a_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status2 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s2_rateid").text(rate1);           	     		
+
+
+           	     			$("#s2_a_cost").hide();
+              				$("#s2_a_btn").hide();
+              		
+           	     			
+                  			$("#s2_b_cost").show();
+                  			$("#s2_b_btn").show();
+                  			
+                  			$("#s2_nxt_s3").show();
+                          	$("#s2_prv_s1").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	
+                	//=================================================================================
+                	
+                	  $("#s2_b_btn").click(function() {
+                    var s2_b_cost = <?php echo  $s2_b_cost?>        
+      
+                    var link =   'ratingAjax.php?&rid='+rid+'&sofar='+sofar+'&now=s2_b&s2_b_cost='+s2_b_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status2 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s2_rateid").text(rate1);           	     		
+
+
+           	     		$("#s2_a_cost").hide();
+          				$("#s2_a_btn").hide();
+          		
+          				$("#s2_b_cost").hide();
+          				$("#s2_b_btn").hide();
+          		
+       	     			
+                  			$("#s2_c_cost").show();
+                  			$("#s2_c_btn").show();
+                  			
+
+                  			$("#s2_nxt_s3").show();
+                          	$("#s2_prv_s1").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                
+                	
+                	//=================================================================================
+                	
+                	  $("#s2_c_btn").click(function() {
+                    var s2_c_cost = <?php echo  $s2_c_cost?>        
+       
+                    var link =   'ratingAjax.php?&rid='+rid+'&sofar='+sofar+'&now=s2_c&s2_c_cost='+s2_c_cost;
+                    $("#curr").text(link);
+                    //alert(link); 
+                    
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status2 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s2_rateid").text(rate1);           	     		
+
+
+           	     		$("#s2_a_cost").hide();
+          				$("#s2_a_btn").hide();
+          		
+          				$("#s2_b_cost").hide();
+          				$("#s2_b_btn").hide();
+          		
+       	     			
+                  			$("#s2_c_cost").hide();
+                  			$("#s2_c_btn").hide();
+
+
+                  			$("#s2_nxt_s3").show();
+                          	$("#s2_prv_s1").show();
+
+                          	
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	  //******************** s2 DEV AJAX CALLS  END ************************************
+                	
+                	  //******************** s3 DEV AJAX CALLS  START ************************************
+            
+                $("#s3_a_btn").click(function() {
+                    var s3_a_cost = <?php echo  $s3_a_cost?>        
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s3_a&s3_a_cost='+s3_a_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status3 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s3_rateid").text(rate1);           	     		
+
+
+           	     			$("#s3_a_cost").hide();
+              				$("#s3_a_btn").hide();
+              		
+           	     			
+                  			$("#s3_b_cost").show();
+                  			$("#s3_b_btn").show();
+
+                  			$("#s3_nxt_s4").show();
+                          	$("#s3_prv_s2").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	
+                	//=================================================================================
+                	
+                	  $("#s3_b_btn").click(function() {
+                    var s3_b_cost = <?php echo  $s3_b_cost?>        
+
+                      
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s3_b&s3_b_cost='+s3_b_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status3 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s3_rateid").text(rate1);           	     		
+
+
+           	     		$("#s3_a_cost").hide();
+          				$("#s3_a_btn").hide();
+          		
+          				$("#s3_b_cost").hide();
+          				$("#s3_b_btn").hide();
+          		
+       	     			
+                  			$("#s3_c_cost").show();
+                  			$("#s3_c_btn").show();
+
+
+                  			$("#s3_nxt_s4").show();
+                          	$("#s3_prv_s2").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                
+                	
+                	//=================================================================================
+                	
+                	  $("#s3_c_btn").click(function() {
+                    var s3_c_cost = <?php echo  $s3_c_cost?>        
+      
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s3_c&s3_c_cost='+s3_c_cost;
+                    $("#curr").text(link);
+                    //alert(link); 
+                    
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status3 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s3_rateid").text(rate1);           	     		
+
+
+           	     		$("#s3_a_cost").hide();
+          				$("#s3_a_btn").hide();
+          		
+          				$("#s3_b_cost").hide();
+          				$("#s3_b_btn").hide();
+          		
+       	     			
+                  			$("#s3_c_cost").hide();
+                  			$("#s3_c_btn").hide();
+
+
+                  			$("#s3_nxt_s4").show();
+                          	$("#s3_prv_s2").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	  //******************** s3 DEV AJAX CALLS  END ************************************
+                	
+                	  //******************** s4 DEV AJAX CALLS  START ************************************
+            
+                $("#s4_a_btn").click(function() {
+                    var s4_a_cost = <?php echo  $s4_a_cost?>        
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s4_a&s4_a_cost='+s4_a_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status4 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s4_rateid").text(rate1);           	     		
+
+
+           	     			$("#s4_a_cost").hide();
+              				$("#s4_a_btn").hide();
+              		
+           	     			
+                  			$("#s4_b_cost").show();
+                  			$("#s4_b_btn").show();
+                  			
+                  			$("#s4_nxt_s5").show();
+                          	$("#s4_prv_s3").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	
+                	//=================================================================================
+                	
+                	  $("#s4_b_btn").click(function() {
+                    var s4_b_cost = <?php echo  $s4_b_cost?>        
+     
+                    var link =   'ratingAjax.php?&rid='+rid+'&sofar='+sofar+'&now=s4_b&s4_b_cost='+s4_b_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status4 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s4_rateid").text(rate1);           	     		
+
+
+           	     		$("#s4_a_cost").hide();
+          				$("#s4_a_btn").hide();
+          		
+          				$("#s4_b_cost").hide();
+          				$("#s4_b_btn").hide();
+          		
+       	     			
+                  			$("#s4_c_cost").show();
+                  			$("#s4_c_btn").show();
+                  			
+                  			
+                  			$("#s4_nxt_s5").show();
+                          	$("#s4_prv_s3").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                
+                	
+                	//=================================================================================
+                	
+                	  $("#s4_c_btn").click(function() {
+                    var s4_c_cost = <?php echo  $s4_c_cost?>        
+    
+                    var link =   'ratingAjax.php?&rid='+rid+'&sofar='+sofar+'&now=s4_c&s4_c_cost='+s4_c_cost;
+                    $("#curr").text(link);
+                    //alert(link); 
+                    
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status4 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s4_rateid").text(rate1);           	     		
+
+
+           	     		$("#s4_a_cost").hide();
+          				$("#s4_a_btn").hide();
+          		
+          				$("#s4_b_cost").hide();
+          				$("#s4_b_btn").hide();
+          		
+       	     			
+                  			$("#s4_c_cost").hide();
+                  			$("#s4_c_btn").hide();
+
+                  			
+                  			$("#s4_nxt_s5").show();
+                          	$("#s4_prv_s3").show();
+
+                          	
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	  //******************** s4 DEV AJAX CALLS  END ************************************
+                	
+                	  //******************** s5 DEV AJAX CALLS  START ************************************
+            
+                $("#s5_a_btn").click(function() {
+                    var s5_a_cost = <?php echo  $s5_a_cost?>        
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s5_a&s5_a_cost='+s5_a_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status5 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s5_rateid").text(rate1);           	     		
+
+
+           	     			$("#s5_a_cost").hide();
+              				$("#s5_a_btn").hide();
+              		
+           	     			
+                  			$("#s5_b_cost").show();
+                  			$("#s5_b_btn").show();
+
+                  			
+                  			$("#s5_nxt_s6").show();
+                          	$("#s5_prv_s4").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	
+                	//=================================================================================
+                	
+                	  $("#s5_b_btn").click(function() {
+                    var s5_b_cost = <?php echo  $s5_b_cost?>        
+
+                         
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s5_b&s5_b_cost='+s5_b_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status5 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s5_rateid").text(rate1);           	     		
+
+
+           	     		$("#s5_a_cost").hide();
+          				$("#s5_a_btn").hide();
+          		
+          				$("#s5_b_cost").hide();
+          				$("#s5_b_btn").hide();
+          		
+       	     			
+                  			$("#s5_c_cost").show();
+                  			$("#s5_c_btn").show();
+                  			
+                  			
+                  			$("#s5_nxt_s6").show();
+                          	$("#s5_prv_s4").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                
+                	
+                	//=================================================================================
+                	
+                	  $("#s5_c_btn").click(function() {
+                    var s5_c_cost = <?php echo  $s5_c_cost?>        
+      
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s5_c&s5_c_cost='+s5_c_cost;
+                    $("#curr").text(link);
+                    //alert(link); 
+                    
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status5 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s5_rateid").text(rate1);           	     		
+
+
+           	     		$("#s5_a_cost").hide();
+          				$("#s5_a_btn").hide();
+          		
+          				$("#s5_b_cost").hide();
+          				$("#s5_b_btn").hide();
+          		
+       	     			
+                  			$("#s5_c_cost").hide();
+                  			$("#s5_c_btn").hide();
+
+                  			
+                  			$("#s5_nxt_s6").show();
+                          	$("#s5_prv_s4").show();
+                          	
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	  //******************** s5 DEV AJAX CALLS  END ************************************
+                	
+                	  //******************** s6 DEV AJAX CALLS  START ************************************
+            
+                $("#s6_a_btn").click(function() {
+                    var s6_a_cost = <?php echo  $s6_a_cost?>        
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s6_a&s6_a_cost='+s6_a_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status6 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s6_rateid").text(rate1);           	     		
+
+
+           	     			$("#s6_a_cost").hide();
+              				$("#s6_a_btn").hide();
+              		
+           	     			
+                  			$("#s6_b_cost").show();
+                  			$("#s6_b_btn").show();
+                  			
+                  			$("#s6_nxt_s7").show();
+                          	$("#s6_prv_s5").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	
+                	//=================================================================================
+                	
+                	  $("#s6_b_btn").click(function() {
+                    var s6_b_cost = <?php echo  $s6_b_cost?>        
+
+                 
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s6_b&s6_b_cost='+s6_b_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status6 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s6_rateid").text(rate1);           	     		
+
+
+           	     		$("#s6_a_cost").hide();
+          				$("#s6_a_btn").hide();
+          		
+          				$("#s6_b_cost").hide();
+          				$("#s6_b_btn").hide();
+          		
+       	     			
+                  			$("#s6_c_cost").show();
+                  			$("#s6_c_btn").show();
+                  			
+                  			
+                  			$("#s6_nxt_s7").show();
+                          	$("#s6_prv_s5").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                
+                	
+                	//=================================================================================
+                	
+                	  $("#s6_c_btn").click(function() {
+                    var s6_c_cost = <?php echo  $s6_c_cost?>        
+
+                    
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s6_c&s6_c_cost='+s6_c_cost;
+                    $("#curr").text(link);
+                    //alert(link); 
+                    
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status6 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s6_rateid").text(rate1);           	     		
+
+
+           	     		$("#s6_a_cost").hide();
+          				$("#s6_a_btn").hide();
+          		
+          				$("#s6_b_cost").hide();
+          				$("#s6_b_btn").hide();
+          		
+       	     			
+                  			$("#s6_c_cost").hide();
+                  			$("#s6_c_btn").hide();
+
+                  			
+                  			$("#s6_nxt_s7").show();
+                          	$("#s6_prv_s5").show();
+                          	
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	  //******************** s6 DEV AJAX CALLS  END ************************************
+                	
+                	  //******************** s7 DEV AJAX CALLS  START ************************************
+            
+                $("#s7_a_btn").click(function() {
+                    var s7_a_cost = <?php echo  $s7_a_cost?>        
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s7_a&s7_a_cost='+s7_a_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status7 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s7_rateid").text(rate1);           	     		
+
+
+           	     			$("#s7_a_cost").hide();
+              				$("#s7_a_btn").hide();
+              		
+           	     			
+                  			$("#s7_b_cost").show();
+                  			$("#s7_b_btn").show();
+                  			
+                  			$("#s7_nxt_s8").show();
+                          	$("#s7_prv_s6").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	
+                	//=================================================================================
+                	
+                	  $("#s7_b_btn").click(function() {
+                    var s7_b_cost = <?php echo  $s7_b_cost?>        
+
+                
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s7_b&s7_b_cost='+s7_b_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status7 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s7_rateid").text(rate1);           	     		
+
+
+           	     		$("#s7_a_cost").hide();
+          				$("#s7_a_btn").hide();
+          		
+          				$("#s7_b_cost").hide();
+          				$("#s7_b_btn").hide();
+          		
+       	     			
+                  			$("#s7_c_cost").show();
+                  			$("#s7_c_btn").show();
+                  			
+                  			$("#s7_nxt_s8").show();
+                          	$("#s7_prv_s6").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                
+                	
+                	//=================================================================================
+                	
+                	  $("#s7_c_btn").click(function() {
+                    var s7_c_cost = <?php echo  $s7_c_cost?>        
+
+                 
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s7_c&s7_c_cost='+s7_c_cost;
+                    $("#curr").text(link);
+                    //alert(link); 
+                    
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status7 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s7_rateid").text(rate1);           	     		
+
+
+           	     		$("#s7_a_cost").hide();
+          				$("#s7_a_btn").hide();
+          		
+          				$("#s7_b_cost").hide();
+          				$("#s7_b_btn").hide();
+          		
+       	     			
+                  			$("#s7_c_cost").hide();
+                  			$("#s7_c_btn").hide();
+
+                  			
+                  			$("#s7_nxt_s8").show();
+                          	$("#s7_prv_s6").show();
+                          	
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	  //******************** s7 DEV AJAX CALLS  END ************************************
+                	
+                	  //******************** s8 DEV AJAX CALLS  START ************************************
+            
+                $("#s8_a_btn").click(function() {
+                    var s8_a_cost = <?php echo  $s8_a_cost?>        
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s8_a&s8_a_cost='+s8_a_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status8 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s8_rateid").text(rate1);           	     		
+
+
+           	     			$("#s8_a_cost").hide();
+              				$("#s8_a_btn").hide();
+              		
+           	     			
+                  			$("#s8_b_cost").show();
+                  			$("#s8_b_btn").show();
+                  			
+                  			$("#s8_nxt_s9").show();
+                          	$("#s8_prv_s7").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	
+                	//=================================================================================
+                	
+                	  $("#s8_b_btn").click(function() {
+                    var s8_b_cost = <?php echo  $s8_b_cost?>        
+      
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s8_b&s8_b_cost='+s8_b_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status8 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s8_rateid").text(rate1);           	     		
+
+
+           	     		$("#s8_a_cost").hide();
+          				$("#s8_a_btn").hide();
+          		
+          				$("#s8_b_cost").hide();
+          				$("#s8_b_btn").hide();
+          		
+       	     			
+                  			$("#s8_c_cost").show();
+                  			$("#s8_c_btn").show();
+
+                  			$("#s8_nxt_s9").show();
+                          	$("#s8_prv_s7").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                
+                	
+                	//=================================================================================
+                	
+                	  $("#s8_c_btn").click(function() {
+                    var s8_c_cost = <?php echo  $s8_c_cost?>        
+
+                
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s8_c&s8_c_cost='+s8_c_cost;
+                    $("#curr").text(link);
+                    //alert(link); 
+                    
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status8 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s8_rateid").text(rate1);           	     		
+
+
+           	     		$("#s8_a_cost").hide();
+          				$("#s8_a_btn").hide();
+          		
+          				$("#s8_b_cost").hide();
+          				$("#s8_b_btn").hide();
+          		
+       	     			
+                  			$("#s8_c_cost").hide();
+                  			$("#s8_c_btn").hide();
+
+                  			$("#s8_nxt_s9").show();
+                          	$("#s8_prv_s7").show();
+                          	
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	  //******************** s8 DEV AJAX CALLS  END ************************************
+                	
+                	  //******************** s9 DEV AJAX CALLS  START ************************************
+            
+                $("#s9_a_btn").click(function() {
+                    var s9_a_cost = <?php echo  $s9_a_cost?>        
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s9_a&s9_a_cost='+s9_a_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status9 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s9_rateid").text(rate1);           	     		
+
+
+           	     			$("#s9_a_cost").hide();
+              				$("#s9_a_btn").hide();
+              		
+           	     			
+                  			$("#s9_b_cost").show();
+                  			$("#s9_b_btn").show();
+
+                  			$("#lastnext").show();
+                          	$("#s9_prv_s8").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	
+                	//=================================================================================
+                	
+                	  $("#s9_b_btn").click(function() {
+                    var s9_b_cost = <?php echo  $s9_b_cost?>        
+
+                    var s9_a_rate = <?php echo  $s9_a_rate?>
+                    var s9_b_rate = <?php echo  $s9_b_rate?>        
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s9_b&s9_b_cost='+s9_b_cost;
+                    //alert(link); 
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status9 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s9_rateid").text(rate1);           	     		
+
+
+           	     		$("#s9_a_cost").hide();
+          				$("#s9_a_btn").hide();
+          		
+          				$("#s9_b_cost").hide();
+          				$("#s9_b_btn").hide();
+          		
+       	     			
+                  			$("#s9_c_cost").show();
+                  			$("#s9_c_btn").show();
+
+                  			$("#lastnext").show();
+                          	$("#s9_prv_s8").show();
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                
+                	
+                	//=================================================================================
+                	
+                	  $("#s9_c_btn").click(function() {
+                    var s9_c_cost = <?php echo  $s9_c_cost?>        
+      
+                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s9_c&s9_c_cost='+s9_c_cost;
+                    $("#curr").text(link);
+                    //alert(link); 
+                    
+
+                       
+                	$.ajax({
+           		     type: "POST",
+           		      url: link,            		    
+           	          success: function( data ) {	             
+           	              toastr.info(data," Notification ");
+           	               	var obj = jQuery.parseJSON(data);
+           	       			var rate1 = obj.rate;
+           	       			var sofar1 = obj.sofar;
+           	       			var bal1 = obj.bal;
+           	     			var status9 = obj.status;
+
+           	     			$("#s_sofar").text(sofar1);
+           	     			$("#bal_id").text(bal1);
+           	     			$("#s_bal").text(bal1);
+           	     			$("#s9_rateid").text(rate1);           	     		
+
+
+           	     		$("#s9_a_cost").hide();
+          				$("#s9_a_btn").hide();
+          		
+          				$("#s9_b_cost").hide();
+          				$("#s9_b_btn").hide();
+          		
+       	     			
+                  			$("#s9_c_cost").hide();
+                  			$("#s9_c_btn").hide();
+
+                  			$("#lastnext").show();
+                          	$("#s9_prv_s8").show();
+                          	
+           	           },	          
+           	           error: function( xhr, status, errorThrown ) {
+           	        	   toastr.error( "Sorry, there was a problem!" );	              
+           	           }
+           		    })
+                	})
+                	  //******************** s9 DEV AJAX CALLS  END ************************************
+                	
+  
+ // ************************  AJAX CALLS END  ************************  
