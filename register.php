@@ -60,7 +60,7 @@
                                         <input type="text" class="form-control" id="banner"  name="banner" placeholder="Your Banner Name" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="email"  name="email" placeholder="Login ID" required>
+                                        <input type="email" class="form-control" id="email"  name="email" placeholder="Email" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control"  id="password"  name="password" placeholder="Password" required>
@@ -126,7 +126,8 @@
 			 var m = $("#email").val();
 			 var u = $("#username").val();
 			var p = $("#password").val();
-
+			var b = $("#banner").val();
+			
 			
 			var link = "http://hitandfut.hostreo.com/activate.php?link=http://www.hitandfut.com/activation.php?email="+m+"&to="+m;
 			var xlink = "http://hitandfut.com/activateMail.php?link=http://www.hitandfut.com/activation.php?email="+m+"&to="+m;
@@ -134,9 +135,14 @@
 			   if(u.length<1)
 			 { toastr.error( "Please Enter Name" );	   
 			 }
+			   else  if(b.length<1)
+				 { toastr.error( "Please Enter Banner/ Production House Name" );	   
+				 }
+				
 			   //else if(m.length<1 || m.indexOf('@')<1)
-			  else if(m.length<5)
-			 { toastr.error( "Please Enter Login ID Minimum of 5 Letters" );	   
+			  //else if(m.length<5)
+			  else if(m.length<1 || m.indexOf('@')<1)
+			 { toastr.error( "Please Enter Valid Email ID" );	   
 			 }
 			 
 			 else  if(p.length<1)
@@ -172,7 +178,7 @@
 							      data: str,
 						          success: function( data ) {
  
-											//toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1>');
+											toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1>');
 										 
 						           },	          
 						           error: function( xhr, status, errorThrown ) {
