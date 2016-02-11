@@ -44,7 +44,7 @@ function clean($string) {
 }
 
 $bg = "bg2.jpg";
-$heroimg = clean($a).'.png';
+$heroimg = clean(strtolower($a)).'.png';
 $jpg_image = imagecreatefromjpeg($bg);
 $fnt = rand(1,13).".ttf";
 $tfnt = rand(1,13).".ttf";
