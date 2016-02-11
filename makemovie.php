@@ -689,7 +689,7 @@ error_reporting(E_ERROR);
 		    	var drate = a.substr(a.indexOf("$")+1, a.indexOf("^")-2);
 		    	var dpic = a.substr(a.indexOf("^")+1, a.length); 
 		    	
-
+				 dpic = dpic.toLowerCase();
 		    	$('#apic').attr('src', dpic);
 
 		    	
