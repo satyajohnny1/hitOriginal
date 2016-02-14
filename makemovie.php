@@ -143,7 +143,7 @@ error_reporting(E_ERROR);
                                                     					$dir_id = $dir_id.'#'.$dir_name.'$'.$dir_rate.'^'.$dir_pic;
                                                     					
                                                     					echo "<tr>";
-                                                    					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
+                                                    					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["director_grade"]."</td>";                                                    					
                                                     					echo  "<td style='display: none;'>".$dir_pic."</td>";
@@ -217,7 +217,7 @@ error_reporting(E_ERROR);
                                                     					$dir_cr = round(($act_rate/10000000),2);
                                                     					
                                                     					echo "<tr>";                                                    					
-                                                    					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
+                                                    					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["actor_grade"]."</td>";
                                                     					 
@@ -296,7 +296,7 @@ error_reporting(E_ERROR);
                                                     					$dir_id = $dir_id.'#'.$dir_name.'$'.$dir_rate.'^'.$ac_pic;
                                                     					
                                                     					echo "<tr>";                                                    					
-                                                    					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
+                                                    					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["actress_grade"]."</td>";
                                                     				 
@@ -372,7 +372,7 @@ error_reporting(E_ERROR);
                                                     					$dir_id = $dir_id.'#'.$dir_name.'$'.$dir_rate.'^'.$ac_pic;
                                                     					
                                                     					echo "<tr>";
-                                                    					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
+                                                    					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td></td>";
                                                     				
@@ -397,7 +397,7 @@ error_reporting(E_ERROR);
 									  <div class="tab-pane fade" id="tab6">
                                               
                                                 <div class="col-md-12">
-                                                       <div class="panel-body">
+                                                  <div class="panel-body">
                                     <form id="make1form" action="makemovie2.php" method="post">
                                     <div style="display: none">
                                         <div class="form-group">
@@ -407,14 +407,14 @@ error_reporting(E_ERROR);
                                             </div>
                                         </div> 
                                         
-                                        <div class="form-group">
+                                        <div class="form-group" style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">Budget</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="budget_id" name="budget_id">
                                             </div>
                                         </div>
                                         
-                                          <div class="form-group">
+                                          <div class="form-group" style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">Director</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="dir_name" name="dir_name">
@@ -422,7 +422,7 @@ error_reporting(E_ERROR);
                                             </div>
                                         </div> 
                                         
-                                        <div class="form-group">
+                                        <div class="form-group" style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">Actors</label>
                                             <div class="col-sm-10">
                                                  <input type="text" class="form-control" id="act_name" name="act_name">
@@ -523,8 +523,10 @@ error_reporting(E_ERROR);
           
             </div>
             <!-- Main Wrapper -->
-
+<br>
+   			<!--  <div class="row" id="showform" style="display: none;">-->
    			<div class="row" id="showform" style="display: none;">
+   			
                         <div class="col-md-10">
                             <div class="login-box">
                                 
@@ -537,21 +539,21 @@ error_reporting(E_ERROR);
                                 
                                 <form class="m-t-md" method="get" id="regform" action="makemovie2.php">
                                    
-                                      <div class="form-group"  style="display: none;">
+                                      <div class="form-group" style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">Title</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="_title_id" name="_title_id">
                                             </div>
                                         </div> 
                                         
-                                        <div class="form-group"  style="display: none;">
+                                        <div class="form-group" style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">Budget</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="_budget_id" name="_budget_id">
                                             </div>
                                         </div>
                                         
-                                          <div class="form-group"  style="display: none;">
+                                          <div class="form-group" style="display: none;"> 
                                             <label for="input-Default" class="col-sm-2 control-label">Director</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="_dir_name" name="_dir_name">
@@ -559,7 +561,7 @@ error_reporting(E_ERROR);
                                             </div>
                                         </div> 
                                         
-                                        <div class="form-group"  style="display: none;">
+                                        <div class="form-group" style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">Actors</label>
                                             <div class="col-sm-10">
                                                  <input type="text" class="form-control" id="_act_name" name="_act_name">
@@ -575,7 +577,7 @@ error_reporting(E_ERROR);
                                             </div>
                                         </div> 
                                         
-                                        <div class="form-group"  style="display: none;">
+                                        <div class="form-group" style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">Witer</label>
                                             <div class="col-sm-10">
                                                  <input type="text" class="form-control" id="_writer_name" name="_writer_name">
@@ -584,8 +586,55 @@ error_reporting(E_ERROR);
                                         </div>
                                         
                                         
+                                          <div class="form-group" style="display: none;">
+                                            <label for="input-Default" class="col-sm-2 control-label">Multi-Starrer</label>
+                                            <div class="col-sm-10">
+                                                 	<input type="text" class="form-control" id="_a2" name="_a2">
+                                                	<input type="text" class="form-control" id="_a2_name" name="_a2_name">                                                	
+                                                	
+                                                 	<input type="text" class="form-control" id="_a3" name="_a3">
+                                                	<input type="text" class="form-control" id="_a3_name" name="_a3_name">
+                                                	
+                                                	
+                                                	
+                                                	
+                                                 	<input type="text" class="form-control" id="_ac2" name="_ac2">
+                                                	<input type="text" class="form-control" id="_ac2_name" name="_ac2_name">
+                                                 	
+                                                 	<input type="text" class="form-control" id="_ac3" name="_ac3">
+                                                 	<input type="text" class="form-control" id="_ac3_name" name="_ac3_name">
+                                                 	
+                                                 	
+                                                 
+                                                 
+                                                 	<input type="text" class="form-control" id="_d2" name="_d2">
+                                                	<input type="text" class="form-control" id="_d2_name" name="_d2_name">                                                	
+                                                	
+                                                 	<input type="text" class="form-control" id="_d3" name="_d3">
+                                                	<input type="text" class="form-control" id="_d3_name" name="_d3_name">
+                                                	
+                                                	
+                                                	
+                                                
+                                                 
+                                                 	<input type="text" class="form-control" id="_w2" name="_w2">
+                                                	<input type="text" class="form-control" id="_w2_name" name="_w2_name">                                                	
+                                                	
+                                                 	<input type="text" class="form-control" id="_w3" name="_w3">
+                                                	<input type="text" class="form-control" id="_w3_name" name="_w3_name">
+                                                	
+                                                	
+                                                	
+                                                	
+                                                 	
+                                                 	
+                                                 	
+                                            </div>
+                                        </div>
+                                        
+                                        
                                                
-                                        <div class="form-group"  style="display: none;">
+                                        <div class="form-group" style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">So _ far</label>
                                             <div class="col-sm-10">
                                                  <input type="text" class="form-control" id="_sofar" name="_sofar">                                                 
@@ -594,7 +643,7 @@ error_reporting(E_ERROR);
                                         
                                         
                                         
-                                          <div class="form-group"  style="display: none;">                                           
+                                          <div class="form-group" style="display: none;">                                           
                                             <div class="col-sm-6 col-md-offset-4">
                                                  <button type="button" class="btn btn-primary" id="_sub_btn">Submit</button>
                                                  <button type="submit" class="btn btn-primary" id="_nxt_btn" style="display: none;">Next</button>
@@ -654,12 +703,19 @@ error_reporting(E_ERROR);
 	// ******************** DIRECTOR RATIO ACTIONS START ***********************
 	$('.r_dir').change(
 		    function(){
-		    	var a = 	$(this).val();
-		    	var did = a.substr(0,a.indexOf("#"));
-		    	var dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2);
-		    	var drate = a.substr(a.indexOf("$")+1, a.indexOf("^")-2);
-		    	var dpic = a.substr(a.indexOf("^")+1, a.length); 
+		    	var did='' ;
+		    	var dname='';
+		    	var drate=0;
+		    	var dpic=''; 		    
 
+		    	$('input[name="r_dir"]:checked').each(function() {
+		    		var a= this.value;
+		    		did = a.substr(0,a.indexOf("#"))+"!"+did;
+			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+			    	drate = drate+parseInt(a.substr(a.indexOf("$")+1, a.indexOf("^")-3));
+			    	dpic = a.substr(a.indexOf("^")+1, a.length);
+		    		});
+		    	
 		    	$('#dpic').attr('src', dpic);
 
 		    	//alert(dpic);
@@ -670,11 +726,13 @@ error_reporting(E_ERROR);
 		    	$("#dir_name").val(dname);
 		    	
 		    	$("#dir_id").val(did);
+		    	if($("input[name=r_dir]:checked").length >= 1 ){
 		    	$("#dir_next").show();
-		    	
+		    	}else{
+		    		$("#dir_next").hide();
+			    	}		    	
 		    	$("#s_dir_rem").hide();
-		    	sofar();
-		     
+		    	sofar();		     
 		    }
 		);	
 	// ******************** DIRECTOR RATIO ACTIONS END  ***********************
@@ -683,26 +741,38 @@ error_reporting(E_ERROR);
 	// ******************** ACTOR RATIO ACTIONS START ***********************
 	$('.r_act').change(
 		    function(){
-		    	var a = 	$(this).val();
-		    	var did = a.substr(0,a.indexOf("#"));
-		    	var dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2);
-		    	var drate = a.substr(a.indexOf("$")+1, a.indexOf("^")-2);
-		    	var dpic = a.substr(a.indexOf("^")+1, a.length); 
+
+ 			 	var did='' ;
+		    	var dname='';
+		    	var drate=0;
+		    	var dpic=''; 		    
+
+		    	$('input[name="r_act"]:checked').each(function() {
+		    		var a= this.value;
+		    		did = a.substr(0,a.indexOf("#"))+"!"+did;
+			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+			    	drate = drate+parseInt(a.substr(a.indexOf("$")+1, a.indexOf("^")-3));
+			    	dpic = a.substr(a.indexOf("^")+1, a.length);
+		    		});
 		    	
-				 dpic = dpic.toLowerCase();
 		    	$('#apic').attr('src', dpic);
 
-		    	
+		    	//alert(dpic);
+		    	 
 		    	$("#s_act").val(dname);
 		    	$("#s_act_id").val(did);
 		    	$("#s_act_rem").val(drate);
 		    	$("#act_name").val(dname);
 		    	
 		    	$("#act_id").val(did);
+		    	if($("input[name=r_act]:checked").length >= 1 ){
 		    	$("#act_next").show();
-
+		    	}else{
+		    		$("#act_next").hide();
+			    	}		    	
 		    	$("#s_act_rem").hide();
 		    	sofar();
+	
 		    }
 		);	
 	// ******************** ACTOR RATIO ACTIONS END  ***********************
@@ -710,42 +780,72 @@ error_reporting(E_ERROR);
 	// ******************** Aactres RATIO ACTIONS START ***********************
 	$('.r_actress').change(
 		    function(){
-		    	var a = 	$(this).val();
-		    	var did = a.substr(0,a.indexOf("#"));
-		    	var dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2);
-		    	var drate = a.substr(a.indexOf("$")+1, a.indexOf("^")-2);
-		    	var dpic = a.substr(a.indexOf("^")+1, a.length); 
+		    	var did='' ;
+		    	var dname='';
+		    	var drate=0;
+		    	var dpic=''; 		    
+
+		    	$('input[name="r_actress"]:checked').each(function() {
+		    		var a= this.value;
+		    		did = a.substr(0,a.indexOf("#"))+"!"+did;
+			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+			    	drate = drate+parseInt(a.substr(a.indexOf("$")+1, a.indexOf("^")-3));
+			    	dpic = a.substr(a.indexOf("^")+1, a.length);
+		    		});
+
+
+		    	
 		    	$('#acpic').attr('src', dpic);
+		    	 
 		    	$("#s_actress").val(dname);
 		    	$("#s_actress_id").val(did);
 		    	$("#s_actress_rem").val(drate);
 		    	$("#actress_name").val(dname);
+		    	
 		    	$("#actress_id").val(did);
+		    	if($("input[name=r_actress]:checked").length >= 1 ){
 		    	$("#actress_next").show();
+		    	}else{
+		    		$("#actress_next").hide();
+			    	}		    	
 		    	$("#s_actress_rem").hide();
-		    	 
 		    	sofar();
-		    }
-		);	
+		    });	
 	// ******************** Aactres RATIO ACTIONS END  ***********************
 
 	
 	// ******************** WRITER RATIO ACTIONS START ***********************
 	$('.r_writer').change(
 		    function(){
-		    	var a = 	$(this).val();
-		    	var did = a.substr(0,a.indexOf("#"));
-		    	var dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2);
-		    	var drate = a.substr(a.indexOf("$")+1, a.indexOf("^")-2);
-		    	var dpic = a.substr(a.indexOf("^")+1, a.length); 
+		    	var did='' ;
+		    	var dname='';
+		    	var drate=0;
+		    	var dpic=''; 		    
+
+		    	$('input[name="r_writer"]:checked').each(function() {
+		    		var a= this.value;
+		    		did = a.substr(0,a.indexOf("#"))+"!"+did;
+			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+			    	drate = drate+parseInt(a.substr(a.indexOf("$")+1, a.indexOf("^")-3));
+			    	dpic = a.substr(a.indexOf("^")+1, a.length);
+		    		});
+
+
 		    	
 		    	$('#wpic').attr('src', dpic);
+		    	 
+		    	 
 		    	$("#s_writer").val(dname);
 		    	$("#s_writer_id").val(did);
 		    	$("#s_writer_rem").val(drate);
 		    	$("#writer_name").val(dname);
+		    	
 		    	$("#writer_id").val(did);
+		    	if($("input[name=r_writer]:checked").length >= 1 ){
 		    	$("#writer_next").show();
+		    	}else{
+		    		$("#writer_next").hide();
+			    	}		    	
 		    	$("#s_writer_rem").hide();
 		    	sofar();
 		    }
@@ -782,14 +882,57 @@ error_reporting(E_ERROR);
 			    
 		    	var tit = $("#title_id").val(); 		    	
 		    	 var bud = $("#budget_id").val(); 
-		    	var did= $("#dir_name").val(); 
-		    	var dv= $("#dir_id").val();
-		    	var aid= $("#act_name").val();
-		    	var av= $("#act_id").val();
-		    	var acid= $("#actress_name").val();
-		    	var acv= $("#actress_id").val();
-		    	var wid= $("#writer_name").val();
-		    	var wv= $("#writer_id").val(); 
+
+
+			    	var did= $("#dir_id").val(); 
+			    	var did_arry =  did.split("!");
+			    	    did = did_arry[0];
+			    	var d2  = did_arry[1];
+			    	var d3  = did_arry[2];
+			    	var dv= $("#dir_name").val();
+			    	var dv_arry =  dv.split("!");
+		    	   		 dv   = dv_arry[0];
+		    		var d2_v  = dv_arry[1];
+		    		var d3_v  = dv_arry[2];
+
+
+			    	var aid= $("#act_id").val(); 
+			    	var aid_arry =  aid.split("!");
+			    	    aid = aid_arry[0];
+			    	var a2  = aid_arry[1];
+			    	var a3  = aid_arry[2];
+			    	var av= $("#act_name").val();
+			    	var av_arry =  av.split("!");
+		    	   		 av   = av_arry[0];
+		    		var a2_v  = av_arry[1];
+		    		var a3_v  = av_arry[2];
+
+
+
+		    		var acid= $("#actress_id").val(); 
+			    	var acid_arry =  acid.split("!");
+			    	    acid = acid_arry[0];
+			    	var ac2  = acid_arry[1];
+			    	var ac3  = acid_arry[2];
+			    	var acv= $("#actress_name").val();
+			    			acv = acv.replace(/\s+/g, " ");
+			    	var acv_arry =  acv.split("!");
+		    	   		 acv   = acv_arry[0];
+		    		var ac2_v  = acv_arry[1];
+		    		var ac3_v  = acv_arry[2];
+
+
+		    		var wid= $("#writer_id").val(); 
+			    	var wid_arry =  wid.split("!");
+			    	    wid = wid_arry[0];
+			    	var w2  = wid_arry[1];
+			    	var w3  = wid_arry[2];
+			    	var wv= $("#writer_name").val();
+			    	var wv_arry =  wv.split("!");
+		    	   		 wv   = wv_arry[0];
+		    		var w2_v  = wv_arry[1];
+		    		var w3_v  = wv_arry[2];
+	 
 		    	var sf =parseFloat($("#sofarlabel").text());		
 		    	if(s_bal<bud || s_bal< sf)
 		    	{
@@ -827,23 +970,49 @@ error_reporting(E_ERROR);
 		    					}  	
 		    	else{
 		    				    		 
-		    		toastr.info("Click on Next to Select MUSIC,EDITOR... ");
+		    		
 		    		  $("#_title_id").val(tit); 		
 		    		   $("#_budget_id").val(bud); 
-		    		 $("#_dir_name").val(did); 
-		    		$("#_dir_id").val(dv);
-		    		 $("#_act_name").val(aid);
-		    		$("#_act_id").val(av);
-		    		 $("#_writer_name").val(wid);
-			    		$("#_writer_id").val(wv);
-		    		 $("#_actress_name").val(acid);
-		    		 $("#_actress_id").val(acv);
+		    		   $("#_dir_name").val(dv);
+		    		  	$("#_dir_id").val(did);
+		    		 $("#_act_name").val(av);
+		    		$("#_act_id").val(aid);
+		    		 $("#_writer_name").val(wv);
+			    	$("#_writer_id").val(wid);
+		    		 $("#_actress_name").val(acv);
+		    		 $("#_actress_id").val(acid);
 		    		 $("#_sofar").val(sf);
 		    		 
-		    		
+
+
+		    		 $("#_d2").val(d2);
+		    		 $("#_d3").val(d3);
+		    		 $("#_d2_name").val(d2_v);
+		    		 $("#_d3_name").val(d3_v);
+
+		    		 
+		    		 $("#_a2").val(a2);
+		    		 $("#_a3").val(a3);
+		    		 $("#_a2_name").val(a2_v);
+		    		 $("#_a3_name").val(a3_v);
+
+		    		 
+		    		 $("#_ac2").val(ac2);
+		    		 $("#_ac3").val(ac3);
+		    		 $("#_ac2_name").val(ac2_v);
+		    		 $("#_ac3_name").val(ac3_v);
+
+		    		 
+		    		 $("#_w2").val(w2);
+		    		 $("#_w3").val(w3);			    		
+		    		 $("#_w2_name").val(w2_v);
+		    		 $("#_w3_name").val(w3_v);
+					    		
 		    			    		
 		    		$("#main-wrapper").hide();
 		    		$("#showform").show();
+
+		    		toastr.info("Click on Next to Select MUSIC,EDITOR... ");
 		  		 
 			    	} 
 		    		     
@@ -864,6 +1033,60 @@ error_reporting(E_ERROR);
 		 }
 
 
+		
+	 $("input[name=r_dir]").change(function(){
+		    var max= 3;
+		    if($("input[name=r_dir]:checked").length >= max ){
+		    	toastr.info("<h3>Maximum 3 Directors Only</h3>");			   
+		        $("input[name=r_dir]").attr('disabled', 'disabled');
+		        $("input[name=r_dir]:checked").removeAttr('disabled');
+		    }else{
+		         $("input[name=r_dir]").removeAttr('disabled');
+		    }
+		});
+
+
+	
+		
+	 $("input[name=r_act]").change(function(){
+		    var max= 3;
+		    if($("input[name=r_act]:checked").length >= max ){
+		    	toastr.info("<h3>Maximum 3 actectors Only</h3>");			   
+		        $("input[name=r_act]").attr('disabled', 'disabled');
+		        $("input[name=r_act]:checked").removeAttr('disabled');
+		    }else{
+		         $("input[name=r_act]").removeAttr('disabled');
+		    }
+		});
+
+
+		
+	 $("input[name=r_actress]").change(function(){
+		    var max= 3;
+		    if($("input[name=r_actress]:checked").length >= max ){
+		    	toastr.info("<h3>Maximum 3 actectors Only</h3>");			   
+		        $("input[name=r_actress]").attr('disabled', 'disabled');
+		        $("input[name=r_actress]:checked").removeAttr('disabled');
+		    }else{
+		         $("input[name=r_actress]").removeAttr('disabled');
+		    }
+		});
+
+	
+		
+	 $("input[name=r_writer]").change(function(){
+		    var max= 3;
+		    if($("input[name=r_writer]:checked").length >= max ){
+		    	toastr.info("<h3>Maximum 3 actectors Only</h3>");			   
+		        $("input[name=r_writer]").attr('disabled', 'disabled');
+		        $("input[name=r_writer]:checked").removeAttr('disabled');
+		    }else{
+		         $("input[name=r_writer]").removeAttr('disabled');
+		    }
+		});
+
+
+	
 
 	
 	</script>

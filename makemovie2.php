@@ -107,7 +107,7 @@ error_reporting(E_ERROR);
                                                     					$dir_id = $dir_id.'#'.$dir_name.'$'.$dir_rate;
                                                     					$dir_cr = round(($dir_rate/10000000),2);
                                                     					echo "<tr>";
-                                                    					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
+                                                    					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$row["music_grade"]."</td>";
                                                     					 
@@ -312,7 +312,52 @@ error_reporting(E_ERROR);
                                             </div>
                                         </div>
                                         
-                                        
+                                        <div class="form-group">
+                                            <label for="input-Default" class="col-sm-2 control-label">Multi-Starrer</label>
+                                            <div class="col-sm-10">
+                                                 	<input type="text" class="form-control" id="a2" name="a2"  value="<?php echo $_GET ['_a2'];?>">
+                                                	<input type="text" class="form-control" id="a2_name" name="a2_name" value="<?php echo $_GET ['_a2_name'];?>">                                                	
+                                                	
+                                                 	<input type="text" class="form-control" id="a3" name="a3" value="<?php echo $_GET ['_a3'];?>">
+                                                	<input type="text" class="form-control" id="a3_name" name="a3_name" value="<?php echo $_GET ['_a3_name'];?>">
+                                                	
+                                                	
+                                                	
+                                                	
+                                                 	<input type="text" class="form-control" id="ac2" name="ac2" value="<?php echo $_GET ['_ac2'];?>">
+                                                	<input type="text" class="form-control" id="ac2_name" name="ac2_name" value="<?php echo $_GET ['_ac2_name'];?>">
+                                                 	
+                                                 	<input type="text" class="form-control" id="ac3" name="ac3" value="<?php echo $_GET ['_ac3'];?>">
+                                                 	<input type="text" class="form-control" id="ac3_name" name="ac3_name" value="<?php echo $_GET ['_ac3_name'];?>">
+                                                 	
+                                                 	
+                                                 
+                                                 
+                                                 	<input type="text" class="form-control" id="d2" name="d2" value="<?php echo $_GET ['_d2'];?>">
+                                                	<input type="text" class="form-control" id="d2_name" name="d2_name" value="<?php echo $_GET ['_d2_name'];?>">                                               	
+                                                	
+                                                 	<input type="text" class="form-control" id="d3" name="d3" value="<?php echo $_GET ['_d3'];?>">
+                                                	<input type="text" class="form-control" id="d3_name" name="d3_name" value="<?php echo $_GET ['_d3_name'];?>">
+                                                	
+                                                	
+                                                	
+                                                
+                                                 
+                                                 	<input type="text" class="form-control" id="w2" name="w2" value="<?php echo $_GET ['_w2'];?>">
+                                                	<input type="text" class="form-control" id="w2_name" name="w2_name" value="<?php echo $_GET ['_w2_name'];?>">                                             	
+                                                	
+                                                 	<input type="text" class="form-control" id="w3" name="w3" value="<?php echo $_GET ['_w3'];?>">
+                                                	<input type="text" class="form-control" id="w3_name" name="w3_name"value="<?php echo $_GET ['_w3_name'];?>">                                             	
+                                                	
+                                                	
+                                                	
+                                                	
+                                                	
+                                                 	
+                                                 	
+                                                 	
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label for="input-Default" class="col-sm-2 control-label">cine</label>
                                             <div class="col-sm-10">
@@ -422,7 +467,7 @@ error_reporting(E_ERROR);
                                     </div>
                                 
                                 
-                                <form class="m-t-md" method="get" id="regform" action="makemovieAjax.php">
+                                <form class="m-t-md" method="get" id="regform" action="makemovieAjax.php" >
                                    
                                       <div class="form-group"  style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">Title</label>
@@ -431,14 +476,14 @@ error_reporting(E_ERROR);
                                             </div>
                                         </div> 
                                         
-                                        <div class="form-group"  style="display: none;">
+                                        <div class="form-group" style="display: none;" >
                                             <label for="input-Default" class="col-sm-2 control-label">Budget</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="_budget_id" name="_budget_id">
                                             </div>
                                         </div>
                                         
-                                          <div class="form-group"  style="display: none;">
+                                          <div class="form-group" style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">Director</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="_dir_name" name="_dir_name">
@@ -469,9 +514,65 @@ error_reporting(E_ERROR);
                                                 <input type="text" class="form-control" id="_writer_id" name="_writer_id">
                                             </div>
                                         </div>
-                                  
+                                  <div class="form-group" style="display: none;">
+                                            <label for="input-Default" class="col-sm-2 control-label">Multi-Starrer</label>
+                                            <div class="col-sm-10">
+                                                 	<input type="text" class="form-control" id="_a2" name="_a2">
+                                                	<input type="text" class="form-control" id="_a2_name" name="_a2_name">                                                	
+                                                	
+                                                 	<input type="text" class="form-control" id="_a3" name="_a3">
+                                                	<input type="text" class="form-control" id="_a3_name" name="_a3_name">
+                                                	
+                                                	
+                                                	
+                                                	
+                                                 	<input type="text" class="form-control" id="_ac2" name="_ac2">
+                                                	<input type="text" class="form-control" id="_ac2_name" name="_ac2_name">
+                                                 	
+                                                 	<input type="text" class="form-control" id="_ac3" name="_ac3">
+                                                 	<input type="text" class="form-control" id="_ac3_name" name="_ac3_name">
+                                                 	
+                                                 	
+                                                 
+                                                 
+                                                 	<input type="text" class="form-control" id="_d2" name="_d2">
+                                                	<input type="text" class="form-control" id="_d2_name" name="_d2_name">                                                	
+                                                	
+                                                 	<input type="text" class="form-control" id="_d3" name="_d3">
+                                                	<input type="text" class="form-control" id="_d3_name" name="_d3_name">
+                                                	
+                                                	
+                                                	
+                                                
+                                                 
+                                                 	<input type="text" class="form-control" id="_w2" name="_w2">
+                                                	<input type="text" class="form-control" id="_w2_name" name="_w2_name">                                                	
+                                                	
+                                                 	<input type="text" class="form-control" id="_w3" name="_w3">
+                                                	<input type="text" class="form-control" id="_w3_name" name="_w3_name">
+                                                	
+                                                	
+                                                	
+                                                	
+                                                 	
+                                                 	<input type="text" class="form-control" id="_m2" name="_m2">
+                                                	<input type="text" class="form-control" id="_m2_name" name="_m2_name">                                                	
+                                                	
+                                                 	<input type="text" class="form-control" id="_m3" name="_m3">
+                                                	<input type="text" class="form-control" id="_m3_name" name="_m3_name">
+                                                	
+                                                	
+                                                	
+                                                	
+                                                 	
+                                                 	
+                                                 	
+                                            </div>
+                                        </div>
+                                        
+                                        
                                       
-                                         <div class=class="form-group"  style="display: none;">
+                                         <div class="form-group"  style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">cine</label>
                                             <div class="col-sm-10">
                                                  <input type="text" class="form-control" id="_cine_name" name="_cine_name" >
@@ -479,7 +580,7 @@ error_reporting(E_ERROR);
                                             </div>
                                         </div>
                                         
-                                         <div class=class="form-group"  style="display: none;">
+                                         <div class="form-group"  style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">music</label>
                                             <div class="col-sm-10">
                                                  <input type="text" class="form-control" id="_mus_name" name="_mus_name" >
@@ -487,7 +588,7 @@ error_reporting(E_ERROR);
                                             </div>
                                         </div>
                                         
-                                         <div class=class="form-group"  style="display: none;">
+                                         <div class="form-group"  style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">editor</label>
                                             <div class="col-sm-10">
                                                  <input type="text" class="form-control" id="_edi_name" name="_edi_name" >
@@ -495,7 +596,7 @@ error_reporting(E_ERROR);
                                             </div>
                                         </div>
                                           
-                                         <div class=class="form-group"  style="display: none;">
+                                         <div class="form-group"  style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">SO-FAR</label>
                                             <div class="col-sm-10">
                                                  <input type="text" class="form-control" id="_sofar" name="_sofar" >
@@ -554,16 +655,32 @@ error_reporting(E_ERROR);
 	// ******************** MUSIC RATIO ACTIONS START ***********************
 	$('.r_mus').change(
 		    function(){
-		    	var a = 	$(this).val();
-		    	var did = a.substr(0,a.indexOf("#"));
-		    	var dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2);
-		    	var drate = a.substr(a.indexOf("$")+1, a.length);  
+		    	var did='' ;
+		    	var dname='';
+		    	var drate=0;
+		    	var dpic=''; 		    
+
+		    	$('input[name="r_mus"]:checked').each(function() {
+		    		var a= this.value;
+		    		//alert(a);
+		    		did = a.substr(0,a.indexOf("#"))+"!"+did;
+			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+			    	drate = drate+parseInt( a.substr(a.indexOf("$")+1, a.length));
+			    	//alert(drate);
+			    	dpic = a.substr(a.indexOf("^")+1, a.length);
+		    		});
+		    	
 		    	$("#s_mus").val(dname);
 		    	$("#s_mus_id").val(did);
 		    	$("#s_mus_rem").val(drate);
 		    	$("#mus_name").val(dname);
+		    	
 		    	$("#mus_id").val(did);
+		    	if($("input[name=r_mus]:checked").length >= 1 ){
 		    	$("#mus_next").show();
+		    	}else{
+		    		$("#mus_next").hide();
+			    	}		    	
 		    	$("#s_mus_rem").hide();
 		    	sofar();
 		    	
@@ -640,8 +757,21 @@ error_reporting(E_ERROR);
 		    	var wid= $("#writer_name").val();
 		    	var wv= $("#writer_id").val(); 
 
-		    	var mid= $("#mus_name").val();
-		    	var mv= $("#mus_id").val(); 
+		    
+
+				var mid= $("#mus_id").val(); 
+		    	var mid_arry =  mid.split("!");
+		    	    mid = mid_arry[0];
+		    	var m2  = mid_arry[1];
+		    	var m3  = mid_arry[2];
+
+		    	
+		    	var mv= $("#mus_name").val();
+		    	var mv_arry =  mv.split("!");
+	    	   		 mv   = mv_arry[0];
+	    		var m2_v  = mv_arry[1];
+	    		var m3_v  = mv_arry[2];
+ 
 
 		    	var cid= $("#cine_name").val();
 		    	var cv= $("#cine_id").val(); 
@@ -649,6 +779,30 @@ error_reporting(E_ERROR);
 		    	var eid= $("#edi_name").val();
 		    	var ev= $("#edi_id").val(); 
 
+
+
+		    	var a2 = $("#a2").val();
+				var a3 = $("#a3").val();
+		    	var ac2 = $("#ac2").val();
+				var ac3 = $("#ac3").val();
+		    	var d2 = $("#d2").val();
+				var d3 = $("#d3").val();
+				var w2 = $("#w2").val();
+				var w3 = $("#w3").val();
+
+				
+
+				var a2_v = $("#a2_name").val();
+				var a3_v = $("#a3_name").val();
+		    	var ac2_v = $("#ac2_name").val();
+				var ac3_v = $("#ac3_name").val();
+		    	var d2_v = $("#d2_name").val();
+				var d3_v = $("#d3_name").val();
+				var w2_v = $("#w2_name").val();
+				var w3_v = $("#w3_name").val();
+				
+		
+				
 		    	var sf =parseFloat($("#sofarlabel").text());
 		    	if(s_bal<bud || s_bal< sf)
 		    	{
@@ -711,8 +865,8 @@ error_reporting(E_ERROR);
 		    		 
 
 		    		 
-		    		   $("#_mus_name").val(mid);
-		    		   $("#_mus_id").val(mv); 
+		    		   $("#_mus_name").val(mv);
+		    		   $("#_mus_id").val(mid); 
 
 		    		    $("#_cine_name").val(cid);
 		    		   $("#_cine_id").val(cv); 
@@ -720,6 +874,42 @@ error_reporting(E_ERROR);
 		    		    $("#_edi_name").val(eid);
 		    		   $("#_edi_id").val(ev); 
 
+		    		   $("#_d2").val(d2);
+			    		 $("#_d3").val(d3);
+			    		 $("#_d2_name").val(d2_v);
+			    		 $("#_d3_name").val(d3_v);
+
+			    		 
+			    		 $("#_a2").val(a2);
+			    		 $("#_a3").val(a3);
+			    		 $("#_a2_name").val(a2_v);
+			    		 $("#_a3_name").val(a3_v);
+
+			    		 
+			    		 $("#_ac2").val(ac2);
+			    		 $("#_ac3").val(ac3);
+			    		 $("#_ac2_name").val(ac2_v);
+			    		 $("#_ac3_name").val(ac3_v);
+
+			    		 
+			    		 $("#_w2").val(w2);
+			    		 $("#_w3").val(w3);			    		
+			    		 $("#_w2_name").val(w2_v);
+			    		 $("#_w3_name").val(w3_v);
+
+			    		 $("#_m2").val(m2);
+			    		 $("#_m3").val(m3);			    		
+			    		 $("#_m2_name").val(m2_v);
+			    		 $("#_m3_name").val(m3_v);
+						    		
+
+
+			    		 $("#_cine_name").val(cid);
+			    		   $("#_cine_id").val(cv); 
+
+			    		    $("#_edi_name").val(eid);
+			    		   $("#_edi_id").val(ev); 
+				    		 
 		    		   $("#_sofar").val(parseFloat(sf)); 
 		    		 		    		 
 		    		
@@ -738,6 +928,7 @@ error_reporting(E_ERROR);
 		 var c =parseFloat($("#s_cine_rem").val());
 			var e =parseFloat($("#s_edi_rem").val());
 			 var o =parseFloat($("#old_sofar").val());
+			 var b = 	$("#budget_id").val();
 
 			 //alert(m);
 			 
@@ -747,6 +938,20 @@ error_reporting(E_ERROR);
 		 
 		 }
 	
+	
+		
+	 $("input[name=r_mus]").change(function(){
+		    var max= 3;
+		    if($("input[name=r_mus]:checked").length >= max ){
+		    	toastr.info("<h3>Maximum 3 Musicians Only</h3>");			   
+		        $("input[name=r_mus]").attr('disabled', 'disabled');
+		        $("input[name=r_mus]:checked").removeAttr('disabled');
+		    }else{
+		         $("input[name=r_mus]").removeAttr('disabled');
+		    }
+		});
+
+
 	
 	
 	</script>

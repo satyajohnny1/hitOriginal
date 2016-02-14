@@ -198,6 +198,19 @@ if(n>20)
 	toastr.error("You not Loggedin / Session Expired", "Please Login");
 }
 
+
+$("#password").keyup(function(event){
+    if(event.keyCode == 13){
+        
+        $("#login").click();
+    }
+});
+$("#email").keyup(function(event){
+    if(event.keyCode == 13){       
+        $("#login").click();
+    }
+});
+
 //-----------------------------FB CODE ----------------------------------------------------
 
   window.fbAsyncInit = function() {
