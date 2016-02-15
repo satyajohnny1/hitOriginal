@@ -1051,7 +1051,7 @@ error_reporting(E_ERROR);
 	 $("input[name=r_act]").change(function(){
 		    var max= 3;
 		    if($("input[name=r_act]:checked").length >= max ){
-		    	toastr.info("<h3>Maximum 3 actectors Only</h3>");			   
+		    	toastr.info("<h3>Maximum 3 Actors Only</h3>");			   
 		        $("input[name=r_act]").attr('disabled', 'disabled');
 		        $("input[name=r_act]:checked").removeAttr('disabled');
 		    }else{
@@ -1064,7 +1064,7 @@ error_reporting(E_ERROR);
 	 $("input[name=r_actress]").change(function(){
 		    var max= 3;
 		    if($("input[name=r_actress]:checked").length >= max ){
-		    	toastr.info("<h3>Maximum 3 actectors Only</h3>");			   
+		    	toastr.info("<h3>Maximum 3 Heroins Only</h3>");			   
 		        $("input[name=r_actress]").attr('disabled', 'disabled');
 		        $("input[name=r_actress]:checked").removeAttr('disabled');
 		    }else{
@@ -1077,7 +1077,7 @@ error_reporting(E_ERROR);
 	 $("input[name=r_writer]").change(function(){
 		    var max= 3;
 		    if($("input[name=r_writer]:checked").length >= max ){
-		    	toastr.info("<h3>Maximum 3 actectors Only</h3>");			   
+		    	toastr.info("<h3>Maximum 3 Writers Only</h3>");			   
 		        $("input[name=r_writer]").attr('disabled', 'disabled');
 		        $("input[name=r_writer]:checked").removeAttr('disabled');
 		    }else{

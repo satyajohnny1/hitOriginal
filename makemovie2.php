@@ -790,6 +790,38 @@ error_reporting(E_ERROR);
 				var w2 = $("#w2").val();
 				var w3 = $("#w3").val();
 
+				if (!a2)
+					a2=0;
+				
+				if (!a3)
+					a3=0;
+				
+				if (!ac2)
+					ac2=0;
+				
+				if (!ac3)
+					ac3=0;
+				
+				if (!w2)
+					w2=0;
+				
+				if (!w3)
+					w3=0;
+
+				if (!d2)
+					d2=0;		
+				
+
+				if (!d3)
+					d3=0;
+				
+				if (!m2)
+					m2=0;		
+				
+
+				if (!m3)
+					m3=0;
+				
 				
 
 				var a2_v = $("#a2_name").val();
@@ -909,6 +941,8 @@ error_reporting(E_ERROR);
 
 			    		    $("#_edi_name").val(eid);
 			    		   $("#_edi_id").val(ev); 
+
+			    	
 				    		 
 		    		   $("#_sofar").val(parseFloat(sf)); 
 		    		 		    		 
