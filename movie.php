@@ -63,7 +63,29 @@ $cinename = '';
  $d150_coll = '';
  $d175_coll = '';
  
+
+ $_a2 = '';
+ $_a3 = '';
+ $_ac2 = '';
+ $_ac3 = '';
+ $_w2 = '';
+ $_w3 = '';
+ $_m2 = '';
+ $_m3 = '';
+ $_d2 = '';
+ $_d3 = '';
  
+ 
+ $_a2_name = '';
+ $_a3_name = '';
+ $_ac2_name = '';
+ $_ac3_name = '';
+ $_w2_name = '';
+ $_w3_name = '';
+ $_m2_name = '';
+ $_m3_name = '';
+ $_d2_name = '';
+ $_d3_name = '';
 $sql = "SELECT * FROM tolly_release s WHERE  s.rid = ".$rid;
 //echo $sql;
 $result = mysqli_query($conn, $sql);
@@ -141,7 +163,28 @@ if (mysqli_num_rows($result) > 0) {
 		   $wriname=$row["wriname"];;
 		   $title = $row["title"];
 		//echo $hit;
-
+		   $_a2 = $row["a2"];
+		   $_a3 = $row["a3"];
+		   $_ac2 = $row["ac2"];
+		   $_ac3 = $row["ac3"];
+		   $_w2 = $row["w2"];
+		   $_w3 = $row["w3"];
+		   $_m2 = $row["m2"];
+		   $_m3 = $row["m3"];
+		   $_d2 = $row["d2"];
+		   $_d3 = $row["d3"];
+		    
+		    
+		   $_a2_name = $row["a2_name"];
+		   $_a3_name = $row["a3_name"];
+		   $_ac2_name = $row["ac2_name"];
+		   $_ac3_name = $row["ac3_name"];
+		   $_w2_name = $row["w2_name"];
+		   $_w3_name = $row["w3_name"];
+		   $_m2_name = $row["m2_name"];
+		   $_m3_name = $row["m3_name"];
+		   $_d2_name = $row["d2_name"];
+		   $_d3_name = $row["d3_name"];
 	}
 }
 
@@ -194,14 +237,31 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                 <div class="panel panel-white">
                                     <div class="panel-body" style="text-align: center;">
                                        
-                                       	<a href="actor.php?id=<?php echo $aid?>" class="btn btn-success btn-rounded"><?php echo $aname?></a>                                        
-                                        <a href="actress.php?id=<?php echo $acid?>" class="btn btn-primary btn-rounded"><?php echo $acname?></a>
-                                        <a href="director.php?id=<?php echo $did?>" class="btn btn-default btn-rounded"><?php echo $dname?></a>
-                                        <a href="music.php?id=<?php echo $mid?>" class="btn btn-info btn-rounded"><?php echo $musname?></a>
-                                        <a href="editor.php?id=<?php echo $eid?>" class="btn btn-warning btn-rounded"><?php echo $ediname?></a>
-                                        <a href="cine.php?id=<?php echo $cid?>" class="btn btn-danger btn-rounded"><?php echo $cinename?></a>
-                                         <a href="writer.php?id=<?php echo $wid?>" class="btn btn-danger btn-rounded"><?php echo $wriname?></a>
-                                         <span><b>Profit/Loss</b></span>
+                                       	<?php
+                                       	echo "<a href=\"actor.php?name=".$aname."&id=".$aid."\" class=\"btn btn-info btn-rounded\">". $aname."</a>";
+                                        
+                                       		if($_a2>0)
+                                       		{
+                                       			echo "<a href=\"actor.php?name=".$_a2_name."&id=".$_a2."\" class=\"btn btn-primary btn-rounded\">". $_a2_name."</a>";
+                                       		}
+                                       		
+                                       		if($_a3>0)
+                                       		{
+                                       			echo "<a href=\"actor.php?name=".$_a3_name."&id==".$_a3."\" class=\"btn btn-warning  btn-rounded\">". $_a3_name."</a>";
+                                       		}
+                                     
+                                       		echo "<a href=\"director.php?name=".$dname."&id=".$did."\" class=\"btn btn-warning btn-rounded\">". $dname."</a>";
+                                        
+                                       		if($_d2>0)
+                                       		{
+                                       			echo "<a href=\"director.php?name=".$_d2_name."&id=".$_d2."\" class=\"btn btn-primary btn-rounded\">". $_d2_name."</a>";
+                                       		}
+                                       		
+                                       		if($_d3>0)
+                                       		{
+                                       			echo "<a href=\"director.php?name=".$_d3_name."&id==".$_d3."\" class=\"btn btn-danger  btn-rounded\">". $_d3_name."</a>";
+                                       		}
+                                       	?><span><b>Profit/Loss</b></span>
                                   <span id="odometer" class="odometer" style="text-align: right;"><?php echo $profit ?></span>
                                     </div>
                                    
@@ -344,7 +404,60 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                             </div>
                         </div>
                         <!-- Row -->
+  <div class="row" >
+                            <div class="col-md-12">
+                                <div class="panel panel-white">
+                                    <div class="panel-body" style="text-align: center;">
+                                    
+                                    	<?php
+                                       		echo "<a href=\"actress.php?name=".$acname."&id=".$acid."\" class=\"btn btn-danger btn-rounded\">". $acname."</a>";
+                                        
+                                       		if($_ac2>0)
+                                       		{
+                                       			echo "<a href=\"actress.php?name=".$_ac2_name."&id=".$_ac2."\" class=\"btn btn-info btn-rounded\">". $_ac2_name."</a>";
+                                       		}
+                                       		
+                                       		if($_ac3>0)
+                                       		{
+                                       			echo "<a href=\"actress.php?name=".$_ac3_name."&id==".$_ac3."\" class=\"btn btn-danger  btn-rounded\">". $_ac3_name."</a>";
+                                       		}
+                                    
 
+                                       		if($_m2>0)
+                                       		{
+                                       			echo "<a href=\"music.php?name=".$_m2_name."&id=".$_m2."\" class=\"btn btn-danger btn-rounded\">". $_m2_name."</a>";
+                                       		}
+                                       		 
+                                       		if($_m3>0)
+                                       		{
+                                       			echo "<a href=\"music.php?name=".$_m3_name."&id=".$_m3."\" class=\"btn btn-warning btn-rounded\">". $_m3_name."</a>";
+                                       		}
+                                       		 
+                                       		if($_w2>0)
+                                       		{
+                                       			echo "<a href=\"music.php?name=".$_w2_name."&id=".$_w2."\" class=\"btn btn-info btn-rounded\">". $_w2_name."</a>";
+                                       		}
+                                       		
+                                       		if($_w3>0)
+                                       		{
+                                       			echo "<a href=\"music.php?name=".$_w3_name."&id=".$_w3."\" class=\"btn btn btn-danger btn-rounded\">". $_w3_name."</a>";
+                                       		}
+                                       		
+                                       		
+                                       
+                                       	   
+                                         echo "<a href=\"music.php?name=".$musname."&id=".$mid."\" class=\"btn btn btn-danger btn-rounded\">". $musname."</a>";
+                                         echo "<a href=\"music.php?name=".$wriname."&id=".$wid."\" class=\"btn btn btn-danger btn-rounded\">". $wriname."</a>";
+                                         ?>
+                                        <a href="editor.php?id=<?php echo $eid?>" class="btn btn-warning btn-rounded"><?php echo $ediname?></a>                                       
+                                         <a href="writer.php?id=<?php echo $wid?>" class="btn btn-danger btn-rounded"><?php echo $wriname?></a>
+                                          <a href="cine.php?id=<?php echo $cid?>" class="btn btn-danger btn-rounded"><?php echo $cinename?></a>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Row -->
                     
                         <div class="row">
                             <div class="col-md-12">

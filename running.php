@@ -50,7 +50,28 @@ $cinename = '';
  $five = '';
  $t5 = '';
 
-
+ $_a2 = '';
+ $_a3 = '';
+ $_ac2 = '';
+ $_ac3 = '';
+ $_w2 = '';
+ $_w3 = '';
+ $_m2 = '';
+ $_m3 = '';
+ $_d2 = '';
+ $_d3 = '';
+ 
+ 
+ $_a2_name = '';
+ $_a3_name = '';
+ $_ac2_name = '';
+ $_ac3_name = '';
+ $_w2_name = '';
+ $_w3_name = '';
+ $_m2_name = '';
+ $_m3_name = '';
+ $_d2_name = '';
+ $_d3_name = '';
 $sql = "SELECT * FROM tolly_release s WHERE s.uid = ".$uid." and s.rid = ".$rid;
 //echo $sql;
 $result = mysqli_query($conn, $sql);
@@ -124,7 +145,28 @@ if (mysqli_num_rows($result) > 0) {
 		   $title = $row["title"];
 		
 		//echo $hit;
-		
+		   $_a2 = $row["a2"];
+		   $_a3 = $row["a3"];
+		   $_ac2 = $row["ac2"];
+		   $_ac3 = $row["ac3"];
+		   $_w2 = $row["w2"];
+		   $_w3 = $row["w3"];
+		   $_m2 = $row["m2"];
+		   $_m3 = $row["m3"];
+		   $_d2 = $row["d2"];
+		   $_d3 = $row["d3"];
+		   
+		   
+		   $_a2_name = $row["a2_name"];
+		   $_a3_name = $row["a3_name"];
+		   $_ac2_name = $row["ac2_name"];
+		   $_ac3_name = $row["ac3_name"];
+		   $_w2_name = $row["w2_name"];
+		   $_w3_name = $row["w3_name"];
+		   $_m2_name = $row["m2_name"];
+		   $_m3_name = $row["m3_name"];
+		   $_d2_name = $row["d2_name"];
+		   $_d3_name = $row["d3_name"];
 
 	}
 }
@@ -195,13 +237,31 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
                                    <div class="panel panel-white">
                                     <div class="panel-body" style="text-align: center;">
                                        
-                                       	<a href="actor.php?id=<?php echo $aid?>" class="btn btn-success btn-rounded"><?php echo $aname?></a>                                        
-                                        <a href="actress.php?id=<?php echo $acid?>" class="btn btn-primary btn-rounded"><?php echo $acname?></a>
-                                        <a href="director.php?id=<?php echo $did?>" class="btn btn-default btn-rounded"><?php echo $dname?></a>
-                                        <a href="music.php?id=<?php echo $mid?>" class="btn btn-info btn-rounded"><?php echo $musname?></a>
-                                        <a href="editor.php?id=<?php echo $eid?>" class="btn btn-warning btn-rounded"><?php echo $ediname?></a>
-                                        <a href="cine.php?id=<?php echo $cid?>" class="btn btn-danger btn-rounded"><?php echo $cinename?></a>
-                                         <a href="writer.php?id=<?php echo $wid?>" class="btn btn-danger btn-rounded"><?php echo $wriname?></a>
+                                       	<?php
+                                       	echo "<a href=\"actor.php?name=".$aname."&id=".$aid."\" class=\"btn btn-info btn-rounded\">". $aname."</a>";
+                                        
+                                       		if($_a2>0)
+                                       		{
+                                       			echo "<a href=\"actor.php?name=".$_a2_name."&id=".$_a2."\" class=\"btn btn-primary btn-rounded\">". $_a2_name."</a>";
+                                       		}
+                                       		
+                                       		if($_a3>0)
+                                       		{
+                                       			echo "<a href=\"actor.php?name=".$_a3_name."&id==".$_a3."\" class=\"btn btn-warning  btn-rounded\">". $_a3_name."</a>";
+                                       		}
+                                     
+                                       		echo "<a href=\"director.php?name=".$dname."&id=".$did."\" class=\"btn btn-warning btn-rounded\">". $dname."</a>";
+                                        
+                                       		if($_d2>0)
+                                       		{
+                                       			echo "<a href=\"director.php?name=".$_d2_name."&id=".$_d2."\" class=\"btn btn-primary btn-rounded\">". $_d2_name."</a>";
+                                       		}
+                                       		
+                                       		if($_d3>0)
+                                       		{
+                                       			echo "<a href=\"director.php?name=".$_d3_name."&id==".$_d3."\" class=\"btn btn-danger  btn-rounded\">". $_d3_name."</a>";
+                                       		}
+                                       	?>
                                          <span><b>Budget</b></span>
                                   <span id="asa" class="n" style="text-align: right;"><b style="font-size:160%;color: red"><?php echo round($sofar/10000000,2) ?> CR</b></span>
                                     </div>
@@ -376,8 +436,52 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
                         <div class="row" >
                             <div class="col-md-12">
                                 <div class="panel panel-white">
-                                    <div class="panel-body">
-                                        <p class="no-s" id="ps">Analaysis</p>
+                                    <div class="panel-body" style="text-align: center;">
+                                    
+                                    	<?php
+                                       		echo "<a href=\"actress.php?name=".$acname."&id=".$acid."\" class=\"btn btn-info btn-rounded\">". $acname."</a>";
+                                        
+                                       		if($_ac2>0)
+                                       		{
+                                       			echo "<a href=\"actress.php?name=".$_ac2_name."&id=".$_ac2."\" class=\"btn btn-primary btn-rounded\">". $_ac2_name."</a>";
+                                       		}
+                                       		
+                                       		if($_ac3>0)
+                                       		{
+                                       			echo "<a href=\"actress.php?name=".$_ac3_name."&id==".$_ac3."\" class=\"btn btn-warning  btn-rounded\">". $_ac3_name."</a>";
+                                       		}
+                                    
+
+                                       		if($_m2>0)
+                                       		{
+                                       			echo "<a href=\"music.php?name=".$_m2_name."&id=".$_m2."\" class=\"btn btn-danger btn-rounded\">". $_m2_name."</a>";
+                                       		}
+                                       		 
+                                       		if($_m3>0)
+                                       		{
+                                       			echo "<a href=\"music.php?name=".$_m3_name."&id=".$_m3."\" class=\"btn btn-warning btn-rounded\">". $_m3_name."</a>";
+                                       		}
+                                       		 
+                                       		if($_w2>0)
+                                       		{
+                                       			echo "<a href=\"music.php?name=".$_w2_name."&id=".$_w2."\" class=\"btn btn-primary btn-rounded\">". $_w2_name."</a>";
+                                       		}
+                                       		
+                                       		if($_w3>0)
+                                       		{
+                                       			echo "<a href=\"music.php?name=".$_w3_name."&id=".$_w3."\" class=\"btn btn btn-warning btn-rounded\">". $_w3_name."</a>";
+                                       		}
+                                       		
+                                       		
+                                       
+                                       	   
+                                         echo "<a href=\"music.php?name=".$musname."&id=".$mid."\" class=\"btn btn btn-primary btn-rounded\">". $musname."</a>";
+                                         echo "<a href=\"music.php?name=".$wriname."&id=".$wid."\" class=\"btn btn btn-danger btn-rounded\">". $wriname."</a>";
+                                         ?>
+                                        <a href="editor.php?id=<?php echo $eid?>" class="btn btn-warning btn-rounded"><?php echo $ediname?></a>                                       
+                                         <a href="writer.php?id=<?php echo $wid?>" class="btn btn-danger btn-rounded"><?php echo $wriname?></a>
+                                          <a href="cine.php?id=<?php echo $cid?>" class="btn btn-primary btn-rounded"><?php echo $cinename?></a>
+                                       <p id="ps" style="display: none;">Link</p>
                                     </div>
                                 </div>
                             </div>
@@ -455,7 +559,8 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
            
          // ////alert(poster);
 
-        if(poster=='no')
+       // 
+       if(poster=='no')
         {
             	var b 	= 		'<?php echo $_SESSION['s_banner']; ?>';
     			var p 	= 		'<?php echo $_SESSION['s_user']; ?>';
@@ -475,10 +580,42 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
     			var sev = 		'<?php echo $sev?>';
     			var onf = 		'<?php echo $onf?>';
 
-    			  var plink = 'poster/poster1.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf;
-    			 //  alert(plink);
+    			var a2 = 		'<?php echo $_a2_name?>';
+    			var a3 = 		'<?php echo $_a3_name?>';
+    			var ac2 = 		'<?php echo $_ac2_name?>';
+    			var ac3 = 		'<?php echo $_ac3_name?>';
+    			var d2 = 		'<?php echo $_d2_name?>';
+    			var d3 = 		'<?php echo $_d3_name?>';
+    			var m2 = 		'<?php echo $_m2_name?>';
+    			var m3 = 		'<?php echo $_m3_name?>';
+    			var w2 = 		'<?php echo $_w2_name?>';
+    			var w3 = 		'<?php echo $_w3_name?>';
+
+    			var a2Chk = '<?php echo $_a2?>';
+    			var a3Chk = '<?php echo $_a3?>';
+
+    			 var plink = 'poster/poster1.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
+   			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
+   			 
+    			
+    			if(a2Chk>0)
+    			{
+    				 plink = 'poster/poster2.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
+       			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
+       			 
+            	}
+
+    			
+    			if(a3Chk>0)
+    			{
+    				 plink = 'poster/poster3.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
+       			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
+       			 
+            	}
+    			 
+    			 
     			   
-    			   $("#ps").text('http://localhost/hits/'+plink);             
+    			   $("#ps").text('http://localhost/hitgit/'+plink);             
     			            $.ajax({
     			                type: "POST",
     			                url: plink,
@@ -494,8 +631,8 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
     			                    toastr.error(errorThrown+"Sorry!"+xhr+" --- "+status);
     			                }
     			            })
-
-    			    
+    			            setTimeout("location.reload(true);", 15000);  
+    			              
         }
 
 

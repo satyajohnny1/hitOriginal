@@ -10,15 +10,6 @@ $c  = strtoupper($_GET["c"]);
 $e = strtoupper($_GET["e"]);
 $m = strtoupper($_GET["m"]);
 $w = strtoupper($_GET["w"]);
-$tit  = strtoupper($_GET["tit"]);
-$fif = $_GET["fif"];
-$hun = $_GET["hun"];
-$fiv = $_GET["fiv"];
-$rid  = $_GET["rid"]; 
-$t5  = $_GET["t5"];
-$sev = $_GET["sev"];
-$onf = $_GET["onf"];
-
 
 $a2 = strtoupper($_GET["a2"]);
 $a3 = strtoupper($_GET["a3"]);
@@ -31,6 +22,20 @@ $d3 = strtoupper($_GET["d3"]);
 $m2 = strtoupper($_GET["m2"]);
 $m3 = strtoupper($_GET["m3"]);
 
+
+
+
+
+
+
+$tit  = strtoupper($_GET["tit"]);
+$fif = $_GET["fif"];
+$hun = $_GET["hun"];
+$fiv = $_GET["fiv"];
+$rid  = $_GET["rid"]; 
+$t5  = $_GET["t5"];
+$sev = $_GET["sev"];
+$onf = $_GET["onf"];
 
 /*
 
@@ -57,7 +62,11 @@ function clean($string) {
 }
 
 $bg = "bg2.jpg";
-$heroimg = clean(strtolower($a)).'.png';
+$heroimg1 = clean(strtolower($a)).'.png';
+$heroimg2 = clean(strtolower($a2)).'.png';
+$heroimg3 = clean(strtolower($a3)).'.png';
+
+
 $jpg_image = imagecreatefromjpeg($bg);
 $fnt = rand(1,13).".ttf";
 $tfnt = rand(1,13).".ttf";
@@ -93,28 +102,48 @@ if($num<15){
   	$cclr = imagecolorallocate($jpg_image,  255, 255, 255); //red  	
   	
   }
-  
 
-  //Merging  HERO imGE CODE--------------
+
+  //=================== HERO-I CODE ================================
   $width = 400;
   $height = 400;
- 
-  $top_image = imagecreatefrompng($heroimg);
+  $top_image = imagecreatefrompng($heroimg1);
   imagesavealpha($top_image, true);
   imagealphablending($top_image, true);
   imagecopy($jpg_image, $top_image, 300, 0, 0, 0, $width, $height);
+  //=================== HERO-I CODE ================================
+  
+  
+
+
+  //=================== HERO-II CODE ================================
+  $width = 400;
+  $height = 400;
+  $top_image = imagecreatefrompng($heroimg2);
+  imagesavealpha($top_image, true);
+  imagealphablending($top_image, true);
+  imagecopy($jpg_image, $top_image, 70, 0, 0, 0, $width, $height);
+  //=================== HERO-II CODE ================================
+  
+  
+
+  //=================== HERO-III CODE ================================
+  $width = 400;
+  $height = 400;
+  $top_image = imagecreatefrompng($heroimg3);
+  imagesavealpha($top_image, true);
+  imagealphablending($top_image, true);
+  imagecopy($jpg_image, $top_image, 550, 0, 0, 0, $width, $height);
+  //=================== HERO-III CODE ================================
+  
+  
+  
+  
   
   //Merging imGE CODE--------------
   //( resource $dst_im , resource $src_im , int $dst_x , int $dst_y , int $src_x , int $src_y , int $src_w , int $src_h )
   
-   //Merging  HITFUT imGE CODE--------------
-  $width = 190;
-  $height = 190;
-  $top_image = imagecreatefrompng("hit.png");
-  imagesavealpha($top_image, true);
-  imagealphablending($top_image, true);
-  imagecopy($jpg_image, $top_image, 0, 60, 0, 0, $width, $height);
-  
+
   //Merging imGE CODE-------------- 
   
 
@@ -126,7 +155,7 @@ if($num<15){
 
  // Hero Data 
    $font_path = $tfnt;    
-  $text = $a.' - '.$ac;
+  $text = $a.'-'.$a2.'-'.$a3;
   imagettftext($jpg_image, 17, 0, 300, 390, $cclr, $font_path, $text);
   
   //top line Data 
@@ -143,25 +172,25 @@ if($num<15){
   $font_path = '3.ttf'; 
 $text = "______________________________________";
   imagettftext($jpg_image, 35, 0, 100, 500,$tclr, $font_path, $text);
-   
+ 
   $fonsiz="35";
   $area = "300";
   
-  if(strlen($d2)>2)
-  {
-  	$fonsiz="30";
-  	$area = "200";
-  }
+ if(strlen($d2)>2)
+ {
+ 	$fonsiz="30";
+ 	$area = "200";
+ }
   
-  
-  if(strlen($d3)>2)
-  {
-  	$fonsiz="25";
-  	$area = "70";
-  }
-  
-  //Director Data
-  $font_path = $tfnt;
+
+ if(strlen($d3)>2)
+ {
+ 	$fonsiz="25";
+ 	$area = "70";
+ }
+ 
+ //Director Data 
+    $font_path = $tfnt;   
   $text =$d.' - '.$d2.' - '.$d3;
   imagettftext($jpg_image, $fonsiz, 0, $area, 550,$cclr, $font_path, $text);
    
@@ -169,19 +198,25 @@ $text = "______________________________________";
   
   
   //Producer Data
-  $font_path = $tfnt;
+    $font_path = $tfnt;  
   $text = $p;
-  imagettftext($jpg_image, 28, 0, 340, 600,$cclr, $font_path, $text);
+ imagettftext($jpg_image, 28, 0, 340, 600,$cclr, $font_path, $text);
   
   
-  
+
   //[FONTSIZE,CURVE,STARTWIDTH,STARTHEIGHT]
+
+ //Music Data
+ $font_path = $tfnt;
+ $text = $m.' '.$m2.' '.$m3.'-'.$w.' '.$w2.' '.$w3.' - '.$e.' - '.$c;
+ imagettftext($jpg_image, 13, 0, 120, 630,$cclr, $font_path, $text);
+ 
   
-  //Music Data
-  $font_path = $tfnt;
-  $text = $m.' '.$m2.' '.$m3.'-'.$w.' '.$w2.' '.$w3.' - '.$e.' - '.$c;
-  imagettftext($jpg_image, 13, 0, 120, 630,$cclr, $font_path, $text);
+ 
+ 
   
+ 
+ 
   
 
   // Normal Poster
@@ -196,20 +231,20 @@ imagejpeg($jpg_image, $path);
   	//Days Data
   	$font_path = $fnt;
   	$text = "50";
-  	imagettftext($jpg_image, 180, 0, 680, 275, $tclr, $font_path, $text);
+  	imagettftext($jpg_image, 180, 0, 480, 800, $tclr, $font_path, $text);
   	 
   	 
   	 
   	//Days text
   	$font_path = $fnt;
   	$text = "DAYS";
-  	imagettftext($jpg_image, 34, 0, 820, 320, $tclr, $font_path, $text);
+  	imagettftext($jpg_image, 25, 0, 700, 800, $tclr, $font_path, $text);
   	 
   	 
   	//Centers Data
   	$font_path = $fnt;
   	$text = $fif." CENTERS";
-  	imagettftext($jpg_image, 32, 0, 750, 55, $tclr, $font_path, $text);
+  	imagettftext($jpg_image, 30, 0, 300, 700, $tclr, $font_path, $text);
   
   	imagejpeg($jpg_image);
   	imagejpeg($jpg_image, $path_50);
@@ -248,22 +283,23 @@ imagejpeg($jpg_image, $path);
   	$jpg_image = imagecreatefromjpeg($ori);
   	echo 'TEMP --- '.$temp;
   
+  	//Days Data
   	$font_path = $fnt;
   	$text = "75";
-  	imagettftext($jpg_image, 180, 0, 680, 275, $tclr, $font_path, $text);
-  
-  
-  
+  	imagettftext($jpg_image, 180, 20, 680, 500, $tclr, $font_path, $text);
+  	 
+  	 
+  	 
   	//Days text
   	$font_path = $fnt;
   	$text = "DAYS";
-  	imagettftext($jpg_image, 34, 0, 820, 320, $tclr, $font_path, $text);
-  
-  
+  	imagettftext($jpg_image, 34, 0, 900, 320, $tclr, $font_path, $text);
+  	 
+  	 
   	//Centers Data
   	$font_path = $fnt;
   	$text = $sev." CENTERS";
-  	imagettftext($jpg_image, 34, 0, 750, 55, $tclr, $font_path, $text);
+  	imagettftext($jpg_image, 30, 0, 790, 490, $tclr, $font_path, $text);
   
   	imagejpeg($jpg_image);
   	imagejpeg($jpg_image, $path_75);
@@ -279,22 +315,23 @@ imagejpeg($jpg_image, $path);
   	$jpg_image = imagecreatefromjpeg($ori);
   	echo 'TEMP --- '.$temp;
   
-  		$font_path = $fnt;
+  		 
+  	$font_path = $fnt;
   	$text = "100";
-  	imagettftext($jpg_image, 180, 0, 680, 275, $tclr, $font_path, $text);
+  	imagettftext($jpg_image, 180, 20, 680, 500, $tclr, $font_path, $text);
   	 
   	 
   	 
   	//Days text
   	$font_path = $fnt;
   	$text = "DAYS";
-  	imagettftext($jpg_image, 34, 0, 820, 320, $tclr, $font_path, $text);
+  	imagettftext($jpg_image, 34, 0, 900, 320, $tclr, $font_path, $text);
   	 
   	 
   	//Centers Data
   	$font_path = $fnt;
   	$text = $hun." CENTERS";
-  	imagettftext($jpg_image, 34, 0, 750, 55, $tclr, $font_path, $text);
+  	imagettftext($jpg_image, 30, 0, 790, 490, $tclr, $font_path, $text);
   
   	imagejpeg($jpg_image);
   	imagejpeg($jpg_image, $path_100);
@@ -313,20 +350,20 @@ imagejpeg($jpg_image, $path);
   
   	$font_path = $fnt;
   	$text = "150";
-  	imagettftext($jpg_image, 180, 0, 680, 275, $tclr, $font_path, $text);
-  
-  
-  
+  	imagettftext($jpg_image, 180, 20, 680, 500, $tclr, $font_path, $text);
+  	 
+  	 
+  	 
   	//Days text
   	$font_path = $fnt;
   	$text = "DAYS";
-  	imagettftext($jpg_image, 34, 0, 820, 320, $tclr, $font_path, $text);
-  
-  
+  	imagettftext($jpg_image, 34, 0, 900, 320, $tclr, $font_path, $text);
+  	 
+  	 
   	//Centers Data
   	$font_path = $fnt;
   	$text = $onf." CENTERS";
-  	imagettftext($jpg_image, 34, 0, 750, 55, $tclr, $font_path, $text);
+  	imagettftext($jpg_image, 30, 0, 790, 490, $tclr, $font_path, $text);
   
   	imagejpeg($jpg_image);
   	imagejpeg($jpg_image, $path_150);
@@ -343,21 +380,20 @@ imagejpeg($jpg_image, $path);
   	//Days Data
   	$font_path = $fnt;
   	$text = "175";
-  	imagettftext($jpg_image, 180, 0, 680, 275, $tclr, $font_path, $text);
-  
-  
-  
+  	imagettftext($jpg_image, 180, 20, 680, 500, $tclr, $font_path, $text);
+  	 
+  	 
+  	 
   	//Days text
   	$font_path = $fnt;
   	$text = "DAYS";
-  	imagettftext($jpg_image, 34, 0, 820, 320, $tclr, $font_path, $text);
-  
-  
+  	imagettftext($jpg_image, 34, 0, 900, 320, $tclr, $font_path, $text);
+  	 
+  	 
   	//Centers Data
   	$font_path = $fnt;
   	$text = $fiv." CENTERS";
-  	imagettftext($jpg_image, 32, 0, 750, 55, $tclr, $font_path, $text);
-  
+  	imagettftext($jpg_image, 30, 0, 790, 490, $tclr, $font_path, $text);
   	imagejpeg($jpg_image);
   	imagejpeg($jpg_image, $path_175);
   	// Clear Memory

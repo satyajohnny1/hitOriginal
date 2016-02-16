@@ -105,7 +105,7 @@ $cid = $_GET['id'];
                                                                         <?php 
                                         include 'db.php';
                                         
-                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.cid = ".$cid." and s.status = 'out'";
+                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.cid = ".$cid." OR s.c2 = ".$cid." OR s.c3 = ".$cid." and s.status = 'out'";
                                              		//	echo $sql;
                                                     			$result = mysqli_query($conn, $sql);                                                      			
                                                     				
@@ -113,7 +113,6 @@ $cid = $_GET['id'];
                                                     				// output data of each row
                                                     				while($row = mysqli_fetch_assoc($result)) {
                                                     					$i++;
-                                                    					
                                                     					$rid = $row["rid"];
                                                     					$title = $row["title"];
                                                     					$dname = $row["dname"];
@@ -121,25 +120,29 @@ $cid = $_GET['id'];
                                                     					$res = $row["result"];
                                                     					$collection= $row["collection"];
                                                     					$budget = $row["sofar"];
+                                                    					$a2_name = $row["a2_name"];
+                                                    					$a3_name = $row["a3_name"];
+                                                    					$d2_name = $row["d2_name"];
+                                                    					$d3_name = $row["d3_name"];
+                                                    					 
+                                                    					$sql2 =	"select * from tolly_release s WHERE s.rid = ".$rid." and s.status = 'out'";
+                                                    					$r1= mysqli_query($conn, $sql2);
+                                                    					$row1 = mysqli_fetch_assoc($r1);
                                                     					
-                                                    				 $sql2 =	"select * from tolly_release s WHERE s.rid = ".$rid." and s.status = 'out'";
-                                                    				$r1= mysqli_query($conn, $sql2);
-                                                    				$row1 = mysqli_fetch_assoc($r1);
-                                                    				
-                                                    				$c50 = $row1["50d_cen"];
-                                                    				$c100 = $row1["100d_cen"]; 
-                                          		echo "<tr>";
-                                          		echo "<td>".$rid."</td>";
-                                             	echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
-                                             	echo "<td><b>".$dname."</b></td>";
-                                             	echo "<td><b>".$aname."</b></td>";
-                                             	echo "<td><button type='button' class='btn btn-info'>".$res."</button></td>";
-                                             	echo "<td>".$budget."</td>";
-                                             	echo "<td>".$collection."</td>";
-                                             	 echo "<td>".$c50."</td>";
-                                             	echo "<td>".$c100."</td>";
-                                            	echo " </tr> ";
-                                          
+                                                    					$c50 = $row1["50d_cen"];
+                                                    					$c100 = $row1["100d_cen"];
+                                                    					echo "<tr>";
+                                                    					echo "<td>".$rid."</td>";
+                                                    					echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
+                                                    					echo "<td><b>".$dname.'-'.$d2_name.'-'.$d3_name."</b></td>";
+                                                    					echo "<td><b>".$aname.'-'.$a2_name.'-'.$a3_name."</b></td>";
+                                                    					echo "<td><button type='button' class='btn btn-info'>".$res."</button></td>";
+                                                    					echo "<td>".round($budget/10000000, 2)."</td>";
+                                                    					echo "<td>".round($collection/10000000, 2)."</td>";
+                                                    					echo "<td>".$c50."</td>";
+                                                    					echo "<td>".$c100."</td>";
+                                                    					echo " </tr> ";
+                                                    					
                                                     				}
                                                     			}
                                             ?>

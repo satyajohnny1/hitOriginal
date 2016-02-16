@@ -663,8 +663,18 @@ error_reporting(E_ERROR);
 		    	$('input[name="r_mus"]:checked').each(function() {
 		    		var a= this.value;
 		    		//alert(a);
+		    		var a= this.value;
+		    		var chk = parseInt(a.substr(0,a.indexOf("#")));
 		    		did = a.substr(0,a.indexOf("#"))+"!"+did;
-			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+		    		
+					if(chk<10)
+					{
+			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2)+"!"+dname;
+					}else if(100>chk && chk>9){
+					dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+					}else{
+					dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-4)+"!"+dname;
+					}
 			    	drate = drate+parseInt( a.substr(a.indexOf("$")+1, a.length));
 			    	//alert(drate);
 			    	dpic = a.substr(a.indexOf("^")+1, a.length);

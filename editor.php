@@ -92,7 +92,7 @@ $wriname='';
                         <div class="col-md-12">
                             <div class="panel panel-white">
                                 <div class="panel-heading clearfix">
-                                    <h4 class="panel-title">Basic example</h4>
+                                    <h4 class="panel-title"></h4>
                                 </div>
                                 <div class="panel-body">
                                    <div class="table-responsive">
@@ -116,45 +116,43 @@ $wriname='';
                                         include 'db.php';
                                         
                              			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.eid = ".$eid." and s.status = 'out'";
-                                             			echo $sql;
+                                             			//echo $sql;
                                                     			$result = mysqli_query($conn, $sql);                                                      			
                                                     				
                                                     			if (mysqli_num_rows($result) > 0) {
                                                     				// output data of each row
                                                     				while($row = mysqli_fetch_assoc($result)) {
                                                     					$i++;
-                                                    					
                                                     					$rid = $row["rid"];
                                                     					$title = $row["title"];
-                                                    					$dname     = 	$row["dname"];
-		$aname     = 	$row["aname"];
-		$acname    = 	$row["acname"];
-		$cinename = $row["cinename"];
-		 $ediname = $row["ediname"];
-		  $musname = $row["musname"];
-		   $wriname=$row["wriname"];;
+                                                    					$dname = $row["dname"];
+                                                    					$aname = $row["aname"];
                                                     					$res = $row["result"];
                                                     					$collection= $row["collection"];
                                                     					$budget = $row["sofar"];
+                                                    					$a2_name = $row["a2_name"];
+                                                    					$a3_name = $row["a3_name"];
+                                                    					$d2_name = $row["d2_name"];
+                                                    					$d3_name = $row["d3_name"];
+                                                    					 
+                                                    					$sql2 =	"select * from tolly_release s WHERE s.rid = ".$rid." and s.status = 'out'";
+                                                    					$r1= mysqli_query($conn, $sql2);
+                                                    					$row1 = mysqli_fetch_assoc($r1);
                                                     					
-                                                    				 $sql2 =	"select * from tolly_release s WHERE s.rid = ".$rid." and s.status = 'out'";
-                                                    				$r1= mysqli_query($conn, $sql2);
-                                                    				$row1 = mysqli_fetch_assoc($r1);
-                                                    				
-                                                    				$c50 = $row1["50d_cen"];
-                                                    				$c100 = $row1["100d_cen"]; 
-                                          		echo "<tr>";
-                                          		echo "<td>".$rid."</td>";
-                                             	echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
-                                             	echo "<td><b>".$dname."</b></td>";
-                                             	echo "<td><b>".$aname."</b></td>";
-                                             	echo "<td><button type='button' class='btn btn-info'>".$res."</button></td>";
-                                             	echo "<td>".$budget."</td>";
-                                             	echo "<td>".$collection."</td>";
-                                             	 echo "<td>".$c50."</td>";
-                                             	echo "<td>".$c100."</td>";
-                                            	echo " </tr> ";
-                                          
+                                                    					$c50 = $row1["50d_cen"];
+                                                    					$c100 = $row1["100d_cen"];
+                                                    					echo "<tr>";
+                                                    					echo "<td>".$rid."</td>";
+                                                    					echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
+                                                    					echo "<td><b>".$dname.'-'.$d2_name.'-'.$d3_name."</b></td>";
+                                                    					echo "<td><b>".$aname.'-'.$a2_name.'-'.$a3_name."</b></td>";
+                                                    					echo "<td><button type='button' class='btn btn-info'>".$res."</button></td>";
+                                                    					echo "<td>".round($budget/10000000, 2)."</td>";
+                                                    					echo "<td>".round($collection/10000000, 2)."</td>";
+                                                    					echo "<td>".$c50."</td>";
+                                                    					echo "<td>".$c100."</td>";
+                                                    					echo " </tr> ";
+                                                    					
                                                     				}
                                                     			}
                                             ?>
@@ -330,7 +328,7 @@ $wriname='';
 
 //********************* Last 5 ********************** 
 
-
+				//alert($("#x").text());
 
                                                         $("#abc").text($("#x").text());
 

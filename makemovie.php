@@ -710,8 +710,17 @@ error_reporting(E_ERROR);
 
 		    	$('input[name="r_dir"]:checked').each(function() {
 		    		var a= this.value;
+		    		var chk = parseInt(a.substr(0,a.indexOf("#")));
 		    		did = a.substr(0,a.indexOf("#"))+"!"+did;
-			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+		    		
+					if(chk<10)
+					{
+			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2)+"!"+dname;
+					}else if(100>chk && chk>9){
+					dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+					}else{
+					dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-4)+"!"+dname;
+					}
 			    	drate = drate+parseInt(a.substr(a.indexOf("$")+1, a.indexOf("^")-3));
 			    	dpic = a.substr(a.indexOf("^")+1, a.length);
 		    		});
@@ -749,11 +758,22 @@ error_reporting(E_ERROR);
 
 		    	$('input[name="r_act"]:checked').each(function() {
 		    		var a= this.value;
+		    		var chk = parseInt(a.substr(0,a.indexOf("#")));
 		    		did = a.substr(0,a.indexOf("#"))+"!"+did;
-			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+		    		
+					if(chk<10)
+					{
+			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2)+"!"+dname;
+					}else if(100>chk && chk>9){
+					dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+					}else{
+					dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-4)+"!"+dname;
+					}
 			    	drate = drate+parseInt(a.substr(a.indexOf("$")+1, a.indexOf("^")-3));
 			    	dpic = a.substr(a.indexOf("^")+1, a.length);
 		    		});
+		     
+
 		    	
 		    	$('#apic').attr('src', dpic);
 
@@ -787,8 +807,17 @@ error_reporting(E_ERROR);
 
 		    	$('input[name="r_actress"]:checked').each(function() {
 		    		var a= this.value;
+		    		var chk = parseInt(a.substr(0,a.indexOf("#")));
 		    		did = a.substr(0,a.indexOf("#"))+"!"+did;
-			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+		    		
+					if(chk<10)
+					{
+			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2)+"!"+dname;
+					}else if(100>chk && chk>9){
+					dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+					}else{
+					dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-4)+"!"+dname;
+					}
 			    	drate = drate+parseInt(a.substr(a.indexOf("$")+1, a.indexOf("^")-3));
 			    	dpic = a.substr(a.indexOf("^")+1, a.length);
 		    		});
@@ -824,8 +853,17 @@ error_reporting(E_ERROR);
 
 		    	$('input[name="r_writer"]:checked').each(function() {
 		    		var a= this.value;
+		    		var chk = parseInt(a.substr(0,a.indexOf("#")));
 		    		did = a.substr(0,a.indexOf("#"))+"!"+did;
-			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+		    		
+					if(chk<10)
+					{
+			    	dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2)+"!"+dname;
+					}else if(100>chk && chk>9){
+					dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-3)+"!"+dname;
+					}else{
+					dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-4)+"!"+dname;
+					}
 			    	drate = drate+parseInt(a.substr(a.indexOf("$")+1, a.indexOf("^")-3));
 			    	dpic = a.substr(a.indexOf("^")+1, a.length);
 		    		});

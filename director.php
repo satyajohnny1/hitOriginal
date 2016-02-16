@@ -5,7 +5,7 @@ error_reporting(E_ERROR);
 session_start();
 $uid = $_SESSION['s_uid'];
 $did = $_GET['id'];
- 
+$nme = $_GET['name'];
 ?>
     <!DOCTYPE html>
     <html>
@@ -70,7 +70,7 @@ $did = $_GET['id'];
                                                 <div class="col-md-12">
                                                     <div class="panel panel-white">
                                                         <div style="width: 100%; height: 70px;">
-                                                            <h1 id="abc" style="text-align: center;"></h1></div>
+                                                           <h1 id="abc" style="text-align: center;"><?php echo $nme?></h1></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -105,7 +105,7 @@ $did = $_GET['id'];
                                                                         <?php 
                                         include 'db.php';
                                         
-                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.did = ".$did." and s.status = 'out'";
+                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.did = ".$did." OR s.d2 = ".$did." OR s.d3 = ".$did." and s.status = 'out'";
                                              		//	echo $sql;
                                                     			$result = mysqli_query($conn, $sql);                                                      			
                                                     				
@@ -114,13 +114,17 @@ $did = $_GET['id'];
                                                     				while($row = mysqli_fetch_assoc($result)) {
                                                     					$i++;
                                                     					
-                                                    					$rid = $row["rid"];
+                                                    				$rid = $row["rid"];
                                                     					$title = $row["title"];
                                                     					$dname = $row["dname"];
                                                     					$aname = $row["aname"];
                                                     					$res = $row["result"];
                                                     					$collection= $row["collection"];
                                                     					$budget = $row["sofar"];
+                                                    					$a2_name = $row["a2_name"];
+                                                    					$a3_name = $row["a3_name"];
+                                                    					$d2_name = $row["d2_name"];
+                                                    					$d3_name = $row["d3_name"];
                                                     					
                                                     				 $sql2 =	"select * from tolly_release s WHERE s.rid = ".$rid." and s.status = 'out'";
                                                     				$r1= mysqli_query($conn, $sql2);
@@ -131,11 +135,11 @@ $did = $_GET['id'];
                                           		echo "<tr>";
                                           		echo "<td>".$rid."</td>";
                                              	echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
-                                             	echo "<td><b>".$dname."</b></td>";
-                                             	echo "<td><b>".$aname."</b></td>";
+                                             	echo "<td><b>".$dname.'-'.$d2_name.'-'.$d3_name."</b></td>";
+                                             	echo "<td><b>".$aname.'-'.$a2_name.'-'.$a3_name."</b></td>";
                                              	echo "<td><button type='button' class='btn btn-info'>".$res."</button></td>";
-                                             	echo "<td>".$budget."</td>";
-                                             	echo "<td>".$collection."</td>";
+                                             	echo "<td>".round($budget/10000000, 2)."</td>";
+                                             	echo "<td>".round($collection/10000000, 2)."</td>";
                                              	 echo "<td>".$c50."</td>";
                                              	echo "<td>".$c100."</td>";
                                             	echo " </tr> ";
@@ -329,7 +333,7 @@ $did = $_GET['id'];
 
                     //********************* Last 5 ********************** 
 
-                    $("#abc").text($("#x").text());
+                   // $("#abc").text($("#x").text());
 
 
 

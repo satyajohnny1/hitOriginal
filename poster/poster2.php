@@ -57,7 +57,11 @@ function clean($string) {
 }
 
 $bg = "bg2.jpg";
-$heroimg = clean(strtolower($a)).'.png';
+$heroimg1 = clean(strtolower($a)).'.png';
+$heroimg2 = clean(strtolower($a2)).'.png';
+
+
+
 $jpg_image = imagecreatefromjpeg($bg);
 $fnt = rand(1,13).".ttf";
 $tfnt = rand(1,13).".ttf";
@@ -95,14 +99,27 @@ if($num<15){
   }
   
 
-  //Merging  HERO imGE CODE--------------
+
+  //=================== HERO-I CODE ================================
   $width = 400;
   $height = 400;
- 
-  $top_image = imagecreatefrompng($heroimg);
+  $top_image = imagecreatefrompng($heroimg1);
   imagesavealpha($top_image, true);
   imagealphablending($top_image, true);
-  imagecopy($jpg_image, $top_image, 300, 0, 0, 0, $width, $height);
+  imagecopy($jpg_image, $top_image, 450, 0, 0, 0, $width, $height);
+  //=================== HERO-I CODE ================================
+  
+  
+
+
+  //=================== HERO-II CODE ================================
+  $width = 400;
+  $height = 400;
+  $top_image = imagecreatefrompng($heroimg2);
+  imagesavealpha($top_image, true);
+  imagealphablending($top_image, true);
+  imagecopy($jpg_image, $top_image, 100, 0, 0, 0, $width, $height);
+  //=================== HERO-II CODE ================================
   
   //Merging imGE CODE--------------
   //( resource $dst_im , resource $src_im , int $dst_x , int $dst_y , int $src_x , int $src_y , int $src_w , int $src_h )
@@ -124,9 +141,9 @@ if($num<15){
   imagettftext($jpg_image, 22, 0, 10, 55, $bclr, $font_path, $text);
   //[FONTSIZE,CURVE,STARTWIDTH,STARTHEIGHT]
 
- // Hero Data 
+// Hero Data 
    $font_path = $tfnt;    
-  $text = $a.' - '.$ac;
+  $text = $a.'-'.$a2;
   imagettftext($jpg_image, 17, 0, 300, 390, $cclr, $font_path, $text);
   
   //top line Data 
@@ -183,6 +200,7 @@ $text = "______________________________________";
   imagettftext($jpg_image, 13, 0, 120, 630,$cclr, $font_path, $text);
   
   
+   
 
   // Normal Poster
  imagejpeg($jpg_image);

@@ -534,7 +534,7 @@ if (mysqli_num_rows ( $result ) > 0) {
 
 $x1 = mt_rand ( 1 * 10, 10 * 10 ) / 30;
 
-$rateavg = number_format ( ( float ) ((($rateavg * 9) + ($crate *3)+$x1) / 18.25), 2, '.', '' );
+$rateavg = number_format ( ( float ) ((($rateavg * 9) + ($crate *3)+$x1) / 19.35), 2, '.', '' );
 
 
 
