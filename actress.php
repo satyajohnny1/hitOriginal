@@ -115,7 +115,7 @@ $wriname='';
                                         <?php 
                                         include 'db.php';
                                         
-                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.acid = ".$acid." OR s.ac2 = ".$acid." OR s.ac3 = ".$acid." and s.status = 'out'";
+                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.acid = ".$acid." and s.status = 'out' OR s.ac2 = ".$acid." OR s.ac3 = ".$acid;
                                              			//echo $sql;
                                                     			$result = mysqli_query($conn, $sql);                                                      			
                                                     				

@@ -105,7 +105,7 @@ $nme = $_GET['name'];
                                                                         <?php 
                                         include 'db.php';
                                         
-                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.did = ".$did." OR s.d2 = ".$did." OR s.d3 = ".$did." and s.status = 'out'";
+                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.did = ".$did." and s.status = 'out' OR s.d2 = ".$did." OR s.d3 = ".$did;
                                              		//	echo $sql;
                                                     			$result = mysqli_query($conn, $sql);                                                      			
                                                     				

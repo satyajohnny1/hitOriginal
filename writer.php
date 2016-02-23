@@ -130,7 +130,7 @@ $wriname='';
                                                     <?php 
                                         include 'db.php';
                                         
-                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.wid = ".$wid." OR s.w2 = ".$wid." OR s.w3 = ".$wid." and s.status = 'out'";
+                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.wid = ".$wid." and s.status = 'out' OR s.w2 = ".$wid." OR s.w3 = ".$wid;
                                              			echo $sql;
                                                     			$result = mysqli_query($conn, $sql);                                                      			
                                                     				
