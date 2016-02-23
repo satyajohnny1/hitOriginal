@@ -191,9 +191,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["actor_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
+	if($rem<100000)
+	{	
 		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_actor` SET `actor_rate`=".$rem.", `actor_rating`=".$ratt." WHERE  `actor_id`=". $aid;
@@ -212,9 +216,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["actress_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
-		$rem = 50000;
+	if($rem<100000)
+	{	
+		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_actress` SET `actress_rate`=".$rem.", `actress_rating`=".$ratt." WHERE  `actress_id`=". $acid;
@@ -233,9 +241,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	echo "Rrem  ==============> ".$rem;
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
-		$rem = 250000;
+if($rem<100000)
+	{	
+		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_director` SET `director_rate`=".$rem.", `director_rating`=".$ratt." WHERE  `director_id`=". $did;
@@ -251,9 +263,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["writer_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
-		$rem = 70000;
+if($rem<100000)
+	{	
+		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_writer` SET `writer_rate`=".$rem.", `writer_rating`=".$ratt." WHERE  `writer_id`=". $wid;
@@ -270,9 +286,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["music_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
-		$rem = 50000;
+if($rem<100000)
+	{	
+		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_music` SET `music_rate`=".$rem.", `music_rating`=".$ratt." WHERE  `music_id`=". $mid;
@@ -292,9 +312,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
-		$rem = 60000;
+if($rem<100000)
+	{	
+		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_cine` SET `cine_rate`=".$rem.", `cine_rating`=".$ratt." WHERE  `cine_id`=". $cid;
@@ -313,9 +337,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["editor_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
-		$rem = 40000;
+if($rem<100000)
+	{	
+		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_editor` SET `editor_rate`=".$rem.", `editor_rating`=".$ratt." WHERE  `editor_id`=". $eid;
@@ -335,9 +363,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["actress_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
-		$rem = 50000;
+		if($rem<100000)
+	{	
+		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_actress` SET `actress_rate`=".$rem.", `actress_rating`=".$ratt." WHERE  `actress_id`=". $ac2;
@@ -355,10 +387,14 @@ if (mysqli_num_rows ( $result ) > 0) {
 		$rem =  $row1 ["actor_rate"];
 		$crate = $crate +$ratt;
 		$rem = $rem+($point*1000000);
-		if($rem<100000||$ratt>9.9)
-		{	$ratt=10;
-			$rem = 60000;
-		}
+	if($rem<100000)
+	{	
+		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
+	}
 		$ratt = $ratt+$point;
 		$sql3="UPDATE `tolly_actor` SET `actor_rate`=".$rem.", `actor_rating`=".$ratt." WHERE  `actor_id`=". $a2;
 		mysqli_query ( $conn, $sql3 );
@@ -393,9 +429,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["actress_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
+		if($rem<100000)
+	{	
 		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_actress` SET `actress_rate`=".$rem.", `actress_rating`=".$ratt." WHERE  `actress_id`=". $ac3;
@@ -412,9 +452,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["music_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
-		$rem = 60000;
+		if($rem<100000)
+	{	
+		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_music` SET `music_rate`=".$rem.", `music_rating`=".$ratt." WHERE  `music_id`=". $m2;
@@ -431,9 +475,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["music_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
-		$rem = 80000;
+		if($rem<100000)
+	{	
+		$rem = 150000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_music` SET `music_rate`=".$rem.", `music_rating`=".$ratt." WHERE  `music_id`=". $m3;
@@ -450,9 +498,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["writer_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
+		if($rem<100000)
+	{	
 		$rem = 70000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_writer` SET `writer_rate`=".$rem.", `writer_rating`=".$ratt." WHERE  `writer_id`=". $w2;
@@ -469,9 +521,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["writer_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
-		$rem = 150000;
+				if($rem<100000)
+	{	
+		$rem = 70000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_writer` SET `writer_rate`=".$rem.", `writer_rating`=".$ratt." WHERE  `writer_id`=". $w3;
@@ -488,9 +544,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["director_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
-	{	$ratt=10;
-		$rem = 150000;
+				if($rem<100000)
+	{	
+		$rem = 70000;
+	}
+	if($ratt>9.9)
+	{
+		$ratt=10;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_director` SET `director_rate`=".$rem.", `director_rating`=".$ratt." WHERE  `director_id`=". $d2;
@@ -507,10 +567,13 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["director_rate"];
 	$crate = $crate +$ratt;
 	$rem = $rem+($point*1000000);
-	if($rem<100000||$ratt>9.9)
+				if($rem<100000)
+	{	
+		$rem = 70000;
+	}
+	if($ratt>9.9)
 	{
 		$ratt=10;
-		$rem = 150000;
 	}
 	$ratt = $ratt+$point;
 	$sql3="UPDATE `tolly_director` SET `director_rate`=".$rem.", `director_rating`=".$ratt." WHERE  `director_id`=". $d3;
