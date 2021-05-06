@@ -159,16 +159,18 @@ Logs:<br/>
 	   		      url: "loginAjax.php",
 	   		      data: str,
 	   	          success: function( data ) {
-	   	        	var obj = jQuery.parseJSON(data);
-	       			var st = obj.st;
+	   	        	var strJson = jQuery.parseJSON(JSON.stringify(data));
+					var obj = JSON.parse(strJson);
+	       			var statusX = obj.st;
 	       			var e = obj.e;	  
 	       			var sl = obj.sql;
-	       			
-	       			toastr.error("<h3><b>"+e+"</b></h3>");
-	       			//toastr.error("<h3><b>"+e+"</b></h3>"+sl);
-	       			
-					if(st=='active')
+	       			console.log(obj);
+	       			//toastr.error("<h3><b>"+e+"</b></h3>");
+	       			//toastr.error("<h3><b>"+e+"</b></h3>"+st+", Check DB Connection/User is not Exist ");
+	       			alert(statusX);
+					if(statusX=='active')
 					{
+						toastr.error("<h3> Iam Comming </h3>");
 						window.location.assign("userdashboard.php")
 
 					}
@@ -304,4 +306,9 @@ $("#email").keyup(function(event){
     </script>	
         
     </body>
-</html> <?php mysql_close($conn);?>
+</html> 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

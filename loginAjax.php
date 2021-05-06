@@ -51,7 +51,7 @@ $password=$_POST['password'];
 $error = "User Not Found <a href='register.php'><h2>Signup Here</h2></a>";
 }
  
-mysql_close($conn); // Closing Connection
+mysqli_close($conn); // Closing Connection
 }
 $arr = array('st' => $status, 'e' => $error, 'sql' =>'SQL IS '.$sql);
 echo json_encode($arr);

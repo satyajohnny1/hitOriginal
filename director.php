@@ -344,4 +344,4 @@ $nme = $_GET['name'];
 
     </body>
 
-    </html> <?php mysql_close($conn);?>
+    </html> <?php mysqli_close($conn);?>

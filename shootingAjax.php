@@ -46,7 +46,7 @@ $rid=$_GET['rid'];
   
 } 
 
-mysql_close($conn); // Closing Connection
+mysqli_close($conn); // Closing Connection
 
 $arr = array('a' => $a, 'b' => $b, 'c' => $c);
 echo json_encode($arr);

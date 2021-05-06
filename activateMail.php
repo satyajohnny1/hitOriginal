@@ -176,7 +176,7 @@ style=\"word-wrap:break-word;color:#15C;font-weight:normal;text-decoration:under
 </table>
 </center>
 </body>
-</html> <?php mysql_close($conn);?>
+</html> <?php mysqli_close($conn);?>
 ";
 
 

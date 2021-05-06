@@ -108,4 +108,4 @@ if ( ! empty ( $_POST ["email"] )) {
         <script src="assets/js/modern.min.js"></script>
         
     </body>
-</html> <?php mysql_close($conn);?>
+</html> <?php mysqli_close($conn);?>

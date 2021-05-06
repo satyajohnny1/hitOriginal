@@ -127,10 +127,11 @@
 			 var u = $("#username").val();
 			var p = $("#password").val();
 			var b = $("#banner").val();
+			var hostname = location.hostname;
 			
 			
-			var link = "http://hitandfut.hostreo.com/activate.php?link=http://www.hitandfut.com/activation.php?email="+m+"&to="+m;
-			var xlink = "http://hitandfut.com/activateMail.php?link=http://www.hitandfut.com/activation.php?email="+m+"&to="+m;
+			var link = hostname+"/activate.php?link="+hostname+"/activation.php?email="+m+"&to="+m;
+			var xlink = hostname+"/activateMail.php?link="+hostname+"/activation.php?email="+m+"&to="+m;
 			
 			   if(u.length<1)
 			 { toastr.error( "Please Enter Name" );	   
@@ -158,7 +159,7 @@
 		      url: "registerAjax.php",
 		      data: str,
 	          success: function( data ) {	
-	        	  //toastr.info(data," Notification "); 
+	        	  toastr.info(data," Notification "); 
 	        	  var obj = jQuery.parseJSON(data);
                   var msg = obj.msg;                
                   var status = obj.status;
@@ -168,7 +169,7 @@
 
 					if(status>10)
 					{
-						//toastr.success("---------"+link);
+						toastr.success("---------"+link);
 
 
 							    
@@ -176,13 +177,11 @@
 							     type: "GET",
 							      url: xlink,
 							      data: str,
-						          success: function( data ) {
- 
-											toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1>');
-										 
+						          success: function( data ) { 
+											toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1> || xlink:'+xlink);										 
 						           },	          
 						           error: function( xhr, status, errorThrown ) {
-						        	   //toastr.error( "Check SPAM Folder Also...." );	              
+						        	   toastr.error( "Error while Sending mail....xlink: errorThrown:"+errorThrown+",status:"+status+",xhr:"+xhr  );	              
 						           }
 							    })
 							    
@@ -192,13 +191,12 @@
 							     type: "GET",
 							      url: link,
 							      data: str,
-						          success: function( data ) {
- 
-											//toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1>');
+						          success: function( data ) { 
+											toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1> || link:'+link);	
 										 
 						           },	          
 						           error: function( xhr, status, errorThrown ) {
-						        	   //toastr.error( "Check SPAM Folder Also...." );	              
+						        	  toastr.error( "Error while Sending mail ....link: errorThrown:"+errorThrown+",status:"+status+",xhr:"+xhr  );	                           
 						           }
 							    })
 
@@ -221,4 +219,4 @@
 		</script>
         
     </body>
-</html> <?php mysql_close($conn);?>
+</html> <?php mysqli_close($conn);?>

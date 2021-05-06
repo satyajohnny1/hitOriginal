@@ -230,4 +230,4 @@ if(al=='active')
     </script>	
         
     </body>
-</html> <?php mysql_close($conn);?></html> <?php mysql_close($conn);?>
+</html> <?php mysqli_close($conn);?></html> <?php mysqli_close($conn);?>

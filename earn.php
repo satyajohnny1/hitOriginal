@@ -256,4 +256,4 @@ if (mysqli_num_rows($result) > 0) {
 
     </body>
 
-    </html> <?php mysql_close($conn);?>
+    </html> <?php mysqli_close($conn);?>

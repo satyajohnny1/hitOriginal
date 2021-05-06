@@ -246,4 +246,4 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
 
     </body>
 
-    </html> <?php mysql_close($conn);?>
+    </html> <?php mysqli_close($conn);?>

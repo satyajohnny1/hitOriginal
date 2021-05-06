@@ -1131,4 +1131,4 @@ error_reporting(E_ERROR);
 
 </body>
 
-</html> <?php mysql_close($conn);?>
+</html> <?php mysqli_close($conn);?>

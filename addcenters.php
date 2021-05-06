@@ -1095,4 +1095,4 @@ header('Location: readyforrun.php?rid='.$rid);
 
     </body>
 
-    </html> <?php mysql_close($conn);?>
+    </html> <?php mysqli_close($conn);?>

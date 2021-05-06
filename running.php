@@ -774,4 +774,4 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
 
     </body>
 
-    </html> <?php mysql_close($conn);?>
+    </html> <?php mysqli_close($conn);?>

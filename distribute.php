@@ -795,4 +795,4 @@
         <script src="assets/js/pages/table-data.js"></script>
         
     </body>
-</html> <?php mysql_close($conn);?>
+</html> <?php mysqli_close($conn);?>
