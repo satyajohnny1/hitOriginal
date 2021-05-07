@@ -6,15 +6,15 @@
 <meta name="author" content="Hege Refsnes">
   </head>
   <body>
-<h1>http://hitandfut.hostreo.com/activate.php?link=www.hitandfut.com&to=hitandfut@gmail.com</h1>
-<a href="http://hitandfut.hostreo.com/activate.php?link=www.hitandfut.com&to=hitandfut@gmail.com">Mail Me</a>
+<h1>activateMail.php?link=www.hitandfut.com&to=smlcodes@gmail.com"</h1>
+<a href="activateMail.php?link=www.hitandfut.com&to=smlcodes@gmail.com">Mail Me</a>
 
-hitandfut.skim.us
+ 
 <?php
 
 	$link = $_GET["link"];
 	$to = $_GET["to"];
-   $subject = "HIT AND FLOP- Activate Your Account ";
+   $subject = "Hit & Fut- Activate Your Account ";
    $header = "From: ActivateAccount@hitandfut.com \r\n";
 			$header .= "Reply-To: ActivateAccount@hitandfut.com\r\n";
 			$header .= "MIME-Version: 1.0\r\n";
@@ -176,13 +176,8 @@ style=\"word-wrap:break-word;color:#15C;font-weight:normal;text-decoration:under
 </table>
 </center>
 </body>
-</html> 
-<?php 
-if($conn!=null){
-mysqli_close($conn);
-}
-?>
-
+</html> ";
+ 
 
 
 

@@ -129,10 +129,8 @@
 			var b = $("#banner").val();
 			var hostname = location.hostname;
 			
-			
-			var link = hostname+"/activate.php?link="+hostname+"/activation.php?email="+m+"&to="+m;
-			var xlink = hostname+"/activateMail.php?link="+hostname+"/activation.php?email="+m+"&to="+m;
-			
+			var xlink = "/activateMail.php?link="+hostname+"/activation.php?email="+m+"&to="+m;
+			console.log("Mail Link : "+xlink);
 			   if(u.length<1)
 			 { toastr.error( "Please Enter Name" );	   
 			 }
@@ -159,18 +157,19 @@
 		      url: "registerAjax.php",
 		      data: str,
 	          success: function( data ) {	
-	        	  toastr.info(data," Notification "); 
+	        	  //toastr.info(data," Notification "); 
 	        	  var obj = jQuery.parseJSON(data);
                   var msg = obj.msg;                
                   var status = obj.status;
                  
 		                       
-	              toastr.info(msg," Notification "); 
+	              //toastr.info(msg," Notification ");
+				  //alert("status :: "+status);
 
-					if(status>10)
+					if(status=='20')
 					{
-						toastr.success("---------"+link);
-
+						 
+						//alert("Sending Mail :: "+status);	
 
 							    
 						  $.ajax({
@@ -178,25 +177,10 @@
 							      url: xlink,
 							      data: str,
 						          success: function( data ) { 
-											toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1> || xlink:'+xlink);										 
+											toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1>');										 
 						           },	          
 						           error: function( xhr, status, errorThrown ) {
 						        	   toastr.error( "Error while Sending mail....xlink: errorThrown:"+errorThrown+",status:"+status+",xhr:"+xhr  );	              
-						           }
-							    })
-							    
-							    
-
-						  $.ajax({
-							     type: "GET",
-							      url: link,
-							      data: str,
-						          success: function( data ) { 
-											toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1> || link:'+link);	
-										 
-						           },	          
-						           error: function( xhr, status, errorThrown ) {
-						        	  toastr.error( "Error while Sending mail ....link: errorThrown:"+errorThrown+",status:"+status+",xhr:"+xhr  );	                           
 						           }
 							    })
 

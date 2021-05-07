@@ -3,4 +3,9 @@ readyforrun.php?rid=858	: Image Creation
 running.php?rid=858
 
 
-http://localhost:8066/hit/poster/poster1.php?rid=860&b=satya&p=admin&d=A. karunakaran&a= Arjanrajesh&ac= Anushka &c=Adusumilli Balaram&e=Bindra&m=	Achu&w=Lola&tit=sadsa&fif=4&hun=0&fiv=0&t5=19&sev=1&onf=0&a2=&a3=&ac2=&ac3=&d2=&d3=&w2=&w3=&m2=&m3=
+http://javabo.ml/javabo.ml/activate.php?link=javabo.ml/activation.php?email=smlcodes@gmail.com&to=smlcodes@gmail.com&username=satya&banner=Satya+Arts&email=smlcodes%40gmail.com&password=admin
+http://javabo.ml/activateMail.php?link=javabo.ml/activation.php?email=das@gmail.com&to=das@gmail.com&username=smlcodes%40gmail.com&banner=sasad&email=das%40gmail.com&password=sadsadsa
+http://javabo.ml/activate.php?link=javabo.ml/activation.php?email=smlcodes2222@gmail.com&to=smlcodes2222@gmail.com&username=sad&banner=sadsad&email=smlcodes2222%40gmail.com&password=sadasdsad
+
+
+http://localhost:8066/hit/poster/poster1.php?rid=856&b=satya&p=admin&d=A. karunakaran&a= Arjanrajesh&ac= Anushka &c=Adusumilli Balaram&e=Bindra&m=	Achu&w=Lola&tit=sadsa&fif=4&hun=0&fiv=0&t5=19&sev=1&onf=0&a2=&a3=&ac2=&ac3=&d2=&d3=&w2=&w3=&m2=&m3=
