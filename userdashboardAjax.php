@@ -18,7 +18,13 @@ $countJson = '';
  	$countJson = "['"+$row['cnt']."', '".$row['result']."'],";
  		}
 	}
-mysqli_close($conn); // Closing Connection
+
+ 
+ 
+if($conn!=null){
+mysqli_close($conn);
+}
+ // Closing Connection
 echo $countJson;
 
 

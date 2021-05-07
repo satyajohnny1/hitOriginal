@@ -557,7 +557,7 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
 			var poster = '<?php echo $poster?>';
 			
            
-         // ////alert(poster);
+         alert(poster);
 
        // 
        if(poster=='no')
@@ -597,7 +597,9 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
     			 var plink = 'poster/poster1.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
    			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
    			 
-    			
+    		
+				
+			
     			if(a2Chk>0)
     			{
     				 plink = 'poster/poster2.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
@@ -612,10 +614,11 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
        			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
        			 
             	}
-    			 
+				alert("");
+    			console.log("plink :: http://localhost:8066/hit/"+plink);	 
     			 
     			   
-    			   $("#ps").text('http://localhost/hitgit/'+plink);             
+    			   $("#ps").text('http://localhost:8066/hit/'+plink);             
     			            $.ajax({
     			                type: "POST",
     			                url: plink,

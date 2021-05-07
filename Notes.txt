@@ -1,0 +1,6 @@
+release.php?rid=858
+readyforrun.php?rid=858	: Image Creation
+running.php?rid=858
+
+
+http://localhost:8066/hit/poster/poster1.php?rid=860&b=satya&p=admin&d=A. karunakaran&a= Arjanrajesh&ac= Anushka &c=Adusumilli Balaram&e=Bindra&m=	Achu&w=Lola&tit=sadsa&fif=4&hun=0&fiv=0&t5=19&sev=1&onf=0&a2=&a3=&ac2=&ac3=&d2=&d3=&w2=&w3=&m2=&m3=

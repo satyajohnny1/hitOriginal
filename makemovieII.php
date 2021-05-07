@@ -705,4 +705,10 @@ session_start();
 
 </body>
 
-</html> <?php mysqli_close($conn);?>
+</html> 
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

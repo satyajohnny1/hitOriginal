@@ -1454,4 +1454,10 @@ header('Location: readyforrelease.php');
 </body>
 
 </html>
-<?php mysqli_close($conn);?>
+
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

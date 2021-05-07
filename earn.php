@@ -256,4 +256,9 @@ if (mysqli_num_rows($result) > 0) {
 
     </body>
 
-    </html> <?php mysqli_close($conn);?>
+    </html>  
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

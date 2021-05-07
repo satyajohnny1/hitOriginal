@@ -681,4 +681,10 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
 
     </body>
 
-    </html><?php mysqli_close($conn);?>
+    </html>
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

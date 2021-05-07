@@ -92,7 +92,7 @@ session_start();
                             </div></div></div>
           
             </div>
-            <!-- Main Wrapper -->
+            <!-- Main Wrapper   -->
 
    		 
             <div class="page-footer">
@@ -131,4 +131,10 @@ session_start();
 
 </body>
 
-</html> <?php mysqli_close($conn);?>
+</html>
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

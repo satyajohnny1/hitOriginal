@@ -166,14 +166,15 @@ Logs:<br/>
 	       			var sl = obj.sql;
 	       			console.log(obj);
 	       			//toastr.error("<h3><b>"+e+"</b></h3>");
-	       			//toastr.error("<h3><b>"+e+"</b></h3>"+st+", Check DB Connection/User is not Exist ");
-	       			alert(statusX);
+	       			toastr.error("<h3><b>"+e+"</b></h3>");
+	       			//alert(statusX);
 					if(statusX=='active')
 					{
 						toastr.error("<h3> Iam Comming </h3>");
 						window.location.assign("userdashboard.php")
 
 					}
+
 	       			
 
 	       		 //toastr.error(data+"Success" );	            
