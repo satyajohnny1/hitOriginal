@@ -163,7 +163,7 @@
                   var status = obj.status;
                  
 		                       
-	              //toastr.info(msg," Notification ");
+	              toastr.info(msg," Notification ");
 				  //alert("status :: "+status);
 
 					if(status=='20')

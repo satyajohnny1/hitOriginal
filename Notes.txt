@@ -4,8 +4,27 @@ running.php?rid=858
 
 
 http://javabo.ml/javabo.ml/activate.php?link=javabo.ml/activation.php?email=smlcodes@gmail.com&to=smlcodes@gmail.com&username=satya&banner=Satya+Arts&email=smlcodes%40gmail.com&password=admin
+
+
 http://javabo.ml/activateMail.php?link=javabo.ml/activation.php?email=das@gmail.com&to=das@gmail.com&username=smlcodes%40gmail.com&banner=sasad&email=das%40gmail.com&password=sadsadsa
+
+
 http://javabo.ml/activate.php?link=javabo.ml/activation.php?email=smlcodes2222@gmail.com&to=smlcodes2222@gmail.com&username=sad&banner=sadsad&email=smlcodes2222%40gmail.com&password=sadasdsad
 
 
-http://localhost:8066/hit/poster/poster1.php?rid=856&b=satya&p=admin&d=A. karunakaran&a= Arjanrajesh&ac= Anushka &c=Adusumilli Balaram&e=Bindra&m=	Achu&w=Lola&tit=sadsa&fif=4&hun=0&fiv=0&t5=19&sev=1&onf=0&a2=&a3=&ac2=&ac3=&d2=&d3=&w2=&w3=&m2=&m3=
+/poster/poster1.php?rid=857&b=satya&p=admin&d=A. karunakaran&a= Arjanrajesh&ac= Anushka &c=Adusumilli Balaram&e=Bindra&m=	Achu&w=Lola&tit=sadsa&fif=4&hun=0&fiv=0&t5=19&sev=1&onf=0&a2=&a3=&ac2=&ac3=&d2=&d3=&w2=&w3=&m2=&m3=
+
+
+activateMail.php?link=javabo.ml/activation.php?email=smlcodes@gmail.com&to=smlcodes@gmail.com
+
+plink :: 
+
+
+
+http://javabo.ml/poster/poster1.php?rid=858&b=sadsad&p=satya&d=A. kodanda rami reddy&a= Arjanrajesh&ac= Anushka &c=Anumolu Srikar&e=Bindra&m=Kedra&w=Lola&tit=Okay&fif=0&hun=0&fiv=0&t5=1&sev=0&onf=0&a2=&a3=&ac2=&ac3=&d2=&d3=&w2=&w3=&m2=Thaman&m3=	Achu
+
+
+plink ::javabo.ml/poster/poster1.php?rid=859&b=sadsad&p=satya&d=Chandrashekar yeleti&a=AkilAkkineni&ac= Anushka &c=Anumolu Srikar&e=GOWTHAM RAJU&m=	Achu&w=KONA VENKAT&tit=Modhati Cinema&fif=0&hun=0&fiv=0&t5=8&sev=0&onf=0&a2=&a3=&ac2=&ac3=&d2=&d3=&w2=&w3=&m2=&m3=
+
+
+http://javabo.ml/poster/poster1.php?rid=860&b=sadsad&p=satya&d=A. karunakaran&a= Arjanrajesh&ac= Anushka &c=CHOTA K NAIDU&e=SHANKAR&m=Thaman&w=Lola&tit=wq&fif=0&hun=0&fiv=0&t5=4&sev=0&onf=0&a2=&a3=&ac2=&ac3=&d2=&d3=&w2=&w3=&m2=&m3=
