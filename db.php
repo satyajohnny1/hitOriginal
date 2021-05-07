@@ -44,9 +44,15 @@ $password = "123abcABC@";
 $dbname = "unaux_28553267_javabo";
 
 if (strpos(gethostname(), 'localhost') !== false) {
-    echo '<h1> gethostname :: IF  </h1>';
+   $servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "hit";
 }else{
-	 echo '<h1> gethostname :: else  </h1>';
+	 $servername = "sql208.unaux.com";
+$username = "unaux_28553267";
+$password = "123abcABC@";
+$dbname = "unaux_28553267_javabo";
 }
  
 
