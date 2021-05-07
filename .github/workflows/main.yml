@@ -15,4 +15,5 @@ jobs:
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local_dir: "./"
+          remote_dir: "/htdocs"
           delete: "false"
