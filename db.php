@@ -25,13 +25,30 @@ httphttp://185.27.134.10/sql.php?db=epiz_17259702_hit&table=tolly_director&sql_q
 $password = "123abcABC";
 $dbname = "epiz_17259702_hit";
 
-*/
+
+$servername = "sql208.unaux.com";
+$username = "unaux_28553267";
+$password = "123abcABC@";
+$dbname = "unaux_28553267_javabo";
 
 $servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "hit";
 
+*/
+
+$servername = "sql208.unaux.com";
+$username = "unaux_28553267";
+$password = "123abcABC@";
+$dbname = "unaux_28553267_javabo";
+
+if (strpos(gethostname(), 'localhost') !== false) {
+    echo '<h1> gethostname :: IF  </h1>';
+}else{
+	 echo '<h1> gethostname :: else  </h1>';
+}
+ 
 
 
 // Create connection
