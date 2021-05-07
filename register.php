@@ -177,7 +177,8 @@
 							      url: xlink,
 							      data: str,
 						          success: function( data ) { 
-											toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1>');										 
+											toastr.success(data+'<h2>Registration Successfull</h2> Activation mail sent, Please Check Your Inbox');
+											console.log("data:"+data);
 						           },	          
 						           error: function( xhr, status, errorThrown ) {
 						        	   toastr.error( "Error while Sending mail....xlink: errorThrown:"+errorThrown+",status:"+status+",xhr:"+xhr  );	              
