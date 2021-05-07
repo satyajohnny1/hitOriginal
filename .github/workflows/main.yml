@@ -1,0 +1,19 @@
+name: Deploying Gitgub to javabo.ml-ProHost Sever VIA FTP
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # Here is the deployment action
+      - name: Copying GitHub files to htdocs via FTP
+        uses: airvzxf/ftp-deployment-action@latest
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_dir: "./"
+          remote_dir: "/htdocs"
+          delete: "false"
