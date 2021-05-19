@@ -31,6 +31,13 @@ $username = "unaux_28553267";
 $password = "123abcABC@";
 $dbname = "unaux_28553267_javabo";
 
+
+$servername = "sql208.unaux.com";
+$username = "unaux_28553267";
+$password = "123abcABC@";
+$dbname = "unaux_28553267_javabo";
+
+
 $servername = "localhost";
 $username = "root";
 $password = "root";
@@ -38,29 +45,19 @@ $dbname = "hit";
 
 */
 
-$servername = "sql208.unaux.com";
-$username = "unaux_28553267";
-$password = "123abcABC@";
-$dbname = "unaux_28553267_javabo";
-
-if (strpos(gethostname(), 'localhost') !== false) {
-   $servername = "localhost";
+$servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "hit";
-}else{
-	 $servername = "sql208.unaux.com";
-$username = "unaux_28553267";
-$password = "123abcABC@";
-$dbname = "unaux_28553267_javabo";
-}
- 
+
+
 
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
 if (!$conn) {
+	echo "<h1> Database Connection failed. </h1>";
     die("Connection failed: " . mysqli_connect_error());
 }else{
 	

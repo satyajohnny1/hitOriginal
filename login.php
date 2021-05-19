@@ -65,7 +65,7 @@ header("location: userdashboard.php");
                                 <hr style="height:1px;border:none;color:#333;background-color:#333;" >
                             <h4 class="text-center m-t-md">The Ultimate Movie Simulation Game</h4>
                  <hr style="height:1px;border:none;color:#333;background-color:#333;" >
-                                <p class="text-center m-t-md">Please login into your account.</p>
+                                <p class="text-center m-t-md">Please login into your account. 1</p>
                                 <button type="button" onclick="Login()" class="btn btn-info btn-block">Login with facebook</button>
                                 <form class="m-t-md" action="" method="post" name="loginform" id="loginform">
                                     <div class="form-group">
@@ -146,6 +146,7 @@ Logs:<br/>
 	 
 	function loginAjax(){
 		
+			var dbflag = "fail";
 	
 		 if ($("#email").val().length<3||$("#password").val().length<1) {
 			toastr.error("<h3><b>Please Enter Valid Login ID and Password</b></h3>");
@@ -153,12 +154,13 @@ Logs:<br/>
 	        else {
 
 	       	 var str = $("#loginform").serialize();	
-	    	 //alert('---');
+	    	// alert('---1');
 	    	 $.ajax({
 	   		     type: "POST",
 	   		      url: "loginAjax.php",
 	   		      data: str,
 	   	          success: function( data ) {
+					dbflag = "ok";					
 	   	        	var strJson = jQuery.parseJSON(JSON.stringify(data));
 					var obj = JSON.parse(strJson);
 	       			var statusX = obj.st;
@@ -173,21 +175,22 @@ Logs:<br/>
 						toastr.error("<h3> Iam Comming </h3>");
 						window.location.assign("userdashboard.php")
 
-					}
-
-	       			
-
-	       		 //toastr.error(data+"Success" );	            
+					}        
 	   					 
 	   	           },	          
 	   	           error: function( xhr, status, errorThrown ) {
-	   	        	 
+	   	        	 console.log("Error......");  
+					 dbflag = "ok";	
 	   	        	   toastr.error( "In error" );	              
 	   	           }
 	   		    })
 
  
 	        }
+			
+			if(dbflag == "fail"){
+				 toastr.error("DB connection Failed. Pls check db.php");
+			}
 		 
 		}
 

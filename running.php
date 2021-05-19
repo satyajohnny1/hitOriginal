@@ -557,7 +557,7 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
 			var poster = '<?php echo $poster?>';
 			
            
-         alert(poster);
+         //alert(poster);
 
        // 
        if(poster=='no')
