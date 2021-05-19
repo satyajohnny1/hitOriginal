@@ -606,53 +606,53 @@ $rateavg = number_format ( ( float ) ((($rateavg * 9) + ($crate *3)+$x1) / 19.35
 // $rateavg =0.78;
 $result = 'ok';
 
-if ((1.25 > $rateavg)) {
+if ((1.5 > $rateavg)) {
 	$result = 'DISASTER';
-} elseif ((1.25 <= $rateavg) && ($rateavg < 2.0)) {
+} elseif ((1.5 <= $rateavg) && ($rateavg < 1.75)) {
 	$result = 'UTTER FLOP';
-} elseif ((2.0 <= $rateavg) && ($rateavg < 2.5)) {
+} elseif ((1.75 <= $rateavg) && ($rateavg < 2.25)) {
 	$result = 'FLOP';
-} elseif ((2.5 <= $rateavg) && ($rateavg < 2.85)) {
+} elseif ((2.25 <= $rateavg) && ($rateavg < 2.5)) {
 	$result = 'BELOW AVERAGE';
-} elseif ((2.85 <= $rateavg) && ($rateavg < 3.25)) {
+} elseif ((2.5 <= $rateavg) && ($rateavg < 3.0)) {
 	$result = 'AVERAGE';
-} elseif ((3.25 <= $rateavg) && ($rateavg < 3.5)) {
+} elseif ((3.0 <= $rateavg) && ($rateavg < 3.25)) {
 	$result = 'ABOVE AVERAGE';
-} elseif ((3.5 <= $rateavg) && ($rateavg < 3.75)) {
+} elseif ((3.25 <= $rateavg) && ($rateavg < 3.5)) {
 	$result = 'HIT';
-} elseif ((3.75 <= $rateavg) && ($rateavg < 4.0)) {
+} elseif ((3.5 <= $rateavg) && ($rateavg < 3.7)) {
 	$result = 'SUPER HIT';
-} elseif ((4.0 <= $rateavg) && ($rateavg < 4.5)) {
+} elseif ((3.7 <= $rateavg) && ($rateavg < 4.25)) {
 	$result = 'BLOCKBUSTER';
-} elseif ($rateavg >= 4.5) {
+} elseif ($rateavg >= 4.25) {
 	$result = 'INDUSTRY HIT';
 } else {
-	$result = 'AVERAGE';
+	$result = 'FLOP';
 }
 
 $hit = $result;
 
 // ============================= EXPECTING RELEASE CENTERS ===========================================
 if ((10000000 > $budget)) {
-	$rel_cent = rand ( 50, 75 );
+	$rel_cent = rand ( 50, 120 );
 } elseif ((10000000 <= $budget) && ($budget < 30000000)) {
-	$rel_cent = rand ( 70, 125 );
+	$rel_cent = rand ( 70, 185 );
 } elseif ((30000000 <= $budget) && ($budget < 50000000)) {
-	$rel_cent = rand ( 125, 180 );
+	$rel_cent = rand ( 125, 280 );
 } elseif ((50000000 <= $budget) && ($budget < 80000000)) {
-	$rel_cent = rand ( 200, 250 );
+	$rel_cent = rand ( 150, 350 );
 } elseif ((80000000 <= $budget) && ($budget < 120000000)) {
-	$rel_cent = rand ( 250, 330 );
+	$rel_cent = rand ( 200, 420 );
 } elseif ((120000000 <= $budget) && ($budget < 150000000)) {
-	$rel_cent = rand ( 300, 400 );
+	$rel_cent = rand ( 300, 490 );
 } elseif ((150000000 <= $budget) && ($budget < 200000000)) {
-	$rel_cent = rand ( 400, 600 );
+	$rel_cent = rand ( 400, 800 );
 } elseif ((200000000 <= $budget) && ($budget < 300000000)) {
-	$rel_cent = rand ( 500, 800 );
+	$rel_cent = rand ( 500, 900 );
 } elseif ((300000000 <= $budget) && ($budget < 400000000)) {
-	$rel_cent = rand ( 800, 1100 );
+	$rel_cent = rand ( 800, 1200 );
 } elseif ((400000000 <= $budget) && ($budget < 500000000)) {
-	$rel_cent = rand ( 1000, 1200 );
+	$rel_cent = rand ( 800, 1400 );
 } elseif ((500000000 <= $budget) && ($budget < 600000000)) {
 	$rel_cent = rand ( 1200, 1500 );
 } elseif ((600000000 <= $budget) && ($budget < 750000000)) {
@@ -680,13 +680,13 @@ function centers($rateavg, $rel_cent) {
 	global $wk1_cent, $wk2_cent, $d25_cent, $d50_cent, $d75_cent, $d100_cent, $d125_cent, $d150_cent, $d175_cent, $d200_cent, $d250_cent, $d300_cent, $d350_cent, $d365_cent, $d400_cent, $d450_cent, $d500_cent, $d600_cent, $wk1_coll, $wk2_coll, $d25_coll, $d50_coll, $d75_coll, $d100_coll, $d125_coll, $d150_coll, $d175_coll, $d200_coll, $d250_coll, $d300_coll, $d350_coll, $d365_coll, $d400_coll, $d450_coll, $d500_coll, $d600_coll, $max_days, $max_coll;
 	echo '--------> centers RATING = ' . $rateavg . '  ---CENTERS  = ' . $rel_cent;
 	
-	if ((1.25 > $rateavg)) // DISASTER
+	if ((1.5 > $rateavg)) // DISASTER
 {
 		$wk1_cent = round ( (($rel_cent / 8.5) + ($rel_cent / 8.4) + ($rel_cent / 7.75)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 9.5) + ($wk1_cent / 3.25)) / 2 );
 		
-		$d25_cent = round ( (($wk2_cent / 9.8) + ($wk2_cent / 7)) / 2 );
-		$d50_cent = round ( (($d25_cent / 16) + ($d25_cent / 8)) / 2 );
+		$d25_cent = round ( (($wk2_cent / 13.8) + ($wk2_cent / 7)) / 2 );
+		$d50_cent = round ( (($d25_cent / 19) + ($d25_cent / 8)) / 2 );
 		if ($d50_cent >= 500) {
 			$d50_cent = rand ( 425, 499 );
 		}
@@ -734,14 +734,13 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((1.25 <= $rateavg) && ($rateavg < 2.0)) // Utter Flop
-{
+	} elseif ((1.5 <= $rateavg) && ($rateavg < 1.75)) {        //UTTER FLOP
 		
 		$wk1_cent = round ( (($rel_cent / 5.5) + ($rel_cent / 4.4) + ($rel_cent / 2.75)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 5.5) + ($wk1_cent / 3.25)) / 2 );
 		
-		$d25_cent = round ( (($wk2_cent / 7.8) + ($wk2_cent / 7)) / 2 );
-		$d50_cent = round ( (($d25_cent / 10) + ($d25_cent / 8)) / 2 );
+		$d25_cent = round ( (($wk2_cent / 13.8) + ($wk2_cent / 7)) / 2 );
+		$d50_cent = round ( (($d25_cent / 15) + ($d25_cent / 8)) / 2 );
 		if ($d50_cent >= 500) {
 			$d50_cent = rand ( 425, 499 );
 		}
@@ -788,14 +787,14 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((2.0 <= $rateavg) && ($rateavg < 2.5)) // Flop
+	} elseif ((1.75 <= $rateavg) && ($rateavg < 2.25)) // Flop
 {
 		
 		$wk1_cent = round ( (($rel_cent / 4.5) + ($rel_cent / 4.4) + ($rel_cent / 2.75)) / 3 );
-		$wk2_cent = round ( (($wk1_cent / 3.5) + ($wk1_cent / 3.25)) / 2 );
+		$wk2_cent = round ( (($wk1_cent / 8.5) + ($wk1_cent / 3.25)) / 2 );
 		
-		$d25_cent = round ( (($wk2_cent / 5.8) + ($wk2_cent / 5)) / 2 );
-		$d50_cent = round ( (($d25_cent / 7) + ($d25_cent / 6)) / 2 ) - 1;
+		$d25_cent = round ( (($wk2_cent / 9.8) + ($wk2_cent / 5)) / 2 );
+		$d50_cent = round ( (($d25_cent / 17) + ($d25_cent / 6)) / 2 ) - 1;
 		if ($d50_cent >= 500) {
 			$d50_cent = rand ( 425, 499 );
 		}
@@ -842,7 +841,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((2.5 <= $rateavg) && ($rateavg < 3.0)) // Below Avg
+	} elseif ((2.25 <= $rateavg) && ($rateavg < 2.5)) // Below Avg
 {
 		
 		$wk1_cent = round ( (($rel_cent / 2.5) + ($rel_cent / 2.4) + ($rel_cent / 2.75)) / 3 );
@@ -894,20 +893,20 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((3.0 <= $rateavg) && ($rateavg < 3.25)) // Average
+	} elseif ((2.5 <= $rateavg) && ($rateavg < 3.0)) // Average
 {
 		
 		$wk1_cent = round ( (($rel_cent / 2.25) + ($rel_cent / 2) + ($rel_cent / 2.25)) / 3 );
-		$wk2_cent = round ( (($wk1_cent / 1.95) + ($wk1_cent / 2)) / 2 );
+		$wk2_cent = round ( (($wk1_cent / 3.95) + ($wk1_cent / 2)) / 2 );
 		
-		$d25_cent = 2 + round ( (($wk2_cent / 2.8) + ($wk2_cent / 3)) / 2 );
-		$d50_cent = round ( (($d25_cent / 3.7) + ($d25_cent / 3.25)) / 2 );
+		$d25_cent = 2 + round ( (($wk2_cent / 3.8) + ($wk2_cent / 3)) / 2 );
+		$d50_cent = round ( (($d25_cent / 6.7) + ($d25_cent / 3.25)) / 2 );
 		
 		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 2, 499 );
+			$d50_cent = rand ( 2, 99 );
 		}
 		
-		$d75_cent = round ( (($d50_cent / 5) + ($d50_cent / 4.5)) / 2 );
+		$d75_cent = round ( (($d50_cent / 7) + ($d50_cent / 4.5)) / 2 );
 		$d100_cent = round ( (($d75_cent / 5.2) + ($d75_cent / 4.75)) / 2 );
 		
 		$d125_cent = round ( (($d100_cent / 8.35) + ($d100_cent / 5.75)) / 2 );
@@ -946,7 +945,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((3.25 <= $rateavg) && ($rateavg < 3.5)) // Above Average
+	} elseif ((3.0 <= $rateavg) && ($rateavg < 3.25)) // Above Average
 {
 		$wk1_cent = round ( (($rel_cent / 2.25) + ($rel_cent / 1.75) + ($rel_cent / 1.85)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 1.75) + ($wk1_cent / 1.65)) / 2 );
@@ -954,7 +953,7 @@ function centers($rateavg, $rel_cent) {
 		$d25_cent = 2 + round ( (($wk2_cent / 2.55) + ($wk2_cent / 2.55)) / 2 );
 		$d50_cent = 1 + round ( (($d25_cent / 3.3) + ($d25_cent / 2.75)) / 2 );
 		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 45, 499 );
+			$d50_cent = round ( (rand ( 1, 300 ) + rand ( 1, 300 ))/2) ;
 		}
 		
 		$d75_cent = round ( (($d50_cent / 4.25) + ($d50_cent / 3.75)) / 2 );
@@ -996,7 +995,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((3.5 <= $rateavg) && ($rateavg < 3.75)) // HIT
+	} elseif ((3.25 <= $rateavg) && ($rateavg < 3.5)) // HIT
 {
 		
 		// // ******************** HIT *******************************
@@ -1006,11 +1005,11 @@ function centers($rateavg, $rel_cent) {
 		$d25_cent = 4 + round ( (($wk2_cent / 2.35) + ($wk2_cent / 1.75)) / 2 );
 		$d50_cent = 1 + round ( (($d25_cent / 3) + ($d25_cent / 1.75)) / 2 );
 		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 30, 499 );
+			$d50_cent = round ( (rand ( 1, 350 ) + rand ( 1, 350 ))/2) ;
 		}
 		
-		$d75_cent = 1 + round ( (($d50_cent / 3.5) + ($d50_cent / 3.75)) / 2 );
-		$d100_cent = 1 + round ( (($d75_cent / 3) + ($d75_cent / 2)) / 2 );
+		$d75_cent = 1 + round ( (($d50_cent / 5.5) + ($d50_cent / 3.75)) / 2 );
+		$d100_cent = round ( (($d75_cent / 3) + ($d75_cent / 2)) / 2 );
 		
 		$d125_cent = round ( (($d100_cent / 7.35) + ($d100_cent / 5.75)) / 2 );
 		$d150_cent = round ( (($d125_cent / 6) + ($d125_cent / 5.75)) / 2 );
@@ -1048,18 +1047,18 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((3.75 <= $rateavg) && ($rateavg < 4.0)) {
+	} elseif ((3.5 <= $rateavg) && ($rateavg < 3.7)) {
 		// ******************** SUPER HIT *******************************
 		$wk1_cent = round ( (($rel_cent / 1.15) + ($rel_cent / 1.20) + ($rel_cent / 1.35)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 1.10) + ($wk1_cent / 1.20) + ($wk1_cent / 1.30)) / 3 );
 		
 		$d25_cent = 15 + round ( (($wk2_cent / 2.25) + ($wk2_cent / 1.55)) / 2 );
-		$d50_cent = 10 + round ( (($d25_cent / 2.85) + ($d25_cent / 1.55)) / 2 );
+		$d50_cent = 1 + round ( (($d25_cent / 2.85) + ($d25_cent / 1.55)) / 2 );
 		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 100, 499 );
+			$d50_cent = round ( (rand ( 2, 399 ) + rand ( 2, 349 ))/2) ;
 		}
 		
-		$d75_cent = 2 + round ( (($d50_cent / 3.25) + ($d50_cent / 3.5)) / 2 );
+		$d75_cent = 1 + round ( (($d50_cent / 3.25) + ($d50_cent / 3.5)) / 2 );
 		$d100_cent = 1 + round ( (($d75_cent / 2) + ($d75_cent / 2)) / 2 );
 		
 		$d125_cent = round ( (($d100_cent / 4.35) + ($d100_cent / 3.75)) / 2 );
@@ -1099,7 +1098,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((4.0 <= $rateavg) && ($rateavg < 4.5)) {
+	} elseif ((3.7 <= $rateavg) && ($rateavg < 4.25)) {
 		// ******************** BLOCK BUSTER*******************************
 		$wk1_cent = round ( (($rel_cent / 1.15) + ($rel_cent / 1.20) + ($rel_cent / 1.35)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 1.10) + ($wk1_cent / 1.20) + ($wk1_cent / 1.30)) / 3 );
@@ -1107,15 +1106,15 @@ function centers($rateavg, $rel_cent) {
 		$d25_cent = 20 + round ( (($wk2_cent / 2.15) + ($wk2_cent / 1.25)) / 2 );
 		$d50_cent = 15 + round ( (($d25_cent / 2.5) + ($d25_cent / 1.35)) / 2 );
 		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 225, 499 );
+			$d50_cent = round ( (rand ( 25, 399 ) + rand (48, 399 ))/2) ;
 		}
 		
-		$d75_cent = 5 + round ( (($d50_cent / 3) + ($d50_cent / 3.25)) / 2 );
-		$d100_cent = 3 + round ( (($d75_cent / 2) + ($d75_cent / 1)) / 2 );
+		$d75_cent = 4 + round ( (($d50_cent / 3) + ($d50_cent / 3.25)) / 2 );
+		$d100_cent = 1 + round ( (($d75_cent / 2) + ($d75_cent / 1)) / 2 );
 		
 		$d125_cent = 1 + round ( (($d100_cent / 3.35) + ($d100_cent / 2.75)) / 2 );
-		$d150_cent = 1 + round ( (($d125_cent / 2.65) + ($d125_cent / 2.75)) / 2 );
-		$d175_cent = 1 + round ( (($d150_cent / 2.8) + ($d150_cent / 4.25)) / 2 );
+		$d150_cent = 0 + round ( (($d125_cent / 2.65) + ($d125_cent / 2.75)) / 2 );
+		$d175_cent = 0 + round ( (($d150_cent / 2.8) + ($d150_cent / 4.25)) / 2 );
 		$d200_cent = round ( (($d175_cent / 5) + ($d175_cent / 3)) / 2 );
 		
 		$d250_cent = round ( (($d200_cent / 5.35) + ($d200_cent / 5.75)) / 2 );
@@ -1149,7 +1148,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ($rateavg >= 4.5) {
+	} elseif ($rateavg >= 4.25) {
 		// ******************** INDUSTRY HIT*******************************
 		$wk1_cent = round ( (($rel_cent / 1.1) + ($rel_cent / 1.20) + ($rel_cent / 1.25)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 1.1) + ($wk1_cent / 1.20) + ($wk1_cent / 1.2)) / 3 );
@@ -1157,11 +1156,11 @@ function centers($rateavg, $rel_cent) {
 		$d25_cent = 25 + round ( (($wk2_cent / 2.15) + ($wk2_cent / 1.15)) / 2 );
 		$d50_cent = 18 + round ( (($d25_cent / 2) + ($d25_cent / 1.25)) / 2 );
 		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 425, 499 );
+			$d50_cent = round ( (rand ( 125, 399 ) + rand (148, 399 ))/2) ;
 		}
 		
-		$d75_cent = 6 + round ( (($d50_cent / 2.5) + ($d50_cent / 3.25)) / 2 );
-		$d100_cent = 3 + round ( (($d75_cent / 1) + ($d75_cent / 2)) / 2 );
+		$d75_cent = 26 + round ( (($d50_cent / 2.5) + ($d50_cent / 3.25)) / 2 );
+		$d100_cent = 10 + round ( (($d75_cent / 1) + ($d75_cent / 2)) / 2 );
 		
 		$d125_cent = 5 + round ( (($d100_cent / 1.35) + ($d100_cent / 2.75)) / 2 );
 		$d150_cent = 3 + round ( (($d125_cent / 1.65) + ($d125_cent / 3.75)) / 2 );
@@ -1201,7 +1200,7 @@ function centers($rateavg, $rel_cent) {
 		echo 'Max Collectoion : ' . $max_coll;
 	} else {
 		$wk1_cent = round ( $rel_cent / 4 );
-		$result = 'AVERAGE';
+		$result = 'FLOP';
 	}
 	
 	// maxdays calculations

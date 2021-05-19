@@ -46,38 +46,6 @@ $s5_b_rate = 0;
 $s5_c_rate = 0;
 $s5_status = '';
 
-$s6_a_cost = 0;
-$s6_b_cost = 0;
-$s6_c_cost	= 0;
-$s6_a_rate = 0;
-$s6_b_rate = 0;
-$s6_c_rate = 0;
-$s6_status = '';
-
-$s7_a_cost = 0;
-$s7_b_cost = 0;
-$s7_c_cost	= 0;
-$s7_a_rate = 0;
-$s7_b_rate = 0;
-$s7_c_rate = 0;
-$s7_status = '';
-
-$s8_a_cost = 0;
-$s8_b_cost = 0;
-$s8_c_cost	= 0;
-$s8_a_rate = 0;
-$s8_b_rate = 0;
-$s8_c_rate = 0;
-$s8_status = '';
-
-$s9_a_cost = 0;
-$s9_b_cost = 0;
-$s9_c_cost	= 0;
-$s9_a_rate = 0;
-$s9_b_rate = 0;
-$s9_c_rate = 0;
-$s9_status = '';
-
 
 
 $title = '';
@@ -190,73 +158,7 @@ if (mysqli_num_rows ( $result ) > 0) {
 	//*************getting s5 Rates and Reviews *************
 }
 
-//*************getting s6 Rates and Reviews *************
-$sql = "SELECT * FROM tolly_s6 s WHERE s.sid = ".$sid." and s.uid=".$uid;
-//echo "====================". $sql;
-$result = mysqli_query ( $conn, $sql );
-$row = mysqli_fetch_assoc($result);
-if (mysqli_num_rows ( $result ) > 0) {
-	$s6_a_cost      =    	$row["s6_a_cost"];
-	$s6_b_cost      =    	$row["s6_b_cost"];
-	$s6_c_cost      =    	$row["s6_c_cost"];
-	$s6_a_rate      =    	$row["s6_a_rate"];
-	$s6_b_rate      =    	$row["s6_b_rate"];
-	$s6_c_rate      =    	$row["s6_c_rate"];
-	$s6_status      =    	$row["s6_status"];
-	//echo $s6_b_rate;
-	//*************getting s6 Rates and Reviews *************
-}
 
-//*************getting s7 Rates and Reviews *************
-$sql = "SELECT * FROM tolly_s7 s WHERE s.sid = ".$sid." and s.uid=".$uid;
-//echo "====================". $sql;
-$result = mysqli_query ( $conn, $sql );
-$row = mysqli_fetch_assoc($result);
-if (mysqli_num_rows ( $result ) > 0) {
-	$s7_a_cost      =    	$row["s7_a_cost"];
-	$s7_b_cost      =    	$row["s7_b_cost"];
-	$s7_c_cost      =    	$row["s7_c_cost"];
-	$s7_a_rate      =    	$row["s7_a_rate"];
-	$s7_b_rate      =    	$row["s7_b_rate"];
-	$s7_c_rate      =    	$row["s7_c_rate"];
-	$s7_status      =    	$row["s7_status"];
-	//echo $s7_b_rate;
-	//*************getting s7 Rates and Reviews *************
-}
-
-//*************getting s8 Rates and Reviews *************
-$sql = "SELECT * FROM tolly_s8 s WHERE s.sid = ".$sid." and s.uid=".$uid;
-//echo "====================". $sql;
-$result = mysqli_query ( $conn, $sql );
-$row = mysqli_fetch_assoc($result);
-if (mysqli_num_rows ( $result ) > 0) {
-	$s8_a_cost      =    	$row["s8_a_cost"];
-	$s8_b_cost      =    	$row["s8_b_cost"];
-	$s8_c_cost      =    	$row["s8_c_cost"];
-	$s8_a_rate      =    	$row["s8_a_rate"];
-	$s8_b_rate      =    	$row["s8_b_rate"];
-	$s8_c_rate      =    	$row["s8_c_rate"];
-	$s8_status      =    	$row["s8_status"];
-	//echo $s8_b_rate;
-	//*************getting s8 Rates and Reviews *************
-}
-
-//*************getting s9 Rates and Reviews *************
-$sql = "SELECT * FROM tolly_s9 s WHERE s.sid = ".$sid." and s.uid=".$uid;
-//echo "====================". $sql;
-$result = mysqli_query ( $conn, $sql );
-$row = mysqli_fetch_assoc($result);
-if (mysqli_num_rows ( $result ) > 0) {
-	$s9_a_cost      =    	$row["s9_a_cost"];
-	$s9_b_cost      =    	$row["s9_b_cost"];
-	$s9_c_cost      =    	$row["s9_c_cost"];
-	$s9_a_rate      =    	$row["s9_a_rate"];
-	$s9_b_rate      =    	$row["s9_b_rate"];
-	$s9_c_rate      =    	$row["s9_c_rate"];
-	$s9_status      =    	$row["s9_status"];
-	//echo $s9_b_rate;
-	//*************getting s9 Rates and Reviews *************
-}
 
 
 
@@ -389,7 +291,7 @@ if (mysqli_num_rows ( $result ) > 0) {
                                                         <h1 class="count" >
                                   								 <?php echo $s1_a_cost?>
                               							</h1>
-                                                        <span class="label label-info">1st Shot Cost <b id="s1_a_rat" ><?php echo $s1_a_rate?></b></span>
+                                                        <span class="label label-info">Intro Scenes <b id="s1_a_rat" ><?php echo $s1_a_rate?></b></span>
                                                     </div>
 
                                                      <div class="value" id= "s1_b_cost" style="display: none;">
@@ -399,12 +301,6 @@ if (mysqli_num_rows ( $result ) > 0) {
                                                         <span class="label label-info">Re-Shoot Cost <b id="s1_b_rat"><?php echo $s1_b_rate?></b></span>
                                                     </div>
 
-                                                    <div class="value" id= "s1_c_cost" style="display: none;">
-                                                        <h1 class="count">
-							                                  <?php echo $s1_c_cost?>
-							                             </h1>
-                                                        <span class="label label-info">Final hoot Cost <b id="s1_c_rat"><?php echo $s1_c_rate?></b></span>
-                                                    </div>
                                                     
                                                        <div class="value" id= "s1_comp" style="display: none;">
                                                         <h1 class="count">
@@ -417,9 +313,9 @@ if (mysqli_num_rows ( $result ) > 0) {
                                             </div>
                                             <div class="col-md-4" style="border: 1px solid;">
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s1_a_btn" style="display: none;" class="btn btn-default btn-rounded">1st Shot, Shoot It!!</button></h2>
-                                             <button type="button"   style="display: none;" id ="s1_b_btn" class="btn btn-default btn-rounded">Not Satisfied ? Try 2nd Shot </button> 
-                                              <h2><button type="button"  style="display: none;"  id ="s1_c_btn" class="btn btn-default btn-rounded">Final Shot!(if u Want)</button></h2>
+                                             <h2><button type="button" id ="s1_a_btn" style="display: none;" class="btn btn-default btn-rounded">Shoot - Intro Scenes</button></h2>
+                                             <button type="button"   style="display: none;" id ="s1_b_btn" class="btn btn-default btn-rounded">Re-Shoot</button> 
+                                             
                                               <h2 style="display: none;" id="s1N"><b>Go To Next Short</b></h2>                                                 
                                              </div>
                                              
@@ -476,7 +372,7 @@ if (mysqli_num_rows ( $result ) > 0) {
                                                         <h1 class="count" >
                                   								 <?php echo $s2_a_cost?>
                               							</h1>
-                                                        <span class="label label-info">1st Shot Cost <b id="s2_a_rat" ><?php echo $s2_a_rate?></b></span>
+                                                        <span class="label label-info">Shoot - Fisst Half Scenes Cost <b id="s2_a_rat" ><?php echo $s2_a_rate?></b></span>
                                                     </div>
 
                                                      <div class="value" id= "s2_b_cost" style="display: none;">
@@ -485,14 +381,6 @@ if (mysqli_num_rows ( $result ) > 0) {
                              							 </h1>
                                                         <span class="label label-info">Re-Shoot Cost <b id="s2_b_rat"><?php echo $s2_b_rate?></b></span>
                                                     </div>
-
-                                                    <div class="value" id= "s2_c_cost" style="display: none;">
-                                                        <h1 class="count">
-							                                  <?php echo $s2_c_cost?>
-							                             </h1>
-                                                        <span class="label label-info">Final hoot Cost <b id="s2_c_rat"><?php echo $s2_c_rate?></b></span>
-                                                    </div>
-                                                    
                                                        <div class="value" id= "s2_comp" style="display: none;">
                                                         <h1 class="count">
 							                                 Completed
@@ -504,9 +392,9 @@ if (mysqli_num_rows ( $result ) > 0) {
                                             </div>
                                             <div class="col-md-4" style="border: 1px solid;">
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s2_a_btn" style="display: none;" class="btn btn-default btn-rounded">1st Shot, Shoot It!!</button></h2>
-                                             <button type="button"   style="display: none;" id ="s2_b_btn" class="btn btn-default btn-rounded">Not Satisfied ? Try 2nd Shot </button> 
-                                              <h2><button type="button"  style="display: none;"  id ="s2_c_btn" class="btn btn-default btn-rounded">Final Shot!(if u Want)</button></h2>
+                                             <h2><button type="button" id ="s2_a_btn" style="display: none;" class="btn btn-default btn-rounded">First Half Scenes</button></h2>
+                                             <button type="button"   style="display: none;" id ="s2_b_btn" class="btn btn-default btn-rounded">Re-Shoot</button> 
+                                              
                                               <h2 style="display: none;" id="s2N"><b>Go To Next Short</b></h2>                                                 
                                              </div>
                                             </div>
@@ -565,13 +453,6 @@ if (mysqli_num_rows ( $result ) > 0) {
                              							 </h1>
                                                         <span class="label label-info">Re-Shoot Cost <b id="s3_b_rat"><?php echo $s3_b_rate?></b></span>
                                                     </div>
-
-                                                    <div class="value" id= "s3_c_cost" style="display: none;">
-                                                        <h1 class="count">
-							                                  <?php echo $s3_c_cost?>
-							                             </h1>
-                                                        <span class="label label-info">Final hoot Cost <b id="s3_c_rat"><?php echo $s3_c_rate?></b></span>
-                                                    </div>
                                                     
                                                        <div class="value" id= "s3_comp" style="display: none;">
                                                         <h1 class="count">
@@ -584,9 +465,9 @@ if (mysqli_num_rows ( $result ) > 0) {
                                             </div>
                                             <div class="col-md-4" style="border: 1px solid;">
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s3_a_btn" style="display: none;" class="btn btn-default btn-rounded">1st Shot, Shoot It!!</button></h2>
-                                             <button type="button"   style="display: none;" id ="s3_b_btn" class="btn btn-default btn-rounded">Not Satisfied ? Try 2nd Shot </button> 
-                                              <h2><button type="button"  style="display: none;"  id ="s3_c_btn" class="btn btn-default btn-rounded">Final Shot!(if u Want)</button></h2>
+                                             <h2><button type="button" id ="s3_a_btn" style="display: none;" class="btn btn-default btn-rounded">INTERVAL Scenes</button></h2>
+                                             <button type="button"   style="display: none;" id ="s3_b_btn" class="btn btn-default btn-rounded">Re-Shoot</button> 
+                                             
                                               <h2 style="display: none;" id="s3N"><b>Go To Next Short</b></h2>                                              
                                              </div>
                                             </div>
@@ -644,13 +525,6 @@ if (mysqli_num_rows ( $result ) > 0) {
                              							 </h1>
                                                         <span class="label label-info">Re-Shoot Cost <b id="s4_b_rat"><?php echo $s4_b_rate?></b></span>
                                                     </div>
-
-                                                    <div class="value" id= "s4_c_cost" style="display: none;">
-                                                        <h1 class="count">
-							                                  <?php echo $s4_c_cost?>
-							                             </h1>
-                                                        <span class="label label-info">Final hoot Cost <b id="s4_c_rat"><?php echo $s4_c_rate?></b></span>
-                                                    </div>
                                                     
                                                        <div class="value" id= "s4_comp" style="display: none;">
                                                         <h1 class="count">
@@ -663,9 +537,9 @@ if (mysqli_num_rows ( $result ) > 0) {
                                             </div>
                                             <div class="col-md-4" style="border: 1px solid;">
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s4_a_btn" style="display: none;" class="btn btn-default btn-rounded">1st Shot, Shoot It!!</button></h2>
-                                             <button type="button"   style="display: none;" id ="s4_b_btn" class="btn btn-default btn-rounded">Not Satisfied ? Try 2nd Shot </button> 
-                                              <h2><button type="button"  style="display: none;"  id ="s4_c_btn" class="btn btn-default btn-rounded">Final Shot!(if u Want)</button></h2>
+                                             <h2><button type="button" id ="s4_a_btn" style="display: none;" class="btn btn-default btn-rounded">2nd Half Scenes</button></h2>
+                                             <button type="button"   style="display: none;" id ="s4_b_btn" class="btn btn-default btn-rounded">Re-Shoot</button> 
+                                             
                                               <h2 style="display: none;" id="s4N"><b>Go To Next Short</b></h2>                                                 
                                              </div>
                                             </div>
@@ -729,13 +603,6 @@ if (mysqli_num_rows ( $result ) > 0) {
                              							 </h1>
                                                         <span class="label label-info">Re-Shoot Cost <b id="s5_b_rat"><?php echo $s5_b_rate?></b></span>
                                                     </div>
-
-                                                    <div class="value" id= "s5_c_cost" style="display: none;">
-                                                        <h1 class="count">
-							                                  <?php echo $s5_c_cost?>
-							                             </h1>
-                                                        <span class="label label-info">Final hoot Cost <b id="s5_c_rat"><?php echo $s5_c_rate?></b></span>
-                                                    </div>
                                                     
                                                        <div class="value" id= "s5_comp" style="display: none;">
                                                         <h1 class="count">
@@ -748,10 +615,10 @@ if (mysqli_num_rows ( $result ) > 0) {
                                             </div>
                                             <div class="col-md-4" style="border: 1px solid;">
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s5_a_btn" style="display: none;" class="btn btn-default btn-rounded">1st Shot, Shoot It!!</button></h2>
-                                             <button type="button"   style="display: none;" id ="s5_b_btn" class="btn btn-default btn-rounded">Not Satisfied ? Try 2nd Shot </button> 
-                                              <h2><button type="button"  style="display: none;"  id ="s5_c_btn" class="btn btn-default btn-rounded">Final Shot!(if u Want)</button></h2>
-                                              <h2 style="display: none;" id="s5N"><b>Go To Next Short</b></h2>                                                 
+                                             <h2><button type="button" id ="s5_a_btn" style="display: none;" class="btn btn-default btn-rounded">CLYMAX Scenes</button></h2>
+                                             <button type="button"   style="display: none;" id ="s5_b_btn" class="btn btn-default btn-rounded">Re-Shoot</button> 
+                                             <h2 style="display: none;" id="shootCompleted"><b>Shooting Completed</b></h2>      
+                                                                                             
                                              </div>
                                             </div>
                                             
@@ -769,7 +636,7 @@ if (mysqli_num_rows ( $result ) > 0) {
                                             </div>
                                              <ul class="pager wizard">
                                                     <li class="previous" id="s5_prv_s4" style="display: none;"><a href="#" class="btn btn-default">Previous</a></li>
-                                                    <li class="next" id="s5_nxt_s6" style="display: none;"><a href="#" class="btn btn-default">Next</a></li>
+                                                    <li class="next" style="display: none;" id="lastnext" ><a href="<?php echo 'shootout.php?rid='.$sid.'&uid='.$uid?>" class="btn btn-default">Shooting Completed</a></li>
                                                 </ul>
                                         </div>
                                         
@@ -783,336 +650,7 @@ if (mysqli_num_rows ( $result ) > 0) {
                            <!--  ****************************  BIG DIVS //////// s5 /END//***************************** -->
 						   
 						   
-						   
-                        
-                           
-                        <!--  ****************************  BIG DIVS //////// s6 ///////////***************************** -->
 
-                        <div class="row" id="s6" style="display: none;">
-                            <div class="col-md-12">
-                                <div class="panel panel-white">
-                               
-                                    <div class="panel-body">
-                                        <!-- SECENE 1 START -->
-                                        <div class="row">
-                                            <div class="col-md-4">
-
-                                                <section class="panel">
-                                                    <div class="value" id= "s6_a_cost" style="display: none;">
-                                                        <h1 class="count" >
-                                  								 <?php echo $s6_a_cost?>
-                              							</h1>
-                                                        <span class="label label-info">1st Shot Cost <b id="s6_a_rat" ><?php echo $s6_a_rate?></b></span>
-                                                    </div>
-
-                                                     <div class="value" id= "s6_b_cost" style="display: none;">
-                                                        <h1 class="count" >
-                                								  <?php echo $s6_b_cost?>
-                             							 </h1>
-                                                        <span class="label label-info">Re-Shoot Cost <b id="s6_b_rat"><?php echo $s6_b_rate?></b></span>
-                                                    </div>
-
-                                                    <div class="value" id= "s6_c_cost" style="display: none;">
-                                                        <h1 class="count">
-							                                  <?php echo $s6_c_cost?>
-							                             </h1>
-                                                        <span class="label label-info">Final hoot Cost <b id="s6_c_rat"><?php echo $s6_c_rate?></b></span>
-                                                    </div>
-                                                    
-                                                       <div class="value" id= "s6_comp" style="display: none;">
-                                                        <h1 class="count">
-							                                 Completed
-							                             </h1>
-                                                       
-                                                    </div>
-                                                </section>
-
-                                            </div>
-                                            <div class="col-md-4" style="border: 1px solid;">
-                                             <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s6_a_btn" style="display: none;" class="btn btn-default btn-rounded">1st Shot, Shoot It!!</button></h2>
-                                             <button type="button"   style="display: none;" id ="s6_b_btn" class="btn btn-default btn-rounded">Not Satisfied ? Try 2nd Shot </button> 
-                                              <h2><button type="button"  style="display: none;"  id ="s6_c_btn" class="btn btn-default btn-rounded">Final Shot!(if u Want)</button></h2>
-                                              <h2 style="display: none;" id="s6N"><b>Go To Next Short</b></h2>                                                 
-                                             </div>
-                                            </div>
-                                            
-                                            <div class="col-lg-4 col-md-6">
-                                                <div class="cd-pricing-container">
-                                                    <header class="cd-pricing-header">
-                                                        <h2>Scene-6 Quality </h2>
-                                                        <div class="cd-price">
-                                                            <span class="cd-value" id="s6_rateid"></span>
-                                                            <span class="cd-duration">10</span>
-                                                        </div>
-                                                        <span class="label label-info"><?php echo $s6_a_rate?> , <?php echo $s6_b_rate?> , <?php echo $s6_c_rate?></span>
-                                                    </header>
-                                                </div>
-                                            </div>
-                                             <ul class="pager wizard">
-                                                    <li class="previous" id="s6_prv_s5" style="display: none;"><a href="#" class="btn btn-default">Previous</a></li>
-                                                    <li class="next" id="s6_nxt_s7" style="display: none;"><a href="#" class="btn btn-default">Next</a></li>
-                                                </ul>
-                                        </div>
-                                        
-                                        <!-- SECENE 1 END -->
-                                    </div>
-                                </div>
-                                 
-                            </div>                           
-                           
-                        </div>
-                           <!--  ****************************  BIG DIVS //////// s6 /END//***************************** -->
-						   
-						   
-						   
-                        
-                           
-                        <!--  ****************************  BIG DIVS //////// s7 ///////////***************************** -->
-
-                        <div class="row" id="s7" style="display: none;">
-                            <div class="col-md-12">
-                                <div class="panel panel-white">
-                               
-                                    <div class="panel-body">
-                                        <!-- SECENE 1 START -->
-                                        <div class="row">
-                                            <div class="col-md-4">
-
-                                                <section class="panel">
-                                                    <div class="value" id= "s7_a_cost" style="display: none;">
-                                                        <h1 class="count" >
-                                  								 <?php echo $s7_a_cost?>
-                              							</h1>
-                                                        <span class="label label-info">1st Shot Cost <b id="s7_a_rat" ><?php echo $s7_a_rate?></b></span>
-                                                    </div>
-
-                                                     <div class="value" id= "s7_b_cost" style="display: none;">
-                                                        <h1 class="count" >
-                                								  <?php echo $s7_b_cost?>
-                             							 </h1>
-                                                        <span class="label label-info">Re-Shoot Cost <b id="s7_b_rat"><?php echo $s7_b_rate?></b></span>
-                                                    </div>
-
-                                                    <div class="value" id= "s7_c_cost" style="display: none;">
-                                                        <h1 class="count">
-							                                  <?php echo $s7_c_cost?>
-							                             </h1>
-                                                        <span class="label label-info">Final hoot Cost <b id="s7_c_rat"><?php echo $s7_c_rate?></b></span>
-                                                    </div>
-                                                    
-                                                       <div class="value" id= "s7_comp" style="display: none;">
-                                                        <h1 class="count">
-							                                 Completed
-							                             </h1>
-                                                       
-                                                    </div>
-                                                </section>
-
-                                            </div>
-                                            <div class="col-md-4" style="border: 1px solid;">
-                                             <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s7_a_btn" style="display: none;" class="btn btn-default btn-rounded">1st Shot, Shoot It!!</button></h2>
-                                             <button type="button"   style="display: none;" id ="s7_b_btn" class="btn btn-default btn-rounded">Not Satisfied ? Try 2nd Shot </button> 
-                                              <h2><button type="button"  style="display: none;"  id ="s7_c_btn" class="btn btn-default btn-rounded">Final Shot!(if u Want)</button></h2>
-                                              <h2 style="display: none;" id="s7N"><b>Go To Next Short</b></h2>                                                 
-                                             </div>
-                                            </div>
-                                            
-                                            <div class="col-lg-4 col-md-6">
-                                                <div class="cd-pricing-container">
-                                                    <header class="cd-pricing-header">
-                                                        <h2>Scene-7 Quality </h2>
-                                                        <div class="cd-price">
-                                                            <span class="cd-value" id="s7_rateid"></span>
-                                                            <span class="cd-duration">10</span>
-                                                        </div>
-                                                        <span class="label label-info"><?php echo $s7_a_rate?> , <?php echo $s7_b_rate?> , <?php echo $s7_c_rate?></span>
-                                                    </header>
-                                                </div>
-                                            </div>
-                                             <ul class="pager wizard">
-                                                    <li class="previous" id="s7_prv_s6" style="display: none;"><a href="#" class="btn btn-default">Previous</a></li>
-                                                    <li class="next" id="s7_nxt_s8" style="display: none;"><a href="#" class="btn btn-default">Next</a></li>
-                                                </ul>
-                                        </div>
-                                        
-                                        <!-- SECENE 1 END -->
-                                    </div>
-                                </div>
-                                 
-                            </div>                           
-                           
-                        </div>
-                           <!--  ****************************  BIG DIVS //////// s7 /END//***************************** -->
-						   
-						   
-						      
-                        <!--  ****************************  BIG DIVS //////// s8 ///////////***************************** -->
-
-                        <div class="row" id="s8" style="display: none;">
-                            <div class="col-md-12">
-                                <div class="panel panel-white">
-                               
-                                    <div class="panel-body">
-                                        <!-- SECENE 1 START -->
-                                        <div class="row">
-                                            <div class="col-md-4">
-
-                                                <section class="panel">
-                                                    <div class="value" id= "s8_a_cost" style="display: none;">
-                                                        <h1 class="count" >
-                                  								 <?php echo $s8_a_cost?>
-                              							</h1>
-                                                        <span class="label label-info">1st Shot Cost <b id="s8_a_rat" ><?php echo $s8_a_rate?></b></span>
-                                                    </div>
-
-                                                     <div class="value" id= "s8_b_cost" style="display: none;">
-                                                        <h1 class="count" >
-                                								  <?php echo $s8_b_cost?>
-                             							 </h1>
-                                                        <span class="label label-info">Re-Shoot Cost <b id="s8_b_rat"><?php echo $s8_b_rate?></b></span>
-                                                    </div>
-
-                                                    <div class="value" id= "s8_c_cost" style="display: none;">
-                                                        <h1 class="count">
-							                                  <?php echo $s8_c_cost?>
-							                             </h1>
-                                                        <span class="label label-info">Final hoot Cost <b id="s8_c_rat"><?php echo $s8_c_rate?></b></span>
-                                                    </div>
-                                                    
-                                                       <div class="value" id= "s8_comp" style="display: none;">
-                                                        <h1 class="count">
-							                                 Completed
-							                             </h1>
-                                                       
-                                                    </div>
-                                                </section>
-
-                                            </div>
-                                            <div class="col-md-4" style="border: 1px solid;">
-                                             <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s8_a_btn" style="display: none;" class="btn btn-default btn-rounded">1st Shot, Shoot It!!</button></h2>
-                                             <button type="button"   style="display: none;" id ="s8_b_btn" class="btn btn-default btn-rounded">Not Satisfied ? Try 2nd Shot </button> 
-                                              <h2><button type="button"  style="display: none;"  id ="s8_c_btn" class="btn btn-default btn-rounded">Final Shot!(if u Want)</button></h2>
-                                              <h2 style="display: none;" id="s8N"><b>Go To Next Short</b></h2>                                                 
-                                             </div>
-                                            </div>
-                                            
-                                            <div class="col-lg-4 col-md-6">
-                                                <div class="cd-pricing-container">
-                                                    <header class="cd-pricing-header">
-                                                        <h2>Scene-8 Quality </h2>
-                                                        <div class="cd-price">
-                                                            <span class="cd-value" id="s8_rateid"></span>
-                                                            <span class="cd-duration">10</span>
-                                                        </div>
-                                                        <span class="label label-info"><?php echo $s8_a_rate?> , <?php echo $s8_b_rate?> , <?php echo $s8_c_rate?></span>
-                                                    </header>
-                                                </div>
-                                            </div>
-                                             <ul class="pager wizard">
-                                                    <li class="previous" id="s8_prv_s7" style="display: none;"><a href="#" class="btn btn-default">Previous</a></li>
-                                                    <li class="next" id="s8_nxt_s9" style="display: none;"><a href="#" class="btn btn-default">Next</a></li>
-                                                </ul>
-                                        </div>
-                                        
-                                        <!-- SECENE 1 END -->
-                                    </div>
-                                </div>
-                                 
-                            </div>                           
-                           
-                        </div>
-                           <!--  ****************************  BIG DIVS //////// s8 /END//***************************** -->
-						   
-						   
-						   
-                        <!--  ****************************  BIG DIVS //////// s9 ///////////***************************** -->
-
-                        <div class="row" id="s9" style="display: none;">
-                            <div class="col-md-12">
-                                <div class="panel panel-white">
-                               
-                                    <div class="panel-body">
-                                        <!-- SECENE 1 START -->
-                                        <div class="row">
-                                            <div class="col-md-4">
-
-                                                <section class="panel">
-                                                    <div class="value" id= "s9_a_cost" style="display: none;">
-                                                        <h1 class="count" >
-                                  								 <?php echo $s9_a_cost?>
-                              							</h1>
-                                                        <span class="label label-info">1st Shot Cost <b id="s9_a_rat" ><?php echo $s9_a_rate?></b></span>
-                                                    </div>
-
-                                                     <div class="value" id= "s9_b_cost" style="display: none;">
-                                                        <h1 class="count" >
-                                								  <?php echo $s9_b_cost?>
-                             							 </h1>
-                                                        <span class="label label-info">Re-Shoot Cost <b id="s9_b_rat"><?php echo $s9_b_rate?></b></span>
-                                                    </div>
-
-                                                    <div class="value" id= "s9_c_cost" style="display: none;">
-                                                        <h1 class="count">
-							                                  <?php echo $s9_c_cost?>
-							                             </h1>
-                                                        <span class="label label-info">Final hoot Cost <b id="s9_c_rat"><?php echo $s9_c_rate?></b></span>
-                                                    </div>
-                                                    
-                                                       <div class="value" id= "s9_comp" style="display: none;">
-                                                        <h1 class="count">
-							                                 Completed
-							                             </h1>
-                                                       
-                                                    </div>
-                                                </section>
-
-                                            </div>
-                                            <div class="col-md-4" style="border: 1px solid;">
-                                             <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s9_a_btn" style="display: none;" class="btn btn-default btn-rounded">1st Shot, Shoot It!!</button></h2>
-                                             <button type="button"   style="display: none;" id ="s9_b_btn" class="btn btn-default btn-rounded">Not Satisfied ? Try 2nd Shot </button> 
-                                              <h2><button type="button"  style="display: none;"  id ="s9_c_btn" class="btn btn-default btn-rounded">Final Shot!(if u Want)</button></h2>
-                                              <h2 style="display: none;" id="s3N"><b>Shooting Comleted</b></h2>                                                 
-                                             </div>
-                                            </div>
-                                            
-                                            <div class="col-lg-4 col-md-6">
-                                                <div class="cd-pricing-container">
-                                                    <header class="cd-pricing-header">
-                                                        <h2>Scene-9 Quality </h2>
-                                                        <div class="cd-price">
-                                                            <span class="cd-value" id="s9_rateid"></span>
-                                                            <span class="cd-duration">10</span>
-                                                        </div>
-                                                        <span class="label label-info"><?php echo $s9_a_rate?> , <?php echo $s9_b_rate?> , <?php echo $s9_c_rate?></span>
-                                                    </header>
-                                                </div>
-                                            </div>
-                                             <ul class="pager wizard">
-                                                    <li class="previous" id="s9_prv_s8" style="display: none;"><a href="#" class="btn btn-default">Previous</a></li>
-                                                    <li class="next" id="lastnext" style="display: none;"><a href="<?php echo 'shootout.php?rid='.$sid.'&uid='.$uid?>" class="btn btn-default">Shooting Completed</a></li>
-                                                </ul>
-                                        </div>
-                                        <?php //echo 'shootout.php?rid='.$sid.'&uid='.$uid?>
-                                        <!-- SECENE 1 END -->
-                                    </div>
-                                </div>
-                                 
-                            </div>                           
-                           
-                        </div>
-                           <!--  ****************************  BIG DIVS //////// s9 /END//***************************** -->
-						   
-						   
-                        
-                        
-                           
-                       
-                                        
-                        
 
  							<div class="progress" style="display: none;">
                                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
@@ -1267,27 +805,14 @@ if (mysqli_num_rows ( $result ) > 0) {
                 		$(nxt+'_b_btn').show(); 
                 		$(nxt+'_c_cost').hide();
                 		$(nxt+'_c_btn').hide(); 
+  
                 		$(prvbtn).show();
                 		$(nxtbtn).show();     				 
+						          			   				 
 						        				 
 						
                     }
-                    function fun_c()
-                    {
-                    	//alert('c next');
-                    	$(nxt+'_c_cost').show();
-                		$(nxt+'_c_btn').show();
-                		$(nxt+'_a_cost').hide();
-                		$(nxt+'_a_btn').hide();
-                		$(nxt+'_b_cost').hide();
-                		$(nxt+'_b_btn').hide();
-                    	
-                		 
-                		$(prvbtn).show();
-                		$(nxtbtn).show();     				 
-						          							 
-							
-                    }
+  
                     function fun_non()
                     {
                     	$(nxt+'_comp').show();
@@ -1397,23 +922,7 @@ if (mysqli_num_rows ( $result ) > 0) {
 						
                     }
 
-                    function fun_c()
-                    {
-                    	//alert('c prv');
-                    	$(prv+'_c_cost').show();
-                		$(prv+'_c_btn').show();
-                		$(prv+'_a_cost').hide();
-                		$(prv+'_a_btn').hide();
-                		$(prv+'_b_cost').hide();
-                		$(prv+'_b_btn').hide();
-                    	
-                		 
-                		$(prvbtn).show();
-                		$(nxtbtn).show();     				 
-						          				 
-							
-                    }
-
+                    
                     function fun_non()
                     {
                         ////alert(' Previous ' + prvbtn + "\n Next  : "+nxtbtn);
@@ -1493,41 +1002,6 @@ if (mysqli_num_rows ( $result ) > 0) {
                 	  $("#s5_b_btn").hide();
                 	  $("#s5_c_btn").hide();
 
-
-                	  $("#s6_a_cost").hide();
-                	  $("#s6_b_cost").hide();
-                	  $("#s6_c_cost").hide();
-                	  $("#s6_comp").hide();
-                	  $("#s6_a_btn").hide();
-                	  $("#s6_b_btn").hide();
-                	  $("#s6_c_btn").hide();
-
-
-                	  $("#s7_a_cost").hide();
-                	  $("#s7_b_cost").hide();
-                	  $("#s7_c_cost").hide();
-                	  $("#s7_comp").hide();
-                	  $("#s7_a_btn").hide();
-                	  $("#s7_b_btn").hide();
-                	  $("#s7_c_btn").hide();
-
-
-                	  $("#s8_a_cost").hide();
-                	  $("#s8_b_cost").hide();
-                	  $("#s8_c_cost").hide();
-                	  $("#s8_comp").hide();
-                	  $("#s8_a_btn").hide();
-                	  $("#s8_b_btn").hide();
-                	  $("#s8_c_btn").hide();
-
-
-                	  $("#s9_a_cost").hide();
-                	  $("#s9_b_cost").hide();
-                	  $("#s9_c_cost").hide();
-                	  $("#s9_comp").hide();
-                	  $("#s9_a_btn").hide();
-                	  $("#s9_b_btn").hide();
-                	  $("#s9_c_btn").hide();
 
 
 // ////alert('hideend');
@@ -2194,6 +1668,10 @@ if (mysqli_num_rows ( $result ) > 0) {
                   			
                   			$("#s5_nxt_s6").show();
                           	$("#s5_prv_s4").show();
+							
+													
+							$("#shootCompleted").show();													
+							$("#lastnext").show();
            	           },	          
            	           error: function( xhr, status, errorThrown ) {
            	        	   toastr.error( "Sorry, there was a problem!" );	              
@@ -2234,628 +1712,20 @@ if (mysqli_num_rows ( $result ) > 0) {
           				$("#s5_b_cost").hide();
           				$("#s5_b_btn").hide();
           		
-       	     			
-                  			$("#s5_c_cost").show();
-                  			$("#s5_c_btn").show();
-                  			
-                  			
-                  			$("#s5_nxt_s6").show();
-                          	$("#s5_prv_s4").show();
+
+							
+							$("#shootCompleted").show();													
+							$("#lastnext").show();
            	           },	          
            	           error: function( xhr, status, errorThrown ) {
            	        	   toastr.error( "Sorry, there was a problem!" );	              
            	           }
            		    })
                 	})
-                
+                             	
                 	
-                	//=================================================================================
-                	
-                	  $("#s5_c_btn").click(function() {
-                    var s5_c_cost = <?php echo  $s5_c_cost?>        
-      
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s5_c&s5_c_cost='+s5_c_cost;
-                    $("#curr").text(link);
-                    $("#curr").text(link);
-                    
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status5 = obj.status;
-           	     		toastr.info("<h2>"+rate1+"</h2>","Scene Rating "); 
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s5_rateid").text(rate1);           	     		
-
-
-           	     		$("#s5_a_cost").hide();
-          				$("#s5_a_btn").hide();
-          		
-          				$("#s5_b_cost").hide();
-          				$("#s5_b_btn").hide();
-          		
-       	     			
-                  			$("#s5_c_cost").hide();
-                  			$("#s5_c_btn").hide();
-                  			$("#s5N").show();
-                  			
-                  			$("#s5_nxt_s6").show();
-                          	$("#s5_prv_s4").show();
-                        	$("#s5_comp").hide();
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
                 	  //******************** s5 DEV AJAX CALLS  END ************************************
-                	
-                	  //******************** s6 DEV AJAX CALLS  START ************************************
-            
-                $("#s6_a_btn").click(function() {
-                    var s6_a_cost = <?php echo  $s6_a_cost?>        
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s6_a&s6_a_cost='+s6_a_cost;
-                    $("#curr").text(link);
 
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status6 = obj.status;
-           	     		toastr.info("<h2>"+rate1+"</h2>","Scene Rating "); 
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s6_rateid").text(rate1);           	     		
-
-
-           	     			$("#s6_a_cost").hide();
-              				$("#s6_a_btn").hide();
-              		
-           	     			
-                  			$("#s6_b_cost").show();
-                  			$("#s6_b_btn").show();
-                  			
-                  			$("#s6_nxt_s7").show();
-                          	$("#s6_prv_s5").show();
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                	
-                	//=================================================================================
-                	
-                	  $("#s6_b_btn").click(function() {
-                    var s6_b_cost = <?php echo  $s6_b_cost?>        
-
-                 
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s6_b&s6_b_cost='+s6_b_cost;
-                    $("#curr").text(link);
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status6 = obj.status;
-           	     		toastr.info("<h2>"+rate1+"</h2>","Scene Rating "); 
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s6_rateid").text(rate1);           	     		
-
-
-           	     		$("#s6_a_cost").hide();
-          				$("#s6_a_btn").hide();
-          		
-          				$("#s6_b_cost").hide();
-          				$("#s6_b_btn").hide();
-          		
-       	     			
-                  			$("#s6_c_cost").show();
-                  			$("#s6_c_btn").show();
-                  			
-                  			
-                  			$("#s6_nxt_s7").show();
-                          	$("#s6_prv_s5").show();
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                
-                	
-                	//=================================================================================
-                	
-                	  $("#s6_c_btn").click(function() {
-                    var s6_c_cost = <?php echo  $s6_c_cost?>        
-
-                    
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s6_c&s6_c_cost='+s6_c_cost;
-                    $("#curr").text(link);
-                    $("#curr").text(link);
-                    
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status6 = obj.status;
-           	     		toastr.info("<h2>"+rate1+"</h2>","Scene Rating "); 
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s6_rateid").text(rate1);           	     		
-
-
-           	     		$("#s6_a_cost").hide();
-          				$("#s6_a_btn").hide();
-          		
-          				$("#s6_b_cost").hide();
-          				$("#s6_b_btn").hide();
-          		
-       	     			
-                  			$("#s6_c_cost").hide();
-                  			$("#s6_c_btn").hide();
-
-                  			$("#s6N").show();
-                  			$("#s6_nxt_s7").show();
-                          	$("#s6_prv_s5").show();
-                        	$("#s6_comp").hide();
-                          	
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                	  //******************** s6 DEV AJAX CALLS  END ************************************
-                	
-                	  //******************** s7 DEV AJAX CALLS  START ************************************
-            
-                $("#s7_a_btn").click(function() {
-                    var s7_a_cost = <?php echo  $s7_a_cost?>        
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s7_a&s7_a_cost='+s7_a_cost;
-                    $("#curr").text(link);
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status7 = obj.status;
-           	     		toastr.info("<h2>"+rate1+"</h2>","Scene Rating "); 
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s7_rateid").text(rate1);           	     		
-
-
-           	     			$("#s7_a_cost").hide();
-              				$("#s7_a_btn").hide();
-              		
-           	     			
-                  			$("#s7_b_cost").show();
-                  			$("#s7_b_btn").show();
-                  			
-                  			$("#s7_nxt_s8").show();
-                          	$("#s7_prv_s6").show();
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                	
-                	//=================================================================================
-                	
-                	  $("#s7_b_btn").click(function() {
-                    var s7_b_cost = <?php echo  $s7_b_cost?>        
-
-                
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s7_b&s7_b_cost='+s7_b_cost;
-                    $("#curr").text(link);
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status7 = obj.status;
-           	     		toastr.info("<h2>"+rate1+"</h2>","Scene Rating "); 
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s7_rateid").text(rate1);           	     		
-
-
-           	     		$("#s7_a_cost").hide();
-          				$("#s7_a_btn").hide();
-          		
-          				$("#s7_b_cost").hide();
-          				$("#s7_b_btn").hide();
-          		
-       	     			
-                  			$("#s7_c_cost").show();
-                  			$("#s7_c_btn").show();
-                  			
-                  			$("#s7_nxt_s8").show();
-                          	$("#s7_prv_s6").show();
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                
-                	
-                	//=================================================================================
-                	
-                	  $("#s7_c_btn").click(function() {
-                    var s7_c_cost = <?php echo  $s7_c_cost?>        
-
-                 
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s7_c&s7_c_cost='+s7_c_cost;
-                    $("#curr").text(link);
-                    $("#curr").text(link);
-                    
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status7 = obj.status;
-           	     		toastr.info("<h2>"+rate1+"</h2>","Scene Rating "); 
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s7_rateid").text(rate1);           	     		
-
-
-           	     		$("#s7_a_cost").hide();
-          				$("#s7_a_btn").hide();
-          		
-          				$("#s7_b_cost").hide();
-          				$("#s7_b_btn").hide();
-          		
-       	     			
-                  			$("#s7_c_cost").hide();
-                  			$("#s7_c_btn").hide();
-
-                  			$("#s7N").show();
-                  			$("#s7_nxt_s8").show();
-                          	$("#s7_prv_s6").show();
-                        	$("#s7_comp").hide();
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                	  //******************** s7 DEV AJAX CALLS  END ************************************
-                	 //******************** s8 DEV AJAX CALLS  START ************************************
-            
-                $("#s8_a_btn").click(function() {
-                    var s8_a_cost = <?php echo  $s8_a_cost?>        
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s8_a&s8_a_cost='+s8_a_cost;
-                    $("#curr").text(link);
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status8 = obj.status;
-           	     		toastr.info("<h2>"+rate1+"</h2>","Scene Rating "); 
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s8_rateid").text(rate1);           	     		
-
-
-           	     			$("#s8_a_cost").hide();
-              				$("#s8_a_btn").hide();
-              		
-           	     			
-                  			$("#s8_b_cost").show();
-                  			$("#s8_b_btn").show();
-                  			
-                  			$("#s8_nxt_s9").show();
-                          	$("#s8_prv_s7").show();
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                	
-                	//=================================================================================
-                	
-                	  $("#s8_b_btn").click(function() {
-                    var s8_b_cost = <?php echo  $s8_b_cost?>        
-      
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s8_b&s8_b_cost='+s8_b_cost;
-                    $("#curr").text(link);
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status8 = obj.status;
-           	     		toastr.info("<h2>"+rate1+"</h2>","Scene Rating "); 
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s8_rateid").text(rate1);           	     		
-
-
-           	     		$("#s8_a_cost").hide();
-          				$("#s8_a_btn").hide();
-          		
-          				$("#s8_b_cost").hide();
-          				$("#s8_b_btn").hide();
-          		
-       	     			
-                  			$("#s8_c_cost").show();
-                  			$("#s8_c_btn").show();
-
-                  			$("#s8_nxt_s9").show();
-                          	$("#s8_prv_s7").show();
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                
-                	
-                	//=================================================================================
-                	
-                	  $("#s8_c_btn").click(function() {
-                    var s8_c_cost = <?php echo  $s8_c_cost?>        
-
-                
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s8_c&s8_c_cost='+s8_c_cost;
-                    $("#curr").text(link);
-                    $("#curr").text(link);
-                    
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status8 = obj.status;
-           	     		toastr.info("<h2>"+rate1+"</h2>","Scene Rating "); 
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s8_rateid").text(rate1);           	     		
-
-           	     		$("#s8N").show();
-           	     		$("#s8_a_cost").hide();
-          				$("#s8_a_btn").hide();
-          		
-          				$("#s8_b_cost").hide();
-          				$("#s8_b_btn").hide();
-          		
-       	     			
-                  			$("#s8_c_cost").hide();
-                  			$("#s8_c_btn").hide();
-
-                  			$("#s8_nxt_s9").show();
-                          	$("#s8_prv_s7").show();
-                        	$("#s8_comp").hide();
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                	  //******************** s8 DEV AJAX CALLS  END ************************************
-                	 //******************** s9 DEV AJAX CALLS  START ************************************
-            
-                $("#s9_a_btn").click(function() {
-                    var s9_a_cost = <?php echo  $s9_a_cost?>        
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s9_a&s9_a_cost='+s9_a_cost;
-                    $("#curr").text(link);
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status9 = obj.status;  
-
-           	     			toastr.info("<h2>"+rate1+"</h2>","Scene Rating ");  
-
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s9_rateid").text(rate1);           	     		
-
-
-           	     			$("#s9_a_cost").hide();
-              				$("#s9_a_btn").hide();
-              		
-           	     			
-                  			$("#s9_b_cost").show();
-                  			$("#s9_b_btn").show();
-
-                  			$("#lastnext").show();
-                          	$("#s9_prv_s8").show();
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                	
-                	//=================================================================================
-                	
-                	  $("#s9_b_btn").click(function() {
-                    var s9_b_cost = <?php echo  $s9_b_cost?>        
-
-                        
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s9_b&s9_b_cost='+s9_b_cost;
-                    $("#curr").text(link);
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status9 = obj.status;  
-           	     			toastr.info("<h2>"+rate1+"</h2>","Scene Rating ");  
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s9_rateid").text(rate1);           	     		
-
-
-           	     		$("#s9_a_cost").hide();
-          				$("#s9_a_btn").hide();
-          		
-          				$("#s9_b_cost").hide();
-          				$("#s9_b_btn").hide();
-          		
-       	     			
-                  			$("#s9_c_cost").show();
-                  			$("#s9_c_btn").show();
-
-                  			$("#lastnext").show();
-                          	$("#s9_prv_s8").show();
-                          	
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                
-                	
-                	//=================================================================================
-                	
-                	  $("#s9_c_btn").click(function() {
-                    var s9_c_cost = <?php echo  $s9_c_cost?>        
-      
-                    var link =   'ratingAjax.php?rid='+rid+'&sofar='+sofar+'&now=s9_c&s9_c_cost='+s9_c_cost;
-                    $("#curr").text(link);
-                    $("#curr").text(link);
-                    
-
-                       
-                	$.ajax({
-           		     type: "POST",
-           		      url: link,            		    
-           	          success: function( data ) {	             
-           	              
-           	               	var obj = jQuery.parseJSON(data);
-           	       			var rate1 = obj.rate;
-           	       			var sofar1 = obj.sofar;
-           	       			var bal1 = obj.bal;
-           	     			var status9 = obj.status;  
-           	     			toastr.info("<h2>"+rate1+"</h2>","Scene Rating ");  
-
-           	     			$("#s_sofar").text(sofar1);
-           	     			$("#bal_id").text(bal1);
-           	     			$("#s_bal").text(bal1);
-           	     			$("#s9_rateid").text(rate1);           	     		
-           	     		$("#s9N").show();
-
-           	     		$("#s9_a_cost").hide();
-          				$("#s9_a_btn").hide();
-          		
-          				$("#s9_b_cost").hide();
-          				$("#s9_b_btn").hide();
-          		
-       	     			
-                  			$("#s9_c_cost").hide();
-                  			$("#s9_c_btn").hide();
-
-                  			$("#lastnext").show();
-                          	$("#s9_prv_s8").show();
-                        	$("#s9_comp").hide();
-                          	
-           	           },	          
-           	           error: function( xhr, status, errorThrown ) {
-           	        	   toastr.error( "Sorry, there was a problem!" );	              
-           	           }
-           		    })
-                	})
-                	  //******************** s9 DEV AJAX CALLS  END ************************************
-                	  
                 	
             </script>
 
