@@ -116,7 +116,7 @@ for($x = 1; $x <= 9; $x ++) {
 	} // IF END
 	$ratesum = $ratesum + $z;
 } // For Loop END
-$rateavg = number_format ( ( float ) ((($ratesum / 9)) / 2), 2, '.', '' );
+$rateavg = number_format ( ( float ) ((($ratesum / 5)) / 2), 2, '.', '' );
 $ratefinal = $rateavg;
 echo 'rating SUM ' . $ratesum . ' ---->  FINAL RATING : ' . $rateavg;
 
@@ -595,9 +595,7 @@ if($rem<100000)
 	echo "<br>CREW -----   >  " . $crate;
 }//if end
 
-$x1 = mt_rand ( 1 * 10, 10 * 10 ) / 30;
 
-$rateavg = number_format ( ( float ) ((($rateavg * 9) + ($crate *3)+$x1) / 19.35), 2, '.', '' );
 
 
 
