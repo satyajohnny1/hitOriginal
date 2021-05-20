@@ -19,3 +19,10 @@ Installation Changes
 
 
 
+
+AutoDeploy
+======================================
+https://www.deployhq.com/
+https://smlcodXXXX.deploybot.com/
+
+
