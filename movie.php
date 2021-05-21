@@ -468,7 +468,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                        <thead>
                                                                 <tr>
                                                                     <th>Days</th>
-                                                                    <th>Centers</th>
+                                                                    <th>Centers<a href="centers.php?rid="></th>
                                                                     <th>Collection</th>                                                                                                                                  
                                                                     
                                                                 </tr>
@@ -496,7 +496,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
 
                                                     			echo  "<tr>";
                                                     			echo "<td><b> 25 days</b>";
-                                                    			echo "<td><b>".$d25_cent." CENTERS</b>";
+                                                    			echo "<td><b> <a href=\"centers.php?rid=".$rid. "&days=".$max_days."\" target=\"_blank\"> ".$d25_cent." CENTERS </a> </b>";
                                                     			echo "<td><b>".$d25_coll." CRORES</b>";
                                                     			echo  "</tr>";
                                                     			
@@ -504,7 +504,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
 
                                                     			echo  "<tr>";
                                                     			echo "<td><b> 50 days</b>";
-                                                    			echo "<td><b>".$d50_cent." CENTERS</b>";
+                                                    			echo "<td><b> <a href=\"centers.php?rid=".$rid. "&days=".$max_days."\" target=\"_blank\"> ".$d50_cent." CENTERS </a> </b>";
                                                     			echo "<td><b>".$d50_coll." CRORES</b>";
                                                     			echo  "</tr>";
                                                     			
@@ -512,7 +512,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
 
                                                     			echo  "<tr>";
                                                     			echo "<td><b> 75 days</b>";
-                                                    			echo "<td><b>".$d75_cent." CENTERS</b>";
+                                                    			echo "<td><b> <a href=\"centers.php?rid=".$rid. "&days=".$max_days."\" target=\"_blank\"> ".$d75_cent." CENTERS </a> </b>";
                                                     			echo "<td><b>".$d75_coll." CRORES</b>";
                                                     			echo  "</tr>";
                                                     			
@@ -520,7 +520,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
 
                                                     			echo  "<tr>";
                                                     			echo "<td><b> 100 days</b>";
-                                                    			echo "<td><b>".$d100_cent." CENTERS</b>";
+                                                    			echo "<td><b> <a href=\"centers.php?rid=".$rid. "&days=".$max_days."\" target=\"_blank\"> ".$d100_cent." CENTERS </a> </b>";
                                                     			echo "<td><b>".$d100_coll." CRORES</b>";
                                                     			echo  "</tr>";
                                                     			

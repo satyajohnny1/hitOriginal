@@ -2,91 +2,295 @@
 <html>
 <body>
 
+<style>
+h1 {
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  box-shadow: 1px 1px blue;
+}
+
+h2 {
+  text-shadow: 2px 2px 5px red;
+}
+
+
+
+</style>
+
+
 <?php
+
+include 'db.php';
  
- $numbers = range(1, 1340);
-$cent25 = 30;
-$cent50 = 15;
-$cent75 = 7;
-$cent100 = 4;
-$cent150 = 2;
-$cent175 = 1;
-$centMax = 0;
-shuffle($numbers);
-shuffle($numbers);
-
  
-$cent25  =  array_slice($numbers, 0, $cent25);
-$cent25_str  = implode(',', $cent25);
-shuffle($cent25);
-
+$rid = $_GET ["rid"]; 
+$days = $_GET ["days"]; 
  
-$cent50  = array_slice($cent25,0,$cent50);
-$cent50_str  = implode(',', $cent50);
-shuffle($cent50);
+//================ DISPLAY CENTERS
+$sql = "SELECT * from centers WHERE rid=".$rid;
+
+$d25_html="";
+$result = mysqli_query($conn, $sql);
+  	
+     	if (mysqli_num_rows($result) > 0) {
+     		// output data of each row
+			
+			$count = 1;
+     		while($row = mysqli_fetch_assoc($result)) {
+     			$d25_str = $row["25list"];
+     			$d50_str = $row["50list"];
+				$d75_str = $row["75list"];
+     			$d100_str = $row["100list"];
+				$d150_str = $row["150list"];
+     			$d175_str = $row["175list"];
+				$d200_str = $row["200list"];
+     			$d250_str = $row["250list"];
+     			$d300_str = $row["300list"];
+				$dMax = $row["maxlist"]; 		
+     		}
+     	}
+
+
+
+
+
+//25 days centers
+echo "<h1> 25days centers</h1>";
+$sql = "SELECT * FROM `thearterslist` where id IN (". $d25_str. ") ORDER BY `city` ASC;";
  
+$d25_html="";
+$result = mysqli_query($conn, $sql);
+  	
+     	if (mysqli_num_rows($result) > 0) {
+     		// output data of each row
+			
+			$count = 1;
+     		while($row = mysqli_fetch_assoc($result)) {
+     			$name = $row["name"];
+     			$city = $row["city"];
+				
+     			$d25_html = $d25_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     		}
+     	}  
+		
+		echo "".$d25_html;
 
+
+
+//50 days centers
+
+$sql = "SELECT * FROM `thearterslist` where id IN (". $d50_str. ") ORDER BY `city` ASC;";
  
-$cent75  = array_slice($cent50,0,$cent75);
-$cent75_str  = implode(',', $cent75);
-shuffle($cent75);
+$d50_html="";
+$result = mysqli_query($conn, $sql);
+  	
+     	if (mysqli_num_rows($result) > 0) {
+     		// output data of each row
+			echo "<h1> 50 days centers</h1>";
+			$count = 1;
+     		while($row = mysqli_fetch_assoc($result)) {
+     			$name = $row["name"];
+     			$city = $row["city"];
+				
+     			$d50_html = $d50_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     		}
+     	}  
+		
+		echo "".$d50_html;
 
+
+
+
+//75 days centers
+
+$sql = "SELECT * FROM `thearterslist` where id IN (". $d75_str. ") ORDER BY `city` ASC;";
  
-$cent100  = array_slice($cent75,0,$cent100);
-$cent100_str  = implode(',', $cent100);
-shuffle($cent100);
+$d75_html="";
+$result = mysqli_query($conn, $sql);
+  	
+     	if (mysqli_num_rows($result) > 0) {
+     		// output data of each row
+			echo "<h1> 75 days centers</h1>";
+			$count = 1;
+     		while($row = mysqli_fetch_assoc($result)) {
+     			$name = $row["name"];
+     			$city = $row["city"];
+				
+     			$d75_html = $d75_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     		}
+     	}  
+		
+		echo "".$d75_html;
 
 
-$cent150  = array_slice($cent100,0,$cent150);
-$cent150_str  = implode(',', $cent150);
-shuffle($cent150);
+
+//100 days centers
+
+$sql = "SELECT * FROM `thearterslist` where id IN (". $d100_str. ") ORDER BY `city` ASC;";
  
-
-$cent175  = array_slice($cent150,0,$cent175);
-$cent175_str  = implode(',', $cent175);
-shuffle($cent175);
-
-
-$centMax  = $numbers[0];
-
-if($cent25!=null){
-	$centMax  = $cent25[0];
-}
-if($cent50!=null){
-	$centMax  = $cent50[0];
-}
-if($cent75!=null){
-	$centMax  = $cent75[0];
-}
-
-if($cent100!=null){
-	$centMax  = $cent100[0];
-}
-
-if($cent150!=null){
-	$centMax  = $cent150[0];
-}
-
-if($cent175!=null){
-	$centMax  = $cent175[0];
-}
+$d100_html="";
+$result = mysqli_query($conn, $sql);
+  	
+     	if ($result!=null && mysqli_num_rows($result) > 0) {
+     		// output data of each row
+			echo "<h1> 100 days centers</h1>";
+			$count = 1;
+     		while($row = mysqli_fetch_assoc($result)) {
+     			$name = $row["name"];
+     			$city = $row["city"];
+				
+     			$d100_html = $d100_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     		}
+     	}  
+		
+		echo "".$d100_html;
 
 
 
+//150 days centers
 
-echo "<p>25 Days :".$cent25_str;
+$sql = "SELECT * FROM `thearterslist` where id IN (". $d150_str. ") ORDER BY `city` ASC;";
+ 
+$d150_html="";
+$result = mysqli_query($conn, $sql);
+  	
+     	if ($result!=null && mysqli_num_rows($result) > 0) {
+     		// output data of each row
+			echo "<h1> 150 days centers</h1>";
+			$count = 1;
+     		while($row = mysqli_fetch_assoc($result)) {
+     			$name = $row["name"];
+     			$city = $row["city"];
+				
+     			$d150_html = $d150_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     		}
+     	}  
+		
+		echo "".$d150_html;
 
-echo "</p> <p> 50 Days :".$cent50_str;
 
-echo "</p> <p> 75 Days :".$cent75_str;
 
-echo "</p> <p> 100 Days :".$cent100_str;
+//175 days centers
 
-echo "</p> <p> 150 Days :".$cent150_str;
+$sql = "SELECT * FROM `thearterslist` where id IN (". $d175_str. ") ORDER BY `city` ASC;";
+ 
+$d175_html="";
+$result = mysqli_query($conn, $sql);
+  	
+     	if ($result!=null && mysqli_num_rows($result) > 0) {
+     		// output data of each row
+			echo "<h1> 175 days centers</h1>";
+			$count = 1;
+     		while($row = mysqli_fetch_assoc($result)) {
+     			$name = $row["name"];
+     			$city = $row["city"];
+				
+     			$d175_html = $d175_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     		}
+     	}  
+		
+		echo "".$d175_html;
 
-echo "</p> <p> 175 Days :".$cent175_str;
 
-echo "</p> <p> Max Days :".$centMax;
+
+
+//200 days centers
+
+$sql = "SELECT * FROM `thearterslist` where id IN (". $d200_str. ") ORDER BY `city` ASC;";
+ 
+$d200_html="";
+$result = mysqli_query($conn, $sql);
+  	
+     	if ($result!=null && mysqli_num_rows($result) > 0) {
+     		// output data of each row
+			echo "<h1> 200 days centers</h1>";
+			$count = 1;
+     		while($row = mysqli_fetch_assoc($result)) {
+     			$name = $row["name"];
+     			$city = $row["city"];
+				
+     			$d200_html = $d200_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     		}
+     	}  
+		
+		echo "".$d200_html;
+
+
+
+
+//250 days centers
+
+$sql = "SELECT * FROM `thearterslist` where id IN (". $d250_str. ") ORDER BY `city` ASC;";
+ 
+$d250_html="";
+$result = mysqli_query($conn, $sql);
+  	
+     	if ($result!=null && mysqli_num_rows($result) > 0) {
+     		// output data of each row
+			echo "<h1> 250 days centers</h1>";
+			$count = 1;
+     		while($row = mysqli_fetch_assoc($result)) {
+     			$name = $row["name"];
+     			$city = $row["city"];
+				
+     			$d250_html = $d250_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     		}
+     	}  
+		
+		echo "".$d250_html;
+
+
+
+//300 days centers
+
+$sql = "SELECT * FROM `thearterslist` where id IN (". $d300_str. ") ORDER BY `city` ASC;";
+ 
+$d300_html="";
+$result = mysqli_query($conn, $sql);
+  	
+     	if ($result!=null && mysqli_num_rows($result) > 0) {
+     		// output data of each row
+			echo "<h1> 300 days centers</h1>";
+			$count = 1;
+     		while($row = mysqli_fetch_assoc($result)) {
+     			$name = $row["name"];
+     			$city = $row["city"];
+				
+     			$d300_html = $d300_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     		}
+     	}  
+		
+		echo "".$d300_html;
+
+
+
+
+//300 days centers
+
+$sql = "SELECT * FROM `thearterslist` where id IN (". $dMax. ") ORDER BY `city` ASC;";
+ 
+$dMax_html="";
+$result = mysqli_query($conn, $sql);
+  	
+     	if ($result!=null && mysqli_num_rows($result) > 0) {
+     		// output data of each row
+			
+		 
+     		while($row = mysqli_fetch_assoc($result)) {
+     			$name = $row["name"];
+     			$city = $row["city"];
+				
+     			$dMax_html = $name.", ".$city; 		
+     		}
+     	}  
+		
+		echo "<h1>Total ".$days." Days </h1>";
+		echo "<b><h3 style=\"color:blue\"> ".$dMax_html."</h3>";
+
+
+
+// Centers ================== Calculation ============== Start 
+
 
  
 ?>

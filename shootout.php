@@ -81,19 +81,22 @@ $s_bal = $_SESSION ['s_bal'];
 $ratesum = 0;
 
 $budget = 0;
-
-echo $sid . '  --    ' . $uid;
-for($x = 1; $x <= 9; $x ++) {
+//1.  Getting all Scenes Quality & updating Best Scenes
+echo "************************************************************";
+echo "<h3> Getting all Scenes Quality & updating Best Scenes </h3>";
+echo "************************************************************ <br>";
+echo '<br>'.$sid . '  --    ' . $uid;
+for($x = 1; $x <= 5; $x ++) {
 	$z = 0;
 	
 	$tab = 's' . $x;
-	echo 'Tab ---> ' . $tab;
+	echo '<br> Tab ---> ' . $tab;
 	$sa = $tab . '_a_rate';
 	$sb = $tab . '_b_rate';
 	$sc = $tab . '_c_rate';
 	
 	$sql = "select * from tolly_" . $tab . " r WHERE r.uid = " . $uid . " and r.sid = " . $sid;
-	echo $sql;
+	echo $sql.'<br>';
 	$result = mysqli_query ( $conn, $sql );
 	if (mysqli_num_rows ( $result ) > 0) {
 		$row = mysqli_fetch_assoc ( $result );
@@ -111,14 +114,14 @@ for($x = 1; $x <= 9; $x ++) {
 		}
 		
 		$sql2 = "UPDATE tolly_" . $tab . " r  SET r." . $tab . "_best=" . $z . " WHERE  r.uid = " . $uid . " and r.sid = " . $sid;
-		echo $sql2;
+		echo $sql2.'<br>';
 		mysqli_query ( $conn, $sql2 );
 	} // IF END
 	$ratesum = $ratesum + $z;
 } // For Loop END
 $rateavg = number_format ( ( float ) ((($ratesum / 5)) / 2), 2, '.', '' );
 $ratefinal = $rateavg;
-echo 'rating SUM ' . $ratesum . ' ---->  FINAL RATING : ' . $rateavg;
+echo '<br> <h2>rating SUM ' . $ratesum . ' ---->  FINAL RATING : ' . $rateavg.'</h2>';
 
 $point = 0;
 
@@ -131,17 +134,17 @@ if ((1.25 > $rateavg)) {
 } elseif ((2.5 <= $rateavg) && ($rateavg < 2.85)) {
 	$point = -0.2;
 } elseif ((2.85 <= $rateavg) && ($rateavg < 3.25)) {
-	$point = -0.1;
+	$point = -0.0;
 } elseif ((3.25 <= $rateavg) && ($rateavg < 3.5)) {
-	$point = 0;
-} elseif ((3.5 <= $rateavg) && ($rateavg < 3.75)) {
-	$point = 0.1;
-} elseif ((3.75 <= $rateavg) && ($rateavg < 4.0)) {
 	$point = 0.2;
-} elseif ((4.0 <= $rateavg) && ($rateavg < 4.5)) {
+} elseif ((3.5 <= $rateavg) && ($rateavg < 3.75)) {
 	$point = 0.3;
+} elseif ((3.75 <= $rateavg) && ($rateavg < 4.0)) {
+	$point = 0.5;
+} elseif ((4.0 <= $rateavg) && ($rateavg < 4.5)) {
+	$point = 1.0;
 } elseif ($rateavg >= 4.5) {
-	$point = 0.4;
+	$point = 1.4;
 } else {
 	$point = 0;
 }
@@ -608,21 +611,21 @@ if ((1.5 > $rateavg)) {
 	$result = 'DISASTER';
 } elseif ((1.5 <= $rateavg) && ($rateavg < 1.75)) {
 	$result = 'UTTER FLOP';
-} elseif ((1.75 <= $rateavg) && ($rateavg < 2.25)) {
+} elseif ((1.75 <= $rateavg) && ($rateavg < 2.5)) {
 	$result = 'FLOP';
-} elseif ((2.25 <= $rateavg) && ($rateavg < 2.5)) {
+} elseif ((2.5 <= $rateavg) && ($rateavg < 3)) {
 	$result = 'BELOW AVERAGE';
-} elseif ((2.5 <= $rateavg) && ($rateavg < 3.0)) {
+} elseif ((3 <= $rateavg) && ($rateavg < 3.25)) {
 	$result = 'AVERAGE';
-} elseif ((3.0 <= $rateavg) && ($rateavg < 3.25)) {
+} elseif ((3.25 <= $rateavg) && ($rateavg < 3.65)) {
 	$result = 'ABOVE AVERAGE';
-} elseif ((3.25 <= $rateavg) && ($rateavg < 3.5)) {
+} elseif ((3.65 <= $rateavg) && ($rateavg < 4)) {
 	$result = 'HIT';
-} elseif ((3.5 <= $rateavg) && ($rateavg < 3.7)) {
+} elseif ((4 <= $rateavg) && ($rateavg < 4.20)) {
 	$result = 'SUPER HIT';
-} elseif ((3.7 <= $rateavg) && ($rateavg < 4.25)) {
+} elseif ((4.20 <= $rateavg) && ($rateavg < 4.4)) {
 	$result = 'BLOCKBUSTER';
-} elseif ($rateavg >= 4.25) {
+} elseif ($rateavg >= 4.4) {
 	$result = 'INDUSTRY HIT';
 } else {
 	$result = 'FLOP';
@@ -678,8 +681,8 @@ function centers($rateavg, $rel_cent) {
 	global $wk1_cent, $wk2_cent, $d25_cent, $d50_cent, $d75_cent, $d100_cent, $d125_cent, $d150_cent, $d175_cent, $d200_cent, $d250_cent, $d300_cent, $d350_cent, $d365_cent, $d400_cent, $d450_cent, $d500_cent, $d600_cent, $wk1_coll, $wk2_coll, $d25_coll, $d50_coll, $d75_coll, $d100_coll, $d125_coll, $d150_coll, $d175_coll, $d200_coll, $d250_coll, $d300_coll, $d350_coll, $d365_coll, $d400_coll, $d450_coll, $d500_coll, $d600_coll, $max_days, $max_coll;
 	echo '--------> centers RATING = ' . $rateavg . '  ---CENTERS  = ' . $rel_cent;
 	
-	if ((1.5 > $rateavg)) // DISASTER
-{
+	if ((1.5 > $rateavg)) {
+
 		$wk1_cent = round ( (($rel_cent / 8.5) + ($rel_cent / 8.4) + ($rel_cent / 7.75)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 9.5) + ($wk1_cent / 3.25)) / 2 );
 		
@@ -785,7 +788,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((1.75 <= $rateavg) && ($rateavg < 2.25)) // Flop
+	} elseif ((1.75 <= $rateavg) && ($rateavg < 2.5)) // Flop
 {
 		
 		$wk1_cent = round ( (($rel_cent / 4.5) + ($rel_cent / 4.4) + ($rel_cent / 2.75)) / 3 );
@@ -839,7 +842,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((2.25 <= $rateavg) && ($rateavg < 2.5)) // Below Avg
+	} elseif ((2.5 <= $rateavg) && ($rateavg < 3)) // Below Avg
 {
 		
 		$wk1_cent = round ( (($rel_cent / 2.5) + ($rel_cent / 2.4) + ($rel_cent / 2.75)) / 3 );
@@ -891,7 +894,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((2.5 <= $rateavg) && ($rateavg < 3.0)) // Average
+	} elseif ((3 <= $rateavg) && ($rateavg < 3.25)) // Average
 {
 		
 		$wk1_cent = round ( (($rel_cent / 2.25) + ($rel_cent / 2) + ($rel_cent / 2.25)) / 3 );
@@ -943,7 +946,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((3.0 <= $rateavg) && ($rateavg < 3.25)) // Above Average
+	} elseif ((3.25 <= $rateavg) && ($rateavg < 3.65))  // Above Average
 {
 		$wk1_cent = round ( (($rel_cent / 2.25) + ($rel_cent / 1.75) + ($rel_cent / 1.85)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 1.75) + ($wk1_cent / 1.65)) / 2 );
@@ -993,7 +996,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((3.25 <= $rateavg) && ($rateavg < 3.5)) // HIT
+	} elseif ((3.65 <= $rateavg) && ($rateavg < 4)) // HIT
 {
 		
 		// // ******************** HIT *******************************
@@ -1045,7 +1048,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((3.5 <= $rateavg) && ($rateavg < 3.7)) {
+	} elseif ((4 <= $rateavg) && ($rateavg < 4.20)) {
 		// ******************** SUPER HIT *******************************
 		$wk1_cent = round ( (($rel_cent / 1.15) + ($rel_cent / 1.20) + ($rel_cent / 1.35)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 1.10) + ($wk1_cent / 1.20) + ($wk1_cent / 1.30)) / 3 );
@@ -1096,7 +1099,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((3.7 <= $rateavg) && ($rateavg < 4.25)) {
+	} elseif ((4.20 <= $rateavg) && ($rateavg < 4.4)) {
 		// ******************** BLOCK BUSTER*******************************
 		$wk1_cent = round ( (($rel_cent / 1.15) + ($rel_cent / 1.20) + ($rel_cent / 1.35)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 1.10) + ($wk1_cent / 1.20) + ($wk1_cent / 1.30)) / 3 );
@@ -1146,7 +1149,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ($rateavg >= 4.25) {
+	} elseif ($rateavg >= 4.4) {
 		// ******************** INDUSTRY HIT*******************************
 		$wk1_cent = round ( (($rel_cent / 1.1) + ($rel_cent / 1.20) + ($rel_cent / 1.25)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 1.1) + ($wk1_cent / 1.20) + ($wk1_cent / 1.2)) / 3 );
@@ -1286,7 +1289,145 @@ $sql3 = "INSERT INTO  `tolly_news` (`news`, `heading`) VALUES ('" . $news . "', 
 echo 'News ----> ' . $sql3;
 mysqli_query ( $conn, $sql3 );
 
+echo ' <h2> RESULT ' . $result.'</h2>';
+
 // adding Json-Ajax Collections Data
+
+
+
+
+// Centers ================== Calculation ============== Start 
+
+$numbers = range(1, 1340);
+shuffle($numbers);
+shuffle($numbers);
+
+$d25_cent  =  array_slice($numbers, 0, $d25_cent);
+$d25_str  = implode(',', $d25_cent);
+shuffle($d25_cent);
+
+ 
+$d50_cent  = array_slice($d25_cent,0,$d50_cent);
+$d50_str  = implode(',', $d50_cent);
+shuffle($d50_cent);
+ 
+
+ 
+$d75_cent  = array_slice($d50_cent,0,$d75_cent);
+$d75_str  = implode(',', $d75_cent);
+shuffle($d75_cent);
+
+ 
+$d100_cent  = array_slice($d75_cent,0,$d100_cent);
+$d100_str  = implode(',', $d100_cent);
+shuffle($d100_cent);
+
+
+$d150_cent  = array_slice($d100_cent,0,$d150_cent);
+$d150_str  = implode(',', $d150_cent);
+shuffle($d150_cent);
+ 
+
+$d175_cent  = array_slice($d150_cent,0,$d175_cent);
+$d175_str  = implode(',', $d175_cent);
+shuffle($d175_cent);
+
+$d200_cent  = array_slice($d175_cent,0,$d200_cent);
+$d200_str  = implode(',', $d200_cent);
+shuffle($d200_cent);
+
+
+$d250_cent  = array_slice($d200_cent,0,$d250_cent);
+$d250_str  = implode(',', $d250_cent);
+shuffle($d250_cent);
+
+
+$d300_cent  = array_slice($d250_cent,0,$d300_cent);
+$d300_str  = implode(',', $d300_cent);
+shuffle($d300_cent);
+
+
+$dMax  = $numbers[0];
+
+if($d25_cent!=null){
+	$dMax  = $d25_cent[0];
+}
+if($d50_cent!=null){
+	$dMax  = $d50_cent[0];
+}
+if($d75_cent!=null){
+	$dMax  = $d75_cent[0];
+}
+
+if($d100_cent!=null){
+	$dMax  = $d100_cent[0];
+}
+
+if($d150_cent!=null){
+	$dMax  = $d150_cent[0];
+}
+
+if($d175_cent!=null){
+	$dMax  = $d175_cent[0];
+}
+
+
+if($d200_cent!=null){
+	$dMax  = $d200_cent[0];
+}
+
+if($d250_cent!=null){
+	$dMax  = $d250_cent[0];
+}
+
+if($d300_cent!=null){
+	$dMax  = $d300_cent[0];
+}
+
+
+
+echo "<p>25 Days :".$d25_str;
+
+echo "</p> <p> 50 Days :".$d50_str;
+
+echo "</p> <p> 75 Days :".$d75_str;
+
+echo "</p> <p> 100 Days :".$d100_str;
+
+echo "</p> <p> 150 Days :".$d150_str;
+
+echo "</p> <p> 175 Days :".$d175_str;
+
+echo "</p> <p> 200 Days :".$d200_str;
+
+echo "</p> <p> 250 Days :".$d250_str;
+
+echo "</p> <p> 300 Days :".$d300_str;
+
+echo "</p> <p> Max Days :".$dMax;
+
+
+
+
+$sqlCenters = "INSERT INTO centers (rid, 25list, 50list, 75list, 100list, 150list, 175list, 200list, 250list, 300list, maxlist) VALUES ( '" .$rid . "', '" .$d25_str . "', '" .$d50_str . "', '" .$d75_str . "', '" .$d100_str . "', '" .$d150_str . "', '" .$d175_str . "', '" .$d200_str . "', '" .$d250_str . "', '" .$d300_str . "', '" .$dMax . "')";
+
+echo "</p> <p> Query :".$sqlCenters;
+
+mysqli_query ( $conn, $sqlCenters );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 header('Location: readyforrelease.php');
 
