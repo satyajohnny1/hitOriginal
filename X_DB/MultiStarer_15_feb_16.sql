@@ -12891,6 +12891,26 @@ INSERT INTO `tolly_writer` (`writer_id`, `writer_name`, `writer_rate`, `writer_g
 (18, 'Chittu Kaveti', 100000, 'B', 'poster/ChittuKaveti.png', 'available', 9),
 (19, 'N.SHANKAR', 30000000, 'a', 'poster/storysplyprod-NSHANKAR.png', 'available', 10);
 
+
+
+CREATE TABLE `centers` (
+	`rid` INT(11) NULL DEFAULT '0',
+	`25list` LONGTEXT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci',
+	`50list` LONGTEXT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci',
+	`75list` LONGTEXT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci',
+	`100list` LONGTEXT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci',
+	`150list` LONGTEXT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci',
+	`175list` LONGTEXT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci',
+	`200list` LONGTEXT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci',
+	`250list` LONGTEXT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci',
+	`300list` LONGTEXT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci',
+	`maxlist` LONGTEXT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci'
+)
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB
+;
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
