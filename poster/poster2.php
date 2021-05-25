@@ -56,15 +56,15 @@ function clean($string) {
 	return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 }
 
-$bg = "bg2.jpg";
-$heroimg1 = clean(strtolower($a)).'.png';
-$heroimg2 = clean(strtolower($a2)).'.png';
+$bg = "bg/bg".rand(1,12).".jpg";
+$heroimg1 = "actors/".clean(strtolower($a)).'.png';
+$heroimg2 = "actors/".clean(strtolower($a2)).'.png';
 
 
 
 $jpg_image = imagecreatefromjpeg($bg);
-$fnt = rand(1,13).".ttf";
-$tfnt = rand(1,13).".ttf";
+$fnt = "fonts/".rand(1,13).".ttf";
+$tfnt = "fonts/".rand(1,29).".ttf";
 $path = 'done/'.$tit.$rid.".jpeg";
 $path_50 = 'done/'.$tit.$rid."_50.jpeg";
 $path_75 = 'done/'.$tit.$rid."_75.jpeg";
