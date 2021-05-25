@@ -69,7 +69,7 @@ $result = mysqli_query($conn, $sql);
      			$name = $row["name"];
      			$city = $row["city"];
 				
-     			$d25_html = $d25_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     			$d25_html = $d25_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
 		
@@ -92,7 +92,7 @@ $result = mysqli_query($conn, $sql);
      			$name = $row["name"];
      			$city = $row["city"];
 				
-     			$d50_html = $d50_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     			$d50_html = $d50_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
 		
@@ -116,7 +116,7 @@ $result = mysqli_query($conn, $sql);
      			$name = $row["name"];
      			$city = $row["city"];
 				
-     			$d75_html = $d75_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     			$d75_html = $d75_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
 		
@@ -139,7 +139,7 @@ $result = mysqli_query($conn, $sql);
      			$name = $row["name"];
      			$city = $row["city"];
 				
-     			$d100_html = $d100_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     			$d100_html = $d100_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
 		
@@ -162,7 +162,7 @@ $result = mysqli_query($conn, $sql);
      			$name = $row["name"];
      			$city = $row["city"];
 				
-     			$d150_html = $d150_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     			$d150_html = $d150_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
 		
@@ -185,7 +185,7 @@ $result = mysqli_query($conn, $sql);
      			$name = $row["name"];
      			$city = $row["city"];
 				
-     			$d175_html = $d175_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     			$d175_html = $d175_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
 		
@@ -209,7 +209,7 @@ $result = mysqli_query($conn, $sql);
      			$name = $row["name"];
      			$city = $row["city"];
 				
-     			$d200_html = $d200_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     			$d200_html = $d200_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
 		
@@ -233,7 +233,7 @@ $result = mysqli_query($conn, $sql);
      			$name = $row["name"];
      			$city = $row["city"];
 				
-     			$d250_html = $d250_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     			$d250_html = $d250_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
 		
@@ -256,7 +256,7 @@ $result = mysqli_query($conn, $sql);
      			$name = $row["name"];
      			$city = $row["city"];
 				
-     			$d300_html = $d300_html."<p>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </p>" ;  		
+     			$d300_html = $d300_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
 		

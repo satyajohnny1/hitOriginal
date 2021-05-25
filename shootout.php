@@ -1416,21 +1416,8 @@ echo "</p> <p> Query :".$sqlCenters;
 mysqli_query ( $conn, $sqlCenters );
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 header('Location: readyforrelease.php');
-
+echo "<h2> After Redirect</h2>";
 ?>
 
 
@@ -1538,7 +1525,7 @@ header('Location: readyforrelease.php');
 					echo '<br>500 CENTERS :  ' . $d500_cent;
 					echo '<br>600 CENTERS :  ' . $d600_cent;
 					
-					// header('Location: readyforrelease.php');
+					header('Location: readyforrelease.php');
 					
 					?></p>
 				</div>
@@ -1565,8 +1552,7 @@ header('Location: readyforrelease.php');
 
         <?php include 'js.php';?>
             <script type="text/javascript">
-            alert('YEH');
-			  
+           
                 toastr.options = {
                     "closeButton": false,
                     "debug": false,
@@ -1597,5 +1583,6 @@ header('Location: readyforrelease.php');
 <?php 
 if($conn!=null){
 mysqli_close($conn);
+header('Location: readyforrelease.php');
 }
 ?>

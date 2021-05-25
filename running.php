@@ -555,7 +555,7 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
 
 
 			var poster = '<?php echo $poster?>';
-			
+			poster = 'no';
            
          //alert(poster);
 
@@ -597,6 +597,11 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
 				var url = window.location.href;
 				var arr = url.split("/"); 
 				var hostname = arr[0] + "//" + arr[2];
+				
+				if(hostname.includes("localhost")){
+					hostname = hostname+"/hit";
+					//alert(hostname);
+				}
 					
     			 var plink = hostname+'/poster/poster1.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
    			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
