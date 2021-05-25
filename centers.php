@@ -68,7 +68,9 @@ $result = mysqli_query($conn, $sql);
      		while($row = mysqli_fetch_assoc($result)) {
      			$name = $row["name"];
      			$city = $row["city"];
-				
+					if(strlen($city)<6){
+					$city = $city."  ";
+				}
      			$d25_html = $d25_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
@@ -91,7 +93,9 @@ $result = mysqli_query($conn, $sql);
      		while($row = mysqli_fetch_assoc($result)) {
      			$name = $row["name"];
      			$city = $row["city"];
-				
+					if(strlen($city)<6){
+					$city = $city."  ";
+				}
      			$d50_html = $d50_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
@@ -116,6 +120,10 @@ $result = mysqli_query($conn, $sql);
      			$name = $row["name"];
      			$city = $row["city"];
 				
+				if(strlen($city)<6){
+					$city = $city."  ";
+				}
+				
      			$d75_html = $d75_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
@@ -138,7 +146,9 @@ $result = mysqli_query($conn, $sql);
      		while($row = mysqli_fetch_assoc($result)) {
      			$name = $row["name"];
      			$city = $row["city"];
-				
+					if(strlen($city)<6){
+					$city = $city."  ";
+				}
      			$d100_html = $d100_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
@@ -161,7 +171,9 @@ $result = mysqli_query($conn, $sql);
      		while($row = mysqli_fetch_assoc($result)) {
      			$name = $row["name"];
      			$city = $row["city"];
-				
+					if(strlen($city)<6){
+					$city = $city."  ";
+				}
      			$d150_html = $d150_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
@@ -184,7 +196,9 @@ $result = mysqli_query($conn, $sql);
      		while($row = mysqli_fetch_assoc($result)) {
      			$name = $row["name"];
      			$city = $row["city"];
-				
+					if(strlen($city)<6){
+					$city = $city."  ";
+				}
      			$d175_html = $d175_html."<pre>" .$count++. "." .mb_strimwidth($city,0,10)."\t - <b>".$name. "</b> </pre>" ;  		
      		}
      	}  
