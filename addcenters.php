@@ -132,7 +132,7 @@ for ($x = 1; $x <= 9; $x++) {
 	}//IF END
 	$ratesum = $ratesum+$z;
 }//For Loop END  
-$rateavg = number_format((float)((($ratesum/9))/2), 2, '.', '');
+$rateavg = number_format((float)((($ratesum/5))/2), 2, '.', '');
  //echo 'rating SUM '.$ratesum.' ---->  FINAL RATING : '.$rateavg;
  
  
@@ -480,8 +480,8 @@ $rateavg = number_format((float)((($ratesum/9))/2), 2, '.', '');
  		$d600_cent = round((($d500_cent/7)+($d500_cent/7))/2);
  			
  		// *******************BELOW AVG--- COLLECTIONS********* COLLECTIONS **********************
- 		$wk1_coll=($wk1_coll*rand(30000, 35000)*4)+($rel_cent*rand(35000, 65000)*3);
- 		$wk2_coll=$wk2_cent*rand(20000, 30000)*7;
+ 		$wk1_coll=($wk1_coll*rand(30000, 45000)*4)+($rel_cent*rand(35000, 65000)*3);
+ 		$wk2_coll=$wk2_cent*rand(20000, 40000)*7;
  		$d25_coll=$d25_cent*rand(10000, 15600)*25;
  		$d50_coll=$d50_cent*rand(5000, 7000)*25;
  		$d75_coll=$d75_cent*rand(3000, 7000)*25;
@@ -537,8 +537,8 @@ $rateavg = number_format((float)((($ratesum/9))/2), 2, '.', '');
  		$d600_cent = round((($d500_cent/7)+($d500_cent/7))/2);
  			
  		// ******************* AVG--- COLLECTIONS********* COLLECTIONS **********************
- 		$wk1_coll=($wk1_coll*rand(30000, 40000)*4)+($rel_cent*rand(35000, 75000)*3);
- 		$wk2_coll=$wk2_cent*rand(25000, 30000)*7;
+ 		$wk1_coll=($wk1_coll*rand(30000, 50000)*4)+($rel_cent*rand(35000, 75000)*3);
+ 		$wk2_coll=$wk2_cent*rand(25000, 40000)*7;
  		$d25_coll=$d25_cent*rand(13000, 15600)*25;
  		$d50_coll=$d50_cent*rand(5000, 7000)*25;
  		$d75_coll=$d75_cent*rand(3000, 7000)*25;
