@@ -35,6 +35,7 @@ $password=$_POST['password'];
 	$_SESSION["s_email"] = $row["email"];
 	$_SESSION['s_pic'] = $row["pic"];
 	$_SESSION['s_banner'] = $row["banner"];
+	$_SESSION['s_type'] = $row["utype"];
 	$status = $row["status"];
 	
 	$status='active';

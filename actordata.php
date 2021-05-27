@@ -123,7 +123,7 @@
                                        
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">ACTRESS rate</label>
-                                            <input type="number" class="form-control" value="10000000" id="arate" name="arate" placeholder="Remuranation">
+                                            <input type="number" class="form-control" value="1000000" id="arate" name="arate" placeholder="Remuranation">
                                         </div>
                                        
                                         <div class="form-group">
@@ -249,7 +249,7 @@
                                        
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">MUSIC rate</label>
-                                            <input type="number" class="form-control" value="10000000" id="arate" name="arate" placeholder="Remuranation">
+                                            <input type="number" class="form-control" value="1000000" id="arate" name="arate" placeholder="Remuranation">
                                         </div>
                                        
                                         <div class="form-group">
@@ -308,7 +308,7 @@
                                        
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">CINE rate</label>
-                                            <input type="number" class="form-control" value="10000000" id="arate" name="arate" placeholder="Remuranation">
+                                            <input type="number" class="form-control" value="1000000" id="arate" name="arate" placeholder="Remuranation">
                                         </div>
                                        
                                         <div class="form-group">
@@ -367,7 +367,7 @@
                                        
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">EDITOR rate</label>
-                                            <input type="number" class="form-control" value="10000000" id="arate" name="arate" placeholder="Remuranation">
+                                            <input type="number" class="form-control" value="1000000" id="arate" name="arate" placeholder="Remuranation">
                                         </div>
                                        
                                         <div class="form-group">
@@ -422,7 +422,7 @@
                                        
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">WRITER rate</label>
-                                            <input type="number" class="form-control" value="10000000" id="arate" name="arate" placeholder="Remuranation">
+                                            <input type="number" class="form-control" value="1000000" id="arate" name="arate" placeholder="Remuranation">
                                         </div>
                                        
                                         <div class="form-group">

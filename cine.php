@@ -66,13 +66,99 @@ $cid = $_GET['id'];
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active fade in" id="tab21">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="panel panel-white">
-                                                        <div style="width: 100%; height: 70px;">
-                                                            <h1 id="abc" style="text-align: center;"></h1></div>
-                                                    </div>
-                                                </div>
+ <div class="row">
+											<div class="col-md-3"></div>
+                                                <div class="col-md-6"> 
+												<div class="panel panel-white">
+                                <div class="panel-heading clearfix">
+                                    <h4 class="panel-title">Data</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <form action="updateallpage.php" method="POST" enctype="multipart/form-data">
+                                    
+                                      <?php 
+                                        include 'db.php';
+                                        
+                             			$sql = "SELECT * FROM tolly_cine WHERE cine_id = ".$cid;
+                                             		//	echo $sql;
+                                                    			$result = mysqli_query($conn, $sql);                                                      			
+                                                    				
+                                                    			if (mysqli_num_rows($result) > 0) {
+                                                    				// output data of each row
+                                                    				while($row = mysqli_fetch_assoc($result)) {
+																	$name 	= $row["cine_name"];
+																	$rate 	= $row["cine_rate"];
+																	$grade 	= $row["cine_grade"];
+																	$status = $row["cine_status"];
+																	$rating = $row["cine_rating"];
+																	$pic 	= $row["cine_pic"];
+																	 
+																 
+                                                    				}
+                                                    			}
+                                            ?>
+									  
+									  <div class="form-group">
+                                            <label for="exampleInputEmail1">TABLE</label>
+                                            <input type="text" class="form-control" id="table"  value="cine" name="table" placeholder="Name">
+									   </div>
+									   
+									   <div class="form-group">
+                                            <label for="exampleInputEmail1">ID</label>
+                                            <input type="text" class="form-control" value="<?php echo $cid ?>" id="aid" name="aid" placeholder="aid">
+                                        </div>
+									   
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">name</label>
+                                            <input type="text" class="form-control" value="<?php echo $name ?>" id="aname" name="aname" placeholder="Name">
+                                        </div>
+                                        
+                                       
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">rate</label>
+                                            <input type="number" class="form-control"  value="<?php echo $rate ?>"  id="arate" name="arate" placeholder="Remuranation">
+                                        </div>
+                                       
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Grade</label>
+                                            <input type="text" class="form-control"  value="<?php echo $grade ?>"  id="agrade" name="agrade"  placeholder="Remuranation">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">status</label>
+                                            <input type="text" class="form-control"  value="<?php echo $status ?>"  id="astatus" name="astatus"  placeholder="Remuranation">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">rating</label>
+                                            <input type="number" class="form-control" id="arating"  value="<?php echo $rating ?>"  name="arating"  placeholder="Remuranation">
+                                        </div>
+                                         
+                                      <?php 
+									  
+									  if($_SESSION['s_type'] == 'admin')
+									 echo "<button type=\"submit\" class=\"btn btn-primary\">Upadte </button>";
+									   ?> 
+									
+									
+									</form>
+									
+									
+									<form action="deleteallpage.php" method="POST" enctype="multipart/form-data">
+									<input type="text" class="form-control" style="display:none" id="table"  value="cine" name="table" placeholder="Name">
+									<input type="text" class="form-control" style="display:none" value="<?php echo $cid ?>" id="aid" name="aid" placeholder="aid">
+									
+									  <?php 
+									  
+									  if($_SESSION['s_type'] == 'admin')
+									 echo "<button type=\"submit\" class=\"btn btn-primary\">DELETE </button>";
+									   ?> 
+									</form>
+									
+									
+                                </div>
+                            </div>      </div>
+                                            </div>
+											
+											
                                             </div>
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="tab22">
