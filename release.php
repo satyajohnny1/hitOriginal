@@ -141,7 +141,7 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                                                 </div>
                                             </div>
 
-
+<! --
                                             <div class="panel panel-info">
                                                 <div class="panel-body">
                                                     <h3>Want to Release in More centers ? (1 center = 1x5,00,000)</h3>
@@ -154,26 +154,29 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                                         </div>
                                         <div class="form-group">
                                        X  &nbsp; &nbsp;5,00,000 &nbsp; =                                
-                                        </div>
+                                        </div>	 
+										
+									 
                                          <div class="form-group">                                             
                                             <input type="text"  class="form-control" name="addsofar" id="addsofar" style="display: none;">
                                              <input type="text"  class="form-control" name="iaddsofar" id="iaddsofar" >
                                         </div>
-                                        
+                                        -->	
+										
+										 <!--	
                                         <div class="form-group">                                             
                                             <input type="text"  class="form-control" value="<?php echo $sofar?>" name="nwbudget" id="nwbudget" style="display: none;">
                                             <input type="text"  class="form-control" value="<?php echo $sofar?>" name="inwbudget" id="inwbudget" >
-                                        </div>
+                                        </div>   
                                         
                                          <input type="text"  id="cent" name="cent" value="<?php echo $rel_cen?>" style="display: none;">
                                     	 <input type="text"  id="rid" name="rid" value="<?php echo  $rid?>" style="display: none;">   
                                         <button type="submit"  class="btn btn-default btn-lg">Add Centers & Release</button>
                                     </form>
-                                                    
-
-
-                                                </div>
+                                             </div>
                                             </div>
+										-->
+										
 
                                         </div>
                                         <!-- **************** OWN RELEASE ********************* -->
