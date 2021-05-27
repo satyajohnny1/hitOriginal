@@ -5,14 +5,10 @@
 -- HeidiSQL Version:             11.2.0.6213
 -- --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+ 
 
 -- Dumping structure for table hit.centers
+DROP TABLE IF EXISTS `centers`;
 CREATE TABLE IF NOT EXISTS `centers` (
   `rid` int(11) DEFAULT 0,
   `25list` longtext DEFAULT NULL,
@@ -28,11 +24,11 @@ CREATE TABLE IF NOT EXISTS `centers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table hit.centers: ~0 rows (approximately)
-DELETE FROM `centers`;
 /*!40000 ALTER TABLE `centers` DISABLE KEYS */;
 /*!40000 ALTER TABLE `centers` ENABLE KEYS */;
 
 -- Dumping structure for table hit.thearterslist
+DROP TABLE IF EXISTS `thearterslist`;
 CREATE TABLE IF NOT EXISTS `thearterslist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `th_id` varchar(50) DEFAULT NULL,
@@ -44,7 +40,6 @@ CREATE TABLE IF NOT EXISTS `thearterslist` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1349 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table hit.thearterslist: ~1,348 rows (approximately)
-DELETE FROM `thearterslist`;
 /*!40000 ALTER TABLE `thearterslist` DISABLE KEYS */;
 INSERT INTO `thearterslist` (`id`, `th_id`, `name`, `capacity`, `city`, `state`) VALUES
 	(1, 'THMY8728732', 'SATYA DTS A/c 70MM', 450, 'KANURU', 'Andhra'),
@@ -1398,6 +1393,7 @@ INSERT INTO `thearterslist` (`id`, `th_id`, `name`, `capacity`, `city`, `state`)
 /*!40000 ALTER TABLE `thearterslist` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_actor
+DROP TABLE IF EXISTS `tolly_actor`;
 CREATE TABLE IF NOT EXISTS `tolly_actor` (
   `actor_id` int(11) NOT NULL AUTO_INCREMENT,
   `actor_name` varchar(250) DEFAULT NULL,
@@ -1410,7 +1406,6 @@ CREATE TABLE IF NOT EXISTS `tolly_actor` (
 ) ENGINE=MyISAM AUTO_INCREMENT=82 DEFAULT CHARSET=utf8 COMMENT='actor Details';
 
 -- Dumping data for table hit.tolly_actor: 73 rows
-DELETE FROM `tolly_actor`;
 /*!40000 ALTER TABLE `tolly_actor` DISABLE KEYS */;
 INSERT INTO `tolly_actor` (`actor_id`, `actor_name`, `actor_rate`, `actor_grade`, `actor_pic`, `actor_status`, `actor_rating`) VALUES
 	(1, 'Chiranjeevi', 152000000, 'A', 'poster/Chiranjeevi.png', 'available', 10),
@@ -1489,6 +1484,7 @@ INSERT INTO `tolly_actor` (`actor_id`, `actor_name`, `actor_rate`, `actor_grade`
 /*!40000 ALTER TABLE `tolly_actor` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_actress
+DROP TABLE IF EXISTS `tolly_actress`;
 CREATE TABLE IF NOT EXISTS `tolly_actress` (
   `actress_id` int(11) NOT NULL AUTO_INCREMENT,
   `actress_name` varchar(250) DEFAULT NULL,
@@ -1501,7 +1497,6 @@ CREATE TABLE IF NOT EXISTS `tolly_actress` (
 ) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COMMENT='actress Details';
 
 -- Dumping data for table hit.tolly_actress: 42 rows
-DELETE FROM `tolly_actress`;
 /*!40000 ALTER TABLE `tolly_actress` DISABLE KEYS */;
 INSERT INTO `tolly_actress` (`actress_id`, `actress_name`, `actress_rate`, `actress_grade`, `actress_pic`, `actress_status`, `actress_rating`) VALUES
 	(1, '	Samantha	 ', 35000000, 'A', 'pic/u1.jpg', 'AVL', 10),
@@ -1549,6 +1544,7 @@ INSERT INTO `tolly_actress` (`actress_id`, `actress_name`, `actress_rate`, `actr
 /*!40000 ALTER TABLE `tolly_actress` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_cine
+DROP TABLE IF EXISTS `tolly_cine`;
 CREATE TABLE IF NOT EXISTS `tolly_cine` (
   `cine_id` int(11) NOT NULL AUTO_INCREMENT,
   `cine_name` varchar(250) DEFAULT NULL,
@@ -1561,7 +1557,6 @@ CREATE TABLE IF NOT EXISTS `tolly_cine` (
 ) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='cine Details';
 
 -- Dumping data for table hit.tolly_cine: 22 rows
-DELETE FROM `tolly_cine`;
 /*!40000 ALTER TABLE `tolly_cine` DISABLE KEYS */;
 INSERT INTO `tolly_cine` (`cine_id`, `cine_name`, `cine_rate`, `cine_grade`, `cine_pic`, `cine_status`, `cine_rating`) VALUES
 	(1, 'Baba', 9600000, 'B', 'poster/Baba.png', 'available', 7.6),
@@ -1589,6 +1584,7 @@ INSERT INTO `tolly_cine` (`cine_id`, `cine_name`, `cine_rate`, `cine_grade`, `ci
 /*!40000 ALTER TABLE `tolly_cine` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_director
+DROP TABLE IF EXISTS `tolly_director`;
 CREATE TABLE IF NOT EXISTS `tolly_director` (
   `director_id` int(11) NOT NULL AUTO_INCREMENT,
   `director_name` varchar(250) DEFAULT NULL,
@@ -1601,7 +1597,6 @@ CREATE TABLE IF NOT EXISTS `tolly_director` (
 ) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=utf8 COMMENT='director Details';
 
 -- Dumping data for table hit.tolly_director: 57 rows
-DELETE FROM `tolly_director`;
 /*!40000 ALTER TABLE `tolly_director` DISABLE KEYS */;
 INSERT INTO `tolly_director` (`director_id`, `director_name`, `director_rate`, `director_grade`, `director_pic`, `director_status`, `director_rating`) VALUES
 	(50, 'BOYAPATI SEENU', 69799996, 'B', 'poster/BOYAPATISEENU.png', 'available', 7.8),
@@ -1664,6 +1659,7 @@ INSERT INTO `tolly_director` (`director_id`, `director_name`, `director_rate`, `
 /*!40000 ALTER TABLE `tolly_director` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_editor
+DROP TABLE IF EXISTS `tolly_editor`;
 CREATE TABLE IF NOT EXISTS `tolly_editor` (
   `editor_id` int(11) NOT NULL AUTO_INCREMENT,
   `editor_name` varchar(250) DEFAULT NULL,
@@ -1676,7 +1672,6 @@ CREATE TABLE IF NOT EXISTS `tolly_editor` (
 ) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='editor Details';
 
 -- Dumping data for table hit.tolly_editor: 17 rows
-DELETE FROM `tolly_editor`;
 /*!40000 ALTER TABLE `tolly_editor` DISABLE KEYS */;
 INSERT INTO `tolly_editor` (`editor_id`, `editor_name`, `editor_rate`, `editor_grade`, `editor_pic`, `editor_status`, `editor_rating`) VALUES
 	(1, 'Bindra', 7600000, 'B', 'poster/Bindra.png', 'available', 5.6),
@@ -1699,6 +1694,7 @@ INSERT INTO `tolly_editor` (`editor_id`, `editor_name`, `editor_rate`, `editor_g
 /*!40000 ALTER TABLE `tolly_editor` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_music
+DROP TABLE IF EXISTS `tolly_music`;
 CREATE TABLE IF NOT EXISTS `tolly_music` (
   `music_id` int(11) NOT NULL AUTO_INCREMENT,
   `music_name` varchar(250) DEFAULT NULL,
@@ -1711,7 +1707,6 @@ CREATE TABLE IF NOT EXISTS `tolly_music` (
 ) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='music Details';
 
 -- Dumping data for table hit.tolly_music: 24 rows
-DELETE FROM `tolly_music`;
 /*!40000 ALTER TABLE `tolly_music` DISABLE KEYS */;
 INSERT INTO `tolly_music` (`music_id`, `music_name`, `music_rate`, `music_grade`, `music_pic`, `music_status`, `music_rating`) VALUES
 	(4, '	Ramana gogula', 2000000, 'B', 'pic/u1.jpg', 'AVL', 8),
@@ -1741,6 +1736,7 @@ INSERT INTO `tolly_music` (`music_id`, `music_name`, `music_rate`, `music_grade`
 /*!40000 ALTER TABLE `tolly_music` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_news
+DROP TABLE IF EXISTS `tolly_news`;
 CREATE TABLE IF NOT EXISTS `tolly_news` (
   `nid` int(11) NOT NULL AUTO_INCREMENT,
   `news` longtext DEFAULT NULL,
@@ -1750,11 +1746,11 @@ CREATE TABLE IF NOT EXISTS `tolly_news` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_news: 0 rows
-DELETE FROM `tolly_news`;
 /*!40000 ALTER TABLE `tolly_news` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_news` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_ready_for_shoot
+DROP TABLE IF EXISTS `tolly_ready_for_shoot`;
 CREATE TABLE IF NOT EXISTS `tolly_ready_for_shoot` (
   `rid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(11) DEFAULT NULL,
@@ -1810,11 +1806,11 @@ CREATE TABLE IF NOT EXISTS `tolly_ready_for_shoot` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_ready_for_shoot: 0 rows
-DELETE FROM `tolly_ready_for_shoot`;
 /*!40000 ALTER TABLE `tolly_ready_for_shoot` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_ready_for_shoot` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_release
+DROP TABLE IF EXISTS `tolly_release`;
 CREATE TABLE IF NOT EXISTS `tolly_release` (
   `uid` int(11) NOT NULL DEFAULT 0,
   `rid` int(11) NOT NULL DEFAULT 0,
@@ -1870,11 +1866,11 @@ CREATE TABLE IF NOT EXISTS `tolly_release` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_release: 0 rows
-DELETE FROM `tolly_release`;
 /*!40000 ALTER TABLE `tolly_release` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_release` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s1
+DROP TABLE IF EXISTS `tolly_s1`;
 CREATE TABLE IF NOT EXISTS `tolly_s1` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -1890,11 +1886,11 @@ CREATE TABLE IF NOT EXISTS `tolly_s1` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s1: 0 rows
-DELETE FROM `tolly_s1`;
 /*!40000 ALTER TABLE `tolly_s1` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s1` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s2
+DROP TABLE IF EXISTS `tolly_s2`;
 CREATE TABLE IF NOT EXISTS `tolly_s2` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -1910,11 +1906,11 @@ CREATE TABLE IF NOT EXISTS `tolly_s2` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s2: 0 rows
-DELETE FROM `tolly_s2`;
 /*!40000 ALTER TABLE `tolly_s2` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s2` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s3
+DROP TABLE IF EXISTS `tolly_s3`;
 CREATE TABLE IF NOT EXISTS `tolly_s3` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -1930,11 +1926,11 @@ CREATE TABLE IF NOT EXISTS `tolly_s3` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s3: 0 rows
-DELETE FROM `tolly_s3`;
 /*!40000 ALTER TABLE `tolly_s3` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s3` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s4
+DROP TABLE IF EXISTS `tolly_s4`;
 CREATE TABLE IF NOT EXISTS `tolly_s4` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -1950,11 +1946,11 @@ CREATE TABLE IF NOT EXISTS `tolly_s4` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s4: 0 rows
-DELETE FROM `tolly_s4`;
 /*!40000 ALTER TABLE `tolly_s4` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s4` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s5
+DROP TABLE IF EXISTS `tolly_s5`;
 CREATE TABLE IF NOT EXISTS `tolly_s5` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -1970,11 +1966,11 @@ CREATE TABLE IF NOT EXISTS `tolly_s5` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s5: 0 rows
-DELETE FROM `tolly_s5`;
 /*!40000 ALTER TABLE `tolly_s5` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s5` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s6
+DROP TABLE IF EXISTS `tolly_s6`;
 CREATE TABLE IF NOT EXISTS `tolly_s6` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -1990,11 +1986,11 @@ CREATE TABLE IF NOT EXISTS `tolly_s6` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s6: 0 rows
-DELETE FROM `tolly_s6`;
 /*!40000 ALTER TABLE `tolly_s6` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s6` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s7
+DROP TABLE IF EXISTS `tolly_s7`;
 CREATE TABLE IF NOT EXISTS `tolly_s7` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -2010,11 +2006,11 @@ CREATE TABLE IF NOT EXISTS `tolly_s7` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s7: 0 rows
-DELETE FROM `tolly_s7`;
 /*!40000 ALTER TABLE `tolly_s7` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s7` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s8
+DROP TABLE IF EXISTS `tolly_s8`;
 CREATE TABLE IF NOT EXISTS `tolly_s8` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -2030,11 +2026,11 @@ CREATE TABLE IF NOT EXISTS `tolly_s8` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s8: 0 rows
-DELETE FROM `tolly_s8`;
 /*!40000 ALTER TABLE `tolly_s8` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s8` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s9
+DROP TABLE IF EXISTS `tolly_s9`;
 CREATE TABLE IF NOT EXISTS `tolly_s9` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -2050,11 +2046,11 @@ CREATE TABLE IF NOT EXISTS `tolly_s9` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s9: 0 rows
-DELETE FROM `tolly_s9`;
 /*!40000 ALTER TABLE `tolly_s9` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s9` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_user
+DROP TABLE IF EXISTS `tolly_user`;
 CREATE TABLE IF NOT EXISTS `tolly_user` (
   `uid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(50) DEFAULT NULL,
@@ -2069,7 +2065,6 @@ CREATE TABLE IF NOT EXISTS `tolly_user` (
 ) ENGINE=MyISAM AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_user: 2 rows
-DELETE FROM `tolly_user`;
 /*!40000 ALTER TABLE `tolly_user` DISABLE KEYS */;
 INSERT INTO `tolly_user` (`uid`, `username`, `password`, `email`, `status`, `pic`, `bal`, `banner`, `utype`) VALUES
 	(93, 'admin', 'admin', 'admin', 'active', 'pic/u1.jpg', 996176585980, 'satya', 'admin'),
@@ -2077,6 +2072,7 @@ INSERT INTO `tolly_user` (`uid`, `username`, `password`, `email`, `status`, `pic
 /*!40000 ALTER TABLE `tolly_user` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_writer
+DROP TABLE IF EXISTS `tolly_writer`;
 CREATE TABLE IF NOT EXISTS `tolly_writer` (
   `writer_id` int(11) NOT NULL AUTO_INCREMENT,
   `writer_name` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2089,7 +2085,6 @@ CREATE TABLE IF NOT EXISTS `tolly_writer` (
 ) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table hit.tolly_writer: 32 rows
-DELETE FROM `tolly_writer`;
 /*!40000 ALTER TABLE `tolly_writer` DISABLE KEYS */;
 INSERT INTO `tolly_writer` (`writer_id`, `writer_name`, `writer_rate`, `writer_grade`, `writer_pic`, `writer_status`, `writer_rating`) VALUES
 	(20, 'Koratala Shiva', 100000000, 'A', 'poster/KoratalaShiva.png', 'available', 10),
@@ -2124,9 +2119,4 @@ INSERT INTO `tolly_writer` (`writer_id`, `writer_name`, `writer_rate`, `writer_g
 	(31, 'Burra Sai Madhav', 60000000, 'A', 'poster/BurraSaiMadhav.png', 'available', 8),
 	(32, 'Daimond Ratnababu', 10000000, 'B', 'poster/DaimondRatnababu.png', 'available', 8),
 	(33, 'Velogonda Srinivas', 1000000, 'B', 'poster/VelogondaSrinivas.png', 'available', 8);
-/*!40000 ALTER TABLE `tolly_writer` ENABLE KEYS */;
-
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+ 
