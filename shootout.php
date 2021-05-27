@@ -635,7 +635,7 @@ $hit = $result;
 
 // ============================= EXPECTING RELEASE CENTERS ===========================================
 if ((10000000 > $budget)) {
-	$rel_cent = rand ( 50, 120 );
+	$rel_cent = rand ( 40, 120 );
 } elseif ((10000000 <= $budget) && ($budget < 30000000)) {
 	$rel_cent = rand ( 70, 185 );
 } elseif ((30000000 <= $budget) && ($budget < 50000000)) {
@@ -661,11 +661,11 @@ if ((10000000 > $budget)) {
 } elseif ((750000000 <= $budget) && ($budget < 900000000)) {
 	$rel_cent = rand ( 2000, 2500 );
 } elseif ((900000000 <= $budget) && ($budget < 1100000000)) {
-	$rel_cent = rand ( 2500, 3000 );
+	$rel_cent = rand ( 2500, 3300 );
 } elseif ((1100000000 <= $budget) && ($budget < 1500000000)) {
-	$rel_cent = rand ( 3000, 3500 );
+	$rel_cent = rand ( 3000, 3800 );
 } elseif (($budget > 1500000000)) {
-	$rel_cent = rand ( 3300, 3800 );
+	$rel_cent = rand ( 3300, 4000 );
 } else {
 	$rel_cent = rand ( 200, 500 );
 }
