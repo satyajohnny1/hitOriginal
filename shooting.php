@@ -1106,15 +1106,7 @@ if (mysqli_num_rows ( $result ) > 0) {
                     				$("#s1_a_btn").hide();
                     		
 							
-									var luckyNo = Math.floor(Math.random() * 100);
-									if(luckyNo % 2 == 0) {
-										$("#s1_b_btn").show(); 
-										console.log("Lucky Boy...");										
-									}else{
-										console.log("You are UnLucky...");
-									}
- 
-							
+										$("#s1_b_btn").show(); 					
 							
                  	     			
                         			$("#s1_b_cost").show();
