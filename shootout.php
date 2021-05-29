@@ -1,3 +1,6 @@
+<div style="display:none">
+
+
 <?php
 include 'sessionCheck.php';
 error_reporting ( 0 );
@@ -611,9 +614,9 @@ if ((1.5 > $rateavg)) {
 	$result = 'DISASTER';
 } elseif ((1.5 <= $rateavg) && ($rateavg < 1.75)) {
 	$result = 'UTTER FLOP';
-} elseif ((1.75 <= $rateavg) && ($rateavg < 2.5)) {
+} elseif ((1.75 <= $rateavg) && ($rateavg < 2.75)) {
 	$result = 'FLOP';
-} elseif ((2.5 <= $rateavg) && ($rateavg < 3)) {
+} elseif ((2.75 <= $rateavg) && ($rateavg < 3)) {
 	$result = 'BELOW AVERAGE';
 } elseif ((3 <= $rateavg) && ($rateavg < 3.25)) {
 	$result = 'AVERAGE';
@@ -788,7 +791,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((1.75 <= $rateavg) && ($rateavg < 2.5)) // Flop
+	} elseif ((1.75 <= $rateavg) && ($rateavg < 2.75)) // Flop
 {
 		
 		$wk1_cent = round ( (($rel_cent / 4.5) + ($rel_cent / 4.4) + ($rel_cent / 2.75)) / 3 );
@@ -842,7 +845,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
 		$max_coll = $wk1_coll + $wk2_coll + $d25_coll + $d50_coll + $d75_coll + $d100_coll + $d125_coll + $d150_coll + $d175_coll + $d200_coll + $d250_coll + $d300_coll + $d350_coll + $d365_coll + $d400_coll + $d450_coll + $d500_coll + $d600_coll;
 		echo 'Max Collectoion : ' . $max_coll;
-	} elseif ((2.5 <= $rateavg) && ($rateavg < 3)) // Below Avg
+	} elseif ((2.75 <= $rateavg) && ($rateavg < 3)) // Below Avg
 {
 		
 		$wk1_cent = round ( (($rel_cent / 2.5) + ($rel_cent / 2.4) + ($rel_cent / 2.75)) / 3 );
@@ -1422,7 +1425,7 @@ echo "<h2> After Redirect</h2>";
 
 
 
-
+</div> <!-- hide Div --> 
 
 
 
@@ -1491,10 +1494,10 @@ echo "<h2> After Redirect</h2>";
 		<div id="main-wrapper">
 			<div class="col-md-4 center">
 				<h1 class="text-xxl  text-center">
-					<i class="icon-wrench"></i>
+					<a href="readyforrelease.php">Go to Release</a>
 				</h1>
 				<h2 class="text-xl f-white text-center" id="counter"></h2>
-				<div class="details">
+				<div class="details" style="display:none">
 					<h3 class="f-white">Shooting Completed</h3>
 					<p class="f-white">WE ARE COMING SOON.</p>
 					<p><?php
