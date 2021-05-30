@@ -6,6 +6,10 @@ session_start();
 $uid = $_SESSION['s_uid'];
 $did = $_GET['id'];
 $nme = $_GET['name'];
+
+
+$totBud = 0;
+$totColl = 0;
 ?>
     <!DOCTYPE html>
     <html>
@@ -202,10 +206,13 @@ $nme = $_GET['name'];
                                                     				$rid = $row["rid"];
                                                     					$title = $row["title"];
                                                     					$dname = $row["dname"];
-                                                    					$aname = $row["aname"];
-                                                    					$res = $row["result"];
+                                                    					$aname = $row["aname"];				
+																		$res = $row["result"];
                                                     					$collection= $row["collection"];
+																		$totColl = $totColl+$totColl;
+																		
                                                     					$budget = $row["sofar"];
+																		$totBud = $totBud+$budget;
                                                     					$a2_name = $row["a2_name"];
                                                     					$a3_name = $row["a3_name"];
                                                     					$d2_name = $row["d2_name"];
@@ -246,6 +253,13 @@ $nme = $_GET['name'];
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane fade" id="tab33">
+												 <div class="panel-body">
+										 
+										 <h1> Total Budget 		:  <?php  echo "".round($totBud/10000000, 2)+""; ?></h1>
+										 <h1> Total Collections :  <?php  echo "".round($totColl/10000000, 2)+""; ?></h1>
+										 <h1> Profit/Loss 		:  <?php  echo "".round(($totColl-$totBud)/10000000, 2)+""; ?></h1>
+										 
+										 </div>
 
                                         </div>
 
