@@ -544,8 +544,6 @@ if (mysqli_num_rows ( $result ) > 0) {
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
                                              <h2><button type="button" id ="s4_a_btn" style="display: none;" class="btn btn-default btn-rounded">2nd Half Scenes</button></h2>
                                              
-											 
-											    <button type="button"   style="display: none;" id ="s4_b_btn" class="btn btn-default btn-rounded">Re-Shoot</button> 
                                               <h2 style="display: none;" id="s4N"><b>Go To Next Short</b></h2>                                                 
                                              </div>
                                             </div>
