@@ -395,6 +395,10 @@ if (mysqli_num_rows ( $result ) > 0) {
                                             <div class="col-md-4" style="border: 1px solid;">
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
                                              <h2><button type="button" id ="s2_a_btn" style="display: none;" class="btn btn-default btn-rounded">First Half Scenes</button></h2>
+											 
+											 
+											 
+											    <button type="button"   style="display: none;" id ="s2_b_btn" class="btn btn-default btn-rounded">Re-Shoot</button> 
                                               
                                               <h2 style="display: none;" id="s2N"><b>Go To Next Short</b></h2>                                                 
                                              </div>
@@ -540,6 +544,8 @@ if (mysqli_num_rows ( $result ) > 0) {
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
                                              <h2><button type="button" id ="s4_a_btn" style="display: none;" class="btn btn-default btn-rounded">2nd Half Scenes</button></h2>
                                              
+											 
+											    <button type="button"   style="display: none;" id ="s4_b_btn" class="btn btn-default btn-rounded">Re-Shoot</button> 
                                               <h2 style="display: none;" id="s4N"><b>Go To Next Short</b></h2>                                                 
                                              </div>
                                             </div>
@@ -1147,6 +1153,9 @@ if (mysqli_num_rows ( $result ) > 0) {
            	     		$("#s1_a_cost").hide();
           				$("#s1_a_btn").hide();
           		
+				
+				
+				
           				$("#s1_b_cost").hide();
           				$("#s1_b_btn").hide();
           		
@@ -1246,6 +1255,14 @@ if (mysqli_num_rows ( $result ) > 0) {
            	     			$("#s2_a_cost").hide();
               				$("#s2_a_btn").hide();
               		
+					
+								var luckyNo = Math.floor(Math.random() * 900);
+									if(luckyNo % 2 == 0) {
+										$("#s2_b_btn").show();
+										console.log("Lucky Boy...");										
+									}else{
+										console.log("You are UnLucky...");
+									}
            	     			
                   			$("#s2_b_cost").show();
                   			$("#s2_b_btn").show();
@@ -1537,7 +1554,15 @@ if (mysqli_num_rows ( $result ) > 0) {
               		
            	     			
                   			$("#s4_b_cost").show();
-                  			$("#s4_b_btn").show();
+							
+															var luckyNo = Math.floor(Math.random() * 3900);
+									if(luckyNo % 2 == 0) {
+										$("#s4_b_btn").show();
+										console.log("Lucky Boy...");										
+									}else{
+										console.log("You are UnLucky...");
+									}
+                  			
                   			
                   			$("#s4_nxt_s5").show();
                           	$("#s4_prv_s3").show();
@@ -1674,7 +1699,7 @@ if (mysqli_num_rows ( $result ) > 0) {
               				$("#s5_a_btn").hide();
               		
            	     			
-								var luckyNo = Math.floor(Math.random() * 100);
+								var luckyNo = Math.floor(Math.random() * 400);
 									if(luckyNo % 2 == 0) {
 											$("#s5_b_btn").show();
 										console.log("Lucky Boy...");										

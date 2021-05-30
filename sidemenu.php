@@ -42,6 +42,9 @@
 
                                 </ul>
                             </li>
+							
+							      <li><a href="logoutAjax.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-edit"></span><p>Logout</p></a> </li>
+							
 							 <?php 
 							
 							 if($_SESSION['s_type'] == 'admin')
