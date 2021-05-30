@@ -255,9 +255,9 @@ $totColl = 0;
                                         <div role="tabpanel" class="tab-pane fade" id="tab33">
 												 <div class="panel-body">
 										 
-										 <h1> Total Budget 		:  <?php  echo "".round($totBud/10000000, 2)+""; ?></h1>
-										 <h1> Total Collections :  <?php  echo "".round($totColl/10000000, 2)+""; ?></h1>
-										 <h1> Profit/Loss 		:  <?php  echo "".round(($totColl-$totBud)/10000000, 2)+""; ?></h1>
+										 <h1> Total Budget 		:  <?php  echo "".round($totBud/10000000, 2)+" Cr."; ?></h1>
+										 <h1> Total Collections :  <?php  echo "".round($totColl/10000000, 2)+" Cr."; ?></h1>
+										 <h1> Profit/Loss 		:  <?php  echo "".round(($totColl-$totBud)/10000000, 2)+" Cr."; ?></h1>
 										 
 										 </div>
 
