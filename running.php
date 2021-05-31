@@ -481,6 +481,7 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
                                         <a href="editor.php?id=<?php echo $eid?>" class="btn btn-warning btn-rounded"><?php echo $ediname?></a>                                       
                                          <a href="writer.php?id=<?php echo $wid?>" class="btn btn-danger btn-rounded"><?php echo $wriname?></a>
                                           <a href="cine.php?id=<?php echo $cid?>" class="btn btn-primary btn-rounded"><?php echo $cinename?></a>
+										  <a href="forceout.php?id=<?php echo $rid?>" class="btn btn-warning btn-rounded">ForceOut</a>  
                                        <p id="ps" style="display: none;">Link</p>
                                     </div>
                                 </div>
