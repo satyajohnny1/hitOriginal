@@ -244,6 +244,8 @@ $nme = $_GET['name'];
                                                     				
                                                     				$c50 = $row1["50d_cen"];
                                                     				$c100 = $row1["100d_cen"]; 
+																	$c150 = $row1["150d_cen"];  
+																	$c175 = $row1["175d_cen"]; 
                                           		echo "<tr>";
                                           		echo "<td>".$rid."</td>";
                                              	echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
@@ -254,6 +256,10 @@ $nme = $_GET['name'];
                                              	echo "<td>".round($collection/10000000, 2)."</td>";
                                              	 echo "<td>".$c50."</td>";
                                              	echo "<td>".$c100."</td>";
+												
+												echo "<td>".$c150."</td>";
+                                             	echo "<td>".$c175."</td>";
+												
                                             	echo " </tr> ";
                                           
                                                     				}
