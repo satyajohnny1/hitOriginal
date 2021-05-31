@@ -54,10 +54,12 @@ $uid = $_SESSION['s_uid'];
                                                 <th>Director</th>
                                                 <th>Actors</th>
                                                 <th>Result</th>
-                                                <th>Budget(Cr's)</th>
-                                                <th>Collection(Cr's)</th>
-                                                <th>50'Centers</th>
-                                                <th>100'Centers</th>
+                                                <th>Budget</th>
+                                                <th>Collec</th>
+                                                                            <th>50'Cen</th>
+                                                                            <th>100'Cen</th>
+                                                                            <th>150'Cen</th>
+                                                                            <th>175'Cen</th>
                                             </tr>
                                         </thead>
                                    
@@ -86,8 +88,14 @@ $uid = $_SESSION['s_uid'];
                                                     				$r1= mysqli_query($conn, $sql2);
                                                     				$row1 = mysqli_fetch_assoc($r1);
                                                     				
-                                                    				$c50 = $row1["50d_cen"];
-                                                    				$c100 = $row1["100d_cen"]; 
+                                                    				
+																	$c50 = $row1["50d_cen"];
+                                                    				$c100 = $row1["100d_cen"];
+																	$c150 = $row1["150d_cen"];  
+																	$c175 = $row1["175d_cen"];
+												
+												echo "<td>".$c150."</td>";
+                                             	echo "<td>".$c175."</td>";
                                           		echo "<tr>";
                                           		echo "<td><b>".$rid."</b></td>";
                                              	echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
