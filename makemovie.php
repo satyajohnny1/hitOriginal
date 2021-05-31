@@ -352,7 +352,7 @@ error_reporting(E_ERROR);
                                                                 <tr>
                                                                     <th style="width: 10%">writer</th>
                                                                     <th style="width: 20%">Rem</th>
-                                                                    <th>PL</th>
+                                                                    <th style="width: 10%">PL</th>
 																	
                                                                    
                                                                      
