@@ -6,10 +6,6 @@ session_start();
 $uid = $_SESSION['s_uid'];
 $aid = $_GET['id'];
 $nme = $_GET['name'];
-
-$totBud = 0;
-$totColl = 0;
-
 ?>
     <!DOCTYPE html>
     <html>
@@ -229,17 +225,14 @@ $totColl = 0;
                                                     					$title = $row["title"];
                                                     					$dname = $row["dname"];
                                                     					$aname = $row["aname"];
-                                                    					$res = $row["result"];
-																		
+																		$res = $row["result"];
                                                     					$collection= $row["collection"];
 																		$totColl = $totColl+$collection;
 																		
                                                     					$budget = $row["sofar"];
 																		$totBud = $totBud+$budget;
 																		
-																		
-
-																		
+                                                    					$budget = $row["sofar"];
                                                     					$a2_name = $row["a2_name"];
                                                     					$a3_name = $row["a3_name"];
                                                     					$d2_name = $row["d2_name"];
@@ -266,9 +259,11 @@ $totColl = 0;
                                                     				}
                                                     			}
 																
-												$pl = round(($totColl-$totBud)/10000000, 2);
-																					
 																
+																
+											$pl = round(($totColl-$totBud)/10000000, 2);
+											$sql = "UPDATE `tolly_actor` SET `pl`=".$pl." WHERE  `actor_id`=".$aid;
+											mysqli_query($conn, $sql);
                                             ?>
 
 
@@ -284,56 +279,61 @@ $totColl = 0;
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane fade" id="tab33">
-										 <div class="panel-body">
-										 
 
-										 
-<h4>Budget :<span class="badge badge-primary"><?php  echo "".round($totBud/10000000, 2)." Cr."; ?></span></h3>
-<h4>Collec :<span class="badge badge-success"><?php  echo "".round($totColl/10000000, 2)." Cr."; ?></span></h3>
-<h2>Profit :<span class="badge badge-success"><?php  echo "".round(($totColl-$totBud)/10000000, 2)." Cr."; ?></span></h3>
 
-<div class="table-responsive">
-                                                                <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Result</th>
-                                                                            <th>Count</th> 
-                                                                        </tr>
-                                                                    </thead>
+<div class="panel-body">
+									
 
-                                                                    <tbody>
 
-<?php 
-                                        include 'db.php';
-                                        
-                  $sql = "SELECT s.result, COUNT(*) AS `count` FROM `tolly_ready_for_shoot` s  WHERE aid= ".$aid." GROUP BY s.result";
+<div class="col-md-6">
+<table class="table table-hover">
 
-                                                    			$result = mysqli_query($conn, $sql);                                                      			
-                                                    				
-                                                    			if (mysqli_num_rows($result) > 0) {
-                                                    				// output data of each row
-                                                    				while($row = mysqli_fetch_assoc($result)) {
-                                                    					 
-                                                    					
-                                                    					$count = $row["count"];
-                                                    					$result = $row["result"]; 
-                                          		echo "<tr>";
-                                          		echo "<td>".$result."</td>"                                            	
-                                             	echo "<td>".$count."</td>";
-                                            	echo " </tr> ";
-                                          
-                                                    				}
-                                                    			}
-																
-										$sql2 = "UPDATE `tolly_actor` SET `pl`=".$$pl." WHERE  `actor_id`=".$aid;mysqli_query ( $conn, $sql2 );								
-																
-                                            ?>
+ <?php 
+    include 'db.php';
+	    $sql = "SELECT s.result, COUNT(*) AS `count` FROM `tolly_ready_for_shoot` s  WHERE s.aid= ".$aid." OR s.a2 = ".$aid." OR s.a3 = ".$aid. " GROUP BY s.result";
+		//echo "sql : ".$sql;
+		
+		
+		$result=mysqli_query($conn,$sql);
+		
+		while($row = mysqli_fetch_assoc($result)) {
+					
+					echo " <tr>  <td> <button type=\"button\" class=\"btn btn-primary\"> ".$row["result"]."  </button></td>";
+					echo " <td> <button type=\"button\" class=\"btn btn-success\">".$row["count"]. " </button><td> </tr>  ";
+		}
+?>
 
-																	</tbody>
-                                                                </table>
-                                                            </div>
-										 
-										 </div>
+
+  
+  
+</table> 
+</div>
+
+									
+
+			<div class="col-md-6"> 							 
+<button type="button" class="btn btn-primary btn-lg btn-block"><h3>Budget :<?php  echo "".round($totBud/10000000, 2)." Cr.";  ?></h3></button>
+<button type="button" class="btn btn-success btn-lg btn-block"><h3>Collec :<?php  echo "".round($totColl/10000000, 2)." Cr."; ?></h3></button>
+<button type="button" class="btn btn-info btn-lg btn-block"><h2>P&L :<?php  echo "".round(($totColl-$totBud)/10000000, 2)." Cr."; ?> </h2></button>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                         </div>
 
@@ -380,7 +380,7 @@ $totColl = 0;
                         ['Task', 'Hours per Day'],
 
                         <?php 
-        	         $sql = "select count(*) as cnt, s.result from tolly_ready_for_shoot s WHERE s.aid = ".$aid." and s.`status` = 'out' GROUP BY s.result";
+        	         $sql = "select count(*) as cnt, s.result from tolly_ready_for_shoot s WHERE s.aid = ".$aid." and s.`status` = 'out' OR s.a2 = ".$aid." OR s.a3 = ".$aid. " GROUP BY s.result";
         	         //echo '<h2>'.$sql.'</h2>';
         	         $result = mysqli_query ( $conn, $sql );
         	         if (mysqli_num_rows($result) > 0) {
@@ -427,8 +427,8 @@ $totColl = 0;
                         ['Label', 'Value'],
                         <?php 
    	         $sql = "SELECT x.tot, y.hit FROM 
-(SELECT count(*) as tot from tolly_ready_for_shoot s WHERE s.aid = ".$aid." and s.`status` = 'out') as x,
-(SELECT count(*) as hit FROM tolly_ready_for_shoot sa WHERE sa.aid = ".$aid." and sa.`status` = 'out' and sa.rating>3) as y 
+(SELECT count(*) as tot from tolly_ready_for_shoot s WHERE s.aid = ".$aid." and s.`status` = 'out' OR s.a2 = ".$aid." OR s.a3 = ".$aid.") as x,
+(SELECT count(*) as hit FROM tolly_ready_for_shoot sa WHERE sa.aid = ".$aid." and sa.`status` = 'out' OR sa.a2 = ".$aid." OR sa.a3 = ".$aid." and sa.rating>3) as y 
  ";
    	         //echo '<h2>'.$sql.'</h2>';
    	         $result = mysqli_query ( $conn, $sql );
@@ -474,7 +474,7 @@ $totColl = 0;
                         ['Movie', 'Rating'],
 
                         <?php 
-                                                     	         $sql = "select s.title,  s.rating from tolly_ready_for_shoot s WHERE s.aid =  ".$aid." and s.`status` = 'out' ORDER BY s.dt LIMIT 5";
+                                                     	         $sql = "select s.title,  s.rating from tolly_ready_for_shoot s WHERE s.aid =  ".$aid." OR s.a2 = ".$aid." OR s.a3 = ".$aid." and s.`status` = 'out' ORDER BY s.dt LIMIT 5";
                                                      	         //echo '<h2>'.$sql.'</h2>';
                                                      	         $result = mysqli_query ( $conn, $sql );
                                                      	         if (mysqli_num_rows($result) > 0) {

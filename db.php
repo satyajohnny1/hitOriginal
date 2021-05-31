@@ -41,15 +41,18 @@ $dbname = "unaux_28553267_javabo";
 $servername = "localhost";
 $username = "root";
 $password = "root";
-$dbname = "hit";
+$dbname = "hit2";
 
 */
+
+
 
 
 $servername = "localhost";
 $username = "root";
 $password = "root";
-$dbname = "hit";
+$dbname = "hit2";
+
 
 
 // Create connection

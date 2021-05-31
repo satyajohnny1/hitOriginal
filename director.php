@@ -6,10 +6,6 @@ session_start();
 $uid = $_SESSION['s_uid'];
 $did = $_GET['id'];
 $nme = $_GET['name'];
-
-
-$totBud = 0;
-$totColl = 0;
 ?>
     <!DOCTYPE html>
     <html>
@@ -70,7 +66,18 @@ $totColl = 0;
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active fade in" id="tab21">
- <div class="row">
+										
+									
+
+
+
+
+
+
+									
+										
+										
+                                            <div class="row">
 											<div class="col-md-3"></div>
                                                 <div class="col-md-6"> 
 												<div class="panel panel-white">
@@ -146,9 +153,11 @@ $totColl = 0;
 									</form>
 									
 									
+									
+									
 									<form action="deleteallpage.php" method="POST" enctype="multipart/form-data">
 									<input type="text" class="form-control" style="display:none" id="table"  value="director" name="table" placeholder="Name">
-									<input type="text" class="form-control" style="display:none" value="<?php echo $did ?>" id="aid" name="aid" placeholder="aid">
+									<input type="text" class="form-control" style="display:none" value="<?php echo $did ?>" id="did" name="did" placeholder="did">
 									
 									  <?php 
 									  
@@ -163,6 +172,15 @@ $totColl = 0;
                                             </div>
 											
 											
+											
+											
+											
+											
+											
+											
+											
+											
+											
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="tab22">
 
@@ -171,7 +189,7 @@ $totColl = 0;
                                                 <div class="col-md-12">
                                                     <div class="panel panel-white">
                                                         <div class="panel-heading clearfix">
-                                                            <h4 class="panel-title">Basic example</h4>
+                                                            <h4 class="panel-title"></h4>
                                                         </div>
                                                         <div class="panel-body">
                                                             <div class="table-responsive">
@@ -181,7 +199,7 @@ $totColl = 0;
                                                                             <th>Sno</th>
                                                                             <th>Title</th>
                                                                             <th>Director</th>
-                                                                            <th>Actors</th>
+                                                                            <th>directors</th>
                                                                             <th>Result</th>
                                                                             <th>Budget</th>
                                                                             <th>Collection</th>
@@ -194,7 +212,7 @@ $totColl = 0;
                                                                         <?php 
                                         include 'db.php';
                                         
-                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.did = ".$did." and s.status = 'out' OR s.d2 = ".$did." OR s.d3 = ".$did;
+                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.did = ".$did." and s.status = 'out' OR s.ac2 = ".$did." OR s.ac3 = ".$did;
                                              		//	echo $sql;
                                                     			$result = mysqli_query($conn, $sql);                                                      			
                                                     				
@@ -203,16 +221,18 @@ $totColl = 0;
                                                     				while($row = mysqli_fetch_assoc($result)) {
                                                     					$i++;
                                                     					
-                                                    				$rid = $row["rid"];
+                                                    					$rid = $row["rid"];
                                                     					$title = $row["title"];
                                                     					$dname = $row["dname"];
-                                                    					$aname = $row["aname"];				
+                                                    					$aname = $row["aname"];
 																		$res = $row["result"];
                                                     					$collection= $row["collection"];
 																		$totColl = $totColl+$collection;
 																		
                                                     					$budget = $row["sofar"];
 																		$totBud = $totBud+$budget;
+																		
+                                                    					$budget = $row["sofar"];
                                                     					$a2_name = $row["a2_name"];
                                                     					$a3_name = $row["a3_name"];
                                                     					$d2_name = $row["d2_name"];
@@ -239,7 +259,12 @@ $totColl = 0;
                                                     				}
                                                     			}
 																
-																		$pl = round(($totColl-$totBud)/10000000, 2);
+																
+																
+											$pl = round(($totColl-$totBud)/10000000, 2);
+											$sql = "UPDATE `tolly_director` SET `pl`=".$pl." WHERE  `director_id`=".$did;
+											mysqli_query($conn, $sql);	
+												
                                             ?>
 
 
@@ -255,39 +280,61 @@ $totColl = 0;
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane fade" id="tab33">
-												 <div class="panel-body">
-										 
-<h4>Budget :<span class="badge badge-primary"><?php  echo "".round($totBud/10000000, 2)+" Cr."; ?></span></h3>
-<h4>Collec :<span class="badge badge-success"><?php  echo "".round($totColl/10000000, 2)+" Cr."; ?></span></h3>
-<h2>Profit :<span class="badge badge-success"><?php  echo "".round(($totColl-$totBud)/10000000, 2)+" Cr."; ?></span></h3>
-<?php 
-                                        include 'db.php';
-                                        
-                  $sql = "SELECT s.result, COUNT(*) AS `count` FROM `tolly_ready_for_shoot` s  WHERE did= ".$did." GROUP BY s.result";
 
-                                                    			$result = mysqli_query($conn, $sql);                                                      			
-                                                    				
-                                                    			if (mysqli_num_rows($result) > 0) {
-                                                    				// output data of each row
-                                                    				while($row = mysqli_fetch_assoc($result)) {
-                                                    					 
-                                                    					
-                                                    					$count = $row["count"];
-                                                    					$result = $row["result"]; 
-                                          		echo "<tr>";
-                                          		echo "<td>".$result."</td>"                                            	
-                                             	echo "<td>".$count."</td>";
-                                            	echo " </tr> ";
-                                          
-                                                    				}
-                                                    			}
-																
-										$sql2 = "UPDATE `tolly_director` SET `pl`=".$$pl." WHERE  `director_id`=".$did;mysqli_query ( $conn, $sql2 );								
-																
-                                            ?>
 
-										 
-										 </div>
+<div class="panel-body">
+									
+
+
+<div class="col-md-6">
+<table class="table table-hover">
+
+ <?php 
+    include 'db.php';
+	    $sql = "SELECT s.result, COUNT(*) AS `count` FROM `tolly_ready_for_shoot` s  WHERE s.did= ".$did."  OR s.ac2 = ".$did." OR s.ac3 = ".$did." GROUP BY s.result";
+		//echo "sql : ".$sql;
+		
+		
+		$result=mysqli_query($conn,$sql);
+		
+		while($row = mysqli_fetch_assoc($result)) {
+					
+					echo " <tr>  <td> <button type=\"button\" class=\"btn btn-primary\"> ".$row["result"]."  </button></td>";
+					echo " <td> <button type=\"button\" class=\"btn btn-success\">".$row["count"]. " </button><td> </tr>  ";
+		}
+?>
+
+
+  
+  
+</table> 
+</div>
+
+									
+
+			<div class="col-md-6"> 							 
+<button type="button" class="btn btn-primary btn-lg btn-block"><h3>Budget :<?php  echo "".round($totBud/10000000, 2)." Cr.";  ?></h3></button>
+<button type="button" class="btn btn-success btn-lg btn-block"><h3>Collec :<?php  echo "".round($totColl/10000000, 2)." Cr."; ?></h3></button>
+<button type="button" class="btn btn-info btn-lg btn-block"><h2>P&L :<?php  echo "".round(($totColl-$totBud)/10000000, 2)." Cr."; ?> </h2></button>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                         </div>
 
@@ -305,7 +352,7 @@ $totColl = 0;
  					<?php include 'share.php';?>
 
                         <div class="page-footer">
-                            <p class="no-s">2015 &copy; HitandFut.com<span id="x" style="display: none;"><?php echo $dname?></span></p>
+                            <p class="no-s">2015 &copy; HitandFut.com<span id="x" style="display: none;"><?php echo $aname?></span></p>
                         </div>
                     </div>
                     <!-- Page Inner -->
@@ -334,7 +381,7 @@ $totColl = 0;
                         ['Task', 'Hours per Day'],
 
                         <?php 
-        	         $sql = "select count(*) as cnt, s.result from tolly_ready_for_shoot s WHERE s.did = ".$did." and s.`status` = 'out' GROUP BY s.result";
+        	         $sql = "select count(*) as cnt, s.result from tolly_ready_for_shoot s WHERE s.did = ".$did."  OR s.ac2 = ".$did." OR s.ac3 = ".$did." and s.`status` = 'out' GROUP BY s.result";
         	         //echo '<h2>'.$sql.'</h2>';
         	         $result = mysqli_query ( $conn, $sql );
         	         if (mysqli_num_rows($result) > 0) {
@@ -381,8 +428,8 @@ $totColl = 0;
                         ['Label', 'Value'],
                         <?php 
    	         $sql = "SELECT x.tot, y.hit FROM 
-(SELECT count(*) as tot from tolly_ready_for_shoot s WHERE s.did = ".$did." and s.`status` = 'out') as x,
-(SELECT count(*) as hit FROM tolly_ready_for_shoot sa WHERE sa.did = ".$did." and sa.`status` = 'out' and sa.rating>3) as y 
+(SELECT count(*) as tot from tolly_ready_for_shoot s WHERE s.did = ".$did."  OR s.ac2 = ".$did." OR s.ac3 = ".$did. " and s.`status` = 'out') as x,
+(SELECT count(*) as hit FROM tolly_ready_for_shoot sa WHERE sa.did = ".$did."  OR sa.d2 = ".$did." OR sa.d3 = ".$did. " and sa.`status` = 'out' and sa.rating>3) as y 
  ";
    	         //echo '<h2>'.$sql.'</h2>';
    	         $result = mysqli_query ( $conn, $sql );
@@ -428,7 +475,7 @@ $totColl = 0;
                         ['Movie', 'Rating'],
 
                         <?php 
-                                                     	         $sql = "select s.title,  s.rating from tolly_ready_for_shoot s WHERE s.did =  ".$did." and s.`status` = 'out' ORDER BY s.dt LIMIT 5";
+                                                     	         $sql = "select s.title,  s.rating from tolly_ready_for_shoot s WHERE s.did =  ".$did."  OR s.ac2 = ".$did." OR s.ac3 = ".$did." and s.`status` = 'out' ORDER BY s.dt LIMIT 5";
                                                      	         //echo '<h2>'.$sql.'</h2>';
                                                      	         $result = mysqli_query ( $conn, $sql );
                                                      	         if (mysqli_num_rows($result) > 0) {
@@ -460,7 +507,7 @@ $totColl = 0;
 
                     //********************* Last 5 ********************** 
 
-                   // $("#abc").text($("#x").text());
+                //    $("#abc").text($("#x").text());
 
 
 
@@ -471,7 +518,7 @@ $totColl = 0;
 
     </body>
 
-    </html>  
+    </html> 
 <?php 
 if($conn!=null){
 mysqli_close($conn);

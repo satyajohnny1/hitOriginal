@@ -5,76 +5,79 @@ error_reporting(E_ERROR);
 session_start();
 $uid = $_SESSION['s_uid'];
 $eid = $_GET['id'];
-$dname     = '';
-$aname     = '';
-$acname    = '';
-$s         = '';
-$progress  = '';
-$rating    = '';
-$hit    = '';
-
-$max_days = 0;
-$cinename = '';
-$ediname = '';
-$musname = '';
-$wriname='';
+$nme = $_GET['name'];
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-   <?php include 'css.php';?>
-</head>
+    <!DOCTYPE html>
+    <html>
 
-<body class="page-header-fixed">
-    <div class="overlay"></div>
-     <div class="overlay"></div>
-    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s1">
-        <h3><span class="pull-left">Chat</span><a href="javascript:void(0);" class="pull-right" id="closeRight"><i class="fa fa-times"></i></a></h3>
+    <head>
+        <?php include 'css.php';?>
+    </head>
 
-    </nav>
-    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-        <h3><span class="pull-left">Sandra Smith</span> <a href="javascript:void(0);" class="pull-right" id="closeRight2"><i class="fa fa-angle-right"></i></a></h3>
-    </nav>
-    <!-- Search Form -->
-    <main class="page-content content-wrap">
-        <?php include 'navbar.php';?>
-       	<div class="page-sidebar sidebar">
-                  <?php include('sidemenu.php');  ?>  
-                <!-- Page Sidebar Inner -->
-            </div>
-            <!-- Page Sidebar -->
-		    <div class="page-inner">            
-           	<div id="main-wrapper">  	
-           	       	
-          
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div id="mymovieschart" style="width: 100%; height: 300px;"></div>
-				</div>
-				<div class="col-lg-3 col-md-6 panel">
-					<div id="successratechart" style="width: 100%; height: 300px;"></div>
-				</div>
-				<div class="col-lg-5 col-md-6">
-					<div id="last5" style="width: 100%; height: 300px;"></div>
-				</div>
+    <body class="page-header-fixed">
+        <div class="overlay"></div>
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s1">
+            <h3><span class="pull-left">Chat</span><a href="javascript:void(0);" class="pull-right" id="closeRight"><i class="fa fa-times"></i></a></h3>
 
-			</div>
-	 
-             <div class="panel panel-white">
-                                     
-                                    <div class="panel-body">
-                                        <div role="tabpanel">
-                                            <!-- Nav tabs -->
-                                            <ul class="nav nav-tabs nav-justified" role="tablist">
-                                                <li role="presentation" class="active"><a href="#tab21" role="tab" data-toggle="tab">Profile</a></li>
-                                                <li role="presentation"><a href="#tab22" role="tab" data-toggle="tab">Statastics</a></li>
-                                                <li role="presentation"><a href="#tab23" role="tab" data-toggle="tab">Notes</a></li>
-                                              
-                                            </ul>
-                                            <!-- Tab panes -->
-                                            <div class="tab-content">
-                                                <div role="tabpanel" class="tab-pane active fade in" id="tab21">
-                                                     	 <div class="row">
+        </nav>
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><span class="pull-left">Sandra Smith</span> <a href="javascript:void(0);" class="pull-right" id="closeRight2"><i class="fa fa-angle-right"></i></a></h3>
+        </nav>
+       
+        <!-- Search Form -->
+        <main class="page-content content-wrap">
+            <?php include 'navbar.php';?>
+                <div class="page-sidebar sidebar">
+                    <?php include('sidemenu.php');  ?>
+                        <!-- Page Sidebar Inner -->
+                </div>
+                <!-- Page Sidebar -->
+                <div class="page-inner">
+                    <div id="main-wrapper">
+
+
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6">
+                                <div id="mymovieschart" style="width: 100%; height: 300px;"></div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 panel">
+                                <div id="successratechart" style="width: 100%; height: 300px;"></div>
+                            </div>
+                            <div class="col-lg-5 col-md-6">
+                                <div id="last5" style="width: 100%; height: 300px;"></div>
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div class="panel panel-white">
+
+                            <div class="panel-body">
+                                <div role="tabpanel">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs nav-justified" role="tablist">
+                                        <li role="presentation" class="active"><a href="#tab21" role="tab" data-toggle="tab">About</a></li>
+                                        <li role="presentation"><a href="#tab22" role="tab" data-toggle="tab">Movies</a></li>
+                                        <li role="presentation"><a href="#tab33" role="tab" data-toggle="tab">Notes</a></li>
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active fade in" id="tab21">
+										
+									
+
+
+
+
+
+
+									
+										
+										
+                                            <div class="row">
 											<div class="col-md-3"></div>
                                                 <div class="col-md-6"> 
 												<div class="panel panel-white">
@@ -150,9 +153,11 @@ $wriname='';
 									</form>
 									
 									
+									
+									
 									<form action="deleteallpage.php" method="POST" enctype="multipart/form-data">
 									<input type="text" class="form-control" style="display:none" id="table"  value="editor" name="table" placeholder="Name">
-									<input type="text" class="form-control" style="display:none" value="<?php echo $eid ?>" id="aid" name="aid" placeholder="aid">
+									<input type="text" class="form-control" style="display:none" value="<?php echo $eid ?>" id="eid" name="eid" placeholder="eid">
 									
 									  <?php 
 									  
@@ -161,97 +166,106 @@ $wriname='';
 									   ?> 
 									</form>
 									
+									
                                 </div>
                             </div>      </div>
                                             </div>
 											
 											
-                                                       
-                                                </div>
-                                                
-                                                
-                                                <div role="tabpanel" class="tab-pane fade" id="tab22">
-                                                
-                                                     
-              <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-white">
-                                <div class="panel-heading clearfix">
-                                    <h4 class="panel-title"></h4>
-                                </div>
-                                <div class="panel-body">
-                                   <div class="table-responsive">
-                                    <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
-                                        <thead>
-                                            <tr><th>No.</th>
-                                                <th>Title</th>
-                                                
-                                                <th>Director</th>
-                                                <th>Actors</th>
-                                                <th>Result</th>
-                                                <th>Budget</th>
-                                                <th>Collection</th>
-                                                <th>50'Centers</th>
-                                                <th>100'Centers</th>
-                                            </tr>
-                                        </thead>
-                                   
-                                        <tbody>
-                                        <?php 
+											
+											
+											
+											
+											
+											
+											
+											
+											
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="tab22">
+
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="panel panel-white">
+                                                        <div class="panel-heading clearfix">
+                                                            <h4 class="panel-title"></h4>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="table-responsive">
+                                                                <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Sno</th>
+                                                                            <th>Title</th>
+                                                                            <th>Director</th>
+                                                                            <th>editors</th>
+                                                                            <th>Result</th>
+                                                                            <th>Budget</th>
+                                                                            <th>Collection</th>
+                                                                            <th>50'Centers</th>
+                                                                            <th>100'Centers</th>
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                    <tbody>
+                                                                        <?php 
                                         include 'db.php';
                                         
                              			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.eid = ".$eid." and s.status = 'out'";
-                                             			//echo $sql;
+                                             		//	echo $sql;
                                                     			$result = mysqli_query($conn, $sql);                                                      			
                                                     				
                                                     			if (mysqli_num_rows($result) > 0) {
                                                     				// output data of each row
                                                     				while($row = mysqli_fetch_assoc($result)) {
                                                     					$i++;
+                                                    					
                                                     					$rid = $row["rid"];
                                                     					$title = $row["title"];
                                                     					$dname = $row["dname"];
                                                     					$aname = $row["aname"];
-                                                    					$res = $row["result"];
-																		
+																		$res = $row["result"];
                                                     					$collection= $row["collection"];
 																		$totColl = $totColl+$collection;
 																		
                                                     					$budget = $row["sofar"];
 																		$totBud = $totBud+$budget;
 																		
+                                                    					$budget = $row["sofar"];
                                                     					$a2_name = $row["a2_name"];
                                                     					$a3_name = $row["a3_name"];
                                                     					$d2_name = $row["d2_name"];
                                                     					$d3_name = $row["d3_name"];
-                                                    					 
-                                                    					$sql2 =	"select * from tolly_release s WHERE s.rid = ".$rid." and s.status = 'out'";
-                                                    					$r1= mysqli_query($conn, $sql2);
-                                                    					$row1 = mysqli_fetch_assoc($r1);
                                                     					
-                                                    					$c50 = $row1["50d_cen"];
-                                                    					$c100 = $row1["100d_cen"];
-                                                    					echo "<tr>";
-                                                    					echo "<td>".$rid."</td>";
-                                                    					echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
-                                                    					echo "<td><b>".$dname.'-'.$d2_name.'-'.$d3_name."</b></td>";
-                                                    					echo "<td><b>".$aname.'-'.$a2_name.'-'.$a3_name."</b></td>";
-                                                    					echo "<td><button type='button' class='btn btn-info'>".$res."</button></td>";
-                                                    					echo "<td>".round($budget/10000000, 2)."</td>";
-                                                    					echo "<td>".round($collection/10000000, 2)."</td>";
-                                                    					echo "<td>".$c50."</td>";
-                                                    					echo "<td>".$c100."</td>";
-                                                    					echo " </tr> ";
-                                                    					
+                                                    				 $sql2 =	"select * from tolly_release s WHERE s.rid = ".$rid." and s.status = 'out'";
+                                                    				$r1= mysqli_query($conn, $sql2);
+                                                    				$row1 = mysqli_fetch_assoc($r1);
+                                                    				
+                                                    				$c50 = $row1["50d_cen"];
+                                                    				$c100 = $row1["100d_cen"]; 
+                                          		echo "<tr>";
+                                          		echo "<td>".$rid."</td>";
+                                             	echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
+                                             	echo "<td><b>".$dname.'-'.$d2_name.'-'.$d3_name."</b></td>";
+                                             	echo "<td><b>".$aname.'-'.$a2_name.'-'.$a3_name."</b></td>";
+                                             	echo "<td><button type='button' class='btn btn-info'>".$res."</button></td>";
+                                             	echo "<td>".round($budget/10000000, 2)."</td>";
+                                             	echo "<td>".round($collection/10000000, 2)."</td>";
+                                             	 echo "<td>".$c50."</td>";
+                                             	echo "<td>".$c100."</td>";
+                                            	echo " </tr> ";
+                                          
                                                     				}
                                                     			}
 																
-												$pl = round(($totColl-$totBud)/10000000, 2);
-																					
 																
+											$pl = round(($totColl-$totBud)/10000000, 2);
+											$sql = "UPDATE `tolly_editor` SET `pl`=".$pl." WHERE  `editor_id`=".$eid;
+											mysqli_query($conn, $sql);
                                             ?>
-                                            
-                                       
+
+
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -264,56 +278,61 @@ $wriname='';
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane fade" id="tab33">
-										 <div class="panel-body">
-										 
 
-										 
-<h4>Budget :<span class="badge badge-primary"><?php  echo "".round($totBud/10000000, 2)." Cr."; ?></span></h3>
-<h4>Collec :<span class="badge badge-success"><?php  echo "".round($totColl/10000000, 2)." Cr."; ?></span></h3>
-<h2>Profit :<span class="badge badge-success"><?php  echo "".round(($totColl-$totBud)/10000000, 2)." Cr."; ?></span></h3>
 
-<div class="table-responsive">
-                                                                <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Result</th>
-                                                                            <th>Count</th> 
-                                                                        </tr>
-                                                                    </thead>
+<div class="panel-body">
+									
 
-                                                                    <tbody>
 
-<?php 
-                                        include 'db.php';
-                                        
-                  $sql = "SELECT s.result, COUNT(*) AS `count` FROM `tolly_ready_for_shoot` s  WHERE eid= ".$eid." GROUP BY s.result";
+<div class="col-md-6">
+<table class="table table-hover">
 
-                                                    			$result = mysqli_query($conn, $sql);                                                      			
-                                                    				
-                                                    			if (mysqli_num_rows($result) > 0) {
-                                                    				// output data of each row
-                                                    				while($row = mysqli_fetch_assoc($result)) {
-                                                    					 
-                                                    					
-                                                    					$count = $row["count"];
-                                                    					$result = $row["result"]; 
-                                          		echo "<tr>";
-                                          		echo "<td>".$result."</td>"                                            	
-                                             	echo "<td>".$count."</td>";
-                                            	echo " </tr> ";
-                                          
-                                                    				}
-                                                    			}
-																
-										$sql2 = "UPDATE `tolly_editor` SET `pl`=".$$pl." WHERE  `editor_id`=".$eid;mysqli_query ( $conn, $sql2 );								
-																
-                                            ?>
+ <?php 
+    include 'db.php';
+	    $sql = "SELECT s.result, COUNT(*) AS `count` FROM `tolly_ready_for_shoot` s  WHERE s.eid= ".$eid."  GROUP BY s.result";
+		//echo "sql : ".$sql;
+		
+		
+		$result=mysqli_query($conn,$sql);
+		
+		while($row = mysqli_fetch_assoc($result)) {
+					
+					echo " <tr>  <td> <button type=\"button\" class=\"btn btn-primary\"> ".$row["result"]."  </button></td>";
+					echo " <td> <button type=\"button\" class=\"btn btn-success\">".$row["count"]. " </button><td> </tr>  ";
+		}
+?>
 
-																	</tbody>
-                                                                </table>
-                                                            </div>
-										 
-										 </div>
+
+  
+  
+</table> 
+</div>
+
+									
+
+			<div class="col-md-6"> 							 
+<button type="button" class="btn btn-primary btn-lg btn-block"><h3>Budget :<?php  echo "".round($totBud/10000000, 2)." Cr.";  ?></h3></button>
+<button type="button" class="btn btn-success btn-lg btn-block"><h3>Collec :<?php  echo "".round($totColl/10000000, 2)." Cr."; ?></h3></button>
+<button type="button" class="btn btn-info btn-lg btn-block"><h2>P&L :<?php  echo "".round(($totColl-$totBud)/10000000, 2)." Cr."; ?> </h2></button>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                         </div>
 
@@ -322,48 +341,45 @@ $wriname='';
                             </div>
                         </div>
 
-        
-            
-        
-            
-     
-          
-          
-          
-          
-           
-            <!-- Main Wrapper -->
 
-   		 
-            <div class="page-footer">
-                <p class="no-s">2015 &copy; HitandFut.com<span id="x" ><?php echo $ediname?></span></p>
-            </div>
-        </div>
-        <!-- Page Inner -->
-    </main>
-    <!-- Page Content -->
-  
-    <div class="cd-overlay"></div>
 
-	<?php include 'js.php';?>
-	<script type="text/javascript"
-		src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['gauge']}]}"></script>
 
-	<script type="text/javascript">
 
-       
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.load("visualization", "1.1", {packages:["bar"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
+                        <!-- Main Wrapper -->
+  <!-- Main Wrapper -->
+ 					<?php include 'share.php';?>
 
-    	  //********************MyMovies Chart*****************************
-          
-        var mymovieschartdata = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
+                        <div class="page-footer">
+                            <p class="no-s">2015 &copy; HitandFut.com<span id="x" style="display: none;"><?php echo $aname?></span></p>
+                        </div>
+                    </div>
+                    <!-- Page Inner -->
+        </main>
+        <!-- Page Content -->
 
-          			<?php 
-        	         $sql = "select count(*) as cnt, s.result from tolly_ready_for_shoot s WHERE s.eid = ".$eid." and s.`status` = 'out' GROUP BY s.result";
+        <div class="cd-overlay"></div>
+
+        <?php include 'js.php';?>
+            <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['gauge']}]}"></script>
+
+            <script type="text/javascript">
+                google.load("visualization", "1", {
+                    packages: ["corechart"]
+                });
+                google.load("visualization", "1.1", {
+                    packages: ["bar"]
+                });
+                google.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+
+                    //********************MyMovies Chart*****************************
+
+                    var mymovieschartdata = google.visualization.arrayToDataTable([
+                        ['Task', 'Hours per Day'],
+
+                        <?php 
+        	         $sql = "select count(*) as cnt, s.result from tolly_ready_for_shoot s WHERE s.eid = ".$eid." and s.`status` = 'out' OR s.a2 = ".$eid." OR s.a3 = ".$eid. " GROUP BY s.result";
         	         //echo '<h2>'.$sql.'</h2>';
         	         $result = mysqli_query ( $conn, $sql );
         	         if (mysqli_num_rows($result) > 0) {
@@ -373,36 +389,45 @@ $wriname='';
         	           		echo "['".$fut."', ".$cnt."],";
         	           	}
         	           } 
-        	         ?> 
-         
-          ['Sleep',    0]
-        ]);
+        	         ?>
 
-        var mymovieschartoptions = {
-          title: 'Your Hits&Futs %',
-          titleTextStyle:{color: 'black', fontName: 'Century Gothic', fontSize: 14},
-          is3D: true,
-          legend :{position: 'bottom', textStyle: {color: 'blue', fontSize: 12}}
-        };
+                        ['Sleep', 0]
+                    ]);
 
-        var chart1 = new google.visualization.PieChart(document.getElementById('mymovieschart'));
-        chart1.draw(mymovieschartdata, mymovieschartoptions);
+                    var mymovieschartoptions = {
+                        title: 'Your Hits&Futs %',
+                        titleTextStyle: {
+                            color: 'black',
+                            fontName: 'Century Gothic',
+                            fontSize: 14
+                        },
+                        is3D: true,
+                        legend: {
+                            position: 'bottom',
+                            textStyle: {
+                                color: 'blue',
+                                fontSize: 12
+                            }
+                        }
+                    };
+
+                    var chart1 = new google.visualization.PieChart(document.getElementById('mymovieschart'));
+                    chart1.draw(mymovieschartdata, mymovieschartoptions);
 
 
-       
-        //********************MyMovies Chart*****************************
-        
-        
-        
-           
 
-      //********************* Suceess Rate ********************** 
- 		var successratedata = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-      	<?php 
+                    //********************MyMovies Chart*****************************
+
+
+
+
+                    //********************* Suceess Rate ********************** 
+                    var successratedata = google.visualization.arrayToDataTable([
+                        ['Label', 'Value'],
+                        <?php 
    	         $sql = "SELECT x.tot, y.hit FROM 
-(SELECT count(*) as tot from tolly_ready_for_shoot s WHERE s.eid = ".$eid." and s.`status` = 'out') as x,
-(SELECT count(*) as hit FROM tolly_ready_for_shoot sa WHERE sa.eid = ".$eid." and sa.`status` = 'out' and sa.rating>3) as y 
+(SELECT count(*) as tot from tolly_ready_for_shoot s WHERE s.eid = ".$eid." and s.`status` = 'out' ) as x,
+(SELECT count(*) as hit FROM tolly_ready_for_shoot sa WHERE sa.eid = ".$eid." and sa.`status` = 'out'  and sa.rating>3) as y 
  ";
    	         //echo '<h2>'.$sql.'</h2>';
    	         $result = mysqli_query ( $conn, $sql );
@@ -414,33 +439,40 @@ $wriname='';
    	           		echo "['Success Rate', ".$rat."]";
    	           	}
    	           } 
-   	         ?>        
-          ]);
+   	         ?>
+                    ]);
 
-        var successrateoptions = {
-        		 animation :{duration: 1000 ,easing: 'inAndOut' },
-          width: '100%', height: '200px',
-          redFrom: 0, redTo: 35,
-          yellowFrom:36, yellowTo: 67,   
-          greenFrom:68, greenTo: 100,       
-          minorTicks: 5
-        };
-       
-        var chart2 = new google.visualization.Gauge(document.getElementById('successratechart'));
-       
-        chart2.draw(successratedata, successrateoptions);
+                    var successrateoptions = {
+                        animation: {
+                            duration: 1000,
+                            easing: 'inAndOut'
+                        },
+                        width: '100%',
+                        height: '200px',
+                        redFrom: 0,
+                        redTo: 35,
+                        yellowFrom: 36,
+                        yellowTo: 67,
+                        greenFrom: 68,
+                        greenTo: 100,
+                        minorTicks: 5
+                    };
 
-      //********************* Suceess Rate ********************** 
-         
-      
-   
-      
-       //********************* Last 5 ********************** 
-        //alert('My movie chart Strat');
-        var last5data = google.visualization.arrayToDataTable([
-                                                          ['Movie', 'Rating'],
+                    var chart2 = new google.visualization.Gauge(document.getElementById('successratechart'));
 
-                                                          <?php 
+                    chart2.draw(successratedata, successrateoptions);
+
+                    //********************* Suceess Rate ********************** 
+
+
+
+
+                    //********************* Last 5 ********************** 
+                    //alert('My movie chart Strat');
+                    var last5data = google.visualization.arrayToDataTable([
+                        ['Movie', 'Rating'],
+
+                        <?php 
                                                      	         $sql = "select s.title,  s.rating from tolly_ready_for_shoot s WHERE s.eid =  ".$eid." and s.`status` = 'out' ORDER BY s.dt LIMIT 5";
                                                      	         //echo '<h2>'.$sql.'</h2>';
                                                      	         $result = mysqli_query ( $conn, $sql );
@@ -451,39 +483,40 @@ $wriname='';
                                                      	           		echo "['".$title."', ".$rating."],";
                                                      	           	}
                                                      	           } 
-                                                     	         ?> 
+                                                     	         ?>
 
-                                                        ]);
+                    ]);
 
-                                                        var last5options = {
-                                                          chart: {
-                                                            title: 'Last 5 Movies',
-                                                            titleTextStyle:{color: 'black', fontName: 'Century Gothic', fontSize: 14}
-                                                          }
-                                                        };
-                                                       // alert('My movie chart End');
-                                                        var last5chart = new google.charts.Bar(document.getElementById('last5'));
+                    var last5options = {
+                        chart: {
+                            title: 'Last 5 Movies',
+                            titleTextStyle: {
+                                color: 'black',
+                                fontName: 'Century Gothic',
+                                fontSize: 14
+                            }
+                        }
+                    };
+                    // alert('My movie chart End');
+                    var last5chart = new google.charts.Bar(document.getElementById('last5'));
 
-                                                        last5chart.draw(last5data, last5options);
-                                                  
-
-//********************* Last 5 ********************** 
-
-				//alert($("#x").text());
-
-                                                        $("#abc").text($("#x").text());
+                    last5chart.draw(last5data, last5options);
 
 
+                    //********************* Last 5 ********************** 
+
+                //    $("#abc").text($("#x").text());
 
 
-        
-      }
-    </script>
-	
 
-</body>
 
-</html>  
+                }
+            </script>
+
+
+    </body>
+
+    </html> 
 <?php 
 if($conn!=null){
 mysqli_close($conn);
