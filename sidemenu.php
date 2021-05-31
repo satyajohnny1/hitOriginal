@@ -48,7 +48,12 @@
 							 <?php 
 							
 							 if($_SESSION['s_type'] == 'admin')
+							 {
 									 echo "<li><a href=\"actordata.php\" class=\"waves-effect waves-button\"><span class=\"menu-icon glyphicon glyphicon-log-in\"></span><p>Admin</p></a>";
+									 
+									 echo "<li><a href=\"pf.php\" class=\"waves-effect waves-button\"><span class=\"menu-icon glyphicon glyphicon-log-in\"></span><p>PF Normalize</p></a>";
+									 
+							 }
 									   ?> 
 							
 							
