@@ -203,8 +203,10 @@ $nme = $_GET['name'];
                                                                             <th>Result</th>
                                                                             <th>Budget</th>
                                                                             <th>Collection</th>
-                                                                            <th>50'Centers</th>
-                                                                            <th>100'Centers</th>
+                                                                            <th>50'Cen</th>
+                                                                            <th>100'Cen</th>
+                                                                            <th>150'Cen</th>
+                                                                            <th>175'Cen</th>
                                                                         </tr>
                                                                     </thead>
 
@@ -212,7 +214,7 @@ $nme = $_GET['name'];
                                                                         <?php 
                                         include 'db.php';
                                         
-                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.did = ".$did." and s.status = 'out' OR s.ac2 = ".$did." OR s.ac3 = ".$did;
+                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.did = ".$did." and s.status = 'out' OR s.d2 = ".$did." OR s.d3 = ".$did;
                                              		//	echo $sql;
                                                     			$result = mysqli_query($conn, $sql);                                                      			
                                                     				
