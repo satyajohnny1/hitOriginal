@@ -94,8 +94,7 @@ $uid = $_SESSION['s_uid'];
 																	$c150 = $row1["150d_cen"];  
 																	$c175 = $row1["175d_cen"];
 												
-												echo "<td>".$c150."</td>";
-                                             	echo "<td>".$c175."</td>";
+											
                                           		echo "<tr>";
                                           		echo "<td><b>".$rid."</b></td>";
                                              	echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
@@ -106,6 +105,8 @@ $uid = $_SESSION['s_uid'];
                                              	echo "<td>".round($collection/10000000, 2)."</td>";
                                              	 echo "<td>".$c50."</td>";
                                              	echo "<td>".$c100."</td>";
+												echo "<td>".$c150."</td>";
+                                             	echo "<td>".$c175."</td>";
                                             	echo " </tr> ";
                                           
                                                     				}
