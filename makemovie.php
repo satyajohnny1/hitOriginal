@@ -118,7 +118,8 @@ error_reporting(E_ERROR);
                                                                 <tr>
                                                                     <th>Director</th>
                                                                     <th>Remuneration</th>
-                                                                    <th>Grade</th>                                                                   
+                                                                    <th>Grade</th> 
+																	<th>PL</th>                                                                   
                                                                     <th style="display: none;">pic</th>
                                                                 </tr>
                                                             </thead>
@@ -145,7 +146,8 @@ error_reporting(E_ERROR);
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["director_grade"]."</td>";                                                    					
+                                                    					echo "<td>".$row["director_grade"]."</td>";
+																		echo "<td>".$row["pl"]."</td>";                                                    					
                                                     					echo  "<td style='display: none;'>".$dir_pic."</td>";
                                                     					
                                                     					echo  "</tr>"; 
@@ -193,7 +195,9 @@ error_reporting(E_ERROR);
                                                                 <tr>
                                                                     <th>Actor</th>
                                                                     <th>Remuneration</th>
+																	
                                                                     <th>Grade</th>
+																	<th>PL</th>
                                                                    
                                                                 </tr>
                                                             </thead>
@@ -220,7 +224,7 @@ error_reporting(E_ERROR);
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["actor_grade"]."</td>";
-                                                    					 
+                                                    					 echo "<td>".$row["pl"]."</td>";
                                                     					echo  "</tr>"; 
                                                     					 
                                                     				
@@ -271,6 +275,7 @@ error_reporting(E_ERROR);
                                                                     <th>actress</th>
                                                                     <th>Remuneration</th>
                                                                     <th>Grade</th>
+                                                                    <th>PL</th>
                                                                      
                                                                 </tr>
                                                             </thead>
@@ -299,7 +304,7 @@ error_reporting(E_ERROR);
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["actress_grade"]."</td>";
-                                                    				 
+																		echo "<td>".$row["pl"]."</td>";
                                                     					echo  "</tr>"; 
                                                     					 
                                                     				
@@ -347,6 +352,8 @@ error_reporting(E_ERROR);
                                                                 <tr>
                                                                     <th style="width: 10%">writer</th>
                                                                     <th style="width: 20%">Rem</th>
+                                                                    <th>PL</th>
+																	
                                                                    
                                                                      
                                                                 </tr>
@@ -374,7 +381,7 @@ error_reporting(E_ERROR);
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td></td>";
+                                                    					echo "<td>".$row["pl"]."</td>";
                                                     				
                                                     					echo  "</tr>"; 
                                                     					 

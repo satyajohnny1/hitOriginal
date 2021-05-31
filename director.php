@@ -209,7 +209,7 @@ $totColl = 0;
                                                     					$aname = $row["aname"];				
 																		$res = $row["result"];
                                                     					$collection= $row["collection"];
-																		$totColl = $totColl+$totColl;
+																		$totColl = $totColl+$collection;
 																		
                                                     					$budget = $row["sofar"];
 																		$totBud = $totBud+$budget;
@@ -238,6 +238,8 @@ $totColl = 0;
                                           
                                                     				}
                                                     			}
+																
+																		$pl = round(($totColl-$totBud)/10000000, 2);
                                             ?>
 
 
@@ -255,9 +257,35 @@ $totColl = 0;
                                         <div role="tabpanel" class="tab-pane fade" id="tab33">
 												 <div class="panel-body">
 										 
-										 <h1> Total Budget 		:  <?php  echo "".round($totBud/10000000, 2)+" Cr."; ?></h1>
-										 <h1> Total Collections :  <?php  echo "".round($totColl/10000000, 2)+" Cr."; ?></h1>
-										 <h1> Profit/Loss 		:  <?php  echo "".round(($totColl-$totBud)/10000000, 2)+" Cr."; ?></h1>
+<h4>Budget :<span class="badge badge-primary"><?php  echo "".round($totBud/10000000, 2)+" Cr."; ?></span></h3>
+<h4>Collec :<span class="badge badge-success"><?php  echo "".round($totColl/10000000, 2)+" Cr."; ?></span></h3>
+<h2>Profit :<span class="badge badge-success"><?php  echo "".round(($totColl-$totBud)/10000000, 2)+" Cr."; ?></span></h3>
+<?php 
+                                        include 'db.php';
+                                        
+                  $sql = "SELECT s.result, COUNT(*) AS `count` FROM `tolly_ready_for_shoot` s  WHERE did= ".$did." GROUP BY s.result";
+
+                                                    			$result = mysqli_query($conn, $sql);                                                      			
+                                                    				
+                                                    			if (mysqli_num_rows($result) > 0) {
+                                                    				// output data of each row
+                                                    				while($row = mysqli_fetch_assoc($result)) {
+                                                    					 
+                                                    					
+                                                    					$count = $row["count"];
+                                                    					$result = $row["result"]; 
+                                          		echo "<tr>";
+                                          		echo "<td>".$result."</td>"                                            	
+                                             	echo "<td>".$count."</td>";
+                                            	echo " </tr> ";
+                                          
+                                                    				}
+                                                    			}
+																
+										$sql2 = "UPDATE `tolly_director` SET `pl`=".$$pl." WHERE  `director_id`=".$did;mysqli_query ( $conn, $sql2 );								
+																
+                                            ?>
+
 										 
 										 </div>
 
