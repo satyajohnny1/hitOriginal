@@ -203,8 +203,10 @@ $nme = $_GET['name'];
                                                                             <th>Result</th>
                                                                             <th>Budget</th>
                                                                             <th>Collection</th>
-                                                                            <th>50'Centers</th>
-                                                                            <th>100'Centers</th>
+                                                                            <th>50'Cen</th>
+                                                                            <th>100'Cen</th>
+                                                                            <th>150'Cen</th>
+                                                                            <th>175'Cen</th>
                                                                         </tr>
                                                                     </thead>
 
