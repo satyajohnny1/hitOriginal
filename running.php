@@ -464,19 +464,19 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
                                        		 
                                        		if($_w2>0)
                                        		{
-                                       			echo "<a href=\"music.php?name=".$_w2_name."&id=".$_w2."\" class=\"btn btn-primary btn-rounded\">". $_w2_name."</a>";
+                                       			echo "<a href=\"writer.php?name=".$_w2_name."&id=".$_w2."\" class=\"btn btn-primary btn-rounded\">". $_w2_name."</a>";
                                        		}
                                        		
                                        		if($_w3>0)
                                        		{
-                                       			echo "<a href=\"music.php?name=".$_w3_name."&id=".$_w3."\" class=\"btn btn btn-warning btn-rounded\">". $_w3_name."</a>";
+                                       			echo "<a href=\"writer.php?name=".$_w3_name."&id=".$_w3."\" class=\"btn btn btn-warning btn-rounded\">". $_w3_name."</a>";
                                        		}
                                        		
                                        		
                                        
                                        	   
                                          echo "<a href=\"music.php?name=".$musname."&id=".$mid."\" class=\"btn btn btn-primary btn-rounded\">". $musname."</a>";
-                                         echo "<a href=\"music.php?name=".$wriname."&id=".$wid."\" class=\"btn btn btn-danger btn-rounded\">". $wriname."</a>";
+                                         echo "<a href=\"writer.php?name=".$wriname."&id=".$wid."\" class=\"btn btn btn-danger btn-rounded\">". $wriname."</a>";
                                          ?>
                                         <a href="editor.php?id=<?php echo $eid?>" class="btn btn-warning btn-rounded"><?php echo $ediname?></a>                                       
                                          <a href="writer.php?id=<?php echo $wid?>" class="btn btn-danger btn-rounded"><?php echo $wriname?></a>

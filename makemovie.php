@@ -345,15 +345,13 @@ error_reporting(E_ERROR);
                                             </div> 
                                             </div>
                                                 </div>
-                                                <div class="col-md-9">
+                                               <div class="col-md-9">
                                                     <div class="table-responsive">
                                                         <table id="example2" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
                                                                 <tr>
                                                                     <th style="width: 10%">writer</th>
                                                                     <th style="width: 20%">Rem</th>
-                                                                    <th style="width: 10%">PL</th>
-																	
                                                                    
                                                                      
                                                                 </tr>
@@ -381,7 +379,7 @@ error_reporting(E_ERROR);
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["pl"]."</td>";
+                                                    					echo "<td></td>";
                                                     				
                                                     					echo  "</tr>"; 
                                                     					 
