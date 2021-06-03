@@ -64,7 +64,7 @@ $heroimg2 = "actors/".clean(strtolower($a2)).'.png';
 
 $jpg_image = imagecreatefromjpeg($bg);
 $fnt = "fonts/".rand(1,13).".ttf";
-$tfnt = "fonts/".rand(1,29).".ttf";
+$tfnt = "fonts/".rand(14,60).".ttf";
 $path = 'done/'.$tit.$rid.".jpeg";
 $path_50 = 'done/'.$tit.$rid."_50.jpeg";
 $path_75 = 'done/'.$tit.$rid."_75.jpeg";
