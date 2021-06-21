@@ -55,11 +55,10 @@ $dbname = "hit2";
 
 
 
-
-$servername = "linkprotechcom.ipagemysql.com";
-$username = "linkpro";
-$password = "linkpro"
-$dbname = "linkpro_empty";
+$servername = "sql111.epizy.com";
+$username = "epiz_17259702";
+$password = "123abcABC";
+$dbname = "epiz_17259702_hit";
 
 
 
