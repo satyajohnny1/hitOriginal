@@ -83,6 +83,7 @@ $ori = 'done/'.$tit.$rid.".jpeg";
 
 //$fnt =$tfnt;
 echo $path;
+echo "fonts :: fnt: $fnt, tfnt: $tfnt ";
 
   //Set the Content Type
 /* $bclr = imagecolorallocate($jpg_image,  7, 185, 205); //blue
@@ -148,13 +149,13 @@ if($num<15){
   
 
 //Banner Data 
-    $font_path = $tfnt;   
+    $font_path = $fnt;   
   $text = $b;
   imagettftext($jpg_image, 22, 0, 10, 55, $bclr, $font_path, $text);
   //[FONTSIZE,CURVE,STARTWIDTH,STARTHEIGHT]
 
  // Hero Data 
-   $font_path = $tfnt;    
+   $font_path = $fnt;    
   $text = $a.'-'.$a2.'-'.$a3;
   imagettftext($jpg_image, 17, 0, 300, 390, $cclr, $font_path, $text);
   
@@ -190,7 +191,7 @@ $text = "______________________________________";
  }
  
  //Director Data 
-    $font_path = $tfnt;   
+    $font_path = $fnt;   
   $text =$d.' - '.$d2.' - '.$d3;
   imagettftext($jpg_image, $fonsiz, 0, $area, 550,$cclr, $font_path, $text);
    
@@ -198,7 +199,7 @@ $text = "______________________________________";
   
   
   //Producer Data
-    $font_path = $tfnt;  
+    $font_path = $fnt;  
   $text = $p;
  imagettftext($jpg_image, 28, 0, 340, 600,$cclr, $font_path, $text);
   
@@ -207,7 +208,7 @@ $text = "______________________________________";
   //[FONTSIZE,CURVE,STARTWIDTH,STARTHEIGHT]
 
  //Music Data
- $font_path = $tfnt;
+ $font_path = $fnt;
  $text = $m.' '.$m2.' '.$m3.'-'.$w.' '.$w2.' '.$w3.' - '.$e.' - '.$c;
  imagettftext($jpg_image, 13, 0, 120, 630,$cclr, $font_path, $text);
  

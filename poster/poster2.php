@@ -78,6 +78,7 @@ $ori = 'done/'.$tit.$rid.".jpeg";
 
 //$fnt =$tfnt;
 echo $path;
+echo "fonts :: fnt: $fnt, tfnt: $tfnt ";
 
   //Set the Content Type
 /* $bclr = imagecolorallocate($jpg_image,  7, 185, 205); //blue

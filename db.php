@@ -43,16 +43,23 @@ $username = "root";
 $password = "root";
 $dbname = "hit2";
 
+ DB_NAME', 'linkpro_wordpress' );
+
+  'DB_USER', 'linkpro' );
+ DB_PASSWORD', 'linkpro' );
+
+ 'DB_HOST', 'linkprotechcom.ipagemysql.com' );
+
 */
 
 
 
 
 
-$servername = "sql208.unaux.com";
-$username = "unaux_28553267";
-$password = "123abcABC@";
-$dbname = "unaux_28553267_javabo";
+$servername = "linkprotechcom.ipagemysql.com";
+$username = "linkpro";
+$password = "linkpro"
+$dbname = "linkpro_empty";
 
 
 
