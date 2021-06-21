@@ -31,7 +31,7 @@ $username = "unaux_28553267";
 $password = "123abcABC@";
 $dbname = "unaux_28553267_javabo";
 
-
+## epizy
 $servername = "sql208.unaux.com";
 $username = "unaux_28553267";
 $password = "123abcABC@";
@@ -55,10 +55,11 @@ $dbname = "hit2";
 
 
 
-$servername = "linkprotechcom.ipagemysql.com";
-$username = "linkpro";
-$password = "linkpro"
-$dbname = "linkpro_empty";
+$servername = "sql208.unaux.com";
+$username = "unaux_28553267";
+$password = "123abcABC@";
+$dbname = "unaux_28553267_javabo";
+
 
 
 // Create connection
