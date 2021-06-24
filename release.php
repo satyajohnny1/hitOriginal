@@ -141,7 +141,6 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                                                 </div>
                                             </div>
 
-<! --
                                             <div class="panel panel-info">
                                                 <div class="panel-body">
                                                     <h3>Want to Release in More centers ? (1 center = 1x5,00,000)</h3>
@@ -161,7 +160,7 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                                             <input type="text"  class="form-control" name="addsofar" id="addsofar" style="display: none;">
                                              <input type="text"  class="form-control" name="iaddsofar" id="iaddsofar" >
                                         </div>
-                                        -->	
+                                        
 										
 										 <!--	
                                         <div class="form-group">                                             

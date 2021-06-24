@@ -110,7 +110,7 @@ error_reporting(E_ERROR);
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b></td>";
-                                                    					echo "<td>".$row["music_grade"]."</td>";
+                                                    					echo "<td>".$row["music_rating"]."</td>";
                                                     					 echo "<td>".$row["pl"]."</td>";
                                                     					echo  "</tr>"; 
                                                     					 
@@ -179,7 +179,7 @@ error_reporting(E_ERROR);
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_cine' name='r_cine' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b></td>";
-                                                    					echo "<td>".$row["cine_grade"]."</td>";
+                                                    					echo "<td>".$row["cine_rating"]."</td>";
                                                     					 echo "<td>".$row["pl"]."</td>";
                                                     					echo  "</tr>"; 
                                                     					 
@@ -246,7 +246,7 @@ error_reporting(E_ERROR);
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_edi' name='r_edi' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b></td>";
-                                                    					echo "<td>".$row["editor_grade"]."</td>";
+                                                    					echo "<td>".$row["editor_rating"]."</td>";
 																		echo "<td>".$row["pl"]."</td>";
                                                     					echo  "</tr>"; 
                                                     					 

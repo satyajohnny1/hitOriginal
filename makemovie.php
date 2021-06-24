@@ -72,12 +72,12 @@ error_reporting(E_ERROR);
                                                                 <input type="text" class="form-control"  name="s_title" id="s_title" placeholder="Title"  required="required">
                                                             </div>
                                                             <div class="form-group  col-md-2">
-                                                                <label for="exampleInputName2">Budget In Cr's</label>
+                                                                <label for="exampleInputName2">Budget</label>
                                                                 <input type="number" class="form-control col-md-6" min="1" max="<?php echo round(($_SESSION['s_bal']/10000000),2)?>" name="inC" id="inC" placeholder="for 0.01 is one lack" required="required">
                                                             </div>
                                                             
                                                             <div class="form-group  col-md-4">
-                                                                <label for="exampleInputName2">Budget in Rs</label>
+                                                                <label for="exampleInputName2">Rs.</label>
                                                                 <input type="text" class="form-control col-md-6" min="7" name="s_budget" id="s_budget" placeholder="In Ruppes" required="required" disabled="disabled">
                                                             </div>
    														  
@@ -146,7 +146,7 @@ error_reporting(E_ERROR);
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["director_grade"]."</td>";
+                                                    					echo "<td>".$row["director_rating"]."</td>";
 																		echo "<td>".$row["pl"]."</td>";                                                    					
                                                     					echo  "<td style='display: none;'>".$dir_pic."</td>";
                                                     					
@@ -223,7 +223,7 @@ error_reporting(E_ERROR);
                                                     					echo "<tr>";                                                    					
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["actor_grade"]."</td>";
+                                                    					echo "<td>".$row["actor_rating"]."</td>";
                                                     					 echo "<td>".$row["pl"]."</td>";
                                                     					echo  "</tr>"; 
                                                     					 
@@ -303,7 +303,7 @@ error_reporting(E_ERROR);
                                                     					echo "<tr>";                                                    					
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["actress_grade"]."</td>";
+                                                    					echo "<td>".$row["actress_rating"]."</td>";
 																		echo "<td>".$row["pl"]."</td>";
                                                     					echo  "</tr>"; 
                                                     					 
@@ -350,8 +350,11 @@ error_reporting(E_ERROR);
                                                         <table id="example2" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
                                                                 <tr>
-                                                                    <th style="width: 10%">writer</th>
-                                                                    <th style="width: 20%">Rem</th>
+                                                                    <th>writer</th>
+                                                                    <th>Rem</th>
+                                                                    <th>DONT TOUCH</th>
+                                                                    <th>Rat</th>
+                                                                    <th>PL</th>
                                                                    
                                                                      
                                                                 </tr>
@@ -378,8 +381,12 @@ error_reporting(E_ERROR);
                                                     					
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
-                                                    					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td></td>";
+                                                    					echo "<td><b>".$dir_cr." CR</b>";
+																		echo "<td></td>";
+                                                    					echo "<td>".$row["writer_rating"]."</td>";
+																		echo "<td>".$row["pl"]."</td>";
+																		
+                                                    				
                                                     				
                                                     					echo  "</tr>"; 
                                                     					 
