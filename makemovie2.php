@@ -84,9 +84,10 @@ error_reporting(E_ERROR);
                                                         <table id="example2" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>music</th>
-                                                                    <th>Remuneration</th>
-                                                                    <th>Grade</th>
+                                                                    <th>Music</th>
+                                                                    <th>Rem</th>
+                                                                    <th>DONT TOUCH</th>
+                                                                    <th>Rat</th>
                                                                     <th>PL</th>
                                                                     
                                                                 </tr>
@@ -109,7 +110,8 @@ error_reporting(E_ERROR);
                                                     					$dir_cr = round(($dir_rate/10000000),2);
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b></td>";
+                                                     					echo "<td><b>".$dir_cr." CR</b></td>";
+																		echo "<td></td>";
                                                     					echo "<td>".$row["music_rating"]."</td>";
                                                     					 echo "<td>".$row["pl"]."</td>";
                                                     					echo  "</tr>"; 

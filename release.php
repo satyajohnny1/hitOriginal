@@ -149,7 +149,7 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                                         
                                         <div class="form-group">
                                             <label  for="addcent">Add Centers</label>
-                                            <input type="number" min="1" max="500" class="form-control" name="addcent" id="addcent" >
+                                            <input type="number" min="-500" max="1500" class="form-control" name="addcent" id="addcent" >
                                         </div>
                                         <div class="form-group">
                                        X  &nbsp; &nbsp;5,00,000 &nbsp; =                                
@@ -158,14 +158,14 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
 									 
                                          <div class="form-group">                                             
                                             <input type="text"  class="form-control" name="addsofar" id="addsofar" style="display: none;">
-                                             <input type="text"  class="form-control" name="iaddsofar" id="iaddsofar" >
+                                             <input type="text"  class="form-control" name="iaddsofar" id="iaddsofar" disabled="disabled">
                                         </div>
                                         
 										
-										 <!--	
+										 
                                         <div class="form-group">                                             
                                             <input type="text"  class="form-control" value="<?php echo $sofar?>" name="nwbudget" id="nwbudget" style="display: none;">
-                                            <input type="text"  class="form-control" value="<?php echo $sofar?>" name="inwbudget" id="inwbudget" >
+                                            <input type="text"  class="form-control" value="<?php echo $sofar?>" name="inwbudget" id="inwbudget">
                                         </div>   
                                         
                                          <input type="text"  id="cent" name="cent" value="<?php echo $rel_cen?>" style="display: none;">
@@ -174,7 +174,7 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                                     </form>
                                              </div>
                                             </div>
-										-->
+							 
 										
 
                                         </div>

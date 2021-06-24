@@ -1424,7 +1424,7 @@ echo "</p> <p> Query :".$sqlCenters;
 mysqli_query ( $conn, $sqlCenters );
 
 
-header('Location: readyforrun.php?rid='.$rid);
+header('released.php?news='.$news.'&rid='.$rid);
 echo "<h2> After Redirect</h2>";
 ?>
 
@@ -1499,7 +1499,7 @@ echo "<h2> After Redirect</h2>";
 		<div id="main-wrapper">
 			<div class="col-md-4 center">
 				<h1 class="text-xxl  text-center">
-					<a href="readyforrelease.php">Go to Release</a>
+					<a href="released.php?news=<?php echo  $news?>&rid=<?php echo  $rid?>">Go to Release</a>
 				</h1>
 				<h2 class="text-xl f-white text-center" id="counter"></h2>
 				<div class="details" style="display:none">
@@ -1533,7 +1533,7 @@ echo "<h2> After Redirect</h2>";
 					echo '<br>500 CENTERS :  ' . $d500_cent;
 					echo '<br>600 CENTERS :  ' . $d600_cent;
 					
-					 header('Location: readyforrun.php');
+				header('Location: readyforrun.php?rid='.$rid);
 					
 					?></p>
 				</div>
