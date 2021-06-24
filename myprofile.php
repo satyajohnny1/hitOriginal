@@ -18,7 +18,10 @@ if (mysqli_num_rows($result) > 0) {
 		$password = $row["password"];
 		$email = $row["email"];
 		$banner = $row["banner"];
-		$pic = $row["pic"];		 
+		$pic = $row["pic"];		
+
+		$_SESSION["s_user"] = $row["username"];
+		$_SESSION['s_banner'] = $row["banner"];
 	}
 	
 

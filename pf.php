@@ -20,9 +20,12 @@ UPDATE `tolly_actor` SET `pl`= (SELECT  ROUND(((SUM(sh.collection) - SUM(sh.budg
 **/
 
 
+
+
+ echo "--------------------------------------------------";
+echo " <h3> ACTOR Table - Update </h3> ";
 echo "--------------------------------------------------";
-echo "Actor Table Profit/Loass Update";
-echo "--------------------------------------------------";
+
 
 $sql = "SELECT distinct a.actor_id, a.actor_name FROM tolly_actor a ORDER BY a.actor_id";
 $result = mysqli_query($conn, $sql);
@@ -45,9 +48,10 @@ if (mysqli_num_rows($result) > 0) {
 
 
 
+ echo "--------------------------------------------------";
+echo " <h3> ACTRESS Table - Update </h3> ";
 echo "--------------------------------------------------";
-echo "Actress Table Profit/Loass Update";
-echo "--------------------------------------------------";
+
 
 $sql = "SELECT distinct a.actress_id, a.actress_name FROM tolly_actress a ORDER BY a.actress_id";
 $result = mysqli_query($conn, $sql);
@@ -70,9 +74,10 @@ if (mysqli_num_rows($result) > 0) {
 
 
 
+ echo "--------------------------------------------------";
+echo " <h3> DIRECTOR Table - Update </h3> ";
 echo "--------------------------------------------------";
-echo "director Table Profit/Loass Update";
-echo "--------------------------------------------------";
+
 
 $sql = "SELECT distinct a.director_id, a.director_name FROM tolly_director a ORDER BY a.director_id";
 $result = mysqli_query($conn, $sql);
@@ -94,9 +99,12 @@ if (mysqli_num_rows($result) > 0) {
 
  
  
+
+
  echo "--------------------------------------------------";
-echo "writer Table Profit/Loass Update";
+echo " <h3> WRITER Table - Update </h3> ";
 echo "--------------------------------------------------";
+
 
 $sql = "SELECT distinct a.writer_id, a.writer_name FROM tolly_writer a ORDER BY a.writer_id";
 $result = mysqli_query($conn, $sql);
@@ -119,9 +127,12 @@ if (mysqli_num_rows($result) > 0) {
 
 
 
+
+
  echo "--------------------------------------------------";
-echo "music Table Profit/Loass Update";
+echo " <h3> MUSIC Table - Update </h3> ";
 echo "--------------------------------------------------";
+
 
 $sql = "SELECT distinct a.music_id, a.music_name FROM tolly_music a ORDER BY a.music_id";
 $result = mysqli_query($conn, $sql);
@@ -142,9 +153,12 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 
+
+
  echo "--------------------------------------------------";
-echo "cine Table Profit/Loass Update";
+echo " <h3> CINE Table - Update </h3> ";
 echo "--------------------------------------------------";
+
 
 $sql = "SELECT distinct a.cine_id, a.cine_name FROM tolly_cine a ORDER BY a.cine_id";
 $result = mysqli_query($conn, $sql);
@@ -168,7 +182,7 @@ if (mysqli_num_rows($result) > 0) {
 
 
  echo "--------------------------------------------------";
-echo "editor Table Profit/Loass Update";
+echo " <h3> editor Table - Update </h3> ";
 echo "--------------------------------------------------";
 
 $sql = "SELECT distinct a.editor_id, a.editor_name FROM tolly_editor a ORDER BY a.editor_id";
@@ -180,7 +194,31 @@ if (mysqli_num_rows($result) > 0) {
 		$id     =	$row["editor_id"];
 		$name    =	$row["editor_name"];
 		
-		$plq = "UPDATE `tolly_editor` SET `pl`= (SELECT  ROUND(((SUM(sh.eollection) - SUM(sh.budget))/10000000), 2) AS pl  FROM tolly_ready_for_shoot sh WHERE sh.eid=".$id."  )  WHERE  `editor_id`=".$id ;
+		$plq = "UPDATE `tolly_editor` SET `pl`= (SELECT  ROUND(((SUM(sh.collection) - SUM(sh.budget))/10000000), 2) AS pl  FROM tolly_ready_for_shoot sh WHERE sh.eid=".$id."  )  WHERE  `editor_id`=".$id ;
+		
+		
+		$res = 	mysqli_query($conn, $plq);
+		echo "<pre>".$id." - ".$name." Updated --> ".$res;
+		
+	}
+}
+
+
+
+ echo "--------------------------------------------------";
+echo " <h3> User Table - Update </h3> ";
+echo "--------------------------------------------------";
+
+$sql = "SELECT distinct a.uid, a.username FROM tolly_user a ORDER BY a.uid";
+$result = mysqli_query($conn, $sql);
+ 
+if (mysqli_num_rows($result) > 0) {
+	// output data of each row
+	while($row = mysqli_fetch_assoc($result)) {	
+		$id     =	$row["uid"];
+		$name    =	$row["username"];
+		
+		$plq = "UPDATE `tolly_user` SET `pl`= (SELECT  ROUND(((SUM(sh.collection) - SUM(sh.budget))/10000000), 2) AS pl  FROM tolly_ready_for_shoot sh WHERE sh.uid=".$id."  )  WHERE  `uid`=".$id ;
 		
 		
 		$res = 	mysqli_query($conn, $plq);
