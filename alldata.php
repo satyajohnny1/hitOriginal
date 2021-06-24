@@ -60,6 +60,7 @@ $uid = $_SESSION['s_uid'];
                                                                             <th>100'Cen</th>
                                                                             <th>150'Cen</th>
                                                                             <th>175'Cen</th>
+                                                                            <th>Days</th>
                                             </tr>
                                         </thead>
                                    
@@ -93,6 +94,7 @@ $uid = $_SESSION['s_uid'];
                                                     				$c100 = $row1["100d_cen"];
 																	$c150 = $row1["150d_cen"];  
 																	$c175 = $row1["175d_cen"];
+																	$days = $row1["max_days"];
 												
 											
                                           		echo "<tr>";
@@ -107,6 +109,7 @@ $uid = $_SESSION['s_uid'];
                                              	echo "<td>".$c100."</td>";
 												echo "<td>".$c150."</td>";
                                              	echo "<td>".$c175."</td>";
+												echo "<td>".$days."</td>";
                                             	echo " </tr> ";
                                           
                                                     				}

@@ -220,6 +220,7 @@ if (mysqli_num_rows($result) > 0) {
 		
 		$plq = "UPDATE `tolly_user` SET `pl`= (SELECT  ROUND(((SUM(sh.collection) - SUM(sh.budget))/10000000), 2) AS pl  FROM tolly_ready_for_shoot sh WHERE sh.uid=".$id."  )  WHERE  `uid`=".$id ;
 		
+		echo "<br> QUERY :".$plq;
 		
 		$res = 	mysqli_query($conn, $plq);
 		echo "<pre>".$id." - ".$name." Updated --> ".$res;
