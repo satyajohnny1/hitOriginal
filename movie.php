@@ -247,7 +247,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                        		
                                        		if($_a3>0)
                                        		{
-                                       			echo "<a href=\"actor.php?name=".$_a3_name."&id==".$_a3."\" class=\"btn btn-warning  btn-rounded\">". $_a3_name."</a>";
+                                       			echo "<a href=\"actor.php?name=".$_a3_name."&id=".$_a3."\" class=\"btn btn-warning  btn-rounded\">". $_a3_name."</a>";
                                        		}
                                      
                                        		echo "<a href=\"director.php?name=".$dname."&id=".$did."\" class=\"btn btn-warning btn-rounded\">". $dname."</a>";
@@ -259,7 +259,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                        		
                                        		if($_d3>0)
                                        		{
-                                       			echo "<a href=\"director.php?name=".$_d3_name."&id==".$_d3."\" class=\"btn btn-danger  btn-rounded\">". $_d3_name."</a>";
+                                       			echo "<a href=\"director.php?name=".$_d3_name."&id=".$_d3."\" class=\"btn btn-danger  btn-rounded\">". $_d3_name."</a>";
                                        		}
                                        	?><span><b>Profit/Loss</b></span>
                                   <span id="odometer" class="odometer" style="text-align: right;"><?php echo $profit ?></span>
@@ -419,7 +419,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                        		
                                        		if($_ac3>0)
                                        		{
-                                       			echo "<a href=\"actress.php?name=".$_ac3_name."&id==".$_ac3."\" class=\"btn btn-danger  btn-rounded\">". $_ac3_name."</a>";
+                                       			echo "<a href=\"actress.php?name=".$_ac3_name."&id=".$_ac3."\" class=\"btn btn-danger  btn-rounded\">". $_ac3_name."</a>";
                                        		}
                                     
 
