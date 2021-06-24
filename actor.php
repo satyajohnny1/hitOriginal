@@ -207,6 +207,7 @@ $nme = $_GET['name'];
                                                                             <th>100'Cen</th>
                                                                             <th>150'Cen</th>
                                                                             <th>175'Cen</th>
+                                                                            <th>Days</th>
                                                                         </tr>
                                                                     </thead>
 
@@ -248,6 +249,7 @@ $nme = $_GET['name'];
                                                     				$c100 = $row1["100d_cen"];
 																	$c150 = $row1["150d_cen"];  
 																	$c175 = $row1["175d_cen"]; 
+																	$days = $row1["max_days"];
                                           		echo "<tr>";
                                           		echo "<td>".$rid."</td>";
                                              	echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
@@ -261,6 +263,7 @@ $nme = $_GET['name'];
 												
 												echo "<td>".$c150."</td>";
                                              	echo "<td>".$c175."</td>";
+												echo "<td>".$days."</td>";
 												
                                             	echo " </tr> ";
                                           
