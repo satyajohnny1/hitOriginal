@@ -129,25 +129,25 @@ echo '<br> <h2>rating SUM ' . $ratesum . ' ---->  FINAL RATING : ' . $rateavg.'<
 $point = 0;
 
 if ((1.25 > $rateavg)) {
-	$point = -3.5;
+	$point = -5;
 } elseif ((1.25 <= $rateavg) && ($rateavg < 2.0)) {
-	$point = -2;
+	$point = -4;
 } elseif ((2.0 <= $rateavg) && ($rateavg < 2.5)) {
-	$point = -1;
+	$point = -3;
 } elseif ((2.5 <= $rateavg) && ($rateavg < 2.85)) {
-	$point = -0.2;
-} elseif ((2.85 <= $rateavg) && ($rateavg < 3.25)) {
-	$point = -0.0;
+	$point = -2.5;
+} elseif ((2.85 <= $rateavg) && ($rateavg < 3)) {
+	$point = -2;
 } elseif ((3.25 <= $rateavg) && ($rateavg < 3.5)) {
-	$point = 0.2;
+	$point = -1;
 } elseif ((3.5 <= $rateavg) && ($rateavg < 3.75)) {
-	$point = 1.5;
+	$point = 1;
 } elseif ((3.75 <= $rateavg) && ($rateavg < 4.0)) {
 	$point = 2.5;
 } elseif ((4.0 <= $rateavg) && ($rateavg < 4.5)) {
-	$point = 3.0;
+	$point = 3.5;
 } elseif ($rateavg >= 4.5) {
-	$point = 4.4;
+	$point = 5;
 } else {
 	$point = 0;
 }

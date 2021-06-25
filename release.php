@@ -143,7 +143,7 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
 
                                             <div class="panel panel-info">
                                                 <div class="panel-body">
-                                                    <h3>Want to Release in More centers ? (1 center = 1x5,00,000)</h3>
+                                                    <h3>Want to Release in More centers ? (1 center = 1x3,00,000)</h3>
                                                     
                                                       <form class="form-inline" method="get" action="addcenters.php">
                                         
@@ -166,6 +166,7 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                                         <div class="form-group">                                             
                                             <input type="text"  class="form-control" value="<?php echo $sofar?>" name="nwbudget" id="nwbudget" style="display: none;">
                                             <input type="text"  class="form-control" value="<?php echo $sofar?>" name="inwbudget" id="inwbudget">
+											<input type="number" min="0" max="4000" class="form-control" name="finalCent" id="finalCent" >
                                         </div>   
                                         
                                          <input type="text"  id="cent" name="cent" value="<?php echo $rel_cen?>" style="display: none;">
@@ -234,13 +235,15 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                 $('#addcent').on('input', function() {
                     // do something
                     var cent = $('#addcent').val();
+					var finCent =  parseFloat($('#finalCent').val());
                     var bud = $('#b1').text();
-                    var addso = cent*500000;
+                    var addso = cent*300000;
                     var nwbud = parseFloat(bud)+parseFloat(addso);
                     $('#addsofar').val(addso);
                     $('#nwbudget').val(nwbud);
                     $('#iaddsofar').val(addso);
                     $('#inwbudget').val(nwbud);
+					$('#finalCent').val(finCent);
                    // alert('Hello');
                 });
                 
