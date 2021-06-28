@@ -233,7 +233,7 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["actor_rating"];
 	$rem =  $row1 ["actor_rate"];
-	$crate = $crate +$ratt;
+	$ratt = $crate +$ratt;
 	$rem= (($rem * $point *10)/100)+$rem;
 	if($rem<100000)
 	{	
@@ -258,8 +258,8 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["actress_rating"];
 	$rem =  $row1 ["actress_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/10) *10)/100)+$rem;
 	if($rem<100000)
 	{	
 		$rem = 100000;
@@ -283,7 +283,7 @@ if (mysqli_num_rows ( $result ) > 0) {
 	$rem =  $row1 ["director_rate"];
 	echo "Rate  ==============> ".$ratt;
 	echo "Rrem  ==============> ".$rem;
-	$crate = $crate +$ratt;
+	$ratt = $crate +$ratt;
 	$rem= (($rem * $point *10)/100)+$rem;
 if($rem<100000)
 	{	
@@ -305,8 +305,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["writer_rating"];
 	$rem =  $row1 ["writer_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/8) *10)/100)+$rem;
 if($rem<100000)
 	{	
 		$rem = 100000;
@@ -328,8 +328,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["music_rating"];
 	$rem =  $row1 ["music_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/7) *10)/100)+$rem;
 if($rem<100000)
 	{	
 		$rem = 100000;
@@ -354,8 +354,8 @@ if($rem<100000)
 	$ratt = $row1 ["cine_rating"];
 	$rem =  $row1 ["cine_rate"];
 	
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/7) *10)/100)+$rem;
 if($rem<100000)
 	{	
 		$rem = 100000;
@@ -379,8 +379,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["editor_rating"];
 	$rem =  $row1 ["editor_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/8) *10)/100)+$rem;
 if($rem<100000)
 	{	
 		$rem = 100000;
@@ -405,8 +405,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["actress_rating"];
 	$rem =  $row1 ["actress_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/8) *10)/100)+$rem;
 		if($rem<100000)
 	{	
 		$rem = 100000;
@@ -429,8 +429,8 @@ if($rem<100000)
 		$row1 = mysqli_fetch_assoc ( $r1 );
 		$ratt = $row1 ["actor_rating"];
 		$rem =  $row1 ["actor_rate"];
-		$crate = $crate +$ratt;
-		$rem= (($rem * $point *10)/100)+$rem;
+		$ratt = $crate +$ratt;
+		$rem= (($rem * ($point/2) *10)/100)+$rem;
 	if($rem<100000)
 	{	
 		$rem = 100000;
@@ -452,8 +452,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["actor_rating"];
 	$rem =  $row1 ["actor_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/3) *10)/100)+$rem;
 	if($rem<100000)
 	{	
 		$rem = 100000;
@@ -475,8 +475,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["actress_rating"];
 	$rem =  $row1 ["actress_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/8) *10)/100)+$rem;
 		if($rem<100000)
 	{	
 		$rem = 100000;
@@ -498,8 +498,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["music_rating"];
 	$rem =  $row1 ["music_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/8) *10)/100)+$rem;
 		if($rem<100000)
 	{	
 		$rem = 100000;
@@ -521,8 +521,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["music_rating"];
 	$rem =  $row1 ["music_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/8) *10)/100)+$rem;
 		if($rem<100000)
 	{	
 		$rem = 100000;
@@ -544,8 +544,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["writer_rating"];
 	$rem =  $row1 ["writer_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/8) *10)/100)+$rem;
 		if($rem<100000)
 	{	
 		$rem = 70000;
@@ -567,8 +567,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["writer_rating"];
 	$rem =  $row1 ["writer_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/8) *10)/100)+$rem;
 	if($rem<100000)
 	{	
 		$rem = 70000;
@@ -590,8 +590,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["director_rating"];
 	$rem =  $row1 ["director_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/8) *10)/100)+$rem;
 	if($rem<100000)
 	{	
 		$rem = 70000;
@@ -613,8 +613,8 @@ if($rem<100000)
 	$row1 = mysqli_fetch_assoc ( $r1 );
 	$ratt = $row1 ["director_rating"];
 	$rem =  $row1 ["director_rate"];
-	$crate = $crate +$ratt;
-	$rem= (($rem * $point *10)/100)+$rem;
+	$ratt = $crate +$ratt;
+	$rem= (($rem * ($point/8) *10)/100)+$rem;
 	if($rem<100000)
 	{	
 		$rem = 70000;

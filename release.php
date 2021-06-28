@@ -152,7 +152,7 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                                             <input type="number" min="-500" max="1500" class="form-control" name="addcent" id="addcent" >
                                         </div>
                                         <div class="form-group">
-                                       X  &nbsp; &nbsp;5,00,000 &nbsp; =                                
+                                       X  &nbsp; &nbsp;4,00,000 &nbsp; =                                
                                         </div>	 
 										
 									 
@@ -235,9 +235,9 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                 $('#addcent').on('input', function() {
                     // do something
                     var cent = $('#addcent').val();
-					var finCent =  parseFloat($('#finalCent').val());
+					var finCent =  parseInt(cent) + parseInt(<?php echo $rel_cen?>);
                     var bud = $('#b1').text();
-                    var addso = cent*300000;
+                    var addso = cent*400000;
                     var nwbud = parseFloat(bud)+parseFloat(addso);
                     $('#addsofar').val(addso);
                     $('#nwbudget').val(nwbud);

@@ -55,11 +55,11 @@ $dbname = "hit2";
 
 
 
+
 $servername = "sql208.unaux.com";
 $username = "unaux_28553267";
 $password = "123abcABC@";
 $dbname = "unaux_28553267_javabo";
-
 
 
 // Create connection
