@@ -76,7 +76,8 @@ session_start();
                                                     					echo "<td><a href='music.php?id=$dir_id' class='btn'>$dir_name</a></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["music_grade"]."</td>"; 
-																		echo "<td>".$row["pl"]."</td>";                                                   					
+																		echo "<td>".$row["pl"]."</td>";
+                                                    					echo "<td>".$row["music_rating"]."</td>";                                                   					
                                                     					                                                    					
                                                     					echo  "</tr>"; 
                                                     					 

@@ -51,7 +51,7 @@ session_start();
                                                                     <th>actress</th>
                                                                     <th>Remuneration</th>
                                                                     <th>Grade</th>
-																	<th>PL</th>                                                                                 
+																	<th>PL</th>                                                                                  
                                                                     
                                                                 </tr>
                                                             </thead>
@@ -75,8 +75,8 @@ session_start();
                                                     					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='actress.php?id=$dir_id' class='btn'></a></td>";
                                                     					echo "<td><a href='actress.php?id=$dir_id' class='btn'>$dir_name</a></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["actress_grade"]."</td>";
-																		echo "<td>".$row["pl"]."</td>";                                                    					
+                                                    					echo "<td>".$row["actress_rating"]."</td>";
+																		echo "<td>".$row["pl"]."</td>";                                                     					
                                                     					                                                    					
                                                     					echo  "</tr>"; 
                                                     					 
