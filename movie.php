@@ -140,10 +140,19 @@ if (mysqli_num_rows($result) > 0) {
 		$mid       = 	$row["mid"];
 		$eid       = 	$row["eid"];
 		$cid       = 	$row["cid"];
+				
 		$budget    = 	$row["budget"];
+		$budget    = 	ceil($budget);
+		
 		$collection= 	$row["collection"];
+		$collection    = 	ceil($collection);
+		
 		$profit    = 	$row["profit"];
+		$profit    = 	ceil($profit);
+		
 		$sofar     = 	$row["sofar"];
+		$sofar    = 	ceil($sofar);
+		
 		$grade     = 	$row["grade"];
 		$status    = 	$row["status"];
 		$pic       = 	$row["pic"];
