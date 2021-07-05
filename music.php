@@ -390,7 +390,7 @@ $nme = $_GET['name'];
                         ['Task', 'Hours per Day'],
 
                         <?php 
-        	         $sql = "select count(*) as cnt, s.result from tolly_ready_for_shoot s WHERE s.mid = ".$mid."  OR s.w2 = ".$mid." OR s.w3 = ".$mid." and s.`status` = 'out' GROUP BY s.result";
+        	         $sql = "select count(*) as cnt, s.result from tolly_ready_for_shoot s WHERE s.mid = ".$mid."  OR s.m2 = ".$mid." OR s.m3 = ".$mid." and s.`status` = 'out' GROUP BY s.result";
         	         //echo '<h2>'.$sql.'</h2>';
         	         $result = mysqli_query ( $conn, $sql );
         	         if (mysqli_num_rows($result) > 0) {

@@ -50,8 +50,8 @@ session_start();
                                                                 <th></th>
                                                                     <th>Music Director</th>
                                                                     <th>Remuneration</th>
-                                                                    <th>Grade</th>
-                                                                    <th>PL</th>                                                                   
+                                                                    <th>PL</th>                 
+                                                                    <th>Grade</th>                                                  
                                                                     
                                                                 </tr>
                                                             </thead>
