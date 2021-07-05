@@ -215,7 +215,7 @@ $nme = $_GET['name'];
                                                                         <?php 
                                         include 'db.php';
                                         
-                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.mid = ".$mid." and s.status = 'out' OR s.w2 = ".$mid." OR s.w3 = ".$mid;
+                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.mid = ".$mid." and s.status = 'out' OR s.m2 = ".$mid." OR s.m3 = ".$mid;
                                              		//	echo $sql;
                                                     			$result = mysqli_query($conn, $sql);                                                      			
                                                     				
