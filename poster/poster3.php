@@ -319,20 +319,20 @@ imagejpeg($jpg_image, $path);
   		 
   	$font_path = $fnt;
   	$text = "100";
-  	imagettftext($jpg_image, 180, 20, 680, 500, $tclr, $font_path, $text);
+  	imagettftext($jpg_image, 180, 0, 480, 800, $tclr, $font_path, $text);
   	 
   	 
   	 
   	//Days text
   	$font_path = $fnt;
   	$text = "DAYS";
-  	imagettftext($jpg_image, 34, 0, 900, 320, $tclr, $font_path, $text);
+  	imagettftext($jpg_image, 25, 0, 700, 800, $tclr, $font_path, $text);
   	 
   	 
   	//Centers Data
   	$font_path = $fnt;
   	$text = $hun." CENTERS";
-  	imagettftext($jpg_image, 30, 0, 790, 490, $tclr, $font_path, $text);
+  	imagettftext($jpg_image, 30, 0, 300, 700, $tclr, $font_path, $text);
   
   	imagejpeg($jpg_image);
   	imagejpeg($jpg_image, $path_100);

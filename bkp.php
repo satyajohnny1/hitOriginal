@@ -11,26 +11,26 @@ $label = '
 /***************************************************
 	Database settings
 	
-	$servername = "sql105.epizy.com";
-$username = "epiz_28768808";
-$password = "jEWDSrJkJi15f";
-$dbname = "epiz_28768808_javabo";
+$servername = "sql208.unaux.com";
+$username = "unaux_28553267";
+$password = "123abcABC@";
+$dbname = "unaux_28553267_javabo";
 
 ****************************************************/
-	$db_server			= 'sql105.epizy.com';				// Database server, usually "localhost", 
+	$db_server			= 'sql208.unaux.com';				// Database server, usually "localhost", 
 	                                                // on (mt) servers something like internal-db.s12345.gridserver.com
- 	$db_name 			= 'epiz_28768808_javabo';				// Database name, leave empty for 'all databases'
-	$db_user 		    = 'epiz_28768808';				// Database username
-	$db_pass 		    = 'jEWDSrJkJi15f';				// Database password
+ 	$db_name 			= 'unaux_28553267';				// Database name, leave empty for 'all databases'
+	$db_user 		    = 'unaux_28553267_javabo';				// Database username
+	$db_pass 		    = '123abcABC@';				// Database password
 
 
 
 /***************************************************
 	E-mail settings
 ****************************************************/
- 	$website            = 'javabo.epizy.com';		    // Your site's domain (without www. part)
+ 	$website            = 'http://infrapodtec.com/';		    // Your site's domain (without www. part)
 	$send_to 		    = 'smlcodes@gmail.com';		        // backup file will be sent to?
-	$from 		        = 'smlcodes@gmail.com';	// some hosting providers won’t let you send backups from invalid e-mail address
+	$from 		        = 'dbbkp@infrapodtec.com';	// some hosting providers won’t let you send backups from invalid e-mail address
 
 
 
@@ -38,7 +38,7 @@ $dbname = "epiz_28768808_javabo";
     Misc options
 ****************************************************/
 
-    $full_path      = '/home/vol1_4/epizy.com/epiz_28768808/htdocs'; 
+    $full_path      = 'public_html/v3/'; 
     // Full path to folder where you are running the script, usually "/home/username/public_html"
     // (mt) servers have something like "/nfs/c01/h01/mnt/12345/domains/yourdomain.mobi/html/tools/backup2mail"
 
