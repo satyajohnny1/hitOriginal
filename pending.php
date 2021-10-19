@@ -133,10 +133,10 @@ session_start();
                                 </div>
                                 <div class="panel-body">
                                    <div class="table-responsive">
-                                    <table id="example2" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <table id="example3" class="display table" style="width: 100%; cellspacing: 0;">
                                        <thead>
                                                                 <tr>
-                                                                <th></th>
+                                                                
                                                                     <th>director</th>
                                                                     <th>Remuneration</th>
                                                                     <th>Grade</th>
@@ -158,10 +158,10 @@ session_start();
                                                     					$dir_id = $row["director_id"];
                                                     					$dir_name = $row["director_name"];
                                                     					$dir_rate = $row["director_rate"];
-                                                    					$dir_pic = $row["director_pic"];                                                    					
+                                                    					                                               					
                                                     					$dir_cr = round(($dir_rate/10000000),2);   
                                                     					echo "<tr>";
-                                                    					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='director.php?id=$dir_id' class='btn'></a></td>";
+                                                    					
                                                     					echo "<td><a href='director.php?id=$dir_id' class='btn'>$dir_name</a></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["director_rating"]."</td>";   
