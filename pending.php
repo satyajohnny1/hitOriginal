@@ -93,6 +93,71 @@ session_start();
                                     </div>
                                 </div>
                             </div></div></div>
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-white">
+                                <div class="panel-heading clearfix">
+                                   
+                                </div>
+                                <div class="panel-body">
+                                   <div class="table-responsive">
+                                    <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                                       <thead>
+                                                                <tr>
+                                                                <th></th>
+                                                                    <th>director</th>
+                                                                    <th>Remuneration</th>
+                                                                    <th>Grade</th>
+                                                                    <th>PL</th>                                                    
+                                                                    
+                                                                </tr>
+                                                            </thead>
+													<!-- director serach code -->
+                                                        
+                                                            <tbody>
+                                                             <?php 
+                                                    			include 'db.php'; 
+                                                    			$sql = "SELECT * FROM tolly_director";
+                                                    			$result = mysqli_query($conn, $sql);
+                                                    			
+                                                    			if (mysqli_num_rows($result) > 0) {
+                                                    				// output data of each row
+                                                    				while($row = mysqli_fetch_assoc($result)) {
+                                                    					$dir_id = $row["director_id"];
+                                                    					$dir_name = $row["director_name"];
+                                                    					$dir_rate = $row["director_rate"];
+                                                    					$dir_pic = $row["director_pic"];                                                    					
+                                                    					$dir_cr = round(($dir_rate/10000000),2);   
+                                                    					echo "<tr>";
+                                                    					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='director.php?id=$dir_id' class='btn'></a></td>";
+                                                    					echo "<td><a href='director.php?id=$dir_id' class='btn'>$dir_name</a></td>";
+                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
+                                                    					echo "<td>".$row["director_rating"]."</td>";   
+																		echo "<td>".$row["pl"]."</td>";                                                  					
+                                                    					                                                    					
+                                                    					echo  "</tr>"; 
+                                                    					 
+                                                    				
+                                                    				}
+                                                    			}  
+                                                    			  
+                                                                ?>
+                                                            </tbody>                                          
+                                           
+                                        </tbody>
+                                       </table>  
+                                    </div>
+                                </div>
+                            </div></div></div>
           
             </div>
             <!-- Main Wrapper -->
