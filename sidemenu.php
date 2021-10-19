@@ -39,6 +39,7 @@
                                     <li><a href="listeditors.php">Editors</a></li>
                                     <li><a href="listmisic.php">MusicDirectors</a></li>
                                     <li><a href="listcine.php">Cinematographers</a></li>
+                                    <li><a href="pending.php">PENDING</a></li>
 
                                 </ul>
                             </li>
