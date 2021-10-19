@@ -60,7 +60,30 @@ session_start();
                                                             <tbody>
                                                              <?php 
                                                     			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_actor";
+
+                                                                
+
+                                                            $sql = "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot";
+                                                                echo '<h2>'.$sql.'</h2>';
+                                                                $result = mysqli_query ( $conn, $sql );	 
+                                                                if (mysqli_num_rows ( $result ) > 0) {
+                                                                $row = mysqli_fetch_assoc($result);
+                                                                
+                                                            
+                                                                $minid = $row["max_page"];
+
+                                                                
+                                                                $minid = (round($minid/100)*100-100);
+                                                                $maxid = ($minid+100); 
+                                                                echo "<h1> Check me : $minid, $maxid </h1> ";
+                                                                }    
+
+                                                    			$sql = "SELECT * FROM `tolly_actor` WHERE 
+`actor_id` NOT IN (SELECT `aid` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) AND 
+`actor_id` NOT IN (SELECT `a2` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) AND 
+`actor_id` NOT IN (SELECT `a3` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) ";
+
+                                                                 echo '<h2>'.$sql.'</h2>';
                                                     			$result = mysqli_query($conn, $sql);
                                                     			
                                                     			if (mysqli_num_rows($result) > 0) {
@@ -110,7 +133,7 @@ session_start();
                                 </div>
                                 <div class="panel-body">
                                    <div class="table-responsive">
-                                    <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <table id="example2" class="display table" style="width: 100%; cellspacing: 0;">
                                        <thead>
                                                                 <tr>
                                                                 <th></th>
@@ -126,7 +149,7 @@ session_start();
                                                             <tbody>
                                                              <?php 
                                                     			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_director";
+                                                    			$sql = "SELECT * FROM tolly_director WHERE `director_id` NOT IN (SELECT `did` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) AND `director_id` NOT IN (SELECT `d2` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) AND `director_id` NOT IN (SELECT `d3` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid)";
                                                     			$result = mysqli_query($conn, $sql);
                                                     			
                                                     			if (mysqli_num_rows($result) > 0) {
