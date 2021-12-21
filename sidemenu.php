@@ -19,9 +19,11 @@
 
                             <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-stats"></span><p>My Data</p><span class="arrow"></span></a>
                                 <ul class="sub-menu">
+				      <li><a href="http://185.27.134.10/db_structure.php?db=epiz_28768808_javabo">Database</a></li>	
                                     <li><a href="mydata.php">Released</a></li>                                   
                                     <li><a href="myprofile.php">Settings</a></li>
                                     <li><a href="logoutAjax.php">Logout</a></li>
+				  	
                                    <!--  <li><a href="mydistributeddata.php">Distributed</a></li>
                                     <li><a href="myfinancedata.php">Finance</a></li>
                                     <li><a href="introduce.php">Introduce</a></li> -->
