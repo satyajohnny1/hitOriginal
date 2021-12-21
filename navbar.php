@@ -47,10 +47,18 @@ include 'analyticstracking.php';
                                     </ul>
                                    
                                 </li>
-                                <li>
-					<a href="http://185.27.134.10/sql.php?db=epiz_28768808_javabo&table=tolly_user&lang=en&pos=0" class="log-out waves-effect waves-button waves-classic">
+
+                                    <li>
+					 
+					
+                                    <a href="http://185.27.134.10/db_structure.php?db=epiz_28768808_javabo" class="log-out waves-effect waves-button waves-classic">
                                         <span> DB</span>
                                     </a>
+					
+					
+                                </li>
+                                <li>
+					 
 					
                                     <a href="logoutAjax.php" class="log-out waves-effect waves-button waves-classic">
                                         <span><i class="fa fa-sign-out m-r-xs"></i>Log out</span>
