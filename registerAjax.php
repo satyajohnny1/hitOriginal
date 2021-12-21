@@ -27,7 +27,7 @@ if (! empty ( $_POST ["username"] ) && ! empty ( $_POST ["password"] ) && ! empt
 	else{
 		global $status;
 		$status = 20;
-		$sql1 = "INSERT INTO tolly_user (username, password, email, status,pic,banner) VALUES ('$username', '$password', '$email', 'pending','pic/u1.jpg','$banner')";
+		$sql1 = "INSERT INTO tolly_user (username, password, email, status,pic,banner) VALUES ('$username', '$password', '$email', 'active','pic/u1.jpg','$banner')";
 		$t = mysqli_query ( $conn, $sql1 );
 		//echo $t;
 		if ($t) {
