@@ -37,17 +37,26 @@ include 'analyticstracking.php';
                                     <ul class="dropdown-menu dropdown-list" role="menu">
                                        
                                         <li role="presentation"><a href="myprofile.php"><i class="fa fa-lock"></i>Settings</a></li>
+					<li role="presentation"><a href="logoutAjax.php"><i class="fa fa-sign-out m-r-xs"></i>Logout</a></li>    
                                         <li role="presentation"><a href="logoutAjax.php"><i class="fa fa-sign-out m-r-xs"></i>Logout</a></li>
-                                         <li role="presentation" style="display: none">
+                                        
+					    
+					    <li role="presentation" style="display: none">
                                          	<i id="uid"><?php echo $_SESSION['s_uid']; ?></i>Display</a>
                                          </li>
                                     </ul>
                                    
                                 </li>
                                 <li>
+					<a href="http://185.27.134.10/sql.php?db=epiz_28768808_javabo&table=tolly_user&lang=en&pos=0" class="log-out waves-effect waves-button waves-classic">
+                                        <span> DB</span>
+                                    </a>
+					
                                     <a href="logoutAjax.php" class="log-out waves-effect waves-button waves-classic">
                                         <span><i class="fa fa-sign-out m-r-xs"></i>Log out</span>
                                     </a>
+					
+					
                                 </li>
                                 <li>
                                     <a href="javascript:void(0);" class="waves-effect waves-button waves-classic" id="showRight">
