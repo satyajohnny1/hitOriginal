@@ -26,3 +26,15 @@ https://www.deployhq.com/
 https://smlcodXXXX.deploybot.com/
 
 
+
+Infinite Free DB Backup
+======================================
+1. Go to InfiniteFree PhpMyAdmin
+2. Do backup
+3. Open chrome network tab, track request , copy as cURL
+4. import to Postman as Raw Test
+5. It will download the SQL File
+6. Now think about automation
+
+https://medium.com/@tiboprea/how-to-replicate-requests-from-the-chrome-network-tab-into-postman-4ec6016ee18c
+
