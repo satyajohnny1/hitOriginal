@@ -23,7 +23,10 @@ Installation Changes
 AutoDeploy
 ======================================
 https://www.deployhq.com/
-https://smlcodXXXX.deploybot.com/
+
+https://www.deploybot.com/
+
+https://launchdeck.io/
 
 
 
