@@ -27,7 +27,7 @@ $dbname = "hit2";
 
 
 $servername = "sql301.epizy.com";
-$dbname = "epiz_32875882_test";
+$dbname = "epiz_32875882_javabo";
 $username = "epiz_32875882";
 $password = "AF6tE0XjpZUX";
 
