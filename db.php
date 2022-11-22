@@ -40,5 +40,5 @@ if (!$conn) {
 	echo "<h1> Database Connection failed. </h1>";
     die("Connection failed: " . mysqli_connect_error());
 }else{
-	
+	//echo "<h1> Connection Success. </h1>";
 }
