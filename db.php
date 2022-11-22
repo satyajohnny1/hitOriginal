@@ -26,10 +26,10 @@ $dbname = "hit2";
 
 
 
-$servername = "sql105.epizy.com";
-$dbname = "epiz_28768808_javabo";
-$username = "epiz_28768808";
-$password = "jEWDSrJkJi15f";
+$servername = "sql301.epizy.com";
+$dbname = "epiz_32875882_test";
+$username = "epiz_32875882";
+$password = "AF6tE0XjpZUX";
 
 
 
