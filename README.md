@@ -22,6 +22,8 @@ Installation Changes
 
 AutoDeploy
 ======================================
+https://satyajohnny1.deployhq.com/
+
 https://www.deployhq.com/
 
 https://www.deploybot.com/
