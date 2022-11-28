@@ -18,6 +18,9 @@ Installation Changes
 2. Change db.php for DB Connections 
 
 
+Theme
+===========
+FlatLab - Bootstrap 4 Responsive Admin Template
 
 
 AutoDeploy
