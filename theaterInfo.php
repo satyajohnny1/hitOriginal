@@ -46,7 +46,7 @@ $(document).ready(function(){
   function load_data(type, category_id = '')
   {
     $.ajax({
-      url:"load_theaterInfo.php",
+      url:"theaterInfoAjax.php",
       method:"POST",
       data:{type:type, category_id:category_id},
       dataType:"json",
