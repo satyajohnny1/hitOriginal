@@ -21,7 +21,8 @@
                                 <ul class="sub-menu">
 				      <li><a href="http://185.27.134.10/db_structure.php?db=epiz_28768808_javabo">Database</a></li>	
                                     <li><a href="mydata.php">Released</a></li>                                   
-                                    <li><a href="myprofile.php">Settings</a></li>
+                                    <li><a href="myprofile.php">Settings</a></li>                                  
+                                    <li><a href="thInfo.php">TheatreInfo</a></li>
                                     <li><a href="logoutAjax.php">Logout</a></li>
 				  	
                                    <!--  <li><a href="mydistributeddata.php">Distributed</a></li>
