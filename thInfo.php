@@ -183,8 +183,8 @@ h3 {
 
 
                                         $thStr = ",".$thId.",";
-                                        $thFir = substr($list25, 0, strpos($list25, ','));
-                                        echo "thId:".$thId.", thFir:".$thFir;
+                                      //  $thFir = substr($list25, 0, strpos($list25, ','));
+                                       // echo "thId:".$thId.", thFir:".$thFir;
 
                                         if ( (strlen(stristr($list25,$thStr))>0) ||  (substr($list25, 0, strpos($list25, ',')) == $thId) ){
                                             array_push($array25, $rid);
@@ -214,14 +214,31 @@ h3 {
                                        if ( (strlen(stristr($list300,$thStr))>0) ||  (substr($list300, 0, strpos($list300, ',')) == $thId)  ||  ($list300 == $thId) ){
                                             array_push($array300, $rid);
                                         }
-                                        if (strlen(stristr($maxlist,$thId))>0){
+                                        if ($maxlist==$thId){
                                             array_push($arraymax, $rid);
                                         }
                                         
                                 		}
                                 	}
 
- echo "<hr>";
+
+                                //Remove Duplicates From Arrays
+
+                                //1.Remove 50days Cents from 25Centrs
+                                $array25 = array_diff($array25,$array50);
+                                $array50 = array_diff($array50,$array75);
+                                $array75 = array_diff($array75,$array100);
+                                $array100 = array_diff($array100,$array150);
+                                $array150 = array_diff($array150,$array175);
+                                $array175 = array_diff($array175,$array200);
+                                $array200 = array_diff($array200,$array250);
+                                $array250 = array_diff($array250,$array275);
+                                
+
+
+
+
+                                echo "<hr>";
                                 echo "<h2>Max Days Movies List</h2>";
                                 sort($arraymax);
                                 $rowCount = 0;
@@ -239,6 +256,7 @@ h3 {
 
                                     $did = $row['did'];
                                     $dname = $row['dname'];
+                                    $rating = $row['result'];
 
 
                                     $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
@@ -252,18 +270,25 @@ h3 {
                                     echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
                                    	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
                                     echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo "<td><code> <b>".$rating." </b></code> </td>  ";
                                     echo "<td><code> <b>".$maxdays." Days </b></code> </td> </tr> ";
+                                    
                 
                                    
                                     // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
                                 }
                                  echo '</table>';
 
-/*
+
+
+
+            
                                 echo "<hr>";
                                 echo "<h2>25 Days Movies List</h2>";
                                 sort($array25);
+                              //  echo '<pre>'; print_r($array50); echo '</pre>';
                                 $rowCount = 0;
+                                 echo "<table class=\"table\">";
                                 foreach ($array25 as $rid) {
                                     $sql = "SELECT * FROM `tolly_ready_for_shoot` where rid = ".$rid;
                                     $result = mysqli_query($conn, $sql);
@@ -277,6 +302,7 @@ h3 {
 
                                     $did = $row['did'];
                                     $dname = $row['dname'];
+                                    $rating = $row['result'];
 
 
                                     $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
@@ -285,15 +311,19 @@ h3 {
                                     $maxdays = $row['max_days'];
                                     $rowCount++;
 
+                                if($maxdays<50){
                                     echo "<tr>";
                                     echo "<td>".$rowCount."</td>";
                                     echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
                                    	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
                                     echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo "<td><code> <b>".$rating." </b></code> </td>  ";
                                     echo '</tr>';
+                                }
                                     // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
                                 }
-                                */
+                                 echo '</table>';
+            
 
 
                                 echo "<hr>";
@@ -315,6 +345,7 @@ h3 {
 
                                     $did = $row['did'];
                                     $dname = $row['dname'];
+                                    $rating = $row['result'];
 
 
                                     $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
@@ -328,10 +359,13 @@ h3 {
                                     echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
                                    	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
                                     echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo "<td><code> <b>".$rating." </b></code> </td>  ";
                                     echo '</tr>';
                                     // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
                                 }
                                  echo '</table>';
+
+
 
 
                                 echo "<hr>";
@@ -352,6 +386,7 @@ h3 {
 
                                     $did = $row['did'];
                                     $dname = $row['dname'];
+                                    $rating = $row['result'];
 
 
                                     $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
@@ -365,6 +400,7 @@ h3 {
                                     echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
                                    	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
                                     echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo "<td><code> <b>".$rating." </b></code> </td>  ";
                                     echo '</tr>';
                                     // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
                                 }
@@ -391,6 +427,7 @@ h3 {
 
                                     $did = $row['did'];
                                     $dname = $row['dname'];
+                                    $rating = $row['result'];
 
 
                                     $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
@@ -404,6 +441,7 @@ h3 {
                                     echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
                                    	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
                                     echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo "<td><code> <b>".$rating." </b></code> </td>  ";
                                     echo '</tr>';
                                     // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
                                 }
@@ -432,6 +470,7 @@ h3 {
 
                                     $did = $row['did'];
                                     $dname = $row['dname'];
+                                    $rating = $row['result'];
 
 
                                     $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
@@ -445,6 +484,7 @@ h3 {
                                     echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
                                    	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
                                     echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo "<td><code> <b>".$rating." </b></code> </td>  ";
                                     echo '</tr>';
                                     // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
                                 }
@@ -472,6 +512,7 @@ h3 {
 
                                     $did = $row['did'];
                                     $dname = $row['dname'];
+                                    $rating = $row['result'];
 
 
                                     $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
@@ -485,6 +526,7 @@ h3 {
                                     echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
                                    	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
                                     echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo "<td><code> <b>".$rating." </b></code> </td>  ";
                                     echo '</tr>';
                                     // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
                                 }
@@ -508,6 +550,7 @@ h3 {
 
                                     $did = $row['did'];
                                     $dname = $row['dname'];
+                                    $rating = $row['result'];
 
 
                                     $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
@@ -521,6 +564,7 @@ h3 {
                                     echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
                                    	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
                                     echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo "<td><code> <b>".$rating." </b></code> </td>  ";
                                     echo '</tr>';
                                     // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
                                 }
