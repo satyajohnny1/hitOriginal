@@ -6,7 +6,12 @@ session_start();
 <html>
 
 <head>
+
    <?php include "css.php"; ?>
+
+   <!-- Select2 CSS --> 
+
+
    <style>
 h1 {
   color: white;
@@ -15,9 +20,14 @@ h1 {
 }
 
 h2 {
-  text-shadow: 2px 2px 5px red;
+  text-shadow: 2px 2px 5px green;
 }
 
+h3 {
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  box-shadow: 1px 1px blue;
+}
 
 
 </style>
@@ -43,11 +53,7 @@ h2 {
             </div>
             <!-- Page Sidebar -->
 		    <div class="page-inner">
-            <div class="page-title">
-                <h3>Actors List</h3>                
-            </div>
-            
-          
+    
             
             <div id="main-wrapper" >
   <div class="row">
@@ -80,7 +86,7 @@ h2 {
                                    <form method="POST" action="">
 		
 		<label>Select a Theator</label>
-		<select name="theater">
+		<select name="theater" id='selUser' style='width: 400px;'>
 			<?php // use a while loop to fetch data
    // from the $all_categories variable
    // and individually display as an option
@@ -96,10 +102,13 @@ h2 {
 // While loop must be terminated
 ?>
 		</select>
-		<br>
-		<input type="submit" value="submit" name="submit">
+	
+		<button type="submit" class="btn btn-success"><i class="fa fa-eye"></i> View </button>
 	</form>
 
+
+<br/>
+<div id='result'></div>
 
     <?php
     if(isset($_POST["theater"])){
@@ -129,14 +138,14 @@ h2 {
                                        
                                            // echo "<br> Theater ID : ".$row['id'];
                                            //capacity - 
-                                           echo "Id: ".$row['id']."</br> <h2 style='text-align:center;'>".$row['city']."[".$row['capacity']."]</h2>";
+                                           echo "<h3 style='text-align:center;'>Id: ".$row['id'].", ".$row['city']."[Seats : ".$row['capacity']."]</h3>";
                                             echo "<h1>".$row['name']."</h1>";
                                             
 
                                     $sql = "SELECT * FROM `centers`";
                                 	$result = mysqli_query($conn, $sql);                                                      			
 
-                                    $thStr = $thId.",";
+                                   
                                     $array25 = array();
                                     $array50 = array();
                                     $array75 = array();
@@ -173,47 +182,87 @@ h2 {
 
 
 
-
+                                        $thStr = ",".$thId.",";
+                                        $thBfr = ",".$thId;
                                         
-                                        if (strlen(stristr($list25,$thStr))>0){
+                                        if ( strlen(stristr($list25,$thStr))>0 ){
                                             array_push($array25, $rid);
                                         }
-                                        if (strlen(stristr($list50,$thStr))>0){
+                    
+                                        if ( strlen(stristr($list50,$thStr))>0 ){
                                             array_push($array50, $rid);
-                                        }
-                                        if (strlen(stristr($list75,$thStr))>0){
+                                        } 
+                                        if ( strlen(stristr($list75,$thStr))>0 ){
                                             array_push($array75, $rid);
                                         }
-                                        if (strlen(stristr($list100,$thStr))>0){
+                                        if ( strlen(stristr($list100,$thStr))>0  ){
                                             array_push($array100, $rid);
                                         }
-                                        if (strlen(stristr($list150,$thStr))>0){
+                                         if ( strlen(stristr($list150,$thStr))>0 ){
                                             array_push($array150, $rid);
                                         }
-                                        if (strlen(stristr($list175,$thStr))>0){
+                                         if ( strlen(stristr($list175,$thStr))>0 ){
                                             array_push($array175, $rid);
                                         }
-                                        if (strlen(stristr($list200,$thStr))>0){
+                                         if ( strlen(stristr($list200,$thStr))>0 ){
                                             array_push($array200, $rid);
                                         }
-                                        if (strlen(stristr($list250,$thStr))>0){
+                                        if ( strlen(stristr($list250,$thStr))>0 ){
                                             array_push($array250, $rid);
                                         }
-                                        if (strlen(stristr($list300,$thStr))>0){
+                                         if ( strlen(stristr($list300,$thStr))>0 ){
                                             array_push($array300, $rid);
                                         }
-                                        if (strlen(stristr($maxlist,$thStr))>0){
+                                        if (strlen(stristr($maxlist,$thId))>0){
                                             array_push($arraymax, $rid);
                                         }
                                         
                                 		}
                                 	}
 
+ echo "<hr>";
+                                echo "<h2>Max Days Movies List</h2>";
+                                sort($arraymax);
+                                $rowCount = 0;
+                                 echo "<table class=\"table\">";
+                                foreach ($arraymax as $rid) {
+                                    $sql = "SELECT * FROM `tolly_ready_for_shoot` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                   
 
+                                    $title = $row['title'];
+
+                                    $aid = $row['aid'];
+                                    $aname =$row['aname'];
+
+                                    $did = $row['did'];
+                                    $dname = $row['dname'];
+
+
+                                    $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                    $maxdays = $row['max_days'];
+                                    $rowCount++;
+
+                                   
+                                    echo "<tr><td>".$rowCount."</td>";
+                                    echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
+                                   	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
+                                    echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo "<td><code> <b>".$maxdays." Days </b></code> </td> </tr> ";
+                
+                                   
+                                    // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
+                                }
+                                 echo '</table>';
+
+/*
                                 echo "<hr>";
-                                echo "25 Days Movies List ************************** START";
+                                echo "<h2>25 Days Movies List</h2>";
                                 sort($array25);
-
+                                $rowCount = 0;
                                 foreach ($array25 as $rid) {
                                     $sql = "SELECT * FROM `tolly_ready_for_shoot` where rid = ".$rid;
                                     $result = mysqli_query($conn, $sql);
@@ -222,32 +271,274 @@ h2 {
 
                                     $title = $row['title'];
 
-                                    $actId = $row['aid'];
-                                    $actName =$row['aname'];
+                                    $aid = $row['aid'];
+                                    $aname =$row['aname'];
 
-                                    $dirId = $row['did'];
-                                    $dirName = $row['dname'];
+                                    $did = $row['did'];
+                                    $dname = $row['dname'];
 
 
                                     $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
                                     $result = mysqli_query($conn, $sql);
                                     $row = mysqli_fetch_assoc($result);
                                     $maxdays = $row['max_days'];
+                                    $rowCount++;
 
-                                    echo $title.", ".$actId.", ".$actName.", ".$dirId.", ".$dirName.", ".$maxdays;
-
-
+                                    echo "<tr>";
+                                    echo "<td>".$rowCount."</td>";
+                                    echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
+                                   	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
+                                    echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo '</tr>';
+                                    // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
                                 }
+                                */
+
+
+                                echo "<hr>";
+                                echo "<h2>50 Days Movies List</h2>";
+                                sort($array50);
+                              //  echo '<pre>'; print_r($array50); echo '</pre>';
+                                $rowCount = 0;
+                                 echo "<table class=\"table\">";
+                                foreach ($array50 as $rid) {
+                                    $sql = "SELECT * FROM `tolly_ready_for_shoot` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                   
+
+                                    $title = $row['title'];
+
+                                    $aid = $row['aid'];
+                                    $aname =$row['aname'];
+
+                                    $did = $row['did'];
+                                    $dname = $row['dname'];
+
+
+                                    $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                    $maxdays = $row['max_days'];
+                                    $rowCount++;
+
+                                    echo "<tr>";
+                                    echo "<td>".$rowCount."</td>";
+                                    echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
+                                   	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
+                                    echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo '</tr>';
+                                    // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
+                                }
+                                 echo '</table>';
+
+
+                                echo "<hr>";
+                                echo "<h2>75 Days Movies List</h2>";
+                                sort($array75);
+                                $rowCount = 0;
+                                 echo "<table class=\"table\">";
+                                foreach ($array75 as $rid) {
+                                    $sql = "SELECT * FROM `tolly_ready_for_shoot` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                   
+
+                                    $title = $row['title'];
+
+                                    $aid = $row['aid'];
+                                    $aname =$row['aname'];
+
+                                    $did = $row['did'];
+                                    $dname = $row['dname'];
+
+
+                                    $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                    $maxdays = $row['max_days'];
+                                    $rowCount++;
+
+                                    echo "<tr>";
+                                    echo "<td>".$rowCount."</td>";
+                                    echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
+                                   	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
+                                    echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo '</tr>';
+                                    // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
+                                }
+                                 echo '</table>';
 
 
 
 
-                                echo "25 Days Movies List ************************** END";
+                                echo "<hr>";
+                                echo "<h2>100 Days Movies List</h2>";
+                                sort($array100);
+                                $rowCount = 0;
+                                 echo "<table class=\"table\">";
+                                foreach ($array100 as $rid) {
+                                    $sql = "SELECT * FROM `tolly_ready_for_shoot` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                   
+
+                                    $title = $row['title'];
+
+                                    $aid = $row['aid'];
+                                    $aname =$row['aname'];
+
+                                    $did = $row['did'];
+                                    $dname = $row['dname'];
+
+
+                                    $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                    $maxdays = $row['max_days'];
+                                    $rowCount++;
+
+                                    echo "<tr>";
+                                    echo "<td>".$rowCount."</td>";
+                                    echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
+                                   	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
+                                    echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo '</tr>';
+                                    // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
+                                }
+                                 echo '</table>';
+
+
+                            
 
 
 
+                                echo "<hr>";
+                                echo "<h2>150 Days Movies List</h2>";
+                                sort($array150);
+                                $rowCount = 0;
+                                 echo "<table class=\"table\">";
+                                foreach ($array150 as $rid) {
+                                    $sql = "SELECT * FROM `tolly_ready_for_shoot` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                   
+
+                                    $title = $row['title'];
+
+                                    $aid = $row['aid'];
+                                    $aname =$row['aname'];
+
+                                    $did = $row['did'];
+                                    $dname = $row['dname'];
+
+
+                                    $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                    $maxdays = $row['max_days'];
+                                    $rowCount++;
+
+                                    echo "<tr>";
+                                    echo "<td>".$rowCount."</td>";
+                                    echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
+                                   	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
+                                    echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo '</tr>';
+                                    // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
+                                }
+                                 echo '</table>';
+
+
+
+
+
+                                echo "<hr>";
+                                echo "<h2>175 Days Movies List</h2>";
+                                sort($array175);
+                                $rowCount = 0;
+                                 echo "<table class=\"table\">";
+                                foreach ($array175 as $rid) {
+                                    $sql = "SELECT * FROM `tolly_ready_for_shoot` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                   
+
+                                    $title = $row['title'];
+
+                                    $aid = $row['aid'];
+                                    $aname =$row['aname'];
+
+                                    $did = $row['did'];
+                                    $dname = $row['dname'];
+
+
+                                    $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                    $maxdays = $row['max_days'];
+                                    $rowCount++;
+
+                                    echo "<tr>";
+                                    echo "<td>".$rowCount."</td>";
+                                    echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
+                                   	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
+                                    echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo '</tr>';
+                                    // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
+                                }
+                                 echo '</table>';
 
                                        
+                                echo "<hr>";
+                                echo "<h2>200 Days Movies List</h2>";
+                                sort($array200);
+                                $rowCount = 0;
+                                foreach ($array200 as $rid) {
+                                    $sql = "SELECT * FROM `tolly_ready_for_shoot` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                   
+
+                                    $title = $row['title'];
+
+                                    $aid = $row['aid'];
+                                    $aname =$row['aname'];
+
+                                    $did = $row['did'];
+                                    $dname = $row['dname'];
+
+
+                                    $sql = "SELECT * FROM `tolly_release` where rid = ".$rid;
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_assoc($result);
+                                    $maxdays = $row['max_days'];
+                                    $rowCount++;
+
+                                    echo "<tr>";
+                                    echo "<td>".$rowCount."</td>";
+                                    echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
+                                   	echo "<td><a href=\"actor.php?name=".$aname."&id=".$aid."\" >". $aname."</a></td>";
+                                    echo "<td><a href=\"director.php?name=".$dname."&id=".$did."\" >". $dname."</a></td>";
+                                    echo '</tr>';
+                                    // echo $title.", ".$aid.", ".$aname.", ".$did.", ".$dname.", ".$maxdays;
+                                }
+                                 echo '</table>';
+
+
+                                    $array25 = array();
+                                    $array50 = array();
+                                    $array75 = array();
+                                    $array100 = array();
+                                    $array150 = array();
+                                    $array175 = array();
+                                    $array200 = array();
+                                    $array250 = array();
+                                    $array300 = array();
+                                    $arraymax = array(); 
+                
+                               
+
                                    }
 
                                    ?>
@@ -289,10 +580,23 @@ h2 {
 			  "showMethod": "fadeIn",
 			  "hideMethod": "fadeOut"
 			}
+ 
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
 
-	 
-	
+$(document).ready(function(){
+ 
+    // Initialize select2
+    $("#selUser").select2();
+});
+
+
+
 	</script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
+<!-- Select2 JS --> 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
 </body>
 
