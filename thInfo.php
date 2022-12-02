@@ -311,7 +311,7 @@ h3 {
                                     $maxdays = $row['max_days'];
                                     $rowCount++;
 
-                                if($maxdays<50){
+                                if($maxdays<74){
                                     echo "<tr>";
                                     echo "<td>".$rowCount."</td>";
                                     echo "<td><code><b><a href=\"movie.php?rid=".$rid."\" target=\"_blank\">". $title."</a></b></code></td>";
