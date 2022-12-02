@@ -183,34 +183,35 @@ h3 {
 
 
                                         $thStr = ",".$thId.",";
-                                        $thBfr = ",".$thId;
-                                        
-                                        if ( strlen(stristr($list25,$thStr))>0 ){
+                                        $thFir = substr($list25, 0, strpos($list25, ','));
+                                        echo "thId:".$thId.", thFir:".$thFir;
+
+                                        if ( (strlen(stristr($list25,$thStr))>0) ||  (substr($list25, 0, strpos($list25, ',')) == $thId) ){
                                             array_push($array25, $rid);
                                         }
                     
-                                        if ( strlen(stristr($list50,$thStr))>0 ){
+                                        if ( (strlen(stristr($list50,$thStr))>0) ||  (substr($list50, 0, strpos($list50, ',')) == $thId)  ||  ($list50 == $thId) ){
                                             array_push($array50, $rid);
                                         } 
-                                        if ( strlen(stristr($list75,$thStr))>0 ){
+                                        if ( (strlen(stristr($list75,$thStr))>0) ||  (substr($list75, 0, strpos($list75, ',')) == $thId) ||  ($list75 == $thId) ){
                                             array_push($array75, $rid);
                                         }
-                                        if ( strlen(stristr($list100,$thStr))>0  ){
+                                        if ( (strlen(stristr($list100,$thStr))>0) ||  (substr($list100, 0, strpos($list100, ',')) == $thId) ||  ($list100 == $thId) ){
                                             array_push($array100, $rid);
                                         }
-                                         if ( strlen(stristr($list150,$thStr))>0 ){
+                                         if ( (strlen(stristr($list150,$thStr))>0) ||  (substr($list150, 0, strpos($list150, ',')) == $thId) ||  ($list150 == $thId) ){
                                             array_push($array150, $rid);
                                         }
-                                         if ( strlen(stristr($list175,$thStr))>0 ){
+                                        if ( (strlen(stristr($list175,$thStr))>0) ||  (substr($list175, 0, strpos($list175, ',')) == $thId)  ||  ($list175 == $thId) ){
                                             array_push($array175, $rid);
                                         }
-                                         if ( strlen(stristr($list200,$thStr))>0 ){
+                                         if ( (strlen(stristr($list200,$thStr))>0) ||  (substr($list200, 0, strpos($list200, ',')) == $thId) ||  ($list200 == $thId) ){
                                             array_push($array200, $rid);
                                         }
-                                        if ( strlen(stristr($list250,$thStr))>0 ){
+                                        if ( (strlen(stristr($list250,$thStr))>0) ||  (substr($list250, 0, strpos($list250, ',')) == $thId) ||  ($list250 == $thId) ){
                                             array_push($array250, $rid);
                                         }
-                                         if ( strlen(stristr($list300,$thStr))>0 ){
+                                       if ( (strlen(stristr($list300,$thStr))>0) ||  (substr($list300, 0, strpos($list300, ',')) == $thId)  ||  ($list300 == $thId) ){
                                             array_push($array300, $rid);
                                         }
                                         if (strlen(stristr($maxlist,$thId))>0){
