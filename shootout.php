@@ -757,9 +757,13 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 5.5) + ($wk1_cent / 3.25)) / 2 );
 		
 		$d25_cent = round ( (($wk2_cent / 13.8) + ($wk2_cent / 7)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 500 );
+		}
+
 		$d50_cent = round ( (($d25_cent / 15) + ($d25_cent / 8)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 425, 499 );
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		if ($d50_cent > 0) {
 			$d50_cent = 0;
@@ -811,9 +815,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 8.5) + ($wk1_cent / 3.25)) / 2 );
 		
 		$d25_cent = round ( (($wk2_cent / 9.8) + ($wk2_cent / 5)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 500 );
+		}
+
+
 		$d50_cent = round ( (($d25_cent / 17) + ($d25_cent / 6)) / 2 ) - 1;
-		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 425, 499 );
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		if ($d50_cent < 0) {
 			$d50_cent = 0;
@@ -865,10 +874,15 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 2.5) + ($wk1_cent / 2.25)) / 2 );
 		
 		$d25_cent = 1 + round ( (($wk2_cent / 3.8) + ($wk2_cent / 3)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 500 );
+		}
+
+        
 		$d50_cent = round ( (($d25_cent / 5) + ($d25_cent / 4)) / 2 );
 		
-		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 5, 499 );
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		
 		$d75_cent = round ( (($d50_cent / 6) + ($d50_cent / 7)) / 2 );
@@ -917,10 +931,15 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 3.95) + ($wk1_cent / 2)) / 2 );
 		
 		$d25_cent = 1 + round ( (($wk2_cent / 3.8) + ($wk2_cent / 3)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 500 );
+		}
+
+        
 		$d50_cent = round ( (($d25_cent / 6.7) + ($d25_cent / 3.25)) / 2 );
 		
-		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 2, 99 );
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		
 		$d75_cent = round ( (($d50_cent / 7) + ($d50_cent / 4.5)) / 2 );
@@ -968,9 +987,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 1.75) + ($wk1_cent / 1.65)) / 2 );
 		
 		$d25_cent = 2 + round ( (($wk2_cent / 2.55) + ($wk2_cent / 2.55)) / 2 );
-		$d50_cent = 0 + round ( (($d25_cent / 3.3) + ($d25_cent / 2.75)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = round ( (rand ( 1, 300 ) + rand ( 1, 300 ))/2) ;
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 500 );
+		}
+
+        
+		$d50_cent = 0 + round ( (($d25_cent / 3) + ($d25_cent / 2.75)) / 2 );
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		
 		$d75_cent = round ( (($d50_cent / 4.25) + ($d50_cent / 3.75)) / 2 );
@@ -1020,9 +1044,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 1.25) + ($wk1_cent / 1.35)) / 2 );
 		
 		$d25_cent = 4 + round ( (($wk2_cent / 2.35) + ($wk2_cent / 1.75)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 600 );
+		}
+
+        
 		$d50_cent = 1 + round ( (($d25_cent / 3) + ($d25_cent / 1.75)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = round ( (rand ( 1, 350 ) + rand ( 1, 350 ))/2) ;
+        if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		
 		$d75_cent =  round ( (($d50_cent / 5.5) + ($d50_cent / 3.75)) / 2 );
@@ -1070,9 +1099,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 1.10) + ($wk1_cent / 1.20) + ($wk1_cent / 1.30)) / 3 );
 		
 		$d25_cent = 15 + round ( (($wk2_cent / 2.25) + ($wk2_cent / 1.55)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 700 );
+		}
+
+        
 		$d50_cent = 1 + round ( (($d25_cent / 2.85) + ($d25_cent / 1.55)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = round ( (rand ( 2, 399 ) + rand ( 2, 349 ))/2) ;
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 90, 310 );
 		}
 		
 		$d75_cent = 1 + round ( (($d50_cent / 3.25) + ($d50_cent / 3.5)) / 2 );
@@ -1121,9 +1155,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 1.10) + ($wk1_cent / 1.20) + ($wk1_cent / 1.30)) / 3 );
 		
 		$d25_cent = 20 + round ( (($wk2_cent / 2.15) + ($wk2_cent / 1.25)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 800 );
+		}
+
+        
 		$d50_cent = 15 + round ( (($d25_cent / 2.5) + ($d25_cent / 1.35)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = round ( (rand ( 25, 399 ) + rand (48, 399 ))/2) ;
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 100, 335 );
 		}
 		
 		$d75_cent = 4 + round ( (($d50_cent / 3) + ($d50_cent / 3.25)) / 2 );
@@ -1171,9 +1210,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 1.1) + ($wk1_cent / 1.20) + ($wk1_cent / 1.2)) / 3 );
 		
 		$d25_cent = 25 + round ( (($wk2_cent / 2.15) + ($wk2_cent / 1.15)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 900 );
+		}
+
+        
 		$d50_cent = 18 + round ( (($d25_cent / 2) + ($d25_cent / 1.25)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = round ( (rand ( 125, 399 ) + rand (148, 399 ))/2) ;
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 350 );
 		}
 		
 		$d75_cent = 26 + round ( (($d50_cent / 2.5) + ($d50_cent / 3.25)) / 2 );
