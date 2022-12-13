@@ -64,6 +64,7 @@ if (mysqli_num_rows($result) > 0) {
 
  
 	echo "<h1><a href=\"readyforrun.php\"> Go Back </a>";
+        echo "<h1><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>Go to Movie</a></h1>";
  
  
 if($conn!=null){
