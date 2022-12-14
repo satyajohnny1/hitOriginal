@@ -47,6 +47,12 @@ Infinite Free DB Backup
 https://medium.com/@tiboprea/how-to-replicate-requests-from-the-chrome-network-tab-into-postman-4ec6016ee18c
 
 
+# Tools
+
+1. Excel to SQL file Conversion
+https://sqlizer.io/
+
+
 
 # Deployment
 
