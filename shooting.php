@@ -635,7 +635,7 @@ if (mysqli_num_rows ( $result ) > 0) {
                                             </div>
                                              <ul class="pager wizard">
                                                     <li class="previous" id="s5_prv_s4" style="display: none;"><a href="#" class="btn btn-default">Previous</a></li>
-                                                    <li class="next" style="display: none;" id="lastnext" ><a href="<?php echo 'shootout.php?rid='.$sid.'&uid='.$uid?>" class="btn btn-default">Shooting Completed</a></li>
+                                                    <li class="next"  id="lastnext" ><a href="<?php echo 'shootout.php?rid='.$sid.'&uid='.$uid?>" class="btn btn-default">Shooting Completed</a></li>
                                                 </ul>
                                         </div>
                                         
