@@ -1,7 +1,6 @@
 
 TRUNCATE TABLE tolly_actor;
 
-
 INSERT INTO tolly_actor VALUES
     (1,'Chiranjeevi',250000000,'A','poster/Chiranjeevi.png','available',10),
     (2,'Balakrishna',100000000,'A','poster/Balakrishna.png','available',10),
@@ -86,3 +85,73 @@ INSERT INTO tolly_actor VALUES
     (89,'Vadde Naveen',2500000,'C','poster/VaddeNaveen.png','available',7),
     (90,'Sree Vishnu',7000000,'B','poster/SreeVishnu.png','available',8.5),
     (91,'Sudigali Sudeer',4000000,'C','poster/SudigaliSudeer.png','available',7);
+    
+    
+    # ===================
+    
+    TRUNCATE TABLE tolly_actress;
+
+    INSERT INTO tolly_actress VALUES
+    (51,'Deepika Padukone',220000000,'A','pic/u1.jpg','available',11),
+    (40,'Alia Bhatt',200000000,'A','pic/u1.jpg','available',11),
+    (8,'Nayanathara',180000000,'A','pic/u1.jpg','available',11),
+    (58,'Shraddha Kapoor',150000000,'A','pic/u1.jpg','available',10),
+    (62,'Aishwarya Rai Bachchan',135000000,'A','pic/u1.jpg','available',10),
+    (48,'Katrina Kaif',125000000,'A','pic/u1.jpg','available',11),
+    (60,'Disha Patani',120000000,'A','pic/u1.jpg','available',10),
+    (52,'Kriti Sanon',110000000,'A','pic/u1.jpg','available',11),
+    (1,'Samantha',100000000,'A','pic/u1.jpg','available',11),
+    (27,'Pooja Hegde',100000000,'A','pic/u1.jpg','available',11),
+    (57,'Anushka Sharma',100000000,'A','pic/u1.jpg','available',10),
+    (61,'Janhvi Kapoor	',100000000,'A','pic/u1.jpg','available',10),
+    (56,'Priyanka Chopra',80000000,'A','pic/u1.jpg','available',10),
+    (28,'Rashmika Mandanna',80000000,'A','pic/u1.jpg','available',11),
+    (55,'Kangana Ranaut',70000000,'A','pic/u1.jpg','available',10),
+    (43,'Jacqueline Fernandez',70000000,'A','pic/u1.jpg','available',11),
+    (33,'Kiara Advani',60000000,'A','pic/u1.jpg','available',11),
+    (47,'Amy Jackson',60000000,'A','pic/u1.jpg','available',11),
+    (59,'Sara Ali Khan',50000000,'A','pic/u1.jpg','available',10),
+    (63,'Sonam Kapoor',50000000,'A','pic/u1.jpg','available',10),
+    (53,'Kriti Shetty',40000000,'A','pic/u1.jpg','available',11),
+    (2,'Kajal',30000000,'A','pic/u1.jpg','available',11),
+    (4,'Anushka',30000000,'A','pic/u1.jpg','available',12),
+    (3,'Rakul preeth sigh',30000000,'A','pic/u1.jpg','available',11),
+    (32,'Sai Pallavi',25000000,'A','pic/u1.jpg','available',11),
+    (49,'Ananya Panday',25000000,'A','pic/u1.jpg','available',11),
+    (21,'Keerthy Suresh',20000000,'A','pic/u1.jpg','available',11),
+    (10,'Sruthi haasan',12000000,'B','pic/u1.jpg','available',8.5),
+    (14,'Yami gowtham',10000000,'C','pic/u1.jpg','available',7),
+    (6,'Trisha',7000000,'B','pic/u1.jpg','available',8.5),
+    (46,'Samyukta Menon',7000000,'B','pic/u1.jpg','available',8.5),
+    (7,'Sreeya',5000000,'B','pic/u1.jpg','available',8.5),
+    (13,'Illiyana',5000000,'B','pic/u1.jpg','available',8.5),
+    (5,'Thammana',4000000,'B','pic/u1.jpg','available',8.5),
+    (22,'Anupama Parameshwaran',3500000,'B','pic/u1.jpg','available',8.5),
+    (50,'Varalaxmi Sarathkumar',3500000,'B','pic/u1.jpg','available',8.5),
+    (45,'Aditi Rao Hydari',6000000,'B','pic/u1.jpg','available',8.5),
+    (54,'Neha Shetty',5000000,'B','pic/u1.jpg','available',8.5),
+    (15,'Hansika',3000000,'C','pic/u1.jpg','available',7),
+    (37,'Rashmi Gautam',3000000,'C','pic/u1.jpg','available',7),
+    (31,'Raashi Khanna',2500000,'B','pic/u1.jpg','available',8.5),
+    (12,'Radika aapte',7500000,'C','pic/u1.jpg','available',7),
+    (39,'Priya Anand',2500000,'C','pic/u1.jpg','available',7),
+    (41,'Meenakshi Chaudhary',2400000,'B','pic/u1.jpg','available',8.5),
+    (9,'Nithya menon',2000000,'B','pic/u1.jpg','available',8.5),
+    (24,'Nabha Natesh',2000000,'B','pic/u1.jpg','available',8.5),
+    (34,'Anu Emmanuel',2000000,'B','pic/u1.jpg','available',8.5),
+    (30,'Nivetha Thomas',2000000,'C','pic/u1.jpg','available',7),
+    (38,'Megha Akash',2000000,'C','pic/u1.jpg','available',7),
+    (35,'Catherine Tresa',1800000,'B','pic/u1.jpg','available',8.5),
+    (42,'Sonal Chauhan',1800000,'B','pic/u1.jpg','available',8.5),
+    (18,'Lavanya thripati',1500000,'B','pic/u1.jpg','available',8.5),
+    (11,'Anjali',2500000,'C','pic/u1.jpg','available',7),
+    (29,'Mehreen Kaur Pirzada',1500000,'C','pic/u1.jpg','available',7),
+    (36,'Anasuya Bharadwaj',1500000,'C','pic/u1.jpg','available',7),
+    (19,'Nidhhi Agerwal',1250000,'B','pic/u1.jpg','available',8.5),
+    (17,'Ritu varma',1200000,'B','pic/u1.jpg','available',8.5),
+    (16,'Surabi',1000000,'B','pic/u1.jpg','available',8.5),
+    (25,'Shivathmika Rajashekar',1000000,'B','pic/u1.jpg','available',8.5),
+    (20,'Eesha Rebba',1000000,'C','pic/u1.jpg','available',7),
+    (23,'Hebha Patel',1000000,'C','pic/u1.jpg','available',7),
+    (26,'Payal Rajput',1000000,'C','pic/u1.jpg','available',7),
+    (44,'Avika Gor',1000000,'C','pic/u1.jpg','available',7);
