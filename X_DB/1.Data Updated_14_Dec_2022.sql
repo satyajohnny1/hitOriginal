@@ -1,5 +1,5 @@
 # *******************************************************************************
-#                          ACTOR DATA : tolly_actor              
+#                          tolly_actor              
 # *******************************************************************************
 
 
@@ -92,7 +92,7 @@ INSERT INTO tolly_actor VALUES
     
     
 # *******************************************************************************
-#                          ACTOR DATA : tolly_actress              
+#                          tolly_actress              
 # *******************************************************************************
 
     
@@ -164,7 +164,11 @@ INSERT INTO tolly_actor VALUES
     (44,'Avika Gor',1000000,'C','pic/u1.jpg','available',7);
 
 
-#=========== writer =========
+    
+# *******************************************************************************
+#                          tolly_writer            
+# *******************************************************************************
+
 
 TRUNCATE TABLE tolly_writer;
 
@@ -237,33 +241,36 @@ INSERT INTO tolly_writer VALUES
     (71,'Sudheer Varma',7000000,'B','poster/writer.png','available',9),
     (72,'Chandra Sekhar Yeleti',6000000,'B','poster/writer.png','available',9);
 
+    
+# *******************************************************************************
+#                          tolly_music            
+# *******************************************************************************
 
-#=========== Music =========
 TRUNCATE TABLE tolly_music;
 INSERT INTO tolly_music VALUES
-    (4,'	Ramana gogula',1000000,'B','pic/u1.jpg','AVL',9.5),
-    (5,'	Sasi pretham',500000,'C','pic/u1.jpg','AVL',7),
-    (6,'	Sai Karthik',1000000,'C','pic/u1.jpg','AVL',7),
-    (7,'	Chinna',100000,'C','pic/u1.jpg','AVL',7),
-    (8,'	Raj-koti',1000000,'C','pic/u1.jpg','AVL',7),
+    (4,'Ramana gogula',1000000,'B','pic/u1.jpg','AVL',9.5),
+    (5,'Sasi pretham',500000,'C','pic/u1.jpg','AVL',7),
+    (6,'Sai Karthik',1000000,'C','pic/u1.jpg','AVL',7),
+    (7,'Chinna',100000,'C','pic/u1.jpg','AVL',7),
+    (8,'Raj-koti',1000000,'C','pic/u1.jpg','AVL',7),
     (9,'Ilaiyaraaja',50000000,'A','pic/u1.jpg','AVL',11),
-    (10,'	Deva',1000000,'B','pic/u1.jpg','AVL',9.5),
-    (11,'	Kalyan koduri',1000000,'C','pic/u1.jpg','AVL',7),
-    (12,'	Mm srilekha',100000,'C','pic/u1.jpg','AVL',7),
+    (10,'Deva',1000000,'B','pic/u1.jpg','AVL',9.5),
+    (11,'Kalyan koduri',1000000,'C','pic/u1.jpg','AVL',7),
+    (12,'Mm srilekha',100000,'C','pic/u1.jpg','AVL',7),
     (13,'Ragu kunche',100000,'C','pic/u1.jpg','AVL',7),
-    (14,'	Hemachandra',100000,'C','pic/u1.jpg','AVL',7),
-    (15,'	Sa rajkumar',500000,'C','pic/u1.jpg','AVL',7),
-    (16,'	Sandeep chowtha',800000,'C','pic/u1.jpg','AVL',7),
-    (17,'	Sunil kasyap',600000,'C','pic/u1.jpg','AVL',7),
-    (19,'	Devi Sri Prasad',120000000,'A','pic/u1.jpg','AVL',11),
+    (14,'Hemachandra',100000,'C','pic/u1.jpg','AVL',7),
+    (15,'Sa rajkumar',500000,'C','pic/u1.jpg','AVL',7),
+    (16,'Sandeep chowtha',800000,'C','pic/u1.jpg','AVL',7),
+    (17,'Sunil kasyap',600000,'C','pic/u1.jpg','AVL',7),
+    (19,'Devi Sri Prasad',120000000,'A','pic/u1.jpg','AVL',11),
     (20,'MM Keervani',125000000,'A','pic/u1.jpg','AVL',11),
-    (21,'	Thaman S',100000000,'A','pic/u1.jpg','AVL',11),
-    (22,'	Mani sharma',70000000,'A','pic/u1.jpg','AVL',11),
+    (21,'Thaman S',100000000,'A','pic/u1.jpg','AVL',11),
+    (22,'Mani sharma',70000000,'A','pic/u1.jpg','AVL',11),
     (23,'Mickey J. Meyer',50000000,'A','pic/u1.jpg','AVL',11),
-    (24,'	R.p.patnayak',2500000,'B','pic/u1.jpg','AVL',9.5),
-    (25,'	Harris jai raj',20000000,'A','pic/u1.jpg','AVL',11),
+    (24,'R.p.patnayak',2500000,'B','pic/u1.jpg','AVL',9.5),
+    (25,'Harris jai raj',20000000,'A','pic/u1.jpg','AVL',11),
     (26,'A. R. Rahman',200000000,'A','pic/u1.jpg','AVL',11),
-    (27,'	Yavan Shankar raja',150000000,'A','pic/u1.jpg','AVL',11),
+    (27,'Yavan Shankar raja',150000000,'A','pic/u1.jpg','AVL',11),
     (28,'Shekar Chandra',600000,'C','pic/u1.jpg','AVL',7),
     (29,'Vishal Chandrashekhar',800000,'C','pic/u1.jpg','AVL',7),
     (30,'Ghibran',1000000,'C','pic/u1.jpg','AVL',7),
@@ -279,3 +286,51 @@ INSERT INTO tolly_music VALUES
     (40,'Vidya Sagar',1800000,'C','pic/u1.jpg','AVL',7),
     (41,'Pawan CH',5000000,'B','pic/u1.jpg','AVL',9.5),
     (42,'Anirudh Ravichadran',70000000,'A','pic/u1.jpg','AVL',11);
+    
+
+
+# *******************************************************************************
+#                          tolly_cine            
+# *******************************************************************************
+
+TRUNCATE TABLE tolly_cine;
+
+INSERT INTO tolly_cine VALUES
+    (1,'K. K. Senthil Kumar',200000000,'A','poster/Baba.png','available',11),
+    (2,'Chota K. Naidu',60000000,'A','poster/CHOTAKNAIDU.png','available',11),
+    (4,'G.RamPrasad',20000000,'A','poster/GRamPrasad.png','available',11),
+    (5,'P. C. Sreeram',150000000,'A','poster/PCSRIRAM.png','available',11),
+    (10,'Raj Thota',1000000,'B','poster/ThotaRaj.png','available',9),
+    (8,'Anumolu Srikar',500000,'C','poster/AnumoluSrikar.png','available',7),
+    (9,'Adusumilli Balaram',600000,'C','poster/AdusumilliBalaram.png','available',7),
+    (11,'Anji',800000,'C','poster/Anji.png','available',7),
+    (12,'Hari Anumolu',700000,'C','poster/HariAnumolu.png','available',7),
+    (13,'Rasool Ellore',6000000,'B','poster/RasoolEllore.png','available',9),
+    (14,'Karthik Ghattamaneni',40000000,'A','poster/KarthikGhattamaneni.png','available',11),
+    (15,'K. V. Guhan',30000000,'A','poster/KVGuhan.png','available',11),
+    (16,'Vijay C. Kumar',5000000,'B','poster/VijayCKumar.png','available',9),
+    (17,'Prasad Murella',1000000,'C','poster/PrasadMurella.png','available',7),
+    (18,'Shyam K. Naidu',5000000,'B','poster/ShyamKNaidu.png','available',9),
+    (19,'R. Rathnavelu',160000000,'A','poster/RRathnavelu.png','available',11),
+    (20,'Sameer Reddy',1500000,'C','poster/SameerReddy.png','available',7),
+    (21,'Tirru',8000000,'B','poster/Tirru.png','available',9),
+    (22,'P. G. Vinda',100000000,'A','poster/PGVinda.png','available',11),
+    (23,'P. S. Vinod',100000000,'A','poster/PSVinod.png','available',11),
+    (24,'Santosh Sivan',15000000,'A','poster/Baba.png','available',11),
+    (25,'R.Madhi',7000000,'B','poster/CHOTAKNAIDU.png','available',9),
+    (26,'Abhik Mukhopadhyay',10000000,'A','poster/GRamPrasad.png','available',11),
+    (27,'Pankaj Kumar',400000,'C','poster/PCSRIRAM.png','available',7),
+    (28,'Sanu Varghese',200000,'C','poster/ThotaRaj.png','available',7),
+    (29,'Jayanan Vincent ',2000000,'B','poster/AnumoluSrikar.png','available',9),
+    (30,'Amol Rathod',300000,'C','poster/AdusumilliBalaram.png','available',7),
+    (31,'Manoj Paramahamsa',40000000,'A','poster/Anji.png','available',11),
+    (32,'Sai Sriram',100000,'C','poster/HariAnumolu.png','available',7),
+    (33,'Venkat C. Dilip',350000,'C','poster/RasoolEllore.png','available',7),
+    (34,'K. U. Mohanan',10000000,'A','poster/KarthikGhattamaneni.png','available',11),
+    (35,'Jay Kay',3000000,'B','poster/KVGuhan.png','available',9),
+    (36,'Shaneil Deo',1500000,'B','poster/VijayCKumar.png','available',9),
+    (37,'George C Williams',1500000,'B','poster/PrasadMurella.png','available',9),
+    (38,'Sarvesh Murari',1000000,'B','poster/ShyamKNaidu.png','available',9),
+    (39,'M. S. Prabhu',1000000,'B','poster/RRathnavelu.png','available',9),
+    (40,'TEJA',50000000,'A','poster/SameerReddy.png','available',11);
+
