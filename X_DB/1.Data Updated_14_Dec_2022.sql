@@ -334,3 +334,29 @@ INSERT INTO tolly_cine VALUES
     (39,'M. S. Prabhu',1000000,'B','poster/RRathnavelu.png','available',9),
     (40,'TEJA',50000000,'A','poster/SameerReddy.png','available',11);
 
+
+
+# *******************************************************************************
+#                          tolly_editor            
+# *******************************************************************************
+
+TRUNCATE TABLE tolly_editor;
+
+INSERT INTO tolly_editor VALUES
+    (3,'Marthand K Venkatesh',60000000,'A','poster/MARTHANDKVENKATESH.png','available',11),
+    (4,'Kotagiri Venkateswararo',140000000,'A','poster/KOTAGIRIVENKATESWARARO.png','available',11),
+    (5,'K. Shankar',10000000,'B','poster/SHANKAR.png','available',9),
+    (6,'Pravin Pudi',10000000,'B','poster/PRAVINPUDI.png','available',9),
+    (7,'Praveen Boyina',300000,'C','poster/PraveenBoyina.png','available',7),
+    (8,'Prakash Peleru',300000,'C','poster/PrakashPeleru.png','available',7),
+    (10,'Anthony',1300000,'B','poster/Anthony.png','available',9),
+    (12,'Prasanna Gk',1000000,'C','poster/PrasannaGK.png','available',7),
+    (13,'Dharmendra Kakarala',2300000,'C','poster/DharmendraKakarala.png','available',7),
+    (14,'B. Lenin',1000000,'C','poster/BLenin.png','available',7),
+    (15,'Naveen Nooli',40000000,'B','poster/NaveenNooli.png','available',9),
+    (16,'A. Sreekar Prasad',40000000,'A','poster/ASreekarPrasad.png','available',11),
+    (17,'Karthika Srinivas',10000000,'B','poster/KarthikaSrinivas.png','available',9),
+    (18,'Kola Bhaskar',10000000,'B','poster/MARTHANDKVENKATESH.png','available',9),
+    (19,'Ravikanth Perepu',1000000,'C','poster/KOTAGIRIVENKATESWARARO.png','available',7),
+    (20,'Praveen K. L',500000,'C','poster/SHANKAR.png','available',7),
+    (21,'Sathish Suriya',100000,'C','poster/PRAVINPUDI.png','available',7);
