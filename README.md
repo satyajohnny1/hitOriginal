@@ -25,6 +25,8 @@ FlatLab - Bootstrap 4 Responsive Admin Template
 
 AutoDeploy
 ======================================
+We are using GitHub actions to do FTP Deploy.
+
 https://satyajohnny1.deployhq.com/
 
 https://www.deployhq.com/
