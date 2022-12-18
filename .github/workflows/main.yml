@@ -11,8 +11,8 @@ jobs:
       - name: Copying GitHub files to htdocs via FTP
         uses: airvzxf/ftp-deployment-action@latest
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER-REMOVEME }}
+          user: ${{ secrets.FTP_USERNAME_REMOVEME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local_dir: "./"
           remote_dir: "/htdocs"
