@@ -94,7 +94,7 @@ h3 {
 				<option value="<?php echo $category["id"];
        // The value we usually set is the primary key
        ?>">
-					<?php echo $category["id"].". ".$category["name"]."[".$category["seats"]."] -".$category["city"];
+					<?php echo $category["id"].". ".$category["name"]."[".$category["capacity"]."] -".$category["city"];
        // To show the category name to the user
        ?>
 				</option>
