@@ -39,12 +39,10 @@ https://launchdeck.io/
 
 Infinite Free DB Backup
 ======================================
-1. Go to InfiniteFree PhpMyAdmin
-2. Do backup
-3. Open chrome network tab, track request , copy as cURL
-4. import to Postman as Raw Test
-5. It will download the SQL File
-6. Now think about automation
+1. Php file to do backup & save in .SQL
+2. Manullay upload to Google drive by click on Button
+3. Auto send mail with backup attachement using 3rd party API like
+https://app.sendgrid.com/guide/integrate/langs/php
 
 https://medium.com/@tiboprea/how-to-replicate-requests-from-the-chrome-network-tab-into-postman-4ec6016ee18c
 
