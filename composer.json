@@ -1,6 +1,7 @@
 {
     "require": {
-        "swiftmailer/swiftmailer": "^5.4"
+        "swiftmailer/swiftmailer": "^5.4",
+        "sendgrid/sendgrid": "^8.0"
     },
     "config": {
         "allow-plugins": {
