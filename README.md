@@ -28,6 +28,16 @@ Infinite Free DB Backup
 
 
 
+
+
+# Process
+
+### 1.Export DB to Excel
+- Open db Phpdmin, select table, Foramte:CSV,  export > Custom > unselect all tables : only select one table > [check] Put columns names in the first row
+- Convert CSV to EXCEL using https://convertio.co/csv-xlsx/
+- Convert EXCEL to SQL https://sqlizer.io/
+
+
 # Tools 
 1. Excel to SQL file Conversion
 https://sqlizer.io/
@@ -58,12 +68,4 @@ https://launchdeck.io/
 - Regenerate all Posters, if files deleted in server
 
 
-
-
-# Process
-
-### Export DB to Excel
-- Open db Phpdmin, select table, Foramte:CSV,  export > Custom > unselect all tables : only select one table > [check] Put columns names in the first row
-- Convert CSV to EXCEL using https://convertio.co/csv-xlsx/
-- Convert EXCEL to SQL https://sqlizer.io/
 
