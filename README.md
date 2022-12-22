@@ -73,3 +73,5 @@ https://launchdeck.io/
 # Code Snippets
 
 - Centers logic - addcenters.php
+
+SELECT s.city, COUNT(s.name) as tcount, GROUP_CONCAT(s.id) AS site_list FROM thearterslist s GROUP BY s.city ORDER BY tcount DESC
