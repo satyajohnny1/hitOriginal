@@ -67,10 +67,11 @@ Go to https://smlcodes.deployhq.com/
 
 
 
-# Features
+# Features Upcoming
 - Poster Generation with Telugu Font
 - Centers by type & city
 - New Fonts for poster 
+- Regenerate all Posters, if files deleted in server
 
 
 
