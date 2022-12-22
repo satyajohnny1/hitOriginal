@@ -1,5 +1,3 @@
-# hitandfut
-
 Theme
 ===========
 FlatLab - Bootstrap 4 Responsive Admin Template
