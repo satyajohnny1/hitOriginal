@@ -50,20 +50,29 @@ Infinite Free DB Backup
     - https://miztechsolutions.com/tools/backup
     - https://miztechsolutions.com/tools/mail
 
-2. Cron job to Hit URL every Week
+2. Cron job to Hit URL every 2 Weeks
 
 
 
 # Tools
-
+==================
 1. Excel to SQL file Conversion
 https://sqlizer.io/
 
 
 
 # Deployment
-
+=================
 Go to https://smlcodes.deployhq.com/
+
+
+
+# Features
+=================
+    - Poster Generation with Telugu Font
+    - Centers by type & city
+    - 
+
 
 
 
