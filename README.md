@@ -72,4 +72,4 @@ https://launchdeck.io/
 
 # Code Snippets
 
-- Centers logic - released.php
+- Centers logic - addcenters.php
