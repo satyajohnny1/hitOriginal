@@ -1,40 +1,15 @@
 # hitandfut
-Working Version Features
-=========================================================
-1. Multi-starer, Multi director Movies
-
-2. Actor/Director/Others Remuneration & Grade Increase or Decrease based upon movie Result
-
-3. Combinations Search
-
-4. Collections 1week, 2nd Week all time Report
-
-5. Space - Shooting, LEFT-RIGHT for Next Previous
-
-
-Installation Changes
-======================================
-1. Use xampp-win32-1.8.3-5-VC11-installer.exe
-2. Change db.php for DB Connections 
-
 
 Theme
 ===========
 FlatLab - Bootstrap 4 Responsive Admin Template
 
 
-AutoDeploy
+
+Installation Changes
 ======================================
-We are using GitHub actions to do FTP Deploy.
-1. https://smlcodes.deployhq.com/ (Best)
-
-2. https://smlcodes.deploybot.com/ (2nd Best)
-
-https://www.deployhq.com/
-
-https://www.deploybot.com/
-
-https://launchdeck.io/
+1. Use xampp-win32-1.8.3-5-VC11-installer.exe
+2. Change db.php for DB Connections 
 
 
 
@@ -62,8 +37,19 @@ https://sqlizer.io/
 
 
 # Deployment
-
 Go to https://smlcodes.deployhq.com/
+
+
+We are using GitHub actions to do FTP Deploy.
+1. https://smlcodes.deployhq.com/ (Best)
+
+2. https://smlcodes.deploybot.com/ (2nd Best)
+
+https://www.deployhq.com/
+
+https://www.deploybot.com/
+
+https://launchdeck.io/
 
 
 
