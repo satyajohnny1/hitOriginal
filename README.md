@@ -79,7 +79,7 @@ Go to https://smlcodes.deployhq.com/
 # Process
 
 ### Export DB to Excel
-- Open db Phpdmin, select table, Foramte:CSV,  export > Custom > unselect all tables : only select one table > Export
+- Open db Phpdmin, select table, Foramte:CSV,  export > Custom > unselect all tables : only select one table > [check] Put columns names in the first row
 - Convert CSV to EXCEL using https://convertio.co/csv-xlsx/
 - Convert EXCEL to SQL https://sqlizer.io/
 
