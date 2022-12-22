@@ -40,12 +40,18 @@ https://launchdeck.io/
 
 Infinite Free DB Backup
 ======================================
+**Same DB HOST**
 1. Php file to do backup & save in .SQL
-2. Manullay upload to Google drive by click on Button
-3. Auto send mail with backup attachement using 3rd party API like
-https://app.sendgrid.com/guide/integrate/langs/php
+2. Manullay upload to Google drive by click on Button - DOne
 
-https://medium.com/@tiboprea/how-to-replicate-requests-from-the-chrome-network-tab-into-postman-4ec6016ee18c
+
+**External DB Host**
+1. Auto send mail with backup attachement using 
+    - https://miztechsolutions.com/tools/backup
+    - https://miztechsolutions.com/tools/mail
+
+2. Cron job to Hit URL every Week
+
 
 
 # Tools
