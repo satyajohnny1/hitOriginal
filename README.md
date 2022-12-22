@@ -56,25 +56,21 @@ Infinite Free DB Backup
 
 
 # Tools 
-======================================
-
 1. Excel to SQL file Conversion
 https://sqlizer.io/
 
 
 
 # Deployment
-=================
 
 Go to https://smlcodes.deployhq.com/
 
 
 
 # Features
-=================
-    - Poster Generation with Telugu Font
-    - Centers by type & city
-    - 
+- Poster Generation with Telugu Font
+- Centers by type & city
+- New Fonts for poster 
 
 
 
