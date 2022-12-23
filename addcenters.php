@@ -1266,16 +1266,15 @@ $r3 = 0;
 
 // -----Review Ratings
 
-$min = $rateavg - 0.50;
-$max = $rateavg + 0.50;
+$min = $rateavg - 0.25;
+$max = $rateavg + 0.25;
 
 $r1 = (((rand ( $min, $max )) / 0.05) * 0.05);
-
 $r3 = (((rand ( $min, $max )) / 0.15) * 0.15);
-
-$r1 = $r1 + 0.25;
+	
+$r1 = (floor($r1 * 4))/4;
 $r2 = $rateavg;
-$r3 = $r3 - 0.25;
+$r3 = (floor($r3 * 4))/4;
 
 $profit = 0;
 $profit = $max_coll - $budget;
