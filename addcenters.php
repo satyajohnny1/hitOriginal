@@ -1272,9 +1272,9 @@ $max = $rateavg + 0.25;
 $r1 = (((rand ( $min, $max )) / 0.05) * 0.05);
 $r3 = (((rand ( $min, $max )) / 0.15) * 0.15);
 	
-$r1 = (floor($r1 * 4))/4;
+$r1 = floorToFraction($r1, 4);
 $r2 = $rateavg;
-$r3 = (floor($r3 * 4))/4;
+$r3 = floorToFraction($r3, 4);
 
 $profit = 0;
 $profit = $max_coll - $budget;
@@ -1355,7 +1355,7 @@ if (mysqli_num_rows($result) > 0) {
 array_unique($numbers);
 shuffle($numbers);
 shuffle($numbers);
-sort($numbers);
+
 $finalCentSize = count($numbers);
 
 echo 'After 2nd ====>';
@@ -1483,6 +1483,14 @@ mysqli_query ( $conn, $sqlCenters );
 
 header('released.php?news='.$news.'&rid='.$rid);
 echo "<h2> After Redirect</h2>";
+	
+function floorToFraction($number, $denominator = 1)
+{
+    $x = $number * $denominator;
+    $x = floor($x);
+    $x = $x / $denominator;
+    return $x;
+}
 ?>
 
 
