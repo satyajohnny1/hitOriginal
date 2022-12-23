@@ -1,6 +1,7 @@
 <div style="display:none">
 
 
+
 <?php
 include 'sessionCheck.php';
 error_reporting ( 0 );
@@ -1307,9 +1308,63 @@ echo ' <h2> RESULT ' . $result.'</h2>';
 
 // Centers ================== Calculation ============== Start 
 
-$numbers = range(1, 1340);
+$centSQl = "SELECT s.city, COUNT(s.name) as tcount, GROUP_CONCAT(s.id) AS idlist FROM thearterslist s GROUP BY s.city having tcount > 10 ORDER BY tcount DESC";
+$result = mysqli_query($conn, $centSQl);
+//$numbers = range(1, 1340);
+$numbers = []; 
+$cityArray = [];
+echo $centSQl;
+                                                    			
+if (mysqli_num_rows($result) > 0) {
+	// output data of each row
+	while($row = mysqli_fetch_assoc($result)) {
+		$idlist = $row["idlist"];
+		$tcount = $row["tcount"];
+		$city = $row["city"];
+	
+		$thlimit = ceil($tcount/6);
+		$idArray = explode(',', $idlist);
+		
+		shuffle($idArray);
+		$subNums = array_slice($idArray, 0, ($thlimit+1));
+		$numbers = array_merge($numbers, $subNums); 
+		array_push($cityArray, $city);
+	}
+}  
+$cityStr = "'" . implode ( "', '", $cityArray ) . "'";
+rtrim($cityStr, ',');
+$centSQl = "SELECT GROUP_CONCAT(s.id) AS idlist FROM thearterslist s WHERE s.city NOT IN (".$cityStr.")";
+echo $centSQl;
+$result = mysqli_query($conn, $centSQl);
+if (mysqli_num_rows($result) > 0) {
+	// output data of each row
+	while($row = mysqli_fetch_assoc($result)) {
+		$idlist = $row["idlist"];
+		$idArray = explode(',', $idlist);
+		shuffle($idArray);
+		echo 'Sub Centers Connt : '.count($idArray);
+		$numbers = array_merge($numbers, $idArray); 
+	}
+}  
+
+
+
+
+
+array_unique($numbers);
 shuffle($numbers);
 shuffle($numbers);
+sort($numbers);
+$finalCentSize = count($numbers);
+
+echo 'After 2nd ====>';
+echo 'Final Centers Connt : '. $finalCentSize;
+echo '<pre>'; print_r($numbers); echo '</pre>';
+
+if($d25_cent > $finalCentSize ){
+	$d25_cent = $finalCentSize;
+}
+
 
 $d25_cent  =  array_slice($numbers, 0, $d25_cent);
 $d25_str  = implode(',', $d25_cent);
