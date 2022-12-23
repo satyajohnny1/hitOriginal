@@ -1,7 +1,30 @@
 # *******************************************************************************
-#                          tolly_director              
+#                          tolly_user              
 # *******************************************************************************
 
+TRUNCATE TABLE tolly_user;
+
+INSERT INTO `tolly_user` (`uid`, `username`, `password`, `email`, `status`, `pic`, `bal`, `banner`, `utype`) VALUES
+(93, 'admin', 'admin', 'admin', 'active', 'pic/u1.jpg', 996176585980, 'satya', 'admin'),
+(95, 'admin', 'admin', 'admin', 'active', 'pic/u1.jpg', 2769910120, 'USER PRODUCTIONS', 'admin'),
+(96, 'ALLU ARAVIND', 'allu', 'allu', 'active', 'pic/u1.jpg', 200000000, 'GEETHA ARTS', 'admin'),
+(97, 'DIL RAJU', 'raju', 'raju', 'active', 'pic/u1.jpg', 200000000, 'SRI VENKATESWARA CREATIONS', 'admin'),
+(98, 'Naveen Yerneni- Ravi Shankar Mohan-Cherukuri', 'mythri', 'mythri', 'active', 'pic/u1.jpg', 200000000, ' Mythri Movie Makers', 'admin'),
+(99, 'Suresh - Venkatesh', 'suresh', 'suresh', 'active', 'pic/u1.jpg', 200000000, 'Suresh Productions - D.Ramanaidu Presents', 'admin'),
+(100, 'Ram Achanta, Gopichand Achanta, Anil Sunkar', '14reels', '14reels', 'active', 'pic/u1.jpg', 200000000, '14 Reels Entertainment', 'admin'),
+(101, 'Nagarjuna - Supriya Akkineni', 'nag', 'nag', 'active', 'pic/u1.jpg', 200000000, 'Annapurna Studios', 'admin'),
+(102, 'NTR - Nanadamuri Kalyam Ram', 'ntr', 'ntr', 'active', 'pic/u1.jpg', 200000000, ' N. T. R. Arts', 'admin'),
+(103, 'Dr. M. MohanBabu - Vishnu Manchu', 'manchu', 'manchu', 'active', 'pic/u1.jpg', 200000000, 'Sree Lakshmi Prasanna Pictures', 'admin'),
+(104, 'C.AswiniDutt', 'vyjayanti', 'vyjayanti', 'active', 'pic/u1.jpg', 200000000, 'Vyjayanthi Movies', 'admin'),
+(105, 'Ram Charan - Pawan Kalyan', 'chiru', 'chiru', 'active', 'pic/u1.jpg', 200000000, 'Konidela Production Company', 'admin'),
+(106, 'Pramod - Vamsi', 'uv', 'uv', 'active', 'pic/u1.jpg', 200000000, 'UV Creations - Prabas Presents', 'admin'),
+(107, 'G.Mahesh Babu', 'mahesh', 'mahesh', 'active', 'pic/u1.jpg', 200000000, 'GMB Entertainment - Krishna Presents', 'admin'),
+(108, 'S.Chinababu', 'sitara', 'sitara', 'active', 'pic/u1.jpg', 200000000, 'Sitara Entertainments', 'admin');
+
+
+# *******************************************************************************
+#                          tolly_director              
+# *******************************************************************************
 
 TRUNCATE TABLE tolly_director;
 
