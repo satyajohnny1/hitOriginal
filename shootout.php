@@ -1374,8 +1374,8 @@ if (mysqli_num_rows($result) > 0) {
 		$thlimit = ceil($tcount/6);
 		$idArray = explode(',', $idlist);
 		
-		$idArray = shuffle($idArray);
-		$idArray = shuffle($idArray);
+		shuffle($idArray);
+		shuffle($idArray);
 		
 		$subNums = array_slice($idArray, 0, ($thlimit+1));
 		$numbers = array_merge($numbers, $subNums); 
@@ -1394,8 +1394,8 @@ if (mysqli_num_rows($result) > 0) {
 		$idArray = explode(',', $idlist);
 		
 		
-		$idArray = shuffle($idArray);
-		$idArray = shuffle($idArray);
+		shuffle($idArray);
+		shuffle($idArray);
 		
 		echo 'Sub Centers Connt : '.count($idArray);
 		$numbers = array_merge($numbers, $idArray); 
@@ -1409,7 +1409,7 @@ if (mysqli_num_rows($result) > 0) {
 array_unique($numbers);
 shuffle($numbers);
 shuffle($numbers);
-sort($numbers);
+
 $finalCentSize = count($numbers);
 
 echo 'After 2nd ====>';
