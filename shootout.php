@@ -1374,7 +1374,9 @@ if (mysqli_num_rows($result) > 0) {
 		$thlimit = ceil($tcount/6);
 		$idArray = explode(',', $idlist);
 		
-		shuffle($idArray);
+		$idArray = shuffle($idArray);
+		$idArray = shuffle($idArray);
+		
 		$subNums = array_slice($idArray, 0, ($thlimit+1));
 		$numbers = array_merge($numbers, $subNums); 
 		array_push($cityArray, $city);
@@ -1390,7 +1392,11 @@ if (mysqli_num_rows($result) > 0) {
 	while($row = mysqli_fetch_assoc($result)) {
 		$idlist = $row["idlist"];
 		$idArray = explode(',', $idlist);
-		shuffle($idArray);
+		
+		
+		$idArray = shuffle($idArray);
+		$idArray = shuffle($idArray);
+		
 		echo 'Sub Centers Connt : '.count($idArray);
 		$numbers = array_merge($numbers, $idArray); 
 	}
