@@ -5,7 +5,6 @@
 TRUNCATE TABLE tolly_user;
 
 INSERT INTO `tolly_user` (`uid`, `username`, `password`, `email`, `status`, `pic`, `bal`, `banner`, `utype`) VALUES
-(93, 'admin', 'admin', 'admin', 'active', 'pic/u1.jpg', 996176585980, 'satya', 'admin'),
 (95, 'admin', 'admin', 'admin', 'active', 'pic/u1.jpg', 2769910120, 'USER PRODUCTIONS', 'admin'),
 (96, 'ALLU ARAVIND', 'allu', 'allu', 'active', 'pic/u1.jpg', 200000000, 'GEETHA ARTS', 'admin'),
 (97, 'DIL RAJU', 'raju', 'raju', 'active', 'pic/u1.jpg', 200000000, 'SRI VENKATESWARA CREATIONS', 'admin'),
@@ -19,7 +18,9 @@ INSERT INTO `tolly_user` (`uid`, `username`, `password`, `email`, `status`, `pic
 (105, 'Ram Charan - Pawan Kalyan', 'chiru', 'chiru', 'active', 'pic/u1.jpg', 200000000, 'Konidela Production Company', 'admin'),
 (106, 'Pramod - Vamsi', 'uv', 'uv', 'active', 'pic/u1.jpg', 200000000, 'UV Creations - Prabas Presents', 'admin'),
 (107, 'G.Mahesh Babu', 'mahesh', 'mahesh', 'active', 'pic/u1.jpg', 200000000, 'GMB Entertainment - Krishna Presents', 'admin'),
+(110, 'Satya Kaveti', 'satya', 'satya', 'active', 'pic/u1.jpg', 200000000, 'A I T H E ARTS - Ramalayam Vendithera ', 'admin'),
 (108, 'S.Chinababu', 'sitara', 'sitara', 'active', 'pic/u1.jpg', 200000000, 'Sitara Entertainments', 'admin');
+
 
 
 # *******************************************************************************
