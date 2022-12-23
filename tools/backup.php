@@ -284,6 +284,10 @@ class Backup_Database {
                 $this->gzipBackupFile();
             } else {
                 $this->obfPrint('Backup file succesfully saved to ' . $this->backupDir.'/'.$this->backupFile, 1, 1);
+                 $filesize = filesize($this->backupDir.'/'.$this->backupFile); // bytes
+                $filesize = round($filesize / 1024 / 1024, 1); // megabytes with 1 digit
+                
+                $this->obfPrint('File Size is : '.$filesize.'mb');
             }
         } catch (Exception $e) {
             print_r($e->getMessage());
