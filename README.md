@@ -73,9 +73,4 @@ https://launchdeck.io/
 # Code Snippets
 
 - Centers logic - addcenters.php, shootout.php both files we need to update
-
-SELECT s.city, COUNT(s.name) as tcount, GROUP_CONCAT(s.id) AS site_list FROM thearterslist s GROUP BY s.city having tcount > 10 ORDER BY tcount DESC
-Iterate
-Convert comma separated to array, shuffle,get % add to final list
-Get records other that above cities
-Add to final list
+- Review logic - addcenters.php, shootout.php both files we need to update
