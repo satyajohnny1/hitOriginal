@@ -25,12 +25,20 @@ $dbname = "hit2";
 
 
 
-
+/* JavaBo
 $servername = "sql301.epizy.com";
 $dbname = "epiz_32875882_javabo";
 $username = "epiz_32875882";
 $password = "AF6tE0XjpZUX";
+*/
 
+//mizDb
+$servername = "68.178.135.125";
+$dbname = "testdb";
+$username = "testdb";
+$password = "testdb";
+
+ 
 
 
 // Create connection
