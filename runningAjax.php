@@ -118,12 +118,9 @@ if($day>=$max_days)
 else if($day<7)
 {	
 	
-	if($day<3)
-	{
+	
 		$cent = $rel_cen;
-	}else{
-		$cent = $wk1_cen;
-	}
+	
 	
 	
 	$coll = round($wk1_unit*$day);
@@ -134,26 +131,41 @@ else if($day<14)
 	$day = $day-7;
 	$cent = $wk1_cen;
 	$coll = round($wk1_coll+($wk2_unit*$day));
-	if($cday>10)
-	{
-		$cent = $wk2_cen;
-	}
+	
 }
  
-else if($day<25)
+else if($day<21)
 {
 	$day = $day-14;
 	$cent = $wk2_cen;
 	$coll = round($wk1_coll+$wk2_coll+($d25_unit*$day));
-	if($cday>18)
-	{
-		$cent = $d25_cen;
-	}
-	if($d25_cen<1)
-	{
-		$cent = 1;
-	}
 	
+	
+}
+else if($day<28)
+
+{
+
+	$day = $day-14;	$cent = $wk2_cen;
+
+	$coll = round($wk1_coll+$wk2_coll+($d25_unit*$day));
+
+	
+
+		$cent = $d25_cen;
+
+	
+
+	if($d25_cen<1)
+
+	{
+
+		$cent = 1;
+
+	}
+
+	
+
 }
 else if($day<=50)
 {	$day = $day-25;
