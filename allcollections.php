@@ -104,7 +104,7 @@ $uid = $_SESSION['s_uid'];
 										$c175 = $row1["175d_cen"];
 										$days = $row1["max_days"];
 										$w1_coll = $row1["1w_coll"];
-										$w2_coll = $row1["1w_coll"];
+										$w2_coll = $row1["2w_coll"];
 												
 											
                                           		echo "<tr>";
