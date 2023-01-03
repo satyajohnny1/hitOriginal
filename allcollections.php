@@ -55,8 +55,14 @@ $uid = $_SESSION['s_uid'];
                                                 <th>Actors</th>
                                                 <th>Result</th>
                                                 <th>Budget</th>
+                                                <th>1W_coll</th>
+                                                <th>2W_coll</th> 
                                                 <th>Collec</th>
-                                                                            <th>50'Cen</th>
+                                                                            <th>Rel'Cen</th>
+                                                                            <th>1W'Cen</th>
+                                                                            <th>2W'Cen</th>
+						    			    <th>25'Cen</th>
+						    			    <th>50'Cen</th>
                                                                             <th>100'Cen</th>
                                                                             <th>150'Cen</th>
                                                                             <th>175'Cen</th>
@@ -85,16 +91,21 @@ $uid = $_SESSION['s_uid'];
                                                     					$collection= $row["collection"];
                                                     					$budget = $row["sofar"];
                                                     					
-                                                    				 $sql2 =	"select * from tolly_release s WHERE s.rid = ".$rid." and s.status = 'out'";
+                                                    				 $sql2 = "select * from tolly_release s WHERE s.rid = ".$rid." and s.status = 'out'";
                                                     				$r1= mysqli_query($conn, $sql2);
                                                     				$row1 = mysqli_fetch_assoc($r1);
-                                                    				
-                                                    				
-																	$c50 = $row1["50d_cen"];
+										
+										$rel_cen = $row1["rel_cen"];
+										$1w_cen = $row1["1w_cen"];
+										$2w_cen = $row1["2w_cen"];
+										$c25 = $row1["25d_cen"];
+										$c50 = $row1["50d_cen"];
                                                     				$c100 = $row1["100d_cen"];
-																	$c150 = $row1["150d_cen"];  
-																	$c175 = $row1["175d_cen"];
-																	$days = $row1["max_days"];
+										$c150 = $row1["150d_cen"];  
+										$c175 = $row1["175d_cen"];
+										$days = $row1["max_days"];
+										$1w_coll = $row1["1w_coll"];
+										$2w_coll = $row1["1w_coll"];
 												
 											
                                           		echo "<tr>";
@@ -104,12 +115,15 @@ $uid = $_SESSION['s_uid'];
                                              	echo "<td><b>".$aname."</b></td>";
                                              	echo "<td><button type='button' class='btn btn-info'>".$res."</button></td>";
                                              	echo "<td>".round($budget/10000000, 2)."</td>";
+                                             	echo "<td>".round($1w_coll/10000000, 2)."</td>";
+                                             	echo "<td>".round($2w_coll/10000000, 2)."</td>";
                                              	echo "<td>".round($collection/10000000, 2)."</td>";
-                                             	 echo "<td>".$c50."</td>";
+											
+                                             	echo "<td>".$c50."</td>";
                                              	echo "<td>".$c100."</td>";
-												echo "<td>".$c150."</td>";
+						echo "<td>".$c150."</td>";
                                              	echo "<td>".$c175."</td>";
-												echo "<td>".$days."</td>";
+						echo "<td>".$days."</td>";
                                             	echo " </tr> ";
                                           
                                                     				}
