@@ -34,10 +34,7 @@ $uid = $_SESSION['s_uid'];
 		    <div class="page-inner">            
            	<div id="main-wrapper">
 		
-            
-        
-            
-          
+           
               <div class="row">
                         <div class="col-md-12">
                             <div class="panel panel-white">
@@ -48,6 +45,8 @@ $uid = $_SESSION['s_uid'];
                                    <div class="table-responsive">
                                     <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
+
+
                                             <tr>
                                            		<th>No.</th>
                                                 <th>Title</th>
@@ -58,15 +57,15 @@ $uid = $_SESSION['s_uid'];
                                                 <th>1W_coll</th>
                                                 <th>2W_coll</th> 
                                                 <th>Collec</th>
-                                                                            <th>Rel'Cen</th>
-                                                                            <th>1W'Cen</th>
-                                                                            <th>2W'Cen</th>
-						    			    <th>25'Cen</th>
-						    			    <th>50'Cen</th>
-                                                                            <th>100'Cen</th>
-                                                                            <th>150'Cen</th>
-                                                                            <th>175'Cen</th>
-                                                                            <th>Days</th>
+                                                <th>Rel'Cen</th>
+                                                <th>1W'Cen</th>
+                                                <th>2W'Cen</th>
+						    			        <th>25'Cen</th>
+						    			        <th>50'Cen</th>
+                                                <th>100'Cen</th>
+                                                <th>150'Cen</th>
+                                                <th>175'Cen</th>
+                                                <th>Days</th>
                                             </tr>
                                         </thead>
                                    
@@ -96,16 +95,16 @@ $uid = $_SESSION['s_uid'];
                                                     				$row1 = mysqli_fetch_assoc($r1);
 										
 										$rel_cen = $row1["rel_cen"];
-										$1w_cen = $row1["1w_cen"];
-										$2w_cen = $row1["2w_cen"];
+										$w1_cen = $row1["1w_cen"];
+										$w2_cen = $row1["2w_cen"];
 										$c25 = $row1["25d_cen"];
 										$c50 = $row1["50d_cen"];
-                                                    				$c100 = $row1["100d_cen"];
+                                        $c100 = $row1["100d_cen"];
 										$c150 = $row1["150d_cen"];  
 										$c175 = $row1["175d_cen"];
 										$days = $row1["max_days"];
-										$1w_coll = $row1["1w_coll"];
-										$2w_coll = $row1["1w_coll"];
+										$w1_coll = $row1["1w_coll"];
+										$w2_coll = $row1["1w_coll"];
 												
 											
                                           		echo "<tr>";
@@ -115,20 +114,18 @@ $uid = $_SESSION['s_uid'];
                                              	echo "<td><b>".$aname."</b></td>";
                                              	echo "<td><button type='button' class='btn btn-info'>".$res."</button></td>";
                                              	echo "<td>".round($budget/10000000, 2)."</td>";
-                                             	echo "<td>".round($1w_coll/10000000, 2)."</td>";
-                                             	echo "<td>".round($2w_coll/10000000, 2)."</td>";
+                                             	echo "<td>".round($w1_coll/10000000, 2)."</td>";
+                                             	echo "<td>".round($w2_coll/10000000, 2)."</td>";
                                              	echo "<td>".round($collection/10000000, 2)."</td>";
-											
-											
-						echo "<td><b>".$rel_cen."</b></td>";
-                                             	echo "<td><b>".$1w_cen."</b></td>";
-                                             	echo "<td><b>".$2w_cen."</b></td>";
+						                        echo "<td><b>".$rel_cen."</b></td>";
+                                             	echo "<td><b>".$w1_cen."</b></td>";
+                                             	echo "<td><b>".$w2_cen."</b></td>";
                                              	echo "<td><b>".$c25."</b></td>";
                                              	echo "<td>".$c50."</td>";
                                              	echo "<td>".$c100."</td>";
-						echo "<td>".$c150."</td>";
+						                        echo "<td>".$c150."</td>";
                                              	echo "<td>".$c175."</td>";
-						echo "<td>".$days."</td>";
+						                        echo "<td>".$days."</td>";
                                             	echo " </tr> ";
                                           
                                                     				}
