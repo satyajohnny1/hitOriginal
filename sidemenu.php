@@ -21,8 +21,7 @@
                                 <ul class="sub-menu">
 				      <li><a href="http://185.27.134.10/db_structure.php?db=epiz_28768808_javabo">Database</a></li>	
                                     <li><a href="mydata.php">Released</a></li>                                   
-                                    <li><a href="myprofile.php">Settings</a></li>                                  
-                                    <li><a href="thInfo.php">TheatreInfo</a></li>
+                                    <li><a href="myprofile.php">Settings</a></li> 
                                     <li><a href="logoutAjax.php">Logout</a></li>
 				  	
                                    <!--  <li><a href="mydistributeddata.php">Distributed</a></li>
@@ -34,6 +33,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="news.php">News</a></li>
                                     <li><a href="alldata.php">All Movies</a></li>
+				     <li><a href="allcollections.php">All Collections</a></li>
                                     <li><a href="listactors.php">Actors</a></li>
                                     <li><a href="listactress.php">Actress</a></li>
                                     <li><a href="listproducers.php">Producers</a></li>
@@ -43,6 +43,7 @@
                                     <li><a href="listmisic.php">MusicDirectors</a></li>
                                     <li><a href="listcine.php">Cinematographers</a></li>
                                     <li><a href="pending.php">PENDING</a></li>
+                                    <li><a href="thInfo.php">TheatreInfo</a></li>
 
                                 </ul>
                             </li>
