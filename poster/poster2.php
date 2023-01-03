@@ -180,7 +180,7 @@ $text = "______________________________________";
   
   //Director Data
   $font_path = $tfnt;
-  $text =$d.' - '.$d2.' - '.$d3;
+  $text =$d.'  '.$d2.'  '.$d3;
   imagettftext($jpg_image, $fonsiz, 0, $area, 550,$cclr, $font_path, $text);
    
   //[FONTSIZE,CURVE,STARTWIDTH,STARTHEIGHT]
