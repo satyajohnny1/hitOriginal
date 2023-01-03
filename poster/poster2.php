@@ -56,7 +56,7 @@ function clean($string) {
 	return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 }
 
-$bg = "bg/bg".rand(1,12).".jpg";
+$bg = "bg/bg".rand(1,35).".jpg";
 $heroimg1 = "actors/".clean(strtolower($a)).'.png';
 $heroimg2 = "actors/".clean(strtolower($a2)).'.png';
 
