@@ -99,7 +99,7 @@ if (mysqli_num_rows($result) > 0) {
 		$r3 = $row["r3"];
 		$max_days = $row["max_days"];
 		
-
+		$rel_cen = $row["rel_cen"];
 		$wk1_cent = $row["1w_cen"];
 		$wk2_cent = $row["2w_cen"];
 		$d25_cent = $row["25d_cen"];
@@ -488,6 +488,13 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                                              <?php 
 
                                                              echo  "<tr>";
+                                                             echo "<td><b> Release</b>";
+                                                             echo "<td><b>".$rel_cen." CENTERS</b>";
+                                                             echo "<td><b>.</b>";
+                                                             echo  "</tr>";
+                                                             
+					   
+					      echo  "<tr>";
                                                              echo "<td><b> 1st week</b>";
                                                              echo "<td><b>".$wk1_cent." CENTERS</b>";
                                                              echo "<td><b>".$wk1_coll." CRORES</b>";
