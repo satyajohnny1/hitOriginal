@@ -1322,9 +1322,10 @@ $max = $rateavg + 0.25;
 $r1 = (((rand ( $min, $max )) / 0.05) * 0.05);
 $r3 = (((rand ( $min, $max )) / 0.15) * 0.15);
 	
-$r1 = floorToFraction($r1, 4);
+$r1 = round($r1, 2);
 $r2 = $rateavg;
-$r3 = floorToFraction($r3, 4);
+$r3 = round($r3, 2);
+
 
 $profit = 0;
 $profit = $max_coll - $budget;
