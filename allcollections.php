@@ -119,6 +119,11 @@ $uid = $_SESSION['s_uid'];
                                              	echo "<td>".round($2w_coll/10000000, 2)."</td>";
                                              	echo "<td>".round($collection/10000000, 2)."</td>";
 											
+											
+						echo "<td><b>".$rel_cen."</b></td>";
+                                             	echo "<td><b>".$1w_cen."</b></td>";
+                                             	echo "<td><b>".$2w_cen."</b></td>";
+                                             	echo "<td><b>".$c25."</b></td>";
                                              	echo "<td>".$c50."</td>";
                                              	echo "<td>".$c100."</td>";
 						echo "<td>".$c150."</td>";
