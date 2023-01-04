@@ -42,11 +42,11 @@
                                     <li><a href="listeditors.php">Editors</a></li>
                                     <li><a href="listmisic.php">MusicDirectors</a></li>
                                     <li><a href="listcine.php">Cinematographers</a></li>
-                                    <li><a href="pending.php">PENDING</a></li>
-                                    <li><a href="thInfo.php">TheatreInfo</a></li>
 
                                 </ul>
                             </li>
+			    <li><a href="pending.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-random"></span><p>Pending</p></a>
+				    <li><a href="thInfo.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-info-sign"></span><p>TheatrInfo</p></a>
 							
 							      <li><a href="logoutAjax.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-edit"></span><p>Logout</p></a> </li>
 							
