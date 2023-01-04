@@ -1,5 +1,205 @@
 <?php
+include 'sessionCheck.php';
+include 'db.php';
+ 
+session_start(); 
+error_reporting(E_ERROR); 
+$uid =  $_SESSION['s_uid'];
+$rid =  $_GET ["rid"];
+date_default_timezone_set("America/New_York");
 
+$rel_date = '';
+$r1 = 0;
+$r2 = 0;
+$r3 = 0;
+$pic = '';
+$aid       = '';
+$acid      = '';
+$did       = '';
+$wid       = '';
+$mid       = '';
+$eid       = '';
+$cid       = '';
+$budget    = '';
+$collection= '';
+$profit    = '';
+$sofar     = '';
+$grade     = '';
+$status    = '';
+$pic       = '';
+$dt        = '';
+$notes     = '';
+$dname     = '';
+$aname     = '';
+$acname    = '';
+$s         = '';
+$progress  = '';
+$rating    = '';
+$hit    = '';
+
+$max_days = 0;
+$cinename = '';
+ $ediname = ''; 
+ $musname = ''; 
+ $wriname='';
+ $poster='';
+
+ $title = '';
+ $fif = '';
+ $hun = '';
+ $five = '';
+ $t5 = '';
+
+ $_a2 = '';
+ $_a3 = '';
+ $_ac2 = '';
+ $_ac3 = '';
+ $_w2 = '';
+ $_w3 = '';
+ $_m2 = '';
+ $_m3 = '';
+ $_d2 = '';
+ $_d3 = '';
+ 
+ 
+ $_a2_name = '';
+ $_a3_name = '';
+ $_ac2_name = '';
+ $_ac3_name = '';
+ $_w2_name = '';
+ $_w3_name = '';
+ $_m2_name = '';
+ $_m3_name = '';
+ $_d2_name = '';
+ $_d3_name = '';
+$sql = "SELECT * FROM tolly_release s WHERE s.uid = ".$uid." and s.rid = ".$rid;
+//echo $sql;
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+	// output data of each row
+	if($row = mysqli_fetch_assoc($result)) {
+		$rel_date = $row["rel_date"];
+		$r1 = $row["r1"];
+		$r2 = $row["r2"];
+		$r3 = $row["r3"];
+		$poster = $row["poster"];
+		$max_days = $row["max_days"];
+		
+		
+		
+		$fif = $row["50d_cen"];
+		$sev = $row["75d_cen"];		
+		$hun = $row["100d_cen"];
+		$onf = $row["150d_cen"];
+		$five = $row["175d_cen"];
+		$t5 = $row["25d_cen"];
+	
+		
+		
+	}
+}
+
+
+
+
+$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.uid = ".$uid." and s.rid = ".$rid;
+//echo $sql;
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+	// output data of each row
+	
+	
+	if($row = mysqli_fetch_assoc($result)) {
+		global  $aid , $acid, $did , $wid , $mid , $eid , $cid , $budget    , $collection, $profit    , $sofar     , $grade     , $status    , $pic , $dt  , $notes     , $dname     , $aname     , $acname    , $s   , $progress  , $rating    , $result    ;
+		$aid       = 	$row["aid"];
+		$acid      = 	$row["acid"];
+		$did       = 	$row["did"];
+		$wid       = 	$row["wid"];
+		$mid       = 	$row["mid"];
+		$eid       = 	$row["eid"];
+		$cid       = 	$row["cid"];
+		
+		$budget    = 	$row["budget"];
+		$budget    = 	ceil($budget);
+		
+		$collection= 	$row["collection"];
+		$collection    = 	ceil($collection);
+		
+		$profit    = 	$row["profit"];
+		$profit    = 	ceil($profit);
+		
+		$sofar     = 	$row["sofar"];
+		$sofar    = 	ceil($sofar);
+		
+		
+		
+		$grade     = 	$row["grade"];
+		$status    = 	$row["status"];
+		$pic       = 	$row["pic"];
+		$dt        = 	$row["dt"];
+		$notes     = 	$row["notes"];
+		
+		$s         = 	$row["s"];
+		$progress  = 	$row["progress"];
+		$rating    = 	$row["rating"];
+		$hit    	= 	$row["result"];
+		
+		$dname     = 	$row["dname"];
+		$aname     = 	$row["aname"];
+		$acname    = 	$row["acname"];
+		$cinename = $row["cinename"];
+		 $ediname = $row["ediname"];
+		  $musname = $row["musname"];
+		   $wriname=$row["wriname"];
+		   $title = $row["title"];
+		
+		//echo $hit;
+		   $_a2 = $row["a2"];
+		   $_a3 = $row["a3"];
+		   $_ac2 = $row["ac2"];
+		   $_ac3 = $row["ac3"];
+		   $_w2 = $row["w2"];
+		   $_w3 = $row["w3"];
+		   $_m2 = $row["m2"];
+		   $_m3 = $row["m3"];
+		   $_d2 = $row["d2"];
+		   $_d3 = $row["d3"];
+		   
+		   
+		   $_a2_name = $row["a2_name"];
+		   $_a3_name = $row["a3_name"];
+		   $_ac2_name = $row["ac2_name"];
+		   $_ac3_name = $row["ac3_name"];
+		   $_w2_name = $row["w2_name"];
+		   $_w3_name = $row["w3_name"];
+		   $_m2_name = $row["m2_name"];
+		   $_m3_name = $row["m3_name"];
+		   $_d2_name = $row["d2_name"];
+		   $_d3_name = $row["d3_name"];
+
+	}
+}
+
+
+$upp = strtoupper($title.$rid);
+
+function clean($string) {
+	$string = str_replace(' ', '', $string); // Replaces all spaces with hyphens.
+
+	return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+}
+
+
+
+$path = 'poster/done/'.$upp.".jpeg";
+$path_50 = 'poster/done/'.$upp."_50.jpeg";
+$path_100 = 'poster/done/'.$upp."_100.jpeg";
+$path_175 = 'poster/done/'.$upp."_175.jpeg";
+
+$path_150 = 'poster/done/'.$upp."_150.jpeg";
+$path_75 = 'poster/done/'.$upp."_75.jpeg";
 
 $b  = strtoupper($_GET["b"]);
 $p  = strtoupper($_GET["p"]);
