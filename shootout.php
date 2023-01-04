@@ -1316,13 +1316,11 @@ $r3 = 0;
 
 // -----Review Ratings
 
- $ratx = $rateavg * 4;
- $ratx = floor($ratx);
- $ratx = $ratx / 4; 
  
-$r1 = ($ratx+0.25)
+ 
+$r1 = ($rateavg+0.25)
 $r2 = $rateavg;
-$r3 = ($ratx-0.25)
+$r3 = ($rateavg-0.25)
 
 $profit = 0;
 $profit = $max_coll - $budget;
