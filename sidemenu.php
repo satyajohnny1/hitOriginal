@@ -2,7 +2,7 @@
 
                     <ul class="menu accordion-menu">
                         <li class="active"><a href="userdashboard.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-home"></span><p>Dashboard</p></a></li>
-                          <li><a href="earn.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-user"></span><p>Earn Money</p></a></li>
+                          <!--<li><a href="earn.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-user"></span><p>Earn Money</p></a></li>  -->   
                           <!--<li><a href="distribute.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-user"></span><p>Distribute</p></a></li>  -->                         
                         <li><a href="makemovie.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-th"></span><p>Make Movie</p></a> </li>                       
                         <li><a href="readyforshoot.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-log-in"></span><p>Shoot</p></a>
