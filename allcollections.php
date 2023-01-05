@@ -56,6 +56,8 @@ $uid = $_SESSION['s_uid'];
                                                 <th>Budget</th>
                                                 <th>1W_coll</th>
                                                 <th>2W_coll</th> 
+                                                <th>25d_coll</th> 
+                                                <th>50d_coll</th> 
                                                 <th>Collec</th>
                                                 <th>Rel'Cen</th>
                                                 <th>1W'Cen</th>
@@ -105,6 +107,8 @@ $uid = $_SESSION['s_uid'];
 										$days = $row1["max_days"];
 										$w1_coll = $row1["1w_coll"];
 										$w2_coll = $row1["2w_coll"];
+										$d25_coll = $row1["25d_coll"];
+										$d50_coll = $row1["50d_coll"];
 												
 											
                                           		echo "<tr>";
@@ -116,6 +120,8 @@ $uid = $_SESSION['s_uid'];
                                              	echo "<td>".round($budget/10000000, 2)."</td>";
                                              	echo "<td>".round($w1_coll/10000000, 2)."</td>";
                                              	echo "<td>".round($w2_coll/10000000, 2)."</td>";
+                                             	echo "<td>".round($d25_coll/10000000, 2)."</td>";
+                                             	echo "<td>".round($d50_coll/10000000, 2)."</td>";
                                              	echo "<td>".round($collection/10000000, 2)."</td>";
 						                        echo "<td><b>".$rel_cen."</b></td>";
                                              	echo "<td><b>".$w1_cen."</b></td>";
