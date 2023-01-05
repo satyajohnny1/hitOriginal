@@ -1318,10 +1318,10 @@ $r3 = 0;
 
  
  
-$r1 = ($rateavg+0.25);
+$r1 = floor($rateavg) + ceil( ($rateavg-floor($rateavg))/0.25) * 0.25;
 $r2 = $rateavg;
-$r3 = ($rateavg-0.25);
-
+$r3 = floor($rateavg) + floor(($rateavg-floor($rateavg))/0.25) * 0.25;
+	
 $profit = 0;
 $profit = $max_coll - $budget;
 
