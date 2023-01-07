@@ -156,7 +156,7 @@ if (mysqli_num_rows($result) > 0) {
 							  <div class="form-group">
                                                             <label for="input-Default" class="col-sm-2 control-label">Balance</label>
                                                             <div class="col-sm-5">
-                                                                <input type="text" class="form-control"  name="bal" id="bal"   value="<?php echo $balnc?>" disabled>
+                                                                <input type="text" class="form-control"  name="bal" id="bal"   value="<?php echo $balnc?>">
                                                             </div>
                                                         </div>   
                                                         
