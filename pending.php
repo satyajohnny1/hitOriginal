@@ -83,7 +83,7 @@ session_start();
 `actor_id` NOT IN (SELECT `a2` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) AND 
 `actor_id` NOT IN (SELECT `a3` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) ";
 
-                                                                 echo '<h2>'.$sql.'</h2>';
+                                                                 echo '<code>'.$sql.'</code>';
                                                     			$result = mysqli_query($conn, $sql);
                                                     			
                                                     			if (mysqli_num_rows($result) > 0) {
