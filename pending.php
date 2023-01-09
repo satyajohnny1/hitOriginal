@@ -73,8 +73,8 @@ session_start();
                                                                 $oriid = $row["max_page"];
 
                                                                 
-                                                                $minid = floor($oriid/100)/*100;
-                                                                $maxid = ceil($oriid/100)/*100; 
+                                                                $minid = floor($oriid/100)*100;
+                                                                $maxid = ceil($oriid/100)*100; 
                                                                 echo "<h1> Check me : $minid, $maxid , $oriid</h1> ";
                                                                 }    
 
