@@ -64,7 +64,7 @@ session_start();
                                                                 
 
                                                             $sql = "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot";
-                                                                echo '<h2>'.$sql.'</h2>';
+                                                                echo '<p>'.$sql.'</p>';
                                                                 $result = mysqli_query ( $conn, $sql );	 
                                                                 if (mysqli_num_rows ( $result ) > 0) {
                                                                 $row = mysqli_fetch_assoc($result);
@@ -75,7 +75,7 @@ session_start();
                                                                 
                                                                 $minid = floor($oriid/100)*100;
                                                                 $maxid = ceil($oriid/100)*100; 
-                                                                echo "<h1> Check me : $minid, $maxid , $oriid</h1> ";
+                                                                echo "<p> Check me : $minid, $maxid , $oriid</p> ";
                                                                 }    
 
                                                     			$sql = "SELECT * FROM `tolly_actor` WHERE 
