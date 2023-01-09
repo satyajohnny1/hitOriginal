@@ -70,12 +70,12 @@ session_start();
                                                                 $row = mysqli_fetch_assoc($result);
                                                                 
                                                             
-                                                                $minid = $row["max_page"];
+                                                                $oriid = $row["max_page"];
 
                                                                 
-                                                                $minid = (round($minid/100)*100-100);
-                                                                $maxid = ($minid+100); 
-                                                                echo "<h1> Check me : $minid, $maxid </h1> ";
+                                                                $minid = floor($oriid/100)/*100;
+                                                                $maxid = ceil($oriid/100)/*100; 
+                                                                echo "<h1> Check me : $minid, $maxid , $oriid</h1> ";
                                                                 }    
 
                                                     			$sql = "SELECT * FROM `tolly_actor` WHERE 
