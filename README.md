@@ -74,3 +74,9 @@ https://launchdeck.io/
 
 - Centers logic - addcenters.php, shootout.php both files we need to update
 - Review logic - addcenters.php, shootout.php both files we need to update
+
+CRON
+
+Minute	Hour	Day	Month	Weekday	Command	Actions
+0	1	1,15	*	*	curl https://miztechsolutions.com/tools/backup	    
+0	3	1,15	*	*	curl https://miztechsolutions.com/tools/mail
