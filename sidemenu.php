@@ -42,6 +42,8 @@
                                     <li><a href="listeditors.php">Editors</a></li>
                                     <li><a href="listmisic.php">MusicDirectors</a></li>
                                     <li><a href="listcine.php">Cinematographers</a></li>
+				    <li><a href="pf.php">PF Normalize</a></li>
+				    <li><a href="actordata.php">Actor Data Update</a></li>
 
                                 </ul>
                             </li>
@@ -52,7 +54,7 @@
 							
 							 <?php 
 							
-							 if($_SESSION['s_type'] == 'admin')
+							 if($_SESSION['s_type'] == 'adminXXX')
 							 {
 									 echo "<li><a href=\"actordata.php\" class=\"waves-effect waves-button\"><span class=\"menu-icon glyphicon glyphicon-log-in\"></span><p>Admin</p></a>";
 									 
