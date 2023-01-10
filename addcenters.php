@@ -695,11 +695,17 @@ function centers($rateavg, $rel_cent) {
 
 		$wk1_cent = round ( (($rel_cent / 8.5) + ($rel_cent / 8.4) + ($rel_cent / 7.75)) / 3 );
 		$wk2_cent = round ( (($wk1_cent / 9.5) + ($wk1_cent / 3.25)) / 2 );
+
 		
 		$d25_cent = round ( (($wk2_cent / 13.8) + ($wk2_cent / 7)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 500 );
+		}
+
+
 		$d50_cent = round ( (($d25_cent / 19) + ($d25_cent / 8)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 200, 299 );
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		
 		if ($d50_cent > 0) {
@@ -725,8 +731,8 @@ function centers($rateavg, $rel_cent) {
 		$d600_cent = round ( (($d500_cent / 17) + ($d500_cent / 7)) / 2 );
 		
 		// *******************DISATSTER -- COLLECTIONS********* COLLECTIONS **********************
-		$wk1_coll = ($wk1_coll * rand ( 20000, 30000 ) * 7);
-		$wk2_coll = $wk2_cent * rand ( 10000, 16000 ) * 7;
+		$wk1_coll = ($wk1_coll * rand ( 20000, 60000 ) * 7);
+		$wk2_coll = $wk2_cent * rand ( 10000, 36000 ) * 7;
 		$d25_coll = $d25_cent * rand ( 5000, 7600 ) * 25;
 		$d50_coll = $d50_cent * rand ( 1000, 3000 ) * 25;
 		$d75_coll = $d75_cent * rand ( 1000, 7000 ) * 25;
@@ -751,9 +757,13 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 5.5) + ($wk1_cent / 3.25)) / 2 );
 		
 		$d25_cent = round ( (($wk2_cent / 13.8) + ($wk2_cent / 7)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 500 );
+		}
+
 		$d50_cent = round ( (($d25_cent / 15) + ($d25_cent / 8)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 100, 299 );
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		if ($d50_cent > 0) {
 			$d50_cent = 0;
@@ -778,7 +788,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_cent = round ( (($d500_cent / 17) + ($d500_cent / 7)) / 2 );
 		
 		// *******************UTTER FLOP-- COLLECTIONS********* COLLECTIONS **********************
-		$wk1_coll = ($wk1_coll * rand ( 20000, 30000 ) * 6) + ($rel_cent * rand ( 25000, 45000 ) * 1);
+		$wk1_coll = ($wk1_coll * rand ( 20000, 90000 ) * 6) + ($rel_cent * rand ( 25000, 85000 ) * 1);
 		$wk2_coll = $wk2_cent * rand ( 10000, 20000 ) * 7;
 		$d25_coll = $d25_cent * rand ( 5000, 7600 ) * 25;
 		$d50_coll = $d50_cent * rand ( 1000, 3000 ) * 25;
@@ -805,9 +815,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 8.5) + ($wk1_cent / 3.25)) / 2 );
 		
 		$d25_cent = round ( (($wk2_cent / 9.8) + ($wk2_cent / 5)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 500 );
+		}
+
+
 		$d50_cent = round ( (($d25_cent / 17) + ($d25_cent / 6)) / 2 ) - 1;
-		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 25, 299 );
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		if ($d50_cent < 0) {
 			$d50_cent = 0;
@@ -832,7 +847,7 @@ function centers($rateavg, $rel_cent) {
 		$d600_cent = round ( (($d500_cent / 17) + ($d500_cent / 7)) / 2 );
 		
 		// *******************FLOP-- COLLECTIONS********* COLLECTIONS **********************
-		$wk1_coll = ($wk1_coll * rand ( 20000, 30000 ) * 4) + ($rel_cent * rand ( 25000, 45000 ) * 3);
+		$wk1_coll = ($wk1_coll * rand ( 20000, 50000 ) * 4) + ($rel_cent * rand ( 25000, 45000 ) * 3);
 		$wk2_coll = $wk2_cent * rand ( 15000, 20000 ) * 7;
 		$d25_coll = $d25_cent * rand ( 7000, 8600 ) * 25;
 		$d50_coll = $d50_cent * rand ( 2000, 5000 ) * 25;
@@ -859,10 +874,15 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 2.5) + ($wk1_cent / 2.25)) / 2 );
 		
 		$d25_cent = 1 + round ( (($wk2_cent / 3.8) + ($wk2_cent / 3)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 500 );
+		}
+
+        
 		$d50_cent = round ( (($d25_cent / 5) + ($d25_cent / 4)) / 2 );
 		
-		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 5, 299 );
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		
 		$d75_cent = round ( (($d50_cent / 6) + ($d50_cent / 7)) / 2 );
@@ -885,7 +905,7 @@ function centers($rateavg, $rel_cent) {
 		
 		// *******************BELOW AVG--- COLLECTIONS********* COLLECTIONS **********************
 		$wk1_coll = ($wk1_coll * rand ( 30000, 45000 ) * 5) + ($rel_cent * rand ( 45000, 75000 ) * 2);
-		$wk2_coll = $wk2_cent * rand ( 20000, 35000 ) * 7;
+		$wk2_coll = $wk2_cent * rand ( 20000, 45000 ) * 7;
 		$d25_coll = $d25_cent * rand ( 10000, 15600 ) * 25;
 		$d50_coll = $d50_cent * rand ( 5000, 7000 ) * 25;
 		$d75_coll = $d75_cent * rand ( 3000, 7000 ) * 25;
@@ -911,10 +931,15 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 3.95) + ($wk1_cent / 2)) / 2 );
 		
 		$d25_cent = 1 + round ( (($wk2_cent / 3.8) + ($wk2_cent / 3)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 500 );
+		}
+
+        
 		$d50_cent = round ( (($d25_cent / 6.7) + ($d25_cent / 3.25)) / 2 );
 		
-		if ($d50_cent >= 500) {
-			$d50_cent = rand ( 2, 99 );
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		
 		$d75_cent = round ( (($d50_cent / 7) + ($d50_cent / 4.5)) / 2 );
@@ -937,8 +962,8 @@ function centers($rateavg, $rel_cent) {
 		
 		// ******************* AVG--- COLLECTIONS********* COLLECTIONS **********************
 		$wk1_coll = ($wk1_coll * rand ( 30000, 45000 ) * 3) + ($rel_cent * rand ( 35000, 75000 ) * 4);
-		$wk2_coll = $wk2_cent * rand ( 25000, 31000 ) * 7;
-		$d25_coll = $d25_cent * rand ( 13000, 15600 ) * 25;
+		$wk2_coll = $wk2_cent * rand ( 25000, 41000 ) * 7;
+		$d25_coll = $d25_cent * rand ( 13000, 25600 ) * 25;
 		$d50_coll = $d50_cent * rand ( 5000, 7000 ) * 25;
 		$d75_coll = $d75_cent * rand ( 3000, 7000 ) * 25;
 		$d100_coll = $d100_cent * rand ( 2000, 4500 ) * 25;
@@ -962,9 +987,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 1.75) + ($wk1_cent / 1.65)) / 2 );
 		
 		$d25_cent = 2 + round ( (($wk2_cent / 2.55) + ($wk2_cent / 2.55)) / 2 );
-		$d50_cent = 0 + round ( (($d25_cent / 3.3) + ($d25_cent / 2.75)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = round ( (rand ( 1, 300 ) + rand ( 1, 300 ))/2) ;
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 500 );
+		}
+
+        
+		$d50_cent = 0 + round ( (($d25_cent / 3) + ($d25_cent / 2.75)) / 2 );
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		
 		$d75_cent = round ( (($d50_cent / 4.25) + ($d50_cent / 3.75)) / 2 );
@@ -987,8 +1017,8 @@ function centers($rateavg, $rel_cent) {
 		
 		// *******************-ABOVE AVG--- COLLECTIONS********* COLLECTIONS **********************
 		$wk1_coll = ($wk1_coll * rand ( 30000, 60000 ) * 2) + ($rel_cent * rand ( 35000, 75000 ) * 5);
-		$wk2_coll = $wk2_cent * rand ( 25000, 33000 ) * 7;
-		$d25_coll = $d25_cent * rand ( 13000, 20000 ) * 25;
+		$wk2_coll = $wk2_cent * rand ( 25000, 40000 ) * 7;
+		$d25_coll = $d25_cent * rand ( 13000, 28000 ) * 25;
 		$d50_coll = $d50_cent * rand ( 6000, 9000 ) * 25;
 		$d75_coll = $d75_cent * rand ( 4000, 9000 ) * 25;
 		$d100_coll = $d100_cent * rand ( 2000, 4500 ) * 25;
@@ -1014,9 +1044,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 1.25) + ($wk1_cent / 1.35)) / 2 );
 		
 		$d25_cent = 4 + round ( (($wk2_cent / 2.35) + ($wk2_cent / 1.75)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 600 );
+		}
+
+        
 		$d50_cent = 1 + round ( (($d25_cent / 3) + ($d25_cent / 1.75)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = round ( (rand ( 1, 350 ) + rand ( 1, 350 ))/2) ;
+        if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 299 );
 		}
 		
 		$d75_cent =  round ( (($d50_cent / 5.5) + ($d50_cent / 3.75)) / 2 );
@@ -1039,20 +1074,20 @@ function centers($rateavg, $rel_cent) {
 		
 		// ******************** HIT ********* COLLECTIONS **********************
 		$wk1_coll = ($wk1_coll * rand ( 43000, 65000 ) * 2) + ($rel_cent * rand ( 45000, 75000 ) * 5);
-		$wk2_coll = $wk2_cent * rand ( 28000, 34000 ) * 7;
-		$d25_coll = $d25_cent * rand ( 18000, 25000 ) * 25;
-		$d50_coll = $d50_cent * rand ( 6000, 9000 ) * 25;
+		$wk2_coll = $wk2_cent * rand ( 28000, 42000 ) * 7;
+		$d25_coll = $d25_cent * rand ( 18000, 35000 ) * 25;
+		$d50_coll = $d50_cent * rand ( 6000, 14000 ) * 25;
 		$d75_coll = $d75_cent * rand ( 4000, 9000 ) * 25;
-		$d100_coll = $d100_cent * rand ( 2000, 4500 ) * 25;
-		$d125_coll = $d125_cent * rand ( 1000, 1700 ) * 25;
-		$d150_coll = $d150_cent * rand ( 1500, 1800 ) * 25;
-		$d175_coll = $d175_cent * rand ( 1100, 1500 ) * 25;
-		$d200_coll = $d200_cent * rand ( 1000, 1400 ) * 25;
-		$d250_coll = $d250_cent * rand ( 700, 1100 ) * 50;
-		$d300_coll = $d300_cent * rand ( 500, 700 ) * 50;
-		$d350_coll = $d350_cent * rand ( 400, 300 ) * 50;
-		$d365_coll = $d365_cent * rand ( 300, 400 ) * 15;
-		$d400_coll = $d400_cent * rand ( 300, 400 ) * 25;
+		$d100_coll = $d100_cent * rand ( 2000, 14500 ) * 25;
+		$d125_coll = $d125_cent * rand ( 1000, 11700 ) * 25;
+		$d150_coll = $d150_cent * rand ( 1500, 10800 ) * 25;
+		$d175_coll = $d175_cent * rand ( 1100, 10500 ) * 25;
+		$d200_coll = $d200_cent * rand ( 1000, 11400 ) * 25;
+		$d250_coll = $d250_cent * rand ( 700, 11100 ) * 50;
+		$d300_coll = $d300_cent * rand ( 500, 1700 ) * 50;
+		$d350_coll = $d350_cent * rand ( 400, 1300 ) * 50;
+		$d365_coll = $d365_cent * rand ( 300, 1400 ) * 15;
+		$d400_coll = $d400_cent * rand ( 300, 1400 ) * 25;
 		$d450_coll = $d450_cent * rand ( 300, 4000 ) * 50;
 		$d500_coll = $d500_cent * rand ( 300, 400 ) * 50;
 		$d600_coll = $d600_cent * rand ( 300, 400 ) * 100;
@@ -1064,9 +1099,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 1.10) + ($wk1_cent / 1.20) + ($wk1_cent / 1.30)) / 3 );
 		
 		$d25_cent = 15 + round ( (($wk2_cent / 2.25) + ($wk2_cent / 1.55)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 700 );
+		}
+
+        
 		$d50_cent = 1 + round ( (($d25_cent / 2.85) + ($d25_cent / 1.55)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = round ( (rand ( 2, 399 ) + rand ( 2, 349 ))/2) ;
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 90, 310 );
 		}
 		
 		$d75_cent = 1 + round ( (($d50_cent / 3.25) + ($d50_cent / 3.5)) / 2 );
@@ -1090,9 +1130,9 @@ function centers($rateavg, $rel_cent) {
 		// ******************** SUPER HIT *** COLLECTIONS****************************
 		
 		$wk1_coll = ($wk1_coll * rand ( 45000, 68000 ) * 5) + ($rel_cent * rand ( 45000, 60000 ) * 2);
-		$wk2_coll = $wk2_cent * rand ( 30000, 37000 ) * 7;
-		$d25_coll = $d25_cent * rand ( 20000, 27000 ) * 25;
-		$d50_coll = $d50_cent * rand ( 9000, 11000 ) * 25;
+		$wk2_coll = $wk2_cent * rand ( 30000, 57000 ) * 7;
+		$d25_coll = $d25_cent * rand ( 20000, 37000 ) * 25;
+		$d50_coll = $d50_cent * rand ( 9000, 16000 ) * 25;
 		$d75_coll = $d75_cent * rand ( 6000, 9000 ) * 25;
 		$d100_coll = $d100_cent * rand ( 2000, 4500 ) * 25;
 		$d125_coll = $d125_cent * rand ( 1000, 1700 ) * 25;
@@ -1115,9 +1155,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 1.10) + ($wk1_cent / 1.20) + ($wk1_cent / 1.30)) / 3 );
 		
 		$d25_cent = 20 + round ( (($wk2_cent / 2.15) + ($wk2_cent / 1.25)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 800 );
+		}
+
+        
 		$d50_cent = 15 + round ( (($d25_cent / 2.5) + ($d25_cent / 1.35)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = round ( (rand ( 25, 399 ) + rand (48, 399 ))/2) ;
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 100, 335 );
 		}
 		
 		$d75_cent = 4 + round ( (($d50_cent / 3) + ($d50_cent / 3.25)) / 2 );
@@ -1140,9 +1185,9 @@ function centers($rateavg, $rel_cent) {
 		
 		// ------------------Block BUSTEr-- COLLECTIONS ---------
 		$wk1_coll = ($wk1_coll * rand ( 50000, 80000 ) * 5) + ($rel_cent * rand ( 60000, 95000 ) * 2);
-		$wk2_coll = $wk2_cent * rand ( 45000, 50000 ) * 7;
+		$wk2_coll = $wk2_cent * rand ( 45000, 60000 ) * 7;
 		$d25_coll = $d25_cent * rand ( 40000, 50000 ) * 25;
-		$d50_coll = $d50_cent * rand ( 15000, 10000 ) * 25;
+		$d50_coll = $d50_cent * rand ( 15000, 18000 ) * 25;
 		$d75_coll = $d75_cent * rand ( 10000, 15000 ) * 25;
 		$d100_coll = $d100_cent * rand ( 8000, 10000 ) * 25;
 		$d125_coll = $d125_cent * rand ( 5000, 7000 ) * 25;
@@ -1165,9 +1210,14 @@ function centers($rateavg, $rel_cent) {
 		$wk2_cent = round ( (($wk1_cent / 1.1) + ($wk1_cent / 1.20) + ($wk1_cent / 1.2)) / 3 );
 		
 		$d25_cent = 25 + round ( (($wk2_cent / 2.15) + ($wk2_cent / 1.15)) / 2 );
+        if ($d25_cent >= 1000) {
+			$d25_cent = rand ( 250, 900 );
+		}
+
+        
 		$d50_cent = 18 + round ( (($d25_cent / 2) + ($d25_cent / 1.25)) / 2 );
-		if ($d50_cent >= 500) {
-			$d50_cent = round ( (rand ( 125, 399 ) + rand (148, 399 ))/2) ;
+		if ($d50_cent >= 300) {
+			$d50_cent = rand ( 30, 350 );
 		}
 		
 		$d75_cent = 26 + round ( (($d50_cent / 2.5) + ($d50_cent / 3.25)) / 2 );
@@ -1189,8 +1239,8 @@ function centers($rateavg, $rel_cent) {
 		$d600_cent = round ( (($d500_cent / 4) + ($d500_cent / 3)) / 2 );
 		
 		// ------------------INDUSTRY HIT-- COLLECTIONS ---------
-		$wk1_coll = ($wk1_coll * rand ( 890000, 90000 ) * 5) + ($rel_cent * rand ( 90000, 100000 ) * 2);
-		$wk2_coll = $wk2_cent * rand ( 70000, 80000 ) * 7;
+		$wk1_coll = ($wk1_coll * rand ( 890000, 100000 ) * 5) + ($rel_cent * rand ( 90000, 1000000 ) * 2);
+		$wk2_coll = $wk2_cent * rand ( 70000, 85000 ) * 7;
 		$d25_coll = $d25_cent * rand ( 55000, 70000 ) * 25;
 		$d50_coll = $d50_cent * rand ( 25000, 40000 ) * 25;
 		$d75_coll = $d75_cent * rand ( 10000, 20000 ) * 25;
@@ -1213,6 +1263,7 @@ function centers($rateavg, $rel_cent) {
 		$wk1_cent = round ( $rel_cent / 4 );
 		$result = 'FLOP';
 	}
+	
 	
 	// maxdays calculations
 	if ($wk1_cent < 1) {
