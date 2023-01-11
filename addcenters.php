@@ -80,6 +80,7 @@ $w2 = 0;
 $w3 = 0;
 
 $sid = $_GET ["rid"];
+$rid = $_GET ["rid"];
 $uid = $_SESSION ['s_uid'];
 $s_bal = $_SESSION ['s_bal'];
 $ratesum = 0;
