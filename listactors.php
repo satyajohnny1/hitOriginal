@@ -69,9 +69,11 @@ session_start();
                                                     					$dir_id = $row["actor_id"];
                                                     					$dir_name = $row["actor_name"];
                                                     					$dir_rate = $row["actor_rate"];
-											
-											$dir_pic = clean(strtolower($dir_name)).'.png';
-											$dir_pic = "/poster/actors/".$dir_pic;
+
+                                                                        $lower = strtolower(trim($dir_name));
+
+    
+											                            $dir_pic = '/poster/actors/'.$lower.'.png';
                                                     					                                                   					
                                                     					$dir_cr = round(($dir_rate/10000000),2);   
                                                     					echo "<tr>";
