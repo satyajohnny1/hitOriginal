@@ -1332,6 +1332,13 @@ $sql1 = "UPDATE tolly_ready_for_shoot SET status='shootout',  collection=" . $ma
 echo "BUDGET IS  " . $budget;
 echo 'Update --->' . $sql1;
 mysqli_query ( $conn, $sql1 );
+	
+	  
+$sqlDel = "DELETE FROM tolly_release WHERE  uid = ".$uid." and rid = ".$sid ;
+ 	echo "<br><br>-----> ".$sqlDel;
+ echo 'DELETE --->'.$sqlDel;
+ mysqli_query ( $conn, $sqlDel);
+	
 
 $sql = "INSERT INTO tolly_release (uid, rid, rel_cen, a1_cen, a2_cen, a3_cen, a4_cen, a5_cen, a1, a2, a3, a4, a5, a6, 1w_coll, 2w_coll, 25d_coll, 50d_coll, 75d_coll, 100d_coll, 125d_coll, 150d_coll, 175d_coll, total_coll, 1w_cen, 2w_cen, 25d_cen, 50d_cen, 75d_cen, 100d_cen, 125d_cen, 150d_cen, 175d_cen, 200d_cen, 250d_cen, 300d_cen, 350d_cen, 400d_cen, max_days, max_cent, 50cen, 100cen, 175cen, notes,r1,r2,r3) VALUES
  		 (" . $uid . ", " . $sid . ", " . $rel_cent . ", " . $a_cent . ", " . $a_cent . ", " . $a_cent . ", " . $a_cent . ", " . $a_cent . ", " . $a_bud . ", " . $a_bud . ", " . $a_bud . ", " . $a_bud . ", " . $a_bud . ", " . $a_bud . ", " . $wk1_coll . ", " . $wk2_coll . ", " . $d25_coll . ", " . $d50_coll . ", " . $d75_coll . ",
@@ -1522,16 +1529,16 @@ echo "</p> <p> 300 Days :".$d300_str;
 echo "</p> <p> Max Days :".$dMax;
 
 
+$sqlDel1 = "DELETE FROM centers WHERE rid = ".$rid ;
+ echo 'DELETE --->'.$sqlDel1;
+ mysqli_query ( $conn, $sqlDel1);
 
-
-$sqlCenters = "INSERT INTO centers (rid, 25list, 50list, 75list, 100list, 150list, 175list, 200list, 250list, 300list, maxlist) VALUES ( '" .$rid . "', '" .$d25_str . "', '" .$d50_str . "', '" .$d75_str . "', '" .$d100_str . "', '" .$d150_str . "', '" .$d175_str . "', '" .$d200_str . "', '" .$d250_str . "', '" .$d300_str . "', '" .$dMax . "')";
-
+$sqlCenters = "INSERT INTO centers (rid, 25list, 50list, 75list, 100list, 150list, 175list, 200list, 250list, 300list, maxlist) VALUES ( '" .$sid . "', '" .$d25_str . "', '" .$d50_str . "', '" .$d75_str . "', '" .$d100_str . "', '" .$d150_str . "', '" .$d175_str . "', '" .$d200_str . "', '" .$d250_str . "', '" .$d300_str . "', '" .$dMax . "')";
 echo "</p> <p> Query :".$sqlCenters;
-
 mysqli_query ( $conn, $sqlCenters );
 
 
-header('released.php?news='.$news.'&rid='.$rid);
+header('released.php?news='.$news.'&rid='.$sid);
 echo "<h2> After Redirect</h2>";
 	
 function floorToFraction($number, $denominator = 1)
