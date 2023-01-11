@@ -42,6 +42,10 @@ Infinite Free DB Backup
 1. Excel to SQL file Conversion
 https://sqlizer.io/
 
+### Poster Generation for Actors
+ - Download Image
+ - https://www.remove.bg/
+
 
 
 # Deployment
