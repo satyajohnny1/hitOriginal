@@ -63,9 +63,11 @@ https://launchdeck.io/
 
 # Features Upcoming
 - Poster Generation with Telugu Font
-- Centers by type & city
-- New Fonts for poster 
+- ~~Centers by type & city~~
+- ~~New Fonts for poster ~~
 - Regenerate all Posters, if files deleted in server
+- Update Actors photos
+- Update Production Company Logo on Poster
 
 
 
