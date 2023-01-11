@@ -69,7 +69,10 @@ session_start();
                                                     					$dir_id = $row["actor_id"];
                                                     					$dir_name = $row["actor_name"];
                                                     					$dir_rate = $row["actor_rate"];
-                                                    					$dir_pic = $row["actor_pic"];                                                    					
+											
+											$dir_pic = clean(strtolower($dir_name)).'.png';
+											$dir_pic = "actors/".$heroimg;
+                                                    					                                                   					
                                                     					$dir_cr = round(($dir_rate/10000000),2);   
                                                     					echo "<tr>";
                                                     					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='actor.php?id=$dir_id' class='btn'></a></td>";
