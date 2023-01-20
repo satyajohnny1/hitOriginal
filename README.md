@@ -105,3 +105,5 @@ Minute	Hour	Day	Month	Weekday	Command	Actions
 0	1	1,15	*	*	curl https://miztechsolutions.com/tools/backup	    
 0	3	1,15	*	*	curl https://miztechsolutions.com/tools/mail
 ```
+If you got this error `This site requires Javascript to work, please enable Javascript in your browser or use a browser with Javascript support`,
+please check BACKUP_DIR in bkp.php & sendmail.php files
