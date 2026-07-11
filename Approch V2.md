@@ -366,3 +366,187 @@ Best practical version for this codebase:
 4. Score the movie using story fit, beat fit, continuity, crew bonus, and budget bonus
 
 This keeps input small, avoids irritation, and still gives the user meaningful control over the movie outcome.
+
+## Approach 3: Hybrid 2 Text + 3 Visual
+
+This version mixes two small text inputs with three visual/clickable inputs.
+
+### Why This Is Better
+
+- Less typing
+- More movie-like
+- Easier for mobile users
+- Feels interactive
+- Still gives enough signal for scoring
+
+### Inputs
+
+#### Text Input 1: Story Line
+
+Ask for one bounded movie premise before shooting starts.
+
+Constraints:
+
+- 200 to 500 characters
+- One paragraph only
+
+Purpose:
+
+- Sets the base narrative
+- Drives the scoring engine
+- Gives context for all scene cards
+
+#### Text Input 2: Tone or Intent
+
+Ask one short text field for the film's overall mood or intent.
+
+Examples:
+
+- Family drama
+- Mass action entertainer
+- Emotional revenge story
+- Romantic comedy
+- Thriller with a twist
+
+This is a small second input that helps the system understand what kind of movie the user wants to make.
+
+#### Visual Input 1: Intro Card
+
+User taps a visual card for the opening tone of the movie.
+
+Examples:
+
+- Family setup
+- Hero introduction
+- Mystery setup
+- Love track
+- Action intro
+
+#### Visual Input 2: Interval Block Card
+
+User taps a visual card for the big turning point.
+
+Examples:
+
+- Twist reveal
+- Betrayal
+- Sudden loss
+- Hero setback
+- Major chase
+
+#### Visual Input 3: Climax Card
+
+User taps a visual card for the final payoff.
+
+Examples:
+
+- Victory
+- Sacrifice
+- Emotional win
+- Mass fight
+- Tragic ending
+
+### UI Flow
+
+#### Screen 1: Story Setup
+
+Show:
+
+- Title
+- Story line textarea
+- Tone/intent text input
+- Continue button
+
+Goal:
+
+- Capture the movie's core idea in two small inputs
+
+#### Screen 2: Visual Beat Picker
+
+Show a five-step timeline:
+
+- Intro
+- First Half
+- Interval Block
+- Second Half
+- Climax
+
+For the first, third, and fifth slots, show clickable cards.
+
+For the other two slots:
+
+- Either auto-fill based on story + previous picks
+- Or show simplified buttons like `safe`, `balanced`, `bold`
+
+#### Screen 3: Review and Confirm
+
+Show a summary:
+
+- Story line
+- Tone
+- Selected beat cards
+- Estimated quality
+- Estimated hit/flop range
+
+User taps `Confirm Shooting` to begin the shooting flow.
+
+### Randomization Rules
+
+Randomize only the presentation, not the meaning.
+
+Good randomization:
+
+- Shuffle the card order
+- Shuffle which icon appears on the card
+- Rotate the card layout slightly
+
+Bad randomization:
+
+- Changing the actual category unexpectedly
+- Making the scoring unpredictable
+
+### Scoring Model for Approach 3
+
+Use the same weighted structure as Approach 2, but give extra weight to visual beat selection.
+
+Suggested weights:
+
+- Story fit: 20%
+- Tone fit: 15%
+- Visual beat fit: 30%
+- Continuity: 15%
+- Crew bonus: 15%
+- Budget bonus: 5%
+
+This version works well because the user makes fewer text decisions, but each visual pick still has real impact.
+
+### Implementation Notes
+
+Best place to add this flow:
+
+- `readyforshoot.php`
+
+Recommended storage:
+
+- Story line field
+- Tone field
+- Intro card field
+- Interval card field
+- Climax card field
+
+Recommended UI components:
+
+- Text area for story
+- Small text input for tone
+- Bootstrap cards or buttons for visual selections
+- One confirm button at the end
+
+### Best Use Case
+
+Approach 3 is best when you want:
+
+- Low typing
+- Good mobile usability
+- Simple scoring
+- Clear user choices
+- A stronger visual feel than plain form inputs
