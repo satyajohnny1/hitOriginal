@@ -285,3 +285,84 @@ It is:
 - better than random-only scoring
 
 It also creates a stronger gameplay loop because the user can see how their early creative choices affect the final movie result.
+
+## Approach 2: Better Low-Input Alternatives
+
+If the five-scene text input still feels too heavy, use one of these lighter options.
+
+### 1. Story Blueprint Sliders
+
+Ask for one bounded story line once, then let the user tune five sliders.
+
+Suggested sliders:
+
+- Emotion
+- Action
+- Comedy
+- Twist
+- Mass Appeal
+
+This is the lowest-friction option because the user only adjusts values instead of writing text.
+
+### 2. Beat Card Selection
+
+For each of the five beats, show 4 to 5 scene cards and let the user tap one.
+
+Example cards:
+
+- Intro: family, action, love, mystery
+- First Half: romance, fun, conflict, travel
+- Interval Block: twist, shock, betrayal, chase
+- Second Half: struggle, comeback, revenge, emotion
+- Climax: victory, sacrifice, fight, tragedy
+
+This is the cleanest option for gameplay and easiest to understand.
+
+### 3. One Keyword Per Scene
+
+Ask the user to enter only one keyword for each beat.
+
+Examples:
+
+- Intro: family
+- First Half: romance
+- Interval Block: betrayal
+- Second Half: revenge
+- Climax: sacrifice
+
+This gives enough signal for scoring while keeping typing minimal.
+
+### 4. Director Intent Path
+
+Instead of scene writing, ask the user what the director wants to do in each beat.
+
+Options:
+
+- Keep it safe
+- Build emotion
+- Add a twist
+- Increase action
+- Go for climax
+
+This feels realistic because it is how film planning often works.
+
+### 5. Audience Test Choice
+
+After each beat, show a simple test question:
+
+- Should this be more emotional?
+- Should we add a bigger twist?
+- Should we make it mass-friendly?
+
+This makes the player feel like they are shaping the movie with audience feedback.
+
+## Approach 2 Recommendation
+
+Best practical version for this codebase:
+
+1. Ask one short story line
+2. For each of the five beats, use beat cards
+3. Add one intensity selector per beat
+4. Score the movie using story fit, beat fit, continuity, crew bonus, and budget bonus
+
+This keeps input small, avoids irritation, and still gives the user meaningful control over the movie outcome.
