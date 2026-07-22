@@ -72,7 +72,11 @@ $cinename = '';
  $_m3_name = '';
  $_d2_name = '';
  $_d3_name = '';
-$sql = "SELECT * FROM tolly_release s WHERE s.uid = ".$uid." and s.rid = ".$rid;
+$sql = "SELECT s.rel_date, s.r1, s.r2, s.r3, s.poster, s.max_days,
+               s.`50d_cen`, s.`75d_cen`, s.`100d_cen`, s.`150d_cen`, s.`175d_cen`, s.`25d_cen`
+        FROM tolly_release s
+        WHERE s.uid = ".$uid." and s.rid = ".$rid
+        LIMIT 1";
 //echo $sql;
 $result = mysqli_query($conn, $sql);
 
@@ -103,7 +107,16 @@ if (mysqli_num_rows($result) > 0) {
 
 
 
-$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.uid = ".$uid." and s.rid = ".$rid;
+$sql = "SELECT s.aid, s.acid, s.did, s.wid, s.mid, s.eid, s.cid,
+               s.budget, s.collection, s.profit, s.sofar, s.grade, s.status, s.pic, s.dt, s.notes,
+               s.dname, s.aname, s.acname, s.s, s.progress, s.rating, s.result,
+               s.cinename, s.ediname, s.musname, s.wriname, s.title,
+               s.a2, s.a3, s.ac2, s.ac3, s.w2, s.w3, s.m2, s.m3, s.d2, s.d3,
+               s.a2_name, s.a3_name, s.ac2_name, s.ac3_name, s.w2_name, s.w3_name,
+               s.m2_name, s.m3_name, s.d2_name, s.d3_name
+        FROM tolly_ready_for_shoot s
+        WHERE s.uid = ".$uid." and s.rid = ".$rid
+        LIMIT 1";
 //echo $sql;
 $result = mysqli_query($conn, $sql);
 

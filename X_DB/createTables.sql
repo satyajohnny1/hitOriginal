@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS `centers` (
   `200list` longtext DEFAULT NULL,
   `250list` longtext DEFAULT NULL,
   `300list` longtext DEFAULT NULL,
-  `maxlist` longtext DEFAULT NULL
+  `maxlist` longtext DEFAULT NULL,
+  KEY `idx_centers_rid` (`rid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -204,6 +205,8 @@ CREATE TABLE IF NOT EXISTS `tolly_ready_for_shoot` (
   `m2_name` varchar(50) DEFAULT '0',
   `m3` int(11) DEFAULT 0,
   `m3_name` varchar(50) DEFAULT '0',
+  KEY `idx_rfs_uid_status_dt` (`uid`, `status`, `dt`),
+  KEY `idx_rfs_uid_rid` (`uid`, `rid`),
   PRIMARY KEY (`rid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -264,6 +267,7 @@ CREATE TABLE IF NOT EXISTS `tolly_release` (
   `r3` double DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `poster` varchar(50) NOT NULL DEFAULT 'no',
+  KEY `idx_release_uid_rid` (`uid`, `rid`),
   PRIMARY KEY (`rid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -472,4 +476,3 @@ INSERT INTO `tolly_user` (`uid`, `username`, `password`, `email`, `status`, `pic
 	(93, 'admin', 'admin', 'admin', 'active', 'pic/u1.jpg', 996176585980, 'satya', 'admin'),
 	(95, 'user', 'user', 'user', 'active', 'pic/u1.jpg', 2769910120, 'USER PRODUCTIONS', 'user');
 /*!40000 ALTER TABLE `tolly_user` ENABLE KEYS */;
-
