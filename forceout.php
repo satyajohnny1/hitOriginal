@@ -11,7 +11,7 @@ $bal = $_SESSION['s_bal'];
 
 
 
-$sql = "SELECT * from tolly_release   WHERE  rid=".$rid;
+$sql = "SELECT rid, rel_cen, total_coll from tolly_release WHERE rid=".$rid." LIMIT 1";
 $result = mysqli_query($conn, $sql);
  
 if (mysqli_num_rows($result) > 0) {

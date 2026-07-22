@@ -50,7 +50,8 @@ error_reporting(E_ERROR);
                                           <?php 
                                                     			include 'db.php'; 
                                                     			$uid = $_SESSION['s_uid'];
-                                                    			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.uid = ".$uid." and s.status = 'ready'";
+                                                    			$sql = "SELECT s.rid, s.title, s.budget, s.sofar, s.dname, s.aname, s.acname, s.progress
+                                                FROM tolly_ready_for_shoot s WHERE s.uid = ".$uid." and s.status = 'ready'";
                                                     			//echo $sql;
                                                     			$result = mysqli_query($conn, $sql);
                                                     			
