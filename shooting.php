@@ -59,103 +59,65 @@ $sid = $_GET ["rid"];
 $uid =  $_SESSION['s_uid'];
 $s_bal =  $_SESSION['s_bal'];
 
-$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.uid = ".$uid." and s.rid = ".$sid." and  s.status = 'ready'";
+$sql = "SELECT r.title, r.budget, r.sofar, r.dname, r.aname, r.s,
+               s1.s1_a_cost, s1.s1_b_cost, s1.s1_c_cost, s1.s1_a_rate, s1.s1_b_rate, s1.s1_c_rate, s1.s1_status,
+               s2.s2_a_cost, s2.s2_b_cost, s2.s2_c_cost, s2.s2_a_rate, s2.s2_b_rate, s2.s2_c_rate, s2.s2_status,
+               s3.s3_a_cost, s3.s3_b_cost, s3.s3_c_cost, s3.s3_a_rate, s3.s3_b_rate, s3.s3_c_rate, s3.s3_status,
+               s4.s4_a_cost, s4.s4_b_cost, s4.s4_c_cost, s4.s4_a_rate, s4.s4_b_rate, s4.s4_c_rate, s4.s4_status,
+               s5.s5_a_cost, s5.s5_b_cost, s5.s5_c_cost, s5.s5_a_rate, s5.s5_b_rate, s5.s5_c_rate, s5.s5_status
+        FROM tolly_ready_for_shoot r
+        LEFT JOIN tolly_s1 s1 ON s1.sid = r.rid AND s1.uid = r.uid
+        LEFT JOIN tolly_s2 s2 ON s2.sid = r.rid AND s2.uid = r.uid
+        LEFT JOIN tolly_s3 s3 ON s3.sid = r.rid AND s3.uid = r.uid
+        LEFT JOIN tolly_s4 s4 ON s4.sid = r.rid AND s4.uid = r.uid
+        LEFT JOIN tolly_s5 s5 ON s5.sid = r.rid AND s5.uid = r.uid
+        WHERE r.uid = ".$uid." and r.rid = ".$sid." and r.status = 'ready'
+        LIMIT 1";
 //echo $sql;
-$result = mysqli_query($conn, $sql); 
-if (mysqli_num_rows($result) > 0) {	
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
 	$row = mysqli_fetch_assoc($result);
-		$title = $row["title"];
-		$budget = $row["budget"];
-		$sofar = $row["sofar"];
-		$dname = $row["dname"];
-		$aname = $row["aname"];
-		$s = $row["s"];
-		//echo 'You are From : '. $s;
-}
-
-//*************getting s1 Rates and Reviews *************
-$sql = "SELECT * FROM tolly_s1 s WHERE s.sid = ".$sid." and s.uid=".$uid;
-//echo "====================". $sql;
-$result = mysqli_query ( $conn, $sql );
-$row = mysqli_fetch_assoc($result);
-if (mysqli_num_rows ( $result ) > 0) {
-$s1_a_cost      =    	$row["s1_a_cost"];
-$s1_b_cost      =    	$row["s1_b_cost"];
-$s1_c_cost      =    	$row["s1_c_cost"];
-$s1_a_rate      =    	$row["s1_a_rate"];
-$s1_b_rate      =    	$row["s1_b_rate"];
-$s1_c_rate      =    	$row["s1_c_rate"];
-$s1_status      =    	$row["s1_status"];
-//echo $s1_b_rate;
-}
-//*************getting s1 Rates and Reviews *************
-
-//*************getting s2 Rates and Reviews *************
-$sql = "SELECT * FROM tolly_s2 s WHERE s.sid = ".$sid." and s.uid=".$uid;
-//echo "====================". $sql;
-$result = mysqli_query ( $conn, $sql );
-$row = mysqli_fetch_assoc($result);
-if (mysqli_num_rows ( $result ) > 0) {
-	$s2_a_cost      =    	$row["s2_a_cost"];
-	$s2_b_cost      =    	$row["s2_b_cost"];
-	$s2_c_cost      =    	$row["s2_c_cost"];
-	$s2_a_rate      =    	$row["s2_a_rate"];
-	$s2_b_rate      =    	$row["s2_b_rate"];
-	$s2_c_rate      =    	$row["s2_c_rate"];
-	$s2_status      =    	$row["s2_status"];
-	//echo $s2_b_rate;
-	//*************getting s2 Rates and Reviews *************
-}
-
-//*************getting s3 Rates and Reviews *************
-$sql = "SELECT * FROM tolly_s3 s WHERE s.sid = ".$sid." and s.uid=".$uid;
-//echo "====================". $sql;
-$result = mysqli_query ( $conn, $sql );
-$row = mysqli_fetch_assoc($result);
-if (mysqli_num_rows ( $result ) > 0) {
-	$s3_a_cost      =    	$row["s3_a_cost"];
-	$s3_b_cost      =    	$row["s3_b_cost"];
-	$s3_c_cost      =    	$row["s3_c_cost"];
-	$s3_a_rate      =    	$row["s3_a_rate"];
-	$s3_b_rate      =    	$row["s3_b_rate"];
-	$s3_c_rate      =    	$row["s3_c_rate"];
-	$s3_status      =    	$row["s3_status"];
-	//echo $s3_b_rate;
-	//*************getting s3 Rates and Reviews *************
-	//*************getting s4 Rates and Reviews *************
-}
-
-$sql = "SELECT * FROM tolly_s4 s WHERE s.sid = ".$sid." and s.uid=".$uid;
-//echo "====================". $sql;
-$result = mysqli_query ( $conn, $sql );
-$row = mysqli_fetch_assoc($result);
-if (mysqli_num_rows ( $result ) > 0) {
-	$s4_a_cost      =    	$row["s4_a_cost"];
-	$s4_b_cost      =    	$row["s4_b_cost"];
-	$s4_c_cost      =    	$row["s4_c_cost"];
-	$s4_a_rate      =    	$row["s4_a_rate"];
-	$s4_b_rate      =    	$row["s4_b_rate"];
-	$s4_c_rate      =    	$row["s4_c_rate"];
-	$s4_status      =    	$row["s4_status"];
-	//echo $s4_b_rate;
-	//*************getting s4 Rates and Reviews *************
-}
-
-//*************getting s5 Rates and Reviews *************
-$sql = "SELECT * FROM tolly_s5 s WHERE s.sid = ".$sid." and s.uid=".$uid;
-//echo "====================". $sql;
-$result = mysqli_query ( $conn, $sql );
-$row = mysqli_fetch_assoc($result);
-if (mysqli_num_rows ( $result ) > 0) {
-	$s5_a_cost      =    	$row["s5_a_cost"];
-	$s5_b_cost      =    	$row["s5_b_cost"];
-	$s5_c_cost      =    	$row["s5_c_cost"];
-	$s5_a_rate      =    	$row["s5_a_rate"];
-	$s5_b_rate      =    	$row["s5_b_rate"];
-	$s5_c_rate      =    	$row["s5_c_rate"];
-	$s5_status      =    	$row["s5_status"];
-	//echo $s5_b_rate;
-	//*************getting s5 Rates and Reviews *************
+	$title = $row["title"];
+	$budget = $row["budget"];
+	$sofar = $row["sofar"];
+	$dname = $row["dname"];
+	$aname = $row["aname"];
+	$s = $row["s"];
+	$s1_a_cost = $row["s1_a_cost"];
+	$s1_b_cost = $row["s1_b_cost"];
+	$s1_c_cost = $row["s1_c_cost"];
+	$s1_a_rate = $row["s1_a_rate"];
+	$s1_b_rate = $row["s1_b_rate"];
+	$s1_c_rate = $row["s1_c_rate"];
+	$s1_status = $row["s1_status"];
+	$s2_a_cost = $row["s2_a_cost"];
+	$s2_b_cost = $row["s2_b_cost"];
+	$s2_c_cost = $row["s2_c_cost"];
+	$s2_a_rate = $row["s2_a_rate"];
+	$s2_b_rate = $row["s2_b_rate"];
+	$s2_c_rate = $row["s2_c_rate"];
+	$s2_status = $row["s2_status"];
+	$s3_a_cost = $row["s3_a_cost"];
+	$s3_b_cost = $row["s3_b_cost"];
+	$s3_c_cost = $row["s3_c_cost"];
+	$s3_a_rate = $row["s3_a_rate"];
+	$s3_b_rate = $row["s3_b_rate"];
+	$s3_c_rate = $row["s3_c_rate"];
+	$s3_status = $row["s3_status"];
+	$s4_a_cost = $row["s4_a_cost"];
+	$s4_b_cost = $row["s4_b_cost"];
+	$s4_c_cost = $row["s4_c_cost"];
+	$s4_a_rate = $row["s4_a_rate"];
+	$s4_b_rate = $row["s4_b_rate"];
+	$s4_c_rate = $row["s4_c_rate"];
+	$s4_status = $row["s4_status"];
+	$s5_a_cost = $row["s5_a_cost"];
+	$s5_b_cost = $row["s5_b_cost"];
+	$s5_c_cost = $row["s5_c_cost"];
+	$s5_a_rate = $row["s5_a_rate"];
+	$s5_b_rate = $row["s5_b_rate"];
+	$s5_c_rate = $row["s5_c_rate"];
+	$s5_status = $row["s5_status"];
 }
 
 

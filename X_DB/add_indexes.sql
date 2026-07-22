@@ -10,3 +10,18 @@ ALTER TABLE `tolly_ready_for_shoot`
 
 ALTER TABLE `tolly_release`
   ADD INDEX `idx_release_uid_rid` (`uid`, `rid`);
+
+ALTER TABLE `tolly_s1`
+  ADD INDEX `idx_s1_uid_sid` (`uid`, `sid`);
+
+ALTER TABLE `tolly_s2`
+  ADD INDEX `idx_s2_uid_sid` (`uid`, `sid`);
+
+ALTER TABLE `tolly_s3`
+  ADD INDEX `idx_s3_uid_sid` (`uid`, `sid`);
+
+ALTER TABLE `tolly_s4`
+  ADD INDEX `idx_s4_uid_sid` (`uid`, `sid`);
+
+ALTER TABLE `tolly_s5`
+  ADD INDEX `idx_s5_uid_sid` (`uid`, `sid`);
