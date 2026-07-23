@@ -123,13 +123,16 @@ error_reporting(E_ERROR);
                                                     					$dir_cr = round(($dir_rate/10000000),2);
 
                                                     					$music_movie_count = $row["movie_count"];
+                                                    					$pl_val = floatval($row["pl"]);
+                                                    					$pl_cr = round(($pl_val/10000000),2);
+                                                    					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CR</b></td>";
 																		echo "<td></td>";
                                                     					echo "<td>".$row["music_rating"]."</td>";
-                                                    					 echo "<td>".floatval($row["pl"])."</td>";
+                                                    					 echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
                                                     					echo "<td><b>".$music_movie_count."</b></td>";
                                                     					echo  "</tr>";
 
@@ -205,12 +208,15 @@ error_reporting(E_ERROR);
                                                     					$dir_cr = round(($dir_rate/10000000),2);
 
                                                     					$cine_movie_count = $row["movie_count"];
+                                                    					$pl_val = floatval($row["pl"]);
+                                                    					$pl_cr = round(($pl_val/10000000),2);
+                                                    					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_cine' name='r_cine' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$row["cine_rating"]."</td>";
-                                                    					 echo "<td>".floatval($row["pl"])."</td>";
+                                                    					 echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
                                                     					echo "<td><b>".$cine_movie_count."</b></td>";
                                                     					echo  "</tr>";
 
@@ -284,12 +290,15 @@ error_reporting(E_ERROR);
                                                     					$dir_cr = round(($dir_rate/10000000),2);
 
                                                     					$editor_movie_count = $row["movie_count"];
+                                                    					$pl_val = floatval($row["pl"]);
+                                                    					$pl_cr = round(($pl_val/10000000),2);
+                                                    					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_edi' name='r_edi' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$row["editor_rating"]."</td>";
-																		echo "<td>".floatval($row["pl"])."</td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
                                                     					echo "<td><b>".$editor_movie_count."</b></td>";
                                                     					echo  "</tr>";
 
