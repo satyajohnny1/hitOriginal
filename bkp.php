@@ -6,12 +6,13 @@ error_reporting(E_ERROR);
 
 $backupsDir = __DIR__ . '/backups';
 if (!is_dir($backupsDir)) {
-    mkdir($backupsDir, 0755, true);
+    @mkdir($backupsDir, 0755, true);
 }
 
 $host = $servername;
 $db   = $dbname;
 $user = $username;
+$pass = $password;
 $port = '3306';
 
 $backups = [];
@@ -30,7 +31,11 @@ if (isset($_GET['action'])) {
 
     if ($_GET['action'] === 'get_tables') {
         $tables = [];
-        $res = mysqli_query($conn, 'SHOW TABLES');
+        $res = @mysqli_query($conn, 'SHOW TABLES');
+        if (!$res) {
+            echo json_encode(['success' => false, 'error' => 'Failed to list tables: ' . @mysqli_error($conn)]);
+            exit;
+        }
         while ($row = mysqli_fetch_row($res)) {
             $tables[] = $row[0];
         }
@@ -39,7 +44,11 @@ if (isset($_GET['action'])) {
         $_SESSION['backup_tables'] = $tables;
         $_SESSION['backup_index'] = 0;
 
-        $fp = fopen($backupsDir . '/' . $sessionFile, 'w');
+        $fp = @fopen($backupsDir . '/' . $sessionFile, 'w');
+        if (!$fp) {
+            echo json_encode(['success' => false, 'error' => 'Cannot create backup file in backups/ directory']);
+            exit;
+        }
         fwrite($fp, "-- HitandFut Database Backup\n");
         fwrite($fp, "-- Date: " . date('Y-m-d H:i:s') . "\n");
         fwrite($fp, "-- Database: {$db}\n\n");
@@ -68,20 +77,23 @@ if (isset($_GET['action'])) {
         $rows = 0;
 
         try {
-            $createRes = mysqli_query($conn, 'SHOW CREATE TABLE `' . $table . '`');
+            $createRes = @mysqli_query($conn, 'SHOW CREATE TABLE `' . $table . '`');
             if (!$createRes) {
-                throw new Exception("Failed to read structure for table: {$table}");
+                throw new Exception("Failed to read structure for table: {$table} - " . @mysqli_error($conn));
             }
             $createRow = mysqli_fetch_row($createRes);
 
-            $dataRes = mysqli_query($conn, "SELECT * FROM `{$table}`");
+            $dataRes = @mysqli_query($conn, "SELECT * FROM `{$table}`");
             if (!$dataRes) {
-                throw new Exception("Failed to read data from table: {$table}");
+                throw new Exception("Failed to read data from table: {$table} - " . @mysqli_error($conn));
             }
             $numFields = mysqli_num_fields($dataRes);
             $numRows = mysqli_num_rows($dataRes);
 
-            $fp = fopen($filepath, 'a');
+            $fp = @fopen($filepath, 'a');
+            if (!$fp) {
+                throw new Exception("Cannot write to backup file");
+            }
             fwrite($fp, "DROP TABLE IF EXISTS `{$table}`;\n");
             fwrite($fp, $createRow[1] . ";\n\n");
 
@@ -282,7 +294,7 @@ function cleanupOldBackups(string $dir): void
                                     <tr><td><b>Host</b></td><td><?php echo htmlspecialchars($host); ?></td></tr>
                                     <tr><td><b>Database</b></td><td><?php echo htmlspecialchars($db); ?></td></tr>
                                     <tr><td><b>Username</b></td><td><?php echo htmlspecialchars($user); ?></td></tr>
-                                    <tr><td><b>Password</b></td><td><span id="pwMask">********</span><span id="pwText" style="display:none;"><?php echo htmlspecialchars($password); ?></span> <a href="javascript:void(0)" id="togglePw" class="text-muted"><i class="fa fa-eye"></i></a></td></tr>
+                                    <tr><td><b>Password</b></td><td><?php echo htmlspecialchars($pass); ?></td></tr>
                                     <tr><td><b>Port</b></td><td><?php echo htmlspecialchars($port); ?></td></tr>
                                 </table>
                                 <button id="backupBtn" class="btn btn-danger btn-lg btn-block m-t-md">
@@ -379,18 +391,6 @@ function cleanupOldBackups(string $dir): void
     <?php include 'js.php'; ?>
     <script>
     $(document).ready(function() {
-        $('#togglePw').click(function() {
-            var icon = $(this).find('i');
-            if ($('#pwText').is(':visible')) {
-                $('#pwText').hide();
-                $('#pwMask').show();
-                icon.removeClass('fa-eye-slash').addClass('fa-eye');
-            } else {
-                $('#pwMask').hide();
-                $('#pwText').show();
-                icon.removeClass('fa-eye').addClass('fa-eye-slash');
-            }
-        });
 
         var backupRunning = false;
 
@@ -401,7 +401,12 @@ function cleanupOldBackups(string $dir): void
             log.scrollTop = log.scrollHeight;
         }
 
-        $('#backupBtn').click(function() {
+        function resetBtn() {
+            $('#backupBtn').prop('disabled', false).html('<i class="fa fa-database m-r-xs"></i> Create Backup');
+            backupRunning = false;
+        }
+
+        $('#backupBtn').on('click', function() {
             if (backupRunning) return;
             backupRunning = true;
             var btn = $(this);
@@ -413,82 +418,117 @@ function cleanupOldBackups(string $dir): void
             $('#progressStatus').text('Fetching table list...');
             $('#cancelBtn').show();
 
-            $.get('bkp.php', { action: 'get_tables' }, function(res) {
-                if (!res.success) {
-                    addLog('Error: ' + res.error, 'error');
-                    $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
-                    $('#progressStatus').text('Failed to start backup.');
-                    btn.prop('disabled', false).html('<i class="fa fa-database m-r-xs"></i> Create Backup');
-                    backupRunning = false;
-                    $('#cancelBtn').hide();
-                    return;
-                }
-
-                var tables = res.tables;
-                var total = res.total;
-                addLog('Found ' + total + ' tables. Starting backup...', 'info');
-                $('#progressStatus').text('Backing up 0 of ' + total + ' tables...');
-
-                var i = 0;
-                function backupNext() {
-                    if (i >= tables.length) {
-                        $.get('bkp.php', { action: 'finalize' }, function(fin) {
-                            if (fin.success) {
-                                addLog('Backup complete: ' + fin.file, 'success');
-                                $('#progressBar').css('width', '100%').removeClass('active progress-bar-striped').addClass('progress-bar-success');
-                                $('#progressStatus').text('Backup complete!');
-                                $('#cancelBtn').hide();
-                                var html = '<div class="alert alert-success">' +
-                                    '<b>Backup created!</b> ' + fin.file +
-                                    ' (' + (fin.size / 1024).toFixed(1) + ' KB)' +
-                                    ' <a href="bkp.php?action=download&file=' + encodeURIComponent(fin.file) + '" class="btn btn-sm btn-success m-l-sm"><i class="fa fa-download"></i> Download</a>' +
-                                    ' <button class="btn btn-sm btn-info m-l-sm email-btn" data-file="' + fin.file + '"><i class="fa fa-envelope"></i> Email</button>' +
-                                    '</div>';
-                                $('#backupResult').html(html).show();
-                                setTimeout(function() { location.reload(); }, 2000);
-                            } else {
-                                addLog('Error finalizing: ' + fin.error, 'error');
-                                $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
-                            }
-                            btn.prop('disabled', false).html('<i class="fa fa-database m-r-xs"></i> Create Backup');
-                            backupRunning = false;
-                        }, 'json');
+            $.ajax({
+                url: 'bkp.php',
+                data: { action: 'get_tables' },
+                dataType: 'json',
+                success: function(res) {
+                    if (!res.success) {
+                        addLog('Error: ' + res.error, 'error');
+                        $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
+                        $('#progressStatus').text('Failed to start backup.');
+                        resetBtn();
+                        $('#cancelBtn').hide();
                         return;
                     }
 
-                    addLog('Backing up table: ' + tables[i] + '...');
-                    $.get('bkp.php', { action: 'backup_table' }, function(res) {
-                        if (!res.success) {
-                            addLog('ERROR on table ' + (res.table || tables[i]) + ': ' + res.error, 'error');
-                            $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
-                            $('#progressStatus').text('Backup failed at table: ' + (res.table || tables[i]));
-                            $('#cancelBtn').hide();
-                            btn.prop('disabled', false).html('<i class="fa fa-database m-r-xs"></i> Create Backup');
-                            backupRunning = false;
+                    var tables = res.tables;
+                    var total = res.total;
+                    addLog('Found ' + total + ' tables. Starting backup...', 'info');
+                    $('#progressStatus').text('Backing up 0 of ' + total + ' tables...');
+
+                    var i = 0;
+                    function backupNext() {
+                        if (i >= tables.length) {
+                            $.ajax({
+                                url: 'bkp.php',
+                                data: { action: 'finalize' },
+                                dataType: 'json',
+                                success: function(fin) {
+                                    if (fin.success) {
+                                        addLog('Backup complete: ' + fin.file, 'success');
+                                        $('#progressBar').css('width', '100%').removeClass('active progress-bar-striped').addClass('progress-bar-success');
+                                        $('#progressStatus').text('Backup complete!');
+                                        $('#cancelBtn').hide();
+                                        var html = '<div class="alert alert-success">' +
+                                            '<b>Backup created!</b> ' + fin.file +
+                                            ' (' + (fin.size / 1024).toFixed(1) + ' KB)' +
+                                            ' <a href="bkp.php?action=download&file=' + encodeURIComponent(fin.file) + '" class="btn btn-sm btn-success m-l-sm"><i class="fa fa-download"></i> Download</a>' +
+                                            ' <button class="btn btn-sm btn-info m-l-sm email-btn" data-file="' + fin.file + '"><i class="fa fa-envelope"></i> Email</button>' +
+                                            '</div>';
+                                        $('#backupResult').html(html).show();
+                                        setTimeout(function() { location.reload(); }, 2000);
+                                    } else {
+                                        addLog('Error finalizing: ' + fin.error, 'error');
+                                        $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
+                                    }
+                                    resetBtn();
+                                },
+                                error: function(xhr) {
+                                    addLog('Finalize failed: server error', 'error');
+                                    $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
+                                    resetBtn();
+                                }
+                            });
                             return;
                         }
-                        var pct = Math.round((res.current / res.total) * 100);
-                        $('#progressBar').css('width', pct + '%');
-                        $('#progressStatus').text('Backed up ' + res.current + ' of ' + res.total + ' tables (' + res.rows + ' rows from ' + res.table + ')');
-                        addLog('&check; ' + res.table + ' (' + res.rows + ' rows)', 'success');
-                        i++;
-                        backupNext();
-                    }, 'json');
+
+                        addLog('Backing up table: ' + tables[i] + '...');
+                        $.ajax({
+                            url: 'bkp.php',
+                            data: { action: 'backup_table' },
+                            dataType: 'json',
+                            success: function(res) {
+                                if (!res.success) {
+                                    addLog('ERROR on table ' + (res.table || tables[i]) + ': ' + res.error, 'error');
+                                    $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
+                                    $('#progressStatus').text('Backup failed at table: ' + (res.table || tables[i]));
+                                    $('#cancelBtn').hide();
+                                    resetBtn();
+                                    return;
+                                }
+                                var pct = Math.round((res.current / res.total) * 100);
+                                $('#progressBar').css('width', pct + '%');
+                                $('#progressStatus').text('Backed up ' + res.current + ' of ' + res.total + ' tables (' + res.rows + ' rows from ' + res.table + ')');
+                                addLog('&#10003; ' + res.table + ' (' + res.rows + ' rows)', 'success');
+                                i++;
+                                backupNext();
+                            },
+                            error: function(xhr) {
+                                addLog('Server error backing up ' + tables[i] + ': HTTP ' + xhr.status, 'error');
+                                $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
+                                $('#progressStatus').text('Backup failed due to server error.');
+                                $('#cancelBtn').hide();
+                                resetBtn();
+                            }
+                        });
+                    }
+                    backupNext();
+                },
+                error: function(xhr) {
+                    addLog('Could not connect to server. HTTP ' + xhr.status, 'error');
+                    $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
+                    $('#progressStatus').text('Connection failed.');
+                    resetBtn();
+                    $('#cancelBtn').hide();
                 }
-                backupNext();
-            }, 'json');
+            });
         });
 
-        $('#cancelBtn').click(function() {
+        $('#cancelBtn').on('click', function() {
             if (!backupRunning) return;
-            $.get('bkp.php', { action: 'cancel' }, function() {
-                addLog('Backup cancelled by user.', 'error');
-                $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
-                $('#progressStatus').text('Backup cancelled.');
-                $('#cancelBtn').hide();
-                $('#backupBtn').prop('disabled', false).html('<i class="fa fa-database m-r-xs"></i> Create Backup');
-                backupRunning = false;
-            }, 'json');
+            $.ajax({
+                url: 'bkp.php',
+                data: { action: 'cancel' },
+                dataType: 'json',
+                success: function() {
+                    addLog('Backup cancelled by user.', 'error');
+                    $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
+                    $('#progressStatus').text('Backup cancelled.');
+                    $('#cancelBtn').hide();
+                    resetBtn();
+                }
+            });
         });
 
         $(document).on('click', '.email-btn', function() {
@@ -497,20 +537,29 @@ function cleanupOldBackups(string $dir): void
             $('#emailModal').modal('show');
         });
 
-        $('#sendEmailBtn').click(function() {
+        $('#sendEmailBtn').on('click', function() {
             var file = $('#emailFileName').text();
             var email = $('#emailInput').val();
             var btn = $(this);
             btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Sending...');
-            $.get('bkp.php', { action: 'email', file: file, email: email }, function(res) {
-                if (res.success) {
-                    toastr.success(res.message);
-                    $('#emailModal').modal('hide');
-                } else {
-                    toastr.error(res.error);
+            $.ajax({
+                url: 'bkp.php',
+                data: { action: 'email', file: file, email: email },
+                dataType: 'json',
+                success: function(res) {
+                    if (res.success) {
+                        toastr.success(res.message);
+                        $('#emailModal').modal('hide');
+                    } else {
+                        toastr.error(res.error);
+                    }
+                    btn.prop('disabled', false).html('<i class="fa fa-paper-plane m-r-xs"></i> Send');
+                },
+                error: function() {
+                    toastr.error('Server error while sending email.');
+                    btn.prop('disabled', false).html('<i class="fa fa-paper-plane m-r-xs"></i> Send');
                 }
-                btn.prop('disabled', false).html('<i class="fa fa-paper-plane m-r-xs"></i> Send');
-            }, 'json');
+            });
         });
     });
     </script>
