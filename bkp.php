@@ -205,7 +205,7 @@ function cleanupOldBackups(string $dir): void
                                     <tr><td><b>Host</b></td><td><?php echo htmlspecialchars($host); ?></td></tr>
                                     <tr><td><b>Database</b></td><td><?php echo htmlspecialchars($db); ?></td></tr>
                                     <tr><td><b>Username</b></td><td><?php echo htmlspecialchars($user); ?></td></tr>
-                                    <tr><td><b>Password</b></td><td>********</td></tr>
+                                    <tr><td><b>Password</b></td><td><span id="pwMask">********</span><span id="pwText" style="display:none;"><?php echo htmlspecialchars($password); ?></span> <a href="javascript:void(0)" id="togglePw" class="text-muted"><i class="fa fa-eye"></i></a></td></tr>
                                     <tr><td><b>Port</b></td><td><?php echo htmlspecialchars($port); ?></td></tr>
                                 </table>
                                 <button id="backupBtn" class="btn btn-danger btn-lg btn-block m-t-md">
@@ -292,6 +292,19 @@ function cleanupOldBackups(string $dir): void
     <?php include 'js.php'; ?>
     <script>
     $(document).ready(function() {
+        $('#togglePw').click(function() {
+            var icon = $(this).find('i');
+            if ($('#pwText').is(':visible')) {
+                $('#pwText').hide();
+                $('#pwMask').show();
+                icon.removeClass('fa-eye-slash').addClass('fa-eye');
+            } else {
+                $('#pwMask').hide();
+                $('#pwText').show();
+                icon.removeClass('fa-eye').addClass('fa-eye-slash');
+            }
+        });
+
         $('#backupBtn').click(function() {
             var btn = $(this);
             btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Backing up...');
