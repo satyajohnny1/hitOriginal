@@ -1,4 +1,5 @@
 <?php
+include 'sessionCheck.php';
 include 'db.php';
 include 'balance.php';
 session_start();

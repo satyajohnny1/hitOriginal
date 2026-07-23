@@ -1,5 +1,6 @@
 <?php
 error_reporting(E_ERROR);
+include 'sessionCheck.php';
 include 'db.php';
 session_start();
 $uid = $_SESSION['s_uid'];

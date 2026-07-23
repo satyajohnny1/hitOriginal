@@ -1,8 +1,9 @@
 <?php
 //error_reporting(0);
+include 'sessionCheck.php';
 include 'db.php';
 include 'balance.php';
-session_start(); 
+session_start();
 $uid =  $_SESSION['s_uid'];
 $bal = $_SESSION['s_bal'];
 $max_coll = rand(100000,10000000);
