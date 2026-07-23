@@ -7,7 +7,7 @@ $username = env('DB_USER');
 $password = env('DB_PASS');
 
 if ($servername === null || $dbname === null || $username === null || $password === null) {
-	die("Database configuration missing. Copy .env.example to .env and fill in real values.");
+	die("Database configuration missing. Check that .env exists at the project root with DB_HOST, DB_NAME, DB_USER, DB_PASS set.");
 }
 
 // Create connection
