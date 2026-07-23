@@ -1,45 +1,14 @@
 <?php
-/*
- 
-## epizy
-$servername = "sql105.epizy.com";
-$dbname = "epiz_28768808_javabo";
-$username = "epiz_28768808";
-$password = "jEWDSrJkJi15f";
+require_once __DIR__ . '/env.php';
 
+$servername = env('DB_HOST');
+$dbname = env('DB_NAME');
+$username = env('DB_USER');
+$password = env('DB_PASS');
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "hit2";
-
- DB_NAME', 'linkpro_wordpress' );
-
-  'DB_USER', 'linkpro' );
- DB_PASSWORD', 'linkpro' );
-
- 'DB_HOST', 'linkprotechcom.ipagemysql.com' );
-
-*/
-
-
-
-
-/* JavaBo
-$servername = "sql301.epizy.com";
-$dbname = "epiz_32875882_javabo";
-$username = "epiz_32875882";
-$password = "AF6tE0XjpZUX";
-*/
-
-//mizDb
-$servername = "68.178.135.125";
-$dbname = "testdb";
-$username = "testdb";
-$password = "testdb";
-
- 
-
+if ($servername === null || $dbname === null || $username === null || $password === null) {
+	die("Database configuration missing. Copy .env.example to .env and fill in real values.");
+}
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);

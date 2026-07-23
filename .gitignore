@@ -1,3 +1,4 @@
 sendgrid.env
+.env
 backups/
 db/migrations/.migrated

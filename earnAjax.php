@@ -2,7 +2,9 @@
 //error_reporting(0);
 include 'sessionCheck.php';
 include 'db.php';
+ob_start();
 include 'balance.php';
+ob_end_clean();
 session_start();
 $uid =  $_SESSION['s_uid'];
 $bal = $_SESSION['s_bal'];
