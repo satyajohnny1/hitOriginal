@@ -15,7 +15,6 @@ $nme = $_GET['name'];
     </head>
 
     <body class="page-header-fixed">
-        <script>alert('JS LOADED on actor.php');</script>
         <div class="overlay"></div>
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s1">
             <h3><span class="pull-left">Chat</span><a href="javascript:void(0);" class="pull-right" id="closeRight"><i class="fa fa-times"></i></a></h3>
@@ -60,9 +59,9 @@ $nme = $_GET['name'];
                                 <div role="tabpanel">
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs nav-justified" role="tablist">
-                                        <li role="presentation" class="active"><a href="#tab21" role="tab" data-toggle="tab" onclick="alert('TAB CLICKED: tab21')">About</a></li>
-                                        <li role="presentation"><a href="#tab22" role="tab" data-toggle="tab" onclick="alert('TAB CLICKED: tab22')">Movies</a></li>
-                                        <li role="presentation"><a href="#tab33" role="tab" data-toggle="tab" onclick="alert('TAB CLICKED: tab33')">Notes</a></li>
+                                        <li role="presentation" class="active"><a href="#tab21" role="tab" data-toggle="tab">About</a></li>
+                                        <li role="presentation"><a href="#tab22" role="tab" data-toggle="tab">Movies</a></li>
+                                        <li role="presentation"><a href="#tab33" role="tab" data-toggle="tab">Notes</a></li>
                                     </ul>
                                     <!-- Tab panes -->
                                     <div class="tab-content">
@@ -373,6 +372,15 @@ $nme = $_GET['name'];
         <div class="cd-overlay"></div>
 
         <?php include 'js.php';?>
+            <script>
+            if (typeof jQuery === 'undefined') {
+                document.body.innerHTML = '<h1 style="color:red">jQuery NOT loaded!</h1>';
+            } else if (typeof $.fn.tab === 'undefined') {
+                document.body.innerHTML = '<h1 style="color:red">jQuery loaded but Bootstrap Tab plugin MISSING! jQuery=' + jQuery.fn.jquery + '</h1>';
+            } else {
+                document.title = 'jQuery:' + jQuery.fn.jquery + ' Bootstrap:' + $.fn.tab.Constructor.VERSION;
+            }
+            </script>
             <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['gauge']}]}"></script>
 
             <script type="text/javascript">
