@@ -373,7 +373,10 @@ INSERT INTO tolly_writer VALUES
     (73, 'Nag Ashwin', 400000000, 'A', 'poster/writer.png', 'available', 10),
     (74, 'Anudeep KV', 20000000, 'B', 'poster/writer.png', 'available', 8.5),
     (75, 'Vivek Athreya', 30000000, 'A', 'poster/writer.png', 'available', 10),
-    (76, 'Venu Yeldandi', 20000000, 'A', 'poster/writer.png', 'available', 10);
+    (76, 'Naveen Kaveti', 3000000, 'B', 'poster/writer.png', 'available', 10),
+    (77, 'Chittu Kaveti', 1000000, 'B', 'poster/writer.png', 'available', 10),
+    (78, 'Nihal Krishna Kaveti', 3000000, 'A', 'poster/writer.png', 'available', 10),
+    (79, 'Venu Yeldandi', 20000000, 'A', 'poster/writer.png', 'available', 10);
     
 # *******************************************************************************
 #                          tolly_music            
