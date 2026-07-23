@@ -47,7 +47,7 @@ if (isset($_GET['code'])) {
 <html>
 <head>
   <title>Tasks API Sample</title>
-  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Droid+Serif|Droid+Sans:regular,bold' />
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Droid+Serif|Droid+Sans:regular,bold' />
   <link rel='stylesheet' href='css/style.css' />
 </head>
 <body>
