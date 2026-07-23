@@ -128,10 +128,22 @@ error_reporting(E_ERROR);
                                                         
                                                             <tbody>
                                                              <?php 
-                                                    			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_director";
+                                                    			include 'db.php';
+                                                    			$sql = "SELECT d.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl
+                                                    			        FROM tolly_director d
+                                                    			        LEFT JOIN (
+                                                    			            SELECT director_id, COUNT(DISTINCT rid) as movie_count, SUM(collection - budget) as total_pl
+                                                    			            FROM (
+                                                    			                SELECT did as director_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out'
+                                                    			                UNION ALL
+                                                    			                SELECT d2 as director_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND d2 > 0
+                                                    			                UNION ALL
+                                                    			                SELECT d3 as director_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND d3 > 0
+                                                    			            ) t
+                                                    			            GROUP BY director_id
+                                                    			        ) m ON d.director_id = m.director_id";
                                                     			$result = mysqli_query($conn, $sql);
-                                                    			
+
                                                     			if (mysqli_num_rows($result) > 0) {
                                                     				// output data of each row
                                                     				while($row = mysqli_fetch_assoc($result)) {
@@ -140,28 +152,29 @@ error_reporting(E_ERROR);
                                                     					$dir_rate = $row["director_rate"];
                                                     					$dir_pic = $row["director_pic"];
                                                     					$dir_id_raw = $dir_id;
-                                                    					
+
                                                     					$dir_cr = round(($dir_rate/10000000),2);
-                                                    					
+
                                                     					$dir_id = $dir_id.'#'.$dir_name.'$'.$dir_rate.'^'.$dir_pic;
 
-                                                    					$countQ = "SELECT COUNT(*) as cnt FROM tolly_ready_for_shoot WHERE did = $dir_id_raw OR d2 = $dir_id_raw OR d3 = $dir_id_raw";
-                                                    					$countR = mysqli_query($conn, $countQ);
-                                                    					$dir_movie_count = mysqli_fetch_assoc($countR)['cnt'];
+                                                    					$dir_movie_count = $row["movie_count"];
+                                                    					$pl_val = floatval($row["pl"]);
+                                                    					$pl_cr = round(($pl_val/10000000),2);
+                                                    					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["director_rating"]."</td>";
-																		echo "<td>".$row["pl"]."</td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr." CRORES</b></td>";
                                                     					echo "<td><b>".$dir_movie_count."</b></td>";
                                                     					echo  "<td style='display: none;'>".$dir_pic."</td>";
-                                                    					
-                                                    					echo  "</tr>"; 
-                                                    					 
-                                                    				
+
+                                                    					echo  "</tr>";
+
+
                                                     				}
-                                                    			}  
+                                                    			}
                                                     			  
                                                                 ?>
                                                             </tbody>
@@ -212,10 +225,22 @@ error_reporting(E_ERROR);
                                                         
                                                             <tbody>
                                                              <?php 
-                                                    			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_actor";
+                                                    			include 'db.php';
+                                                    			$sql = "SELECT a.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl
+                                                    			        FROM tolly_actor a
+                                                    			        LEFT JOIN (
+                                                    			            SELECT actor_id, COUNT(DISTINCT rid) as movie_count, SUM(collection - budget) as total_pl
+                                                    			            FROM (
+                                                    			                SELECT aid as actor_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out'
+                                                    			                UNION ALL
+                                                    			                SELECT a2 as actor_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND a2 > 0
+                                                    			                UNION ALL
+                                                    			                SELECT a3 as actor_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND a3 > 0
+                                                    			            ) t
+                                                    			            GROUP BY actor_id
+                                                    			        ) m ON a.actor_id = m.actor_id";
                                                     			$result = mysqli_query($conn, $sql);
-                                                    			
+
                                                     			if (mysqli_num_rows($result) > 0) {
                                                     				// output data of each row
                                                     				while($row = mysqli_fetch_assoc($result)) {
@@ -225,24 +250,25 @@ error_reporting(E_ERROR);
                                                     					$a_pic = $row["actor_pic"];
                                                     					$act_id_raw = $act_id;
                                                     					$act_id = $act_id.'#'.$act_name.'$'.$act_rate.'^'.$a_pic;
-                                                    					
+
                                                     					$dir_cr = round(($act_rate/10000000),2);
-                                                    					
-                                                    					$countQ = "SELECT COUNT(*) as cnt FROM tolly_ready_for_shoot WHERE aid = $act_id_raw OR a2 = $act_id_raw OR a3 = $act_id_raw";
-                                                    					$countR = mysqli_query($conn, $countQ);
-                                                    					$act_movie_count = mysqli_fetch_assoc($countR)['cnt'];
-                                                    					
-                                                    					echo "<tr>";                                                    					
+
+                                                    					$act_movie_count = $row["movie_count"];
+                                                    					$pl_val = floatval($row["pl"]);
+                                                    					$pl_cr = round(($pl_val/10000000),2);
+                                                    					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
+
+                                                    					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["actor_rating"]."</td>";
-                                                    					 echo "<td>".$row["pl"]."</td>";
+                                                    					 echo "<td class='$pl_class'><b>".$pl_cr." CRORES</b></td>";
                                                     					echo "<td><b>".$act_movie_count."</b></td>";
-                                                    					echo  "</tr>"; 
-                                                    					 
-                                                    				
+                                                    					echo  "</tr>";
+
+
                                                     				}
-                                                    			}  
+                                                    			}
                                                     			  
                                                                 ?>
                                                             </tbody>
@@ -296,10 +322,22 @@ error_reporting(E_ERROR);
                                                         
                                                             <tbody>
                                                              <?php 
-                                                    			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_actress";
+                                                    			include 'db.php';
+                                                    			$sql = "SELECT a.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl
+                                                    			        FROM tolly_actress a
+                                                    			        LEFT JOIN (
+                                                    			            SELECT actress_id, COUNT(DISTINCT rid) as movie_count, SUM(collection - budget) as total_pl
+                                                    			            FROM (
+                                                    			                SELECT acid as actress_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out'
+                                                    			                UNION ALL
+                                                    			                SELECT ac2 as actress_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND ac2 > 0
+                                                    			                UNION ALL
+                                                    			                SELECT ac3 as actress_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND ac3 > 0
+                                                    			            ) t
+                                                    			            GROUP BY actress_id
+                                                    			        ) m ON a.actress_id = m.actress_id";
                                                     			$result = mysqli_query($conn, $sql);
-                                                    			
+
                                                     			if (mysqli_num_rows($result) > 0) {
                                                     				// output data of each row
                                                     				while($row = mysqli_fetch_assoc($result)) {
@@ -308,27 +346,28 @@ error_reporting(E_ERROR);
                                                     					$dir_rate = $row["actress_rate"];
                                                     					$ac_pic = $row["actress_pic"];
                                                     					$actress_id_raw = $dir_id;
-                                                    					
+
                                                     					$dir_cr = round(($dir_rate/10000000),2);
-                                                    					 
-                                                    					
+
+
                                                     					$dir_id = $dir_id.'#'.$dir_name.'$'.$dir_rate.'^'.$ac_pic;
-                                                    					
-                                                    					$countQ = "SELECT COUNT(*) as cnt FROM tolly_ready_for_shoot WHERE acid = $actress_id_raw OR ac2 = $actress_id_raw OR ac3 = $actress_id_raw";
-                                                    					$countR = mysqli_query($conn, $countQ);
-                                                    					$actress_movie_count = mysqli_fetch_assoc($countR)['cnt'];
-                                                    					
-                                                    					echo "<tr>";                                                    					
+
+                                                    					$actress_movie_count = $row["movie_count"];
+                                                    					$pl_val = floatval($row["pl"]);
+                                                    					$pl_cr = round(($pl_val/10000000),2);
+                                                    					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
+
+                                                    					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["actress_rating"]."</td>";
-																		echo "<td>".$row["pl"]."</td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr." CRORES</b></td>";
                                                     					echo "<td><b>".$actress_movie_count."</b></td>";
-                                                    					echo  "</tr>"; 
-                                                    					 
-                                                    				
+                                                    					echo  "</tr>";
+
+
                                                     				}
-                                                    			}  
+                                                    			}
                                                     			  
                                                                 ?>
                                                             </tbody>
@@ -381,10 +420,22 @@ error_reporting(E_ERROR);
                                                         
                                                             <tbody>
                                                              <?php 
-                                                    			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_writer";
+                                                    			include 'db.php';
+                                                    			$sql = "SELECT w.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl
+                                                    			        FROM tolly_writer w
+                                                    			        LEFT JOIN (
+                                                    			            SELECT writer_id, COUNT(DISTINCT rid) as movie_count, SUM(collection - budget) as total_pl
+                                                    			            FROM (
+                                                    			                SELECT wid as writer_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out'
+                                                    			                UNION ALL
+                                                    			                SELECT w2 as writer_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND w2 > 0
+                                                    			                UNION ALL
+                                                    			                SELECT w3 as writer_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND w3 > 0
+                                                    			            ) t
+                                                    			            GROUP BY writer_id
+                                                    			        ) m ON w.writer_id = m.writer_id";
                                                     			$result = mysqli_query($conn, $sql);
-                                                    			
+
                                                     			if (mysqli_num_rows($result) > 0) {
                                                     				// output data of each row
                                                     				while($row = mysqli_fetch_assoc($result)) {
@@ -393,30 +444,30 @@ error_reporting(E_ERROR);
                                                     					$dir_rate = $row["writer_rate"];
                                                     					$ac_pic = $row["writer_pic"];
                                                     					$writer_id_raw = $dir_id;
-                                                    					  
+
                                                     					$dir_cr = round(($dir_rate/10000000),2);
-                                                    					 
+
                                                     					$dir_id = $dir_id.'#'.$dir_name.'$'.$dir_rate.'^'.$ac_pic;
-                                                    					
-                                                    					$countQ = "SELECT COUNT(*) as cnt FROM tolly_ready_for_shoot WHERE wid = $writer_id_raw OR w2 = $writer_id_raw OR w3 = $writer_id_raw";
-                                                    					$countR = mysqli_query($conn, $countQ);
-                                                    					$writer_movie_count = mysqli_fetch_assoc($countR)['cnt'];
-                                                    					
+
+                                                    					$writer_movie_count = $row["movie_count"];
+                                                    					$pl_val = floatval($row["pl"]);
+                                                    					$pl_cr = round(($pl_val/10000000),2);
+                                                    					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
+
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CR</b>";
 																		echo "<td></td>";
                                                     					echo "<td>".$row["writer_rating"]."</td>";
-																		echo "<td>".$row["pl"]."</td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr." CRORES</b></td>";
 																		echo "<td><b>".$writer_movie_count."</b></td>";
-																		
-                                                    				
-                                                    				
-                                                    					echo  "</tr>"; 
-                                                    					 
-                                                    				
+
+
+                                                    					echo  "</tr>";
+
+
                                                     				}
-                                                    			}  
+                                                    			}
                                                     			  
                                                                 ?>
                                                             </tbody>
