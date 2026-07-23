@@ -82,7 +82,7 @@ if ($branch === '') {
 }
 
 $sN = substr($branch, 0, 2);
-$step = substr($branch, 2, 1);
+$step = substr($branch, 3, 1);
 $next = match($sN) {
     's1' => 's2_a', 's2' => 's3_a', 's3' => 's4_a',
     's4' => 's5_a', 's5' => 's6_a', 's6' => 's7_a',
