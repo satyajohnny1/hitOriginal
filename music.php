@@ -523,6 +523,26 @@ $nme = $_GET['name'];
 
                 }
             </script>
+        <script>
+        jQuery(document).ready(function($) {
+            $('.nav-tabs a[data-toggle="tab"]').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var target = $(this).attr('href');
+                var $container = $(this).closest('.nav-tabs').siblings('.tab-content');
+                if (!$container.length) $container = $(this).closest('.panel-body').find('.tab-content').first();
+                $(this).closest('.nav-tabs').find('li').removeClass('active');
+                $(this).parent('li').addClass('active');
+                $container.children('.tab-pane').removeClass('active in');
+                $(target).addClass('active in');
+            });
+            var hash = window.location.hash;
+            if (hash && hash.length > 1) {
+                var $link = $('.nav-tabs a[href="' + hash + '"]');
+                if ($link.length) $link.trigger('click');
+            }
+        });
+        </script>
 
 
     </body>
