@@ -41,35 +41,37 @@
  
   <script src="share/js/rrssb.min.js"></script>
   <script>
-  $(document).ready(function() {
-      function activateTab($link) {
-          var target = $link.attr('href');
-          if (!target || target.length < 2) return;
-          var targetId = target.charAt(0) === '#' ? target.substring(1) : target;
-          var $pane = $('#' + targetId);
-          if (!$pane.length) return;
-          var $navTabs = $link.closest('.nav-tabs');
-          var $contentContainer = $navTabs.siblings('.tab-content');
-          if (!$contentContainer.length) {
-              $contentContainer = $navTabs.parent().find('.tab-content').first();
-          }
-          $navTabs.find('li').removeClass('active');
-          $link.parent('li').addClass('active');
-          $contentContainer.children('.tab-pane').removeClass('active in');
-          $pane.addClass('active in');
+  document.addEventListener('click', function(e) {
+      var link = e.target.closest('.nav-tabs a[data-toggle="tab"]');
+      if (!link) return;
+      e.preventDefault();
+      e.stopPropagation();
+      var href = link.getAttribute('href');
+      if (!href || href.length < 2) return;
+      var pane = document.querySelector(href);
+      if (!pane) return;
+      var nav = link.closest('.nav-tabs');
+      var lis = nav.querySelectorAll(':scope > li');
+      for (var i = 0; i < lis.length; i++) lis[i].classList.remove('active');
+      link.parentElement.classList.add('active');
+      var container = nav.parentElement;
+      var tabContent = container.querySelector('.tab-content');
+      if (!tabContent) tabContent = nav.closest('.panel-body, .panel, [role="tabpanel"]').querySelector('.tab-content');
+      if (!tabContent) return;
+      var panes = tabContent.children;
+      for (var i = 0; i < panes.length; i++) {
+          panes[i].classList.remove('active');
+          panes[i].classList.remove('in');
       }
+      pane.classList.add('active');
+      pane.classList.add('in');
+  }, true);
 
-      $(document).on('click', '.nav-tabs a[data-toggle="tab"]', function(e) {
-          e.preventDefault();
-          activateTab($(this));
-      });
-
+  document.addEventListener('DOMContentLoaded', function() {
       var hash = window.location.hash;
       if (hash && hash.length > 1) {
-          var $link = $('.nav-tabs a[href="' + hash + '"]');
-          if ($link.length) {
-              activateTab($link);
-          }
+          var link = document.querySelector('.nav-tabs a[href="' + hash + '"]');
+          if (link) link.click();
       }
   });
   </script>
