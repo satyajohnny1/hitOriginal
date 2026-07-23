@@ -20,9 +20,13 @@ if (!$conn) {
 }else{
 	//echo "<h1> Connection Success. </h1>";
 	
-	// Silent Automated Migration Runner with local file cache check (0ms overhead on subsequent hits)
+	// Silent Automated Migration Runner with local file cache check (0ms overhead on subsequent hits).
+	// The lock is fingerprinted to the DB connection so switching DB_HOST/DB_NAME/etc. (e.g. a new
+	// server) automatically invalidates the cache instead of skipping migrations on the new, empty DB.
 	$migratedLock = __DIR__ . '/db/migrations/.migrated';
-	if (!defined('PHINX_CONFIG_LOADED') && !defined('MIGRATING_DB') && !file_exists($migratedLock)) {
+	$dbFingerprint = md5($servername . '|' . $dbport . '|' . $dbname . '|' . $username);
+	$lockIsCurrent = file_exists($migratedLock) && trim((string) @file_get_contents($migratedLock)) === $dbFingerprint;
+	if (!defined('PHINX_CONFIG_LOADED') && !defined('MIGRATING_DB') && !$lockIsCurrent) {
 		define('MIGRATING_DB', true);
 		
 		$runMigrate = false;
@@ -66,12 +70,12 @@ if (!$conn) {
 				$app = new \Phinx\Console\PhinxApplication();
 				$app->setAutoExit(false);
 				$app->run(new \Symfony\Component\Console\Input\StringInput('migrate'), new \Symfony\Component\Console\Output\NullOutput());
-				@touch($migratedLock);
+				@file_put_contents($migratedLock, $dbFingerprint);
 			} catch (\Exception $e) {
 				error_log("Auto Migration Failed: " . $e->getMessage());
 			}
 		} else {
-			@touch($migratedLock);
+			@file_put_contents($migratedLock, $dbFingerprint);
 		}
 	}
 }
