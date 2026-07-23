@@ -276,7 +276,12 @@ if (mysqli_num_rows($result) > 0) {
                                             </div>
                                             <div class="col-md-4" style="border: 1px solid;">
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s1_a_btn" style="display: none;" class="btn btn-default btn-rounded">Shoot - Intro Scenes</button></h2>
+                                             <h2>
+												 <button type="button" id ="s1_a_btn" style="display: none;" class="btn btn-default btn-rounded">Shoot - Intro Scenes</button>
+												 
+												 <button type="button" id ="s1_b_btn" style="display: none;" class="btn btn-default btn-rounded">ReShoot - Intro Scenes</button>
+											 
+											 </h2>
 											 
 											  
                                               <h2 style="display: none;" id="s1N"><b>Go To Next Short</b></h2>                                                 
@@ -357,9 +362,8 @@ if (mysqli_num_rows($result) > 0) {
                                             <div class="col-md-4" style="border: 1px solid;">
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
                                              <h2><button type="button" id ="s2_a_btn" style="display: none;" class="btn btn-default btn-rounded">First Half Scenes</button></h2>
-											 
-						<button type="button" style="display: none;" id ="s2_b_btn" class="btn btn-default btn-rounded">Re-Shoot</button>					 
-											 
+											 				 
+											
                                               <h2 style="display: none;" id="s2N"><b>Go To Next Short</b></h2>                                                 
                                              </div>
                                             </div>
@@ -432,6 +436,8 @@ if (mysqli_num_rows($result) > 0) {
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
                                              <h2>
 												 <button type="button" id ="s3_a_btn" style="display: none;" class="btn btn-default btn-rounded">INTERVAL Scenes</button>
+												 
+												 <button type="button" id ="s3_b_btn" style="display: none;" class="btn btn-default btn-rounded">ReShoot</button>
 											 </h2>
                                              
                                               <h2 style="display: none;" id="s3N"><b>Go To Next Short</b></h2>                                              
