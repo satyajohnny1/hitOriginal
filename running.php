@@ -76,7 +76,7 @@ $cinename = '';
 $sql = "SELECT s.rel_date, s.r1, s.r2, s.r3, s.poster, s.max_days,
                s.`50d_cen`, s.`75d_cen`, s.`100d_cen`, s.`150d_cen`, s.`175d_cen`, s.`25d_cen`
         FROM tolly_release s
-        WHERE s.uid = ".$uid." and s.rid = ".$rid
+        WHERE s.uid = ".$uid." and s.rid = ".$rid."
         LIMIT 1";
 //echo $sql;
 $result = mysqli_query($conn, $sql);
@@ -116,7 +116,7 @@ $sql = "SELECT s.aid, s.acid, s.did, s.wid, s.mid, s.eid, s.cid,
                s.a2_name, s.a3_name, s.ac2_name, s.ac3_name, s.w2_name, s.w3_name,
                s.m2_name, s.m3_name, s.d2_name, s.d3_name
         FROM tolly_ready_for_shoot s
-        WHERE s.uid = ".$uid." and s.rid = ".$rid
+        WHERE s.uid = ".$uid." and s.rid = ".$rid."
         LIMIT 1";
 //echo $sql;
 $result = mysqli_query($conn, $sql);

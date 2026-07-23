@@ -20,7 +20,7 @@ $news='';
 $uid = $_SESSION['s_uid'];
 $sql = "SELECT s.rid, s.title, s.result, s.sofar, s.dname, s.aname, s.acname
         FROM tolly_ready_for_shoot s
-        WHERE s.uid = ".$uid." and s.rid = ".$rid
+        WHERE s.uid = ".$uid." and s.rid = ".$rid."
         LIMIT 1";
 $result = mysqli_query($conn, $sql);
  
@@ -41,7 +41,7 @@ if (mysqli_num_rows($result) > 0) {
 
 $sql = "SELECT s.rel_cen
         FROM tolly_release s
-        WHERE s.uid = ".$uid." and s.rid = ".$rid
+        WHERE s.uid = ".$uid." and s.rid = ".$rid."
         LIMIT 1";
 $result = mysqli_query($conn, $sql);
 

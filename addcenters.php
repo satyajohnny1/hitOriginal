@@ -1,9 +1,9 @@
+<?php declare(strict_types=1); ?>
 <div style="display:none">
 
 
 
 <?php
-declare(strict_types=1);
 include 'sessionCheck.php';
 error_reporting ( 0 );
 include 'db_helper.php';
