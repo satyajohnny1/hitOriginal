@@ -66,15 +66,121 @@ $nme = $_GET['name'];
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active fade in" id="tab21">
+										
+									
+
+
+
+
+
+
+									
+										
+										
                                             <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="panel panel-white">
-                                                        <div style="width: 100%; height: 70px;">
-                                                           <h1 id="abc" style="text-align: center;"><?php echo $nme?></h1>
-                                                           </div>
-                                                    </div>
-                                                </div>
+											<div class="col-md-3"></div>
+                                                <div class="col-md-6"> 
+												<div class="panel panel-white">
+                                <div class="panel-heading clearfix">
+                                    <h4 class="panel-title">Data</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <form action="updateallpage.php" method="POST" enctype="multipart/form-data">
+                                    
+                                      <?php 
+                                        include 'db.php';
+                                        
+                             			$sql = "SELECT * FROM tolly_actor WHERE actor_id = ".$aid;
+                                             		//	echo $sql;
+                                                    			$result = mysqli_query($conn, $sql);                                                      			
+                                                    				
+                                                    			if (mysqli_num_rows($result) > 0) {
+                                                    				// output data of each row
+                                                    				while($row = mysqli_fetch_assoc($result)) {
+																	$name 	= $row["actor_name"];
+																	$rate 	= $row["actor_rate"];
+																	$grade 	= $row["actor_grade"];
+																	$status = $row["actor_status"];
+																	$rating = $row["actor_rating"];
+																	$pic 	= $row["actor_pic"];
+																	 
+																 
+                                                    				}
+                                                    			}
+                                            ?>
+									  
+									  <div class="form-group">
+                                            <label for="exampleInputEmail1">TABLE</label>
+                                            <input type="text" class="form-control" id="table"  value="actor" name="table" placeholder="Name">
+									   </div>
+									   
+									   <div class="form-group">
+                                            <label for="exampleInputEmail1">ID</label>
+                                            <input type="text" class="form-control" value="<?php echo $aid ?>" id="aid" name="aid" placeholder="aid">
+                                        </div>
+									   
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">name</label>
+                                            <input type="text" class="form-control" value="<?php echo $name ?>" id="aname" name="aname" placeholder="Name">
+                                        </div>
+                                        
+                                       
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">rate</label>
+                                            <input type="number" class="form-control"  value="<?php echo $rate ?>"  id="arate" name="arate" placeholder="Remuranation">
+                                        </div>
+                                       
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Grade</label>
+                                            <input type="text" class="form-control"  value="<?php echo $grade ?>"  id="agrade" name="agrade"  placeholder="Remuranation">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">status</label>
+                                            <input type="text" class="form-control"  value="<?php echo $status ?>"  id="astatus" name="astatus"  placeholder="Remuranation">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">rating</label>
+                                            <input type="number" class="form-control" id="arating"  value="<?php echo $rating ?>"  name="arating"  placeholder="Remuranation">
+                                        </div>
+                                         
+                                      <?php 
+									  
+									  if($_SESSION['s_type'] == 'admin')
+									 echo "<button type=\"submit\" class=\"btn btn-primary\">Upadte </button>";
+									   ?> 
+									
+									
+									</form>
+									
+									
+									
+									
+									<form action="deleteallpage.php" method="POST" enctype="multipart/form-data">
+									<input type="text" class="form-control" style="display:none" id="table"  value="actor" name="table" placeholder="Name">
+									<input type="text" class="form-control" style="display:none" value="<?php echo $aid ?>" id="aid" name="aid" placeholder="aid">
+									
+									  <?php 
+									  
+									  if($_SESSION['s_type'] == 'admin')
+									 echo "<button type=\"submit\" class=\"btn btn-primary\">DELETE </button>";
+									   ?> 
+									</form>
+									
+									
+                                </div>
+                            </div>      </div>
                                             </div>
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="tab22">
 
@@ -97,8 +203,11 @@ $nme = $_GET['name'];
                                                                             <th>Result</th>
                                                                             <th>Budget</th>
                                                                             <th>Collection</th>
-                                                                            <th>50'Centers</th>
-                                                                            <th>100'Centers</th>
+                                                                            <th>50'Cen</th>
+                                                                            <th>100'Cen</th>
+                                                                            <th>150'Cen</th>
+                                                                            <th>175'Cen</th>
+                                                                            <th>Days</th>
                                                                         </tr>
                                                                     </thead>
 
@@ -106,7 +215,7 @@ $nme = $_GET['name'];
                                                                         <?php 
                                         include 'db.php';
                                         
-                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.aid = ".$aid." OR s.a2 = ".$aid." OR s.a3 = ".$aid." and s.status = 'out'";
+                             			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.aid = ".$aid." and s.status = 'out' OR s.a2 = ".$aid." OR s.a3 = ".$aid;
                                              		//	echo $sql;
                                                     			$result = mysqli_query($conn, $sql);                                                      			
                                                     				
@@ -119,8 +228,13 @@ $nme = $_GET['name'];
                                                     					$title = $row["title"];
                                                     					$dname = $row["dname"];
                                                     					$aname = $row["aname"];
-                                                    					$res = $row["result"];
+																		$res = $row["result"];
                                                     					$collection= $row["collection"];
+																		$totColl = $totColl+$collection;
+																		
+                                                    					$budget = $row["sofar"];
+																		$totBud = $totBud+$budget;
+																		
                                                     					$budget = $row["sofar"];
                                                     					$a2_name = $row["a2_name"];
                                                     					$a3_name = $row["a3_name"];
@@ -132,7 +246,10 @@ $nme = $_GET['name'];
                                                     				$row1 = mysqli_fetch_assoc($r1);
                                                     				
                                                     				$c50 = $row1["50d_cen"];
-                                                    				$c100 = $row1["100d_cen"]; 
+                                                    				$c100 = $row1["100d_cen"];
+																	$c150 = $row1["150d_cen"];  
+																	$c175 = $row1["175d_cen"]; 
+																	$days = $row1["max_days"];
                                           		echo "<tr>";
                                           		echo "<td>".$rid."</td>";
                                              	echo "<td><a href='movie.php?rid=".$rid."' class='btn btn-danger btn-rounded'>".$title."</a></td>";
@@ -141,12 +258,23 @@ $nme = $_GET['name'];
                                              	echo "<td><button type='button' class='btn btn-info'>".$res."</button></td>";
                                              	echo "<td>".round($budget/10000000, 2)."</td>";
                                              	echo "<td>".round($collection/10000000, 2)."</td>";
-                                             	 echo "<td>".$c50."</td>";
+                                             	echo "<td>".$c50."</td>";
                                              	echo "<td>".$c100."</td>";
+												
+												echo "<td>".$c150."</td>";
+                                             	echo "<td>".$c175."</td>";
+												echo "<td>".$days."</td>";
+												
                                             	echo " </tr> ";
                                           
                                                     				}
                                                     			}
+																
+																
+																
+											$pl = round(($totColl-$totBud)/10000000, 2);
+											$sql = "UPDATE `tolly_actor` SET `pl`=".$pl." WHERE  `actor_id`=".$aid;
+											mysqli_query($conn, $sql);
                                             ?>
 
 
@@ -162,6 +290,61 @@ $nme = $_GET['name'];
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane fade" id="tab33">
+
+
+<div class="panel-body">
+									
+
+
+<div class="col-md-6">
+<table class="table table-hover">
+
+ <?php 
+    include 'db.php';
+	    $sql = "SELECT s.result, COUNT(*) AS `count` FROM `tolly_ready_for_shoot` s  WHERE s.aid= ".$aid." OR s.a2 = ".$aid." OR s.a3 = ".$aid. " GROUP BY s.result";
+		//echo "sql : ".$sql;
+		
+		
+		$result=mysqli_query($conn,$sql);
+		
+		while($row = mysqli_fetch_assoc($result)) {
+					
+					echo " <tr>  <td> <button type=\"button\" class=\"btn btn-primary\"> ".$row["result"]."  </button></td>";
+					echo " <td> <button type=\"button\" class=\"btn btn-success\">".$row["count"]. " </button><td> </tr>  ";
+		}
+?>
+
+
+  
+  
+</table> 
+</div>
+
+									
+
+			<div class="col-md-6"> 							 
+<button type="button" class="btn btn-primary btn-lg btn-block"><h3>Budget :<?php  echo "".round($totBud/10000000, 2)." Cr.";  ?></h3></button>
+<button type="button" class="btn btn-success btn-lg btn-block"><h3>Collec :<?php  echo "".round($totColl/10000000, 2)." Cr."; ?></h3></button>
+<button type="button" class="btn btn-info btn-lg btn-block"><h2>P&L :<?php  echo "".round(($totColl-$totBud)/10000000, 2)." Cr."; ?> </h2></button>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                         </div>
 
@@ -208,7 +391,7 @@ $nme = $_GET['name'];
                         ['Task', 'Hours per Day'],
 
                         <?php 
-        	         $sql = "select count(*) as cnt, s.result from tolly_ready_for_shoot s WHERE s.aid = ".$aid." and s.`status` = 'out' GROUP BY s.result";
+        	         $sql = "select count(*) as cnt, s.result from tolly_ready_for_shoot s WHERE s.aid = ".$aid." and s.`status` = 'out' OR s.a2 = ".$aid." OR s.a3 = ".$aid. " GROUP BY s.result";
         	         //echo '<h2>'.$sql.'</h2>';
         	         $result = mysqli_query ( $conn, $sql );
         	         if (mysqli_num_rows($result) > 0) {
@@ -255,8 +438,8 @@ $nme = $_GET['name'];
                         ['Label', 'Value'],
                         <?php 
    	         $sql = "SELECT x.tot, y.hit FROM 
-(SELECT count(*) as tot from tolly_ready_for_shoot s WHERE s.aid = ".$aid." and s.`status` = 'out') as x,
-(SELECT count(*) as hit FROM tolly_ready_for_shoot sa WHERE sa.aid = ".$aid." and sa.`status` = 'out' and sa.rating>3) as y 
+(SELECT count(*) as tot from tolly_ready_for_shoot s WHERE s.aid = ".$aid." and s.`status` = 'out' OR s.a2 = ".$aid." OR s.a3 = ".$aid.") as x,
+(SELECT count(*) as hit FROM tolly_ready_for_shoot sa WHERE sa.aid = ".$aid." and sa.`status` = 'out' OR sa.a2 = ".$aid." OR sa.a3 = ".$aid." and sa.rating>3) as y 
  ";
    	         //echo '<h2>'.$sql.'</h2>';
    	         $result = mysqli_query ( $conn, $sql );
@@ -302,7 +485,7 @@ $nme = $_GET['name'];
                         ['Movie', 'Rating'],
 
                         <?php 
-                                                     	         $sql = "select s.title,  s.rating from tolly_ready_for_shoot s WHERE s.aid =  ".$aid." and s.`status` = 'out' ORDER BY s.dt LIMIT 5";
+                                                     	         $sql = "select s.title,  s.rating from tolly_ready_for_shoot s WHERE s.aid =  ".$aid." OR s.a2 = ".$aid." OR s.a3 = ".$aid." and s.`status` = 'out' ORDER BY s.dt LIMIT 5";
                                                      	         //echo '<h2>'.$sql.'</h2>';
                                                      	         $result = mysqli_query ( $conn, $sql );
                                                      	         if (mysqli_num_rows($result) > 0) {
@@ -345,4 +528,9 @@ $nme = $_GET['name'];
 
     </body>
 
-    </html> <?php mysql_close($conn);?>
+    </html> 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

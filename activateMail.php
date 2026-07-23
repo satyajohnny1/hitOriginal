@@ -1,3 +1,5 @@
+
+
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -6,15 +8,14 @@
 <meta name="author" content="Hege Refsnes">
   </head>
   <body>
-<h1>http://hitandfut.hostreo.com/activate.php?link=www.hitandfut.com&to=hitandfut@gmail.com</h1>
-<a href="http://hitandfut.hostreo.com/activate.php?link=www.hitandfut.com&to=hitandfut@gmail.com">Mail Me</a>
+<a href="activateMail.php?link=www.hitandfut.com&to=smlcodes@gmail.com">Mail Me</a>
 
-hitandfut.skim.us
+ 
 <?php
 
 	$link = $_GET["link"];
 	$to = $_GET["to"];
-   $subject = "HIT AND FLOP- Activate Your Account ";
+   $subject = "Hit & Fut- Activate Your Account ";
    $header = "From: ActivateAccount@hitandfut.com \r\n";
 			$header .= "Reply-To: ActivateAccount@hitandfut.com\r\n";
 			$header .= "MIME-Version: 1.0\r\n";
@@ -120,7 +121,7 @@ hitandfut.skim.us
 <td align=\"center\" style=\"border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;margin: 0px;\" valign=\"top\">
 <a href=\"".$link."\" 
 style=\"word-wrap:break-word;color:#15C;font-weight:normal;text-decoration:underline;color: rgb(17, 85, 204); text-decoration: none;\" target=\"_blank\" title=\"HitandFlop\">
-<img alt=\"HitandFlop\" class=\"CToWUd\" height=\"117\" src=\"https://e15a9472-a-62cb3a1a-s-sites.googlegroups.com/site/hitandfut/downloads/logo1.png\" style=\"border:0;height:auto;line-height:100%;outline:none;text-decoration:none;border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 60px; font-weight: bold; letter-spacing: -4px; line-height: 60px; outline: none; color: rgb(109, 198, 221) !important; min-height: auto !important;\" width=\"259\" /></a></td>
+<img alt=\"HitandFlop\" class=\"CToWUd\" height=\"117\" src=\"https://i.ibb.co/qNSC9kK/ho.png\" style=\"border:0;height:auto;line-height:100%;outline:none;text-decoration:none;border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 60px; font-weight: bold; letter-spacing: -4px; line-height: 60px; outline: none; color: rgb(109, 198, 221) !important; min-height: auto !important;\" width=\"259\" /></a></td>
 </tr>
 <tr>
 <td align=\"center\" style=\"border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;margin: 0px; padding-top: 30px; padding-bottom: 30px;\" valign=\"top\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;border-radius: 4px; background-color: rgb(255, 255, 255);\" width=\"100%\">
@@ -176,9 +177,8 @@ style=\"word-wrap:break-word;color:#15C;font-weight:normal;text-decoration:under
 </table>
 </center>
 </body>
-</html> <?php mysql_close($conn);?>
-";
-
+</html> ";
+ 
 
 
 

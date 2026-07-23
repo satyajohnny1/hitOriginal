@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 include 'sessionCheck.php';
 include 'db.php';
  
@@ -72,7 +73,11 @@ $cinename = '';
  $_m3_name = '';
  $_d2_name = '';
  $_d3_name = '';
-$sql = "SELECT * FROM tolly_release s WHERE s.uid = ".$uid." and s.rid = ".$rid;
+$sql = "SELECT s.rel_date, s.r1, s.r2, s.r3, s.poster, s.max_days,
+               s.`50d_cen`, s.`75d_cen`, s.`100d_cen`, s.`150d_cen`, s.`175d_cen`, s.`25d_cen`
+        FROM tolly_release s
+        WHERE s.uid = ".$uid." and s.rid = ".$rid."
+        LIMIT 1";
 //echo $sql;
 $result = mysqli_query($conn, $sql);
 
@@ -103,7 +108,16 @@ if (mysqli_num_rows($result) > 0) {
 
 
 
-$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.uid = ".$uid." and s.rid = ".$rid;
+$sql = "SELECT s.aid, s.acid, s.did, s.wid, s.mid, s.eid, s.cid,
+               s.budget, s.collection, s.profit, s.sofar, s.grade, s.status, s.pic, s.dt, s.notes,
+               s.dname, s.aname, s.acname, s.s, s.progress, s.rating, s.result,
+               s.cinename, s.ediname, s.musname, s.wriname, s.title,
+               s.a2, s.a3, s.ac2, s.ac3, s.w2, s.w3, s.m2, s.m3, s.d2, s.d3,
+               s.a2_name, s.a3_name, s.ac2_name, s.ac3_name, s.w2_name, s.w3_name,
+               s.m2_name, s.m3_name, s.d2_name, s.d3_name
+        FROM tolly_ready_for_shoot s
+        WHERE s.uid = ".$uid." and s.rid = ".$rid."
+        LIMIT 1";
 //echo $sql;
 $result = mysqli_query($conn, $sql);
 
@@ -120,10 +134,21 @@ if (mysqli_num_rows($result) > 0) {
 		$mid       = 	$row["mid"];
 		$eid       = 	$row["eid"];
 		$cid       = 	$row["cid"];
+		
 		$budget    = 	$row["budget"];
+		$budget    = 	ceil($budget);
+		
 		$collection= 	$row["collection"];
+		$collection    = 	ceil($collection);
+		
 		$profit    = 	$row["profit"];
+		$profit    = 	ceil($profit);
+		
 		$sofar     = 	$row["sofar"];
+		$sofar    = 	ceil($sofar);
+		
+		
+		
 		$grade     = 	$row["grade"];
 		$status    = 	$row["status"];
 		$pic       = 	$row["pic"];
@@ -425,6 +450,7 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
                                     </div>
                                                  <div id="odometer" class="odometer" style="width: 100%;text-align: center;">1000000</div>
                                             </div>
+											<strong><a href="#" id="posterRegen">Poster rgn</strong> 
                                         </div>
                                         
                                     </div>
@@ -464,23 +490,24 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
                                        		 
                                        		if($_w2>0)
                                        		{
-                                       			echo "<a href=\"music.php?name=".$_w2_name."&id=".$_w2."\" class=\"btn btn-primary btn-rounded\">". $_w2_name."</a>";
+                                       			echo "<a href=\"writer.php?name=".$_w2_name."&id=".$_w2."\" class=\"btn btn-primary btn-rounded\">". $_w2_name."</a>";
                                        		}
                                        		
                                        		if($_w3>0)
                                        		{
-                                       			echo "<a href=\"music.php?name=".$_w3_name."&id=".$_w3."\" class=\"btn btn btn-warning btn-rounded\">". $_w3_name."</a>";
+                                       			echo "<a href=\"writer.php?name=".$_w3_name."&id=".$_w3."\" class=\"btn btn btn-warning btn-rounded\">". $_w3_name."</a>";
                                        		}
                                        		
                                        		
                                        
                                        	   
                                          echo "<a href=\"music.php?name=".$musname."&id=".$mid."\" class=\"btn btn btn-primary btn-rounded\">". $musname."</a>";
-                                         echo "<a href=\"music.php?name=".$wriname."&id=".$wid."\" class=\"btn btn btn-danger btn-rounded\">". $wriname."</a>";
+                                         echo "<a href=\"writer.php?name=".$wriname."&id=".$wid."\" class=\"btn btn btn-danger btn-rounded\">". $wriname."</a>";
                                          ?>
                                         <a href="editor.php?id=<?php echo $eid?>" class="btn btn-warning btn-rounded"><?php echo $ediname?></a>                                       
                                          <a href="writer.php?id=<?php echo $wid?>" class="btn btn-danger btn-rounded"><?php echo $wriname?></a>
                                           <a href="cine.php?id=<?php echo $cid?>" class="btn btn-primary btn-rounded"><?php echo $cinename?></a>
+										  <a href="forceout.php?id=<?php echo $rid?>" class="btn btn-warning btn-rounded">ForceOut</a>  
                                        <p id="ps" style="display: none;">Link</p>
                                     </div>
                                 </div>
@@ -555,9 +582,9 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
 
 
 			var poster = '<?php echo $poster?>';
-			
+			//poster = 'no';
            
-         // ////alert(poster);
+         //alert(poster);
 
        // 
        if(poster=='no')
@@ -594,13 +621,24 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
     			var a2Chk = '<?php echo $_a2?>';
     			var a3Chk = '<?php echo $_a3?>';
 
-    			 var plink = 'poster/poster1.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
+				var url = window.location.href;
+				var arr = url.split("/"); 
+				var hostname = arr[0] + "//" + arr[2];
+				
+				if(hostname.includes("localhost")){
+					hostname = hostname+"/hit";
+					//alert(hostname);
+				}
+					
+    			 var plink = hostname+'/poster/poster1.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
    			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
    			 
-    			
+    		
+				
+			
     			if(a2Chk>0)
     			{
-    				 plink = 'poster/poster2.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
+    				 plink = hostname+'/poster/poster2.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
        			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
        			 
             	}
@@ -608,14 +646,16 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
     			
     			if(a3Chk>0)
     			{
-    				 plink = 'poster/poster3.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
+    				 plink = hostname+'/poster/poster3.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
        			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
        			 
             	}
-    			 
+				console.log("hostname : "+hostname);
+    			console.log("plink ::"+plink);
+				document.cookie = 'plink='+plink;
     			 
     			   
-    			   $("#ps").text('http://localhost/hitgit/'+plink);             
+    			   $("#ps").text(plink);             
     			            $.ajax({
     			                type: "POST",
     			                url: plink,
@@ -634,11 +674,6 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
     			            setTimeout("location.reload(true);", 15000);  
     			              
         }
-
-
-
-
-
 
 			
                 
@@ -770,8 +805,26 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
                 window.setInterval(function() {
                     ajaxCall();
                 }, 6000);
+				
+				
+				function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+				
+				var plinkvalue = readCookie('plink');
+				
+				console.log("Get Cookie : plinkvalue: "+plinkvalue);
+				document.getElementById("posterRegen").href = plinkvalue;
+				
             </script>
 
     </body>
 
-    </html> <?php mysql_close($conn);?>
+    </html> <?php mysqli_close($conn);?>

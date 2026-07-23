@@ -8,6 +8,7 @@ $password = '';
 $email = '';
 $banner = '';
 $pic = '';
+$balnc = 0.0;
 
 $sql = "SELECT * FROM tolly_user s WHERE  s.uid = ".$uid;
 //echo $sql;
@@ -18,7 +19,11 @@ if (mysqli_num_rows($result) > 0) {
 		$password = $row["password"];
 		$email = $row["email"];
 		$banner = $row["banner"];
-		$pic = $row["pic"];		 
+		$pic = $row["pic"];	
+		$balnc =  $row["bal"];
+
+		$_SESSION["s_user"] = $row["username"];
+		$_SESSION['s_banner'] = $row["banner"];
 	}
 	
 
@@ -67,7 +72,7 @@ if (mysqli_num_rows($result) > 0) {
                             <div class="col-md-3">
                              <div class="panel panel-white">
                                 <div class="panel-heading clearfix">
-                                    <h3 class="panel-title">Profile</h3>
+                                    <h3 class="panel-title">Banner Logo</h3>
                                 </div>
 
                                 <div class="row">
@@ -147,6 +152,13 @@ if (mysqli_num_rows($result) > 0) {
                                                                 <input type="text" class="form-control"  name="banner" id="banner"   value="<?php echo $banner?>">
                                                             </div>
                                                         </div>
+							    
+							  <div class="form-group">
+                                                            <label for="input-Default" class="col-sm-2 control-label">Balance</label>
+                                                            <div class="col-sm-5">
+                                                                <input type="text" class="form-control"  name="bal" id="bal"   value="<?php echo $balnc?>">
+                                                            </div>
+                                                        </div>   
                                                         
                                                         
 
@@ -286,4 +298,10 @@ if (mysqli_num_rows($result) > 0) {
 
     </body>
 
-    </html> <?php mysql_close($conn);?>
+    </html> 
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

@@ -72,12 +72,12 @@ error_reporting(E_ERROR);
                                                                 <input type="text" class="form-control"  name="s_title" id="s_title" placeholder="Title"  required="required">
                                                             </div>
                                                             <div class="form-group  col-md-2">
-                                                                <label for="exampleInputName2">Budget In Cr's</label>
+                                                                <label for="exampleInputName2">Budget</label>
                                                                 <input type="number" class="form-control col-md-6" min="1" max="<?php echo round(($_SESSION['s_bal']/10000000),2)?>" name="inC" id="inC" placeholder="for 0.01 is one lack" required="required">
                                                             </div>
                                                             
                                                             <div class="form-group  col-md-4">
-                                                                <label for="exampleInputName2">Budget in Rs</label>
+                                                                <label for="exampleInputName2">Rs.</label>
                                                                 <input type="text" class="form-control col-md-6" min="7" name="s_budget" id="s_budget" placeholder="In Ruppes" required="required" disabled="disabled">
                                                             </div>
    														  
@@ -118,7 +118,9 @@ error_reporting(E_ERROR);
                                                                 <tr>
                                                                     <th>Director</th>
                                                                     <th>Remuneration</th>
-                                                                    <th>Grade</th>                                                                   
+                                                                    <th>Grade</th>
+																	<th>PL</th>
+                                                                    <th>Movies</th>
                                                                     <th style="display: none;">pic</th>
                                                                 </tr>
                                                             </thead>
@@ -137,15 +139,22 @@ error_reporting(E_ERROR);
                                                     					$dir_name = $row["director_name"];
                                                     					$dir_rate = $row["director_rate"];
                                                     					$dir_pic = $row["director_pic"];
+                                                    					$dir_id_raw = $dir_id;
                                                     					
                                                     					$dir_cr = round(($dir_rate/10000000),2);
                                                     					
                                                     					$dir_id = $dir_id.'#'.$dir_name.'$'.$dir_rate.'^'.$dir_pic;
-                                                    					
+
+                                                    					$countQ = "SELECT COUNT(*) as cnt FROM tolly_ready_for_shoot WHERE did = $dir_id_raw OR d2 = $dir_id_raw OR d3 = $dir_id_raw";
+                                                    					$countR = mysqli_query($conn, $countQ);
+                                                    					$dir_movie_count = mysqli_fetch_assoc($countR)['cnt'];
+
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["director_grade"]."</td>";                                                    					
+                                                    					echo "<td>".$row["director_rating"]."</td>";
+																		echo "<td>".$row["pl"]."</td>";
+                                                    					echo "<td><b>".$dir_movie_count."</b></td>";
                                                     					echo  "<td style='display: none;'>".$dir_pic."</td>";
                                                     					
                                                     					echo  "</tr>"; 
@@ -190,11 +199,13 @@ error_reporting(E_ERROR);
                                                     <div class="table-responsive">
                                                         <table id="example3" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
-                                                                <tr>
-                                                                    <th>Actor</th>
-                                                                    <th>Remuneration</th>
-                                                                    <th>Grade</th>
-                                                                   
+                                                                 <tr>
+                                                                     <th>Actor</th>
+                                                                     <th>Remuneration</th>
+																	
+                                                                     <th>Grade</th>
+																	<th>PL</th>
+                                                                    <th>Movies</th>
                                                                 </tr>
                                                             </thead>
 													<!-- Actor serach code -->
@@ -212,15 +223,21 @@ error_reporting(E_ERROR);
                                                     					$act_name = $row["actor_name"];
                                                     					$act_rate = $row["actor_rate"];
                                                     					$a_pic = $row["actor_pic"];
+                                                    					$act_id_raw = $act_id;
                                                     					$act_id = $act_id.'#'.$act_name.'$'.$act_rate.'^'.$a_pic;
                                                     					
                                                     					$dir_cr = round(($act_rate/10000000),2);
                                                     					
+                                                    					$countQ = "SELECT COUNT(*) as cnt FROM tolly_ready_for_shoot WHERE aid = $act_id_raw OR a2 = $act_id_raw OR a3 = $act_id_raw";
+                                                    					$countR = mysqli_query($conn, $countQ);
+                                                    					$act_movie_count = mysqli_fetch_assoc($countR)['cnt'];
+                                                    					
                                                     					echo "<tr>";                                                    					
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["actor_grade"]."</td>";
-                                                    					 
+                                                    					echo "<td>".$row["actor_rating"]."</td>";
+                                                    					 echo "<td>".$row["pl"]."</td>";
+                                                    					echo "<td><b>".$act_movie_count."</b></td>";
                                                     					echo  "</tr>"; 
                                                     					 
                                                     				
@@ -267,11 +284,12 @@ error_reporting(E_ERROR);
                                                     <div class="table-responsive">
                                                         <table id="example-editable" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
-                                                                <tr>
-                                                                    <th>actress</th>
-                                                                    <th>Remuneration</th>
-                                                                    <th>Grade</th>
-                                                                     
+                                                                 <tr>
+                                                                     <th>actress</th>
+                                                                     <th>Remuneration</th>
+                                                                     <th>Grade</th>
+                                                                     <th>PL</th>
+                                                                     <th>Movies</th>
                                                                 </tr>
                                                             </thead>
 													<!-- actress serach code -->
@@ -289,17 +307,23 @@ error_reporting(E_ERROR);
                                                     					$dir_name = $row["actress_name"];
                                                     					$dir_rate = $row["actress_rate"];
                                                     					$ac_pic = $row["actress_pic"];
+                                                    					$actress_id_raw = $dir_id;
                                                     					
                                                     					$dir_cr = round(($dir_rate/10000000),2);
                                                     					 
                                                     					
                                                     					$dir_id = $dir_id.'#'.$dir_name.'$'.$dir_rate.'^'.$ac_pic;
                                                     					
+                                                    					$countQ = "SELECT COUNT(*) as cnt FROM tolly_ready_for_shoot WHERE acid = $actress_id_raw OR ac2 = $actress_id_raw OR ac3 = $actress_id_raw";
+                                                    					$countR = mysqli_query($conn, $countQ);
+                                                    					$actress_movie_count = mysqli_fetch_assoc($countR)['cnt'];
+                                                    					
                                                     					echo "<tr>";                                                    					
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["actress_grade"]."</td>";
-                                                    				 
+                                                    					echo "<td>".$row["actress_rating"]."</td>";
+																		echo "<td>".$row["pl"]."</td>";
+                                                    					echo "<td><b>".$actress_movie_count."</b></td>";
                                                     					echo  "</tr>"; 
                                                     					 
                                                     				
@@ -340,15 +364,17 @@ error_reporting(E_ERROR);
                                             </div> 
                                             </div>
                                                 </div>
-                                                <div class="col-md-9">
+                                               <div class="col-md-9">
                                                     <div class="table-responsive">
                                                         <table id="example2" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
-                                                                <tr>
-                                                                    <th style="width: 10%">writer</th>
-                                                                    <th style="width: 20%">Rem</th>
-                                                                   
-                                                                     
+                                                                 <tr>
+                                                                     <th>writer</th>
+                                                                     <th>Rem</th>
+                                                                     <th>DONT TOUCH</th>
+                                                                     <th>Rat</th>
+                                                                     <th>PL</th>
+                                                                     <th>Movies</th>
                                                                 </tr>
                                                             </thead>
 													<!-- writer serach code -->
@@ -366,15 +392,25 @@ error_reporting(E_ERROR);
                                                     					$dir_name = $row["writer_name"];
                                                     					$dir_rate = $row["writer_rate"];
                                                     					$ac_pic = $row["writer_pic"];
+                                                    					$writer_id_raw = $dir_id;
                                                     					  
                                                     					$dir_cr = round(($dir_rate/10000000),2);
                                                     					 
                                                     					$dir_id = $dir_id.'#'.$dir_name.'$'.$dir_rate.'^'.$ac_pic;
                                                     					
+                                                    					$countQ = "SELECT COUNT(*) as cnt FROM tolly_ready_for_shoot WHERE wid = $writer_id_raw OR w2 = $writer_id_raw OR w3 = $writer_id_raw";
+                                                    					$countR = mysqli_query($conn, $countQ);
+                                                    					$writer_movie_count = mysqli_fetch_assoc($countR)['cnt'];
+                                                    					
                                                     					echo "<tr>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
-                                                    					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td></td>";
+                                                    					echo "<td><b>".$dir_cr." CR</b>";
+																		echo "<td></td>";
+                                                    					echo "<td>".$row["writer_rating"]."</td>";
+																		echo "<td>".$row["pl"]."</td>";
+																		echo "<td><b>".$writer_movie_count."</b></td>";
+																		
+                                                    				
                                                     				
                                                     					echo  "</tr>"; 
                                                     					 
@@ -1131,4 +1167,10 @@ error_reporting(E_ERROR);
 
 </body>
 
-</html> <?php mysql_close($conn);?>
+</html> 
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

@@ -99,7 +99,7 @@ if (mysqli_num_rows($result) > 0) {
 		$r3 = $row["r3"];
 		$max_days = $row["max_days"];
 		
-
+		$rel_cen = $row["rel_cen"];
 		$wk1_cent = $row["1w_cen"];
 		$wk2_cent = $row["2w_cen"];
 		$d25_cent = $row["25d_cen"];
@@ -140,10 +140,19 @@ if (mysqli_num_rows($result) > 0) {
 		$mid       = 	$row["mid"];
 		$eid       = 	$row["eid"];
 		$cid       = 	$row["cid"];
+				
 		$budget    = 	$row["budget"];
+		$budget    = 	ceil($budget);
+		
 		$collection= 	$row["collection"];
+		$collection    = 	ceil($collection);
+		
 		$profit    = 	$row["profit"];
+		$profit    = 	ceil($profit);
+		
 		$sofar     = 	$row["sofar"];
+		$sofar    = 	ceil($sofar);
+		
 		$grade     = 	$row["grade"];
 		$status    = 	$row["status"];
 		$pic       = 	$row["pic"];
@@ -247,7 +256,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                        		
                                        		if($_a3>0)
                                        		{
-                                       			echo "<a href=\"actor.php?name=".$_a3_name."&id==".$_a3."\" class=\"btn btn-warning  btn-rounded\">". $_a3_name."</a>";
+                                       			echo "<a href=\"actor.php?name=".$_a3_name."&id=".$_a3."\" class=\"btn btn-warning  btn-rounded\">". $_a3_name."</a>";
                                        		}
                                      
                                        		echo "<a href=\"director.php?name=".$dname."&id=".$did."\" class=\"btn btn-warning btn-rounded\">". $dname."</a>";
@@ -259,7 +268,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                        		
                                        		if($_d3>0)
                                        		{
-                                       			echo "<a href=\"director.php?name=".$_d3_name."&id==".$_d3."\" class=\"btn btn-danger  btn-rounded\">". $_d3_name."</a>";
+                                       			echo "<a href=\"director.php?name=".$_d3_name."&id=".$_d3."\" class=\"btn btn-danger  btn-rounded\">". $_d3_name."</a>";
                                        		}
                                        	?><span><b>Profit/Loss</b></span>
                                   <span id="odometer" class="odometer" style="text-align: right;"><?php echo $profit ?></span>
@@ -419,7 +428,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                        		
                                        		if($_ac3>0)
                                        		{
-                                       			echo "<a href=\"actress.php?name=".$_ac3_name."&id==".$_ac3."\" class=\"btn btn-danger  btn-rounded\">". $_ac3_name."</a>";
+                                       			echo "<a href=\"actress.php?name=".$_ac3_name."&id=".$_ac3."\" class=\"btn btn-danger  btn-rounded\">". $_ac3_name."</a>";
                                        		}
                                     
 
@@ -435,19 +444,19 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                        		 
                                        		if($_w2>0)
                                        		{
-                                       			echo "<a href=\"music.php?name=".$_w2_name."&id=".$_w2."\" class=\"btn btn-info btn-rounded\">". $_w2_name."</a>";
+                                       			echo "<a href=\"writer.php?name=".$_w2_name."&id=".$_w2."\" class=\"btn btn-info btn-rounded\">". $_w2_name."</a>";
                                        		}
                                        		
                                        		if($_w3>0)
                                        		{
-                                       			echo "<a href=\"music.php?name=".$_w3_name."&id=".$_w3."\" class=\"btn btn btn-danger btn-rounded\">". $_w3_name."</a>";
+                                       			echo "<a href=\"writer.php?name=".$_w3_name."&id=".$_w3."\" class=\"btn btn btn-danger btn-rounded\">". $_w3_name."</a>";
                                        		}
                                        		
                                        		
                                        
                                        	   
                                          echo "<a href=\"music.php?name=".$musname."&id=".$mid."\" class=\"btn btn btn-danger btn-rounded\">". $musname."</a>";
-                                         echo "<a href=\"music.php?name=".$wriname."&id=".$wid."\" class=\"btn btn btn-danger btn-rounded\">". $wriname."</a>";
+                                         echo "<a href=\"writer.php?name=".$wriname."&id=".$wid."\" class=\"btn btn btn-danger btn-rounded\">". $wriname."</a>";
                                          ?>
                                         <a href="editor.php?id=<?php echo $eid?>" class="btn btn-warning btn-rounded"><?php echo $ediname?></a>                                       
                                          <a href="writer.php?id=<?php echo $wid?>" class="btn btn-danger btn-rounded"><?php echo $wriname?></a>
@@ -468,7 +477,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                        <thead>
                                                                 <tr>
                                                                     <th>Days</th>
-                                                                    <th>Centers</th>
+                                                                    <th>Centers<a href="centers.php?rid="></th>
                                                                     <th>Collection</th>                                                                                                                                  
                                                                     
                                                                 </tr>
@@ -479,6 +488,13 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                                              <?php 
 
                                                              echo  "<tr>";
+                                                             echo "<td><b> Release</b>";
+                                                             echo "<td><b>".$rel_cen." CENTERS</b>";
+                                                             echo "<td><b>.</b>";
+                                                             echo  "</tr>";
+                                                             
+					   
+					      echo  "<tr>";
                                                              echo "<td><b> 1st week</b>";
                                                              echo "<td><b>".$wk1_cent." CENTERS</b>";
                                                              echo "<td><b>".$wk1_coll." CRORES</b>";
@@ -496,7 +512,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
 
                                                     			echo  "<tr>";
                                                     			echo "<td><b> 25 days</b>";
-                                                    			echo "<td><b>".$d25_cent." CENTERS</b>";
+                                                    			echo "<td><b> <a href=\"centers.php?rid=".$rid. "&days=".$max_days."\" target=\"_blank\"> ".$d25_cent." CENTERS </a> </b>";
                                                     			echo "<td><b>".$d25_coll." CRORES</b>";
                                                     			echo  "</tr>";
                                                     			
@@ -504,7 +520,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
 
                                                     			echo  "<tr>";
                                                     			echo "<td><b> 50 days</b>";
-                                                    			echo "<td><b>".$d50_cent." CENTERS</b>";
+                                                    			echo "<td><b> <a href=\"centers.php?rid=".$rid. "&days=".$max_days."\" target=\"_blank\"> ".$d50_cent." CENTERS </a> </b>";
                                                     			echo "<td><b>".$d50_coll." CRORES</b>";
                                                     			echo  "</tr>";
                                                     			
@@ -512,7 +528,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
 
                                                     			echo  "<tr>";
                                                     			echo "<td><b> 75 days</b>";
-                                                    			echo "<td><b>".$d75_cent." CENTERS</b>";
+                                                    			echo "<td><b> <a href=\"centers.php?rid=".$rid. "&days=".$max_days."\" target=\"_blank\"> ".$d75_cent." CENTERS </a> </b>";
                                                     			echo "<td><b>".$d75_coll." CRORES</b>";
                                                     			echo  "</tr>";
                                                     			
@@ -520,7 +536,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
 
                                                     			echo  "<tr>";
                                                     			echo "<td><b> 100 days</b>";
-                                                    			echo "<td><b>".$d100_cent." CENTERS</b>";
+                                                    			echo "<td><b> <a href=\"centers.php?rid=".$rid. "&days=".$max_days."\" target=\"_blank\"> ".$d100_cent." CENTERS </a> </b>";
                                                     			echo "<td><b>".$d100_coll." CRORES</b>";
                                                     			echo  "</tr>";
                                                     			
@@ -681,4 +697,10 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
 
     </body>
 
-    </html><?php mysql_close($conn);?>
+    </html>
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

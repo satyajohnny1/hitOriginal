@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 include 'sessionCheck.php'; 
 session_start(); 
 error_reporting(E_ERROR);
@@ -17,8 +18,10 @@ $rel_cen =0;
 $news='';
 
 $uid = $_SESSION['s_uid'];
-$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.uid = ".$uid." and s.rid = ".$rid;
-echo $sql;
+$sql = "SELECT s.rid, s.title, s.result, s.sofar, s.dname, s.aname, s.acname
+        FROM tolly_ready_for_shoot s
+        WHERE s.uid = ".$uid." and s.rid = ".$rid."
+        LIMIT 1";
 $result = mysqli_query($conn, $sql);
  
 if (mysqli_num_rows($result) > 0) {
@@ -36,8 +39,10 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 
-$sql = "SELECT * FROM tolly_release s WHERE s.uid = ".$uid." and s.rid = ".$rid;
-echo $sql;
+$sql = "SELECT s.rel_cen
+        FROM tolly_release s
+        WHERE s.uid = ".$uid." and s.rid = ".$rid."
+        LIMIT 1";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
@@ -47,7 +52,7 @@ if (mysqli_num_rows($result) > 0) {
 	}
 }
 
-$news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $acname directed by $dname is Releasing in $rel_cen Centers"
+$news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $acname directed by $dname is Releasing in $rel_cen Centers";
 
 
 ?>
@@ -141,39 +146,42 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                                                 </div>
                                             </div>
 
-
                                             <div class="panel panel-info">
                                                 <div class="panel-body">
-                                                    <h3>Want to Release in More centers ? (1 center = 1x5,00,000)</h3>
+                                                    <h3>Want to Release in More centers ? (1 center = 1x3,00,000)</h3>
                                                     
                                                       <form class="form-inline" method="get" action="addcenters.php">
                                         
                                         <div class="form-group">
                                             <label  for="addcent">Add Centers</label>
-                                            <input type="number" min="1" max="500" class="form-control" name="addcent" id="addcent" >
+                                            <input type="number" min="-500" max="1500" class="form-control" name="addcent" id="addcent" >
                                         </div>
                                         <div class="form-group">
-                                       X  &nbsp; &nbsp;5,00,000 &nbsp; =                                
-                                        </div>
+                                       X  &nbsp; &nbsp;4,00,000 &nbsp; =                                
+                                        </div>	 
+										
+									 
                                          <div class="form-group">                                             
                                             <input type="text"  class="form-control" name="addsofar" id="addsofar" style="display: none;">
-                                             <input type="text"  class="form-control" name="iaddsofar" id="iaddsofar" >
+                                             <input type="text"  class="form-control" name="iaddsofar" id="iaddsofar" disabled="disabled">
                                         </div>
                                         
+										
+										 
                                         <div class="form-group">                                             
                                             <input type="text"  class="form-control" value="<?php echo $sofar?>" name="nwbudget" id="nwbudget" style="display: none;">
-                                            <input type="text"  class="form-control" value="<?php echo $sofar?>" name="inwbudget" id="inwbudget" >
-                                        </div>
+                                            <input type="text"  class="form-control" value="<?php echo $sofar?>" name="inwbudget" id="inwbudget">
+											<input type="number" min="0" max="4000" class="form-control" name="finalCent" id="finalCent" >
+                                        </div>   
                                         
                                          <input type="text"  id="cent" name="cent" value="<?php echo $rel_cen?>" style="display: none;">
                                     	 <input type="text"  id="rid" name="rid" value="<?php echo  $rid?>" style="display: none;">   
                                         <button type="submit"  class="btn btn-default btn-lg">Add Centers & Release</button>
                                     </form>
-                                                    
-
-
-                                                </div>
+                                             </div>
                                             </div>
+							 
+										
 
                                         </div>
                                         <!-- **************** OWN RELEASE ********************* -->
@@ -232,13 +240,15 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
                 $('#addcent').on('input', function() {
                     // do something
                     var cent = $('#addcent').val();
+					var finCent =  parseInt(cent) + parseInt(<?php echo $rel_cen?>);
                     var bud = $('#b1').text();
-                    var addso = cent*500000;
+                    var addso = cent*400000;
                     var nwbud = parseFloat(bud)+parseFloat(addso);
                     $('#addsofar').val(addso);
                     $('#nwbudget').val(nwbud);
                     $('#iaddsofar').val(addso);
                     $('#inwbudget').val(nwbud);
+					$('#finalCent').val(finCent);
                    // alert('Hello');
                 });
                 
@@ -246,4 +256,10 @@ $news = "<a href=\'running.php?rid=$rid\'>".$title."! Staring with $aname and $a
 
     </body>
 
-    </html> <?php mysql_close($conn);?>
+    </html>
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

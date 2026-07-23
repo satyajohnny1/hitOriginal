@@ -473,17 +473,23 @@ $( document ).ready(function() {
         closeRight2 = document.getElementById( 'closeRight2' ),
         body = document.body;
     
-    showRight.onclick = function() {
-        classie.toggle( menuRight, 'cbp-spmenu-open' );
-    };
+    if (showRight) {
+        showRight.onclick = function() {
+            classie.toggle( menuRight, 'cbp-spmenu-open' );
+        };
+    }
     
-    closeRight.onclick = function() {
-        classie.toggle( menuRight, 'cbp-spmenu-open' );
-    };
+    if (closeRight) {
+        closeRight.onclick = function() {
+            classie.toggle( menuRight, 'cbp-spmenu-open' );
+        };
+    }
     
-    closeRight2.onclick = function() {
-        classie.toggle( menuRight2, 'cbp-spmenu-open' );
-    };
+    if (closeRight2) {
+        closeRight2.onclick = function() {
+            classie.toggle( menuRight2, 'cbp-spmenu-open' );
+        };
+    }
     
     $('.showRight2').click(function() {
         classie.toggle( menuRight2, 'cbp-spmenu-open' );

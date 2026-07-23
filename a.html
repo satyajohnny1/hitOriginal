@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to display the hostname and port number of the current URL.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+
+var url = window.location.href;
+
+var arr = url.split("/"); 
+
+var result = arr[0] + "//" + arr[2]
+
+  var x = location.host;
+  document.getElementById("demo").innerHTML = result;
+}
+</script>
+
+</body>
+</html>

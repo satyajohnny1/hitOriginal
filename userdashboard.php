@@ -1,3 +1,4 @@
+<?php declare(strict_types=1); ?>
 <!DOCTYPE html>
 <html>
 
@@ -187,29 +188,27 @@ $srs = $_SESSION['s_rs'];
                                 <div class="panel-body">
                                 
                                    
-                                         <?php 
+                                        <?php
                                         include 'db.php';
                                         
-                             			$sql = "SELECT * FROM tolly_news t ORDER BY t.nid DESC limit 10";
-                                             			//echo $sql;
-                                                    			$result = mysqli_query($conn, $sql);                                                      			
-                                                    				
-                                                    			if (mysqli_num_rows($result) > 0) {
-                                                    				// output data of each row
-                                                    				while($row = mysqli_fetch_assoc($result)) {
-                                                    					$i++;
-                                                    					
-                                                    					$heading = $row["heading"];
-                                                    					$news = $row["news"];
-                                                    					$pic     = 	$row["pic"];                                        
-                                           echo "<div class=\"alert alert-info\" role=\"alert\">                                                                                           
+                                        $sql = "SELECT t.news FROM tolly_news t ORDER BY t.nid DESC limit 10";
+                                        //echo $sql;
+                                        $result = mysqli_query($conn, $sql);
+
+                                        if (mysqli_num_rows($result) > 0) {
+                                            // output data of each row
+                                            while($row = mysqli_fetch_assoc($result)) {
+                                                $i++;
+
+                                                $news = $row["news"];
+                                                $pic = '';
+                                                echo "<div class=\"alert alert-info\" role=\"alert\">
                                                 <strong>$news</strong>
-                                              
                                             </div>";
-                                          
-                                                    				}
-                                                    			
-                                                    			} ?>
+
+                                            }
+
+                                        } ?>
                                                                 
                                 </div>
                             </div>
@@ -280,22 +279,22 @@ $srs = $_SESSION['s_rs'];
       //********************* Suceess Rate ********************** 
  		var successratedata = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-      	<?php 
-   	         $sql = "SELECT x.tot, y.hit FROM 
+        <?php
+            $sql = "SELECT x.tot, y.hit FROM
 (SELECT count(*) as tot from tolly_ready_for_shoot s WHERE s.uid = ".$uid." and s.`status` = 'out') as x,
-(SELECT count(*) as hit FROM tolly_ready_for_shoot sa WHERE sa.uid = ".$uid." and sa.`status` = 'out' and sa.rating>3) as y 
+(SELECT count(*) as hit FROM tolly_ready_for_shoot sa WHERE sa.uid = ".$uid." and sa.`status` = 'out' and sa.rating>3) as y
  ";
-   	         //echo '<h2>'.$sql.'</h2>';
-   	         $result = mysqli_query ( $conn, $sql );
-   	         if (mysqli_num_rows($result) > 0) {
-   	           	if($row = mysqli_fetch_assoc($result)) {           		
-   	           		$tot = $row["tot"];
-   	           		$hit = $row["hit"]; 
-   	           		$rat = round(($hit/$tot)*100);
-   	           		echo "['Success Rate', ".$rat."]";
-   	           	}
-   	           } 
-   	         ?>        
+            //echo '<h2>'.$sql.'</h2>';
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                if($row = mysqli_fetch_assoc($result)) {
+                    $tot = $row["tot"];
+                    $hit = $row["hit"];
+                    $rat = ($tot > 0) ? round(($hit/$tot)*100) : 0;
+                    echo "['Success Rate', ".$rat."]";
+                }
+            }
+        ?>
           ]);
 
         var successrateoptions = {
@@ -357,4 +356,10 @@ $srs = $_SESSION['s_rs'];
 
 </body>
 
-</html> <?php mysql_close($conn);?>
+</html>
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

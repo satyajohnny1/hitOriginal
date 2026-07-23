@@ -35,6 +35,7 @@ $password=$_POST['password'];
 	$_SESSION["s_email"] = $row["email"];
 	$_SESSION['s_pic'] = $row["pic"];
 	$_SESSION['s_banner'] = $row["banner"];
+	$_SESSION['s_type'] = $row["utype"];
 	$status = $row["status"];
 	
 	$status='active';
@@ -51,7 +52,13 @@ $password=$_POST['password'];
 $error = "User Not Found <a href='register.php'><h2>Signup Here</h2></a>";
 }
  
-mysql_close($conn); // Closing Connection
+
+ 
+ 
+if($conn!=null){
+mysqli_close($conn);
+}
+ // Closing Connection
 }
 $arr = array('st' => $status, 'e' => $error, 'sql' =>'SQL IS '.$sql);
 echo json_encode($arr);

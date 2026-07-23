@@ -49,7 +49,8 @@ error_reporting(E_ERROR);
                                           <?php 
                                                     			include 'db.php'; 
                                                     			$uid = $_SESSION['s_uid'];
-                                                    			$sql = "SELECT * FROM tolly_ready_for_shoot s WHERE s.uid = ".$uid." and s.status = 'running'";
+                                                    			$sql = "SELECT s.rid, s.title, s.result, s.sofar, s.dname, s.aname, s.acname, s.progress
+                                                FROM tolly_ready_for_shoot s WHERE s.uid = ".$uid." and s.status = 'running'";
                                                     		//	echo $sql;
                                                     			$result = mysqli_query($conn, $sql);
                                                     			
@@ -148,4 +149,10 @@ error_reporting(E_ERROR);
 
 </body>
 
-</html> <?php mysql_close($conn);?>
+</html> 
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

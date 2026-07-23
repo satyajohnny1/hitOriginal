@@ -40,7 +40,7 @@ if ( ! empty ( $_POST ["email"] )) {
         <meta name="author" content="HitandFut.com" />
         
         <!-- Styles -->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
         <link href="assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet"/>
         <link href="assets/plugins/uniform/css/uniform.default.min.css" rel="stylesheet"/>
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -108,4 +108,9 @@ if ( ! empty ( $_POST ["email"] )) {
         <script src="assets/js/modern.min.js"></script>
         
     </body>
-</html> <?php mysql_close($conn);?>
+</html>  
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

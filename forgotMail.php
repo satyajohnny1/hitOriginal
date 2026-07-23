@@ -176,7 +176,7 @@
 </table>
 </center>
 </body>
-</html> <?php mysql_close($conn);?>
+</html> 
 ";
 
 

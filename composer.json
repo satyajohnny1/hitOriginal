@@ -1,0 +1,7 @@
+{
+    "require": {
+      "sendgrid/sendgrid": "^8.0",
+      "robmorgan/phinx": "^0.16",
+        "symfony/yaml": "^7.4"
+    }
+  }

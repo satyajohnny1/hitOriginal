@@ -50,7 +50,8 @@ session_start();
                                                                 <th></th>
                                                                     <th>cine</th>
                                                                     <th>Remuneration</th>
-                                                                    <th>Grade</th>                                                                   
+                                                                    <th>Grade</th>
+                                                                    <th>PL</th>                                                                     
                                                                     
                                                                 </tr>
                                                             </thead>
@@ -74,7 +75,8 @@ session_start();
                                                     					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='cine.php?id=$dir_id' class='btn'></a></td>";
                                                     					echo "<td><a href='cine.php?id=$dir_id' class='btn'>$dir_name</a></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["cine_grade"]."</td>";                                                    					
+                                                    					echo "<td>".$row["cine_rating"]."</td>"; 
+																		echo "<td>".$row["pl"]."</td>";                                                    					
                                                     					                                                    					
                                                     					echo  "</tr>"; 
                                                     					 
@@ -92,7 +94,7 @@ session_start();
                             </div></div></div>
           
             </div>
-            <!-- Main Wrapper -->
+            <!-- Main Wrapper   -->
 
    		 
             <div class="page-footer">
@@ -131,4 +133,10 @@ session_start();
 
 </body>
 
-</html> <?php mysql_close($conn);?>
+</html>
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

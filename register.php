@@ -12,7 +12,7 @@
         <meta name="author" content="HitandFut.com" />
         
         <!-- Styles -->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
         <link href="assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet"/>
         <link href="assets/plugins/uniform/css/uniform.default.min.css" rel="stylesheet"/>
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -127,11 +127,10 @@
 			 var u = $("#username").val();
 			var p = $("#password").val();
 			var b = $("#banner").val();
+			var hostname = location.hostname;
 			
-			
-			var link = "http://hitandfut.hostreo.com/activate.php?link=http://www.hitandfut.com/activation.php?email="+m+"&to="+m;
-			var xlink = "http://hitandfut.com/activateMail.php?link=http://www.hitandfut.com/activation.php?email="+m+"&to="+m;
-			
+			var xlink = "/activateMail.php?link="+hostname+"/activation.php?email="+m+"&to="+m;
+			console.log("Mail Link : "+xlink);
 			   if(u.length<1)
 			 { toastr.error( "Please Enter Name" );	   
 			 }
@@ -164,41 +163,25 @@
                   var status = obj.status;
                  
 		                       
-	              toastr.info(msg," Notification "); 
+	              toastr.info(msg," Notification ");
+				  //alert("status :: "+status);
 
-					if(status>10)
+					if(status=='20')
 					{
-						//toastr.success("---------"+link);
-
+						 
+						//alert("Sending Mail :: "+status);	
 
 							    
 						  $.ajax({
 							     type: "GET",
 							      url: xlink,
 							      data: str,
-						          success: function( data ) {
- 
-											toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1>');
-										 
+						          success: function( data ) { 
+											toastr.success(data+'<h2>Registration Successfull</h2> Activation mail sent, Please Check Your Inbox');
+											console.log("data:"+data);
 						           },	          
 						           error: function( xhr, status, errorThrown ) {
-						        	   //toastr.error( "Check SPAM Folder Also...." );	              
-						           }
-							    })
-							    
-							    
-
-						  $.ajax({
-							     type: "GET",
-							      url: link,
-							      data: str,
-						          success: function( data ) {
- 
-											//toastr.success(data+'<h1>Email sent, Check SPAM Folder Also....</h1>');
-										 
-						           },	          
-						           error: function( xhr, status, errorThrown ) {
-						        	   //toastr.error( "Check SPAM Folder Also...." );	              
+						        	   toastr.error( "Error while Sending mail....xlink: errorThrown:"+errorThrown+",status:"+status+",xhr:"+xhr  );	              
 						           }
 							    })
 
@@ -221,4 +204,10 @@
 		</script>
         
     </body>
-</html> <?php mysql_close($conn);?>
+</html> 
+ 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

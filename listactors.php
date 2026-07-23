@@ -50,7 +50,8 @@ session_start();
                                                                 <th></th>
                                                                     <th>actor</th>
                                                                     <th>Remuneration</th>
-                                                                    <th>Grade</th>                                                                   
+                                                                    <th>Grade</th>
+                                                                    <th>PL</th>                                                                    
                                                                     
                                                                 </tr>
                                                             </thead>
@@ -68,13 +69,20 @@ session_start();
                                                     					$dir_id = $row["actor_id"];
                                                     					$dir_name = $row["actor_name"];
                                                     					$dir_rate = $row["actor_rate"];
-                                                    					$dir_pic = $row["actor_pic"];                                                    					
+
+                                                                        $lower = strtolower(trim($dir_name));
+
+    
+											                            $dir_pic = '/poster/actors/'.$lower.'.png';
+                                                    					                                                   					
                                                     					$dir_cr = round(($dir_rate/10000000),2);   
                                                     					echo "<tr>";
                                                     					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='actor.php?id=$dir_id' class='btn'></a></td>";
                                                     					echo "<td><a href='actor.php?id=$dir_id' class='btn'>$dir_name</a></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["actor_grade"]."</td>";                                                    					
+                                                    					echo "<td>".$row["actor_rating"]."</td>";
+																		echo "<td>".$row["pl"]."</td>"; 
+                                                    					
                                                     					                                                    					
                                                     					echo  "</tr>"; 
                                                     					 
@@ -131,4 +139,9 @@ session_start();
 
 </body>
 
-</html> <?php mysql_close($conn);?>
+</html> 
+<?php 
+if($conn!=null){
+mysqli_close($conn);
+}
+?>

@@ -19,13 +19,14 @@ if($itype=='pro')
 	$uname = $_POST["uname"];
 	$email = $_POST["email"];
 	$banner = $_POST["banner"];
+    $bal = $_POST["bal"];
 	if($uname!=null && $banner!=null)
 	{
 	
 	
 	//echo 'IN PROoooooooooooooooo---> ';
  	// Regisred Checking
-	$sql = "UPDATE `tolly_user` SET `username`='".$uname."',   `email`='".$email."',  `banner`='".$banner."' WHERE  `uid`=".$s_uid;
+	$sql = "UPDATE `tolly_user` SET `username`='".$uname."',   `email`='".$email."',  `banner`='".$banner."',  `bal`=".$bal." WHERE  `uid`=".$s_uid;
 	$status = $sql;
 	$result = mysqli_query ( $conn, $sql );
 	//echo '----> '.$sql;
