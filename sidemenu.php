@@ -50,6 +50,7 @@
 	                            <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-wrench"></span><p>Tools</p><span class="arrow"></span></a>
                                 <ul class="sub-menu">
                                     <li><a href="bkp.php">Database Backup</a></li>
+                                    <li><a href="email_config.php">Email Config</a></li>
                                 </ul>
                             </li>
 		    <li><a href="pending.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-random"></span><p>Pending</p></a>

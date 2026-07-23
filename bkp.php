@@ -4,6 +4,39 @@ include 'sessionCheck.php';
 include 'db.php';
 error_reporting(E_ERROR);
 
+// Self-healing table creation
+$checkCol = mysqli_query($conn, "SHOW COLUMNS FROM `tolly_email_config` LIKE 'smtp_host'");
+if ($checkCol && mysqli_num_rows($checkCol) == 0) {
+    mysqli_query($conn, "DROP TABLE IF EXISTS `tolly_email_config`");
+}
+
+mysqli_query($conn, "CREATE TABLE IF NOT EXISTS `tolly_email_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `smtp_host` varchar(250) DEFAULT NULL,
+  `smtp_port` int(11) DEFAULT 587,
+  `smtp_username` varchar(250) DEFAULT NULL,
+  `smtp_password` text DEFAULT NULL,
+  `smtp_secure` varchar(50) DEFAULT 'tls',
+  `from_email` varchar(250) DEFAULT NULL,
+  `from_name` varchar(250) DEFAULT NULL,
+  `recipient_emails` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
+// Seed default row if empty
+$resSeed = mysqli_query($conn, "SELECT COUNT(*) FROM `tolly_email_config`");
+$rowSeed = mysqli_fetch_row($resSeed);
+if ($rowSeed && $rowSeed[0] == 0) {
+    mysqli_query($conn, "INSERT INTO `tolly_email_config` (`smtp_host`, `smtp_port`, `smtp_username`, `smtp_password`, `smtp_secure`, `from_email`, `from_name`, `recipient_emails`) 
+                         VALUES ('smtp.mailersend.net', 587, '', '', 'tls', 'backup@hitandfut.com', 'HitandFut Backup', '')");
+}
+
+// Fetch preconfigured emails
+$emailConfigRes = mysqli_query($conn, "SELECT `recipient_emails` FROM `tolly_email_config` WHERE `id` = 1");
+$emailConfig = mysqli_fetch_assoc($emailConfigRes) ?: ['recipient_emails' => ''];
+$preconfiguredEmails = $emailConfig['recipient_emails'] ?? '';
+
+
 $backupsDir = __DIR__ . '/backups';
 if (!is_dir($backupsDir)) {
     @mkdir($backupsDir, 0755, true);
@@ -219,11 +252,30 @@ if (isset($_GET['action'])) {
 
     if ($_GET['action'] === 'email') {
         $file = $_GET['file'] ?? '';
-        $email = $_GET['email'] ?? '';
+        $emailString = $_GET['email'] ?? '';
         $file = basename($file);
 
-        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo json_encode(['success' => false, 'error' => 'Invalid email address']);
+        if (empty($emailString)) {
+            echo json_encode(['success' => false, 'error' => 'No recipient email specified']);
+            exit;
+        }
+
+        $emails = preg_split('/[\s,;]+/', $emailString);
+        $validEmails = [];
+        foreach ($emails as $email) {
+            $email = trim($email);
+            if (!empty($email)) {
+                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $validEmails[] = $email;
+                } else {
+                    echo json_encode(['success' => false, 'error' => 'Invalid email address: ' . htmlspecialchars($email)]);
+                    exit;
+                }
+            }
+        }
+
+        if (empty($validEmails)) {
+            echo json_encode(['success' => false, 'error' => 'No valid recipient email address found']);
             exit;
         }
 
@@ -233,43 +285,45 @@ if (isset($_GET['action'])) {
             exit;
         }
 
-        $from = 'backup@hitandfut.com';
-        $fromName = 'HitandFut Backup';
-        $subject = 'Database Backup - ' . date('j-F-Y');
-        $htmlContent = '<h3>Database Backup</h3><p>Please find the database backup attached.</p>';
+        $configRes = mysqli_query($conn, "SELECT * FROM `tolly_email_config` WHERE `id` = 1");
+        $config = mysqli_fetch_assoc($configRes);
 
-        $semiRand = md5((string)time());
-        $mimeBoundary = "==Multipart_Boundary_x{$semiRand}x";
+        $smtpHost = trim($config['smtp_host'] ?? '');
+        $smtpPort = (int)($config['smtp_port'] ?? 587);
+        $smtpUser = trim($config['smtp_username'] ?? '');
+        $smtpPass = trim($config['smtp_password'] ?? '');
+        $smtpSecure = trim($config['smtp_secure'] ?? 'tls');
+        $fromEmail = trim($config['from_email'] ?? '');
+        $fromName = trim($config['from_name'] ?? '');
 
-        $headers = "From: {$fromName} <{$from}>";
-        $headers .= "\nMIME-Version: 1.0\n";
-        $headers .= "Content-Type: multipart/mixed;\n boundary=\"{$mimeBoundary}\"";
+        if (empty($smtpHost)) {
+            echo json_encode(['success' => false, 'error' => 'SMTP Host is not configured. Please configure it in Tools > Email Config.']);
+            exit;
+        }
+        if (empty($fromEmail)) {
+            $fromEmail = 'backup@hitandfut.com';
+        }
+        if (empty($fromName)) {
+            $fromName = 'HitandFut Backup';
+        }
 
-        $message = "--{$mimeBoundary}\n";
-        $message .= "Content-Type: text/html; charset=\"UTF-8\"\n";
-        $message .= "Content-Transfer-Encoding: 7bit\n\n";
-        $message .= $htmlContent . "\n\n";
+        require_once 'smtp_helper.php';
 
-        $fp = fopen($filepath, 'rb');
-        $data = fread($fp, filesize($filepath));
-        fclose($fp);
-        $data = chunk_split(base64_encode($data));
-
-        $message .= "--{$mimeBoundary}\n";
-        $message .= "Content-Type: application/octet-stream; name=\"{$file}\"\n";
-        $message .= "Content-Description: {$file}\n";
-        $message .= "Content-Disposition: attachment;\n filename=\"{$file}\"; size=" . filesize($filepath) . ";\n";
-        $message .= "Content-Transfer-Encoding: base64\n\n";
-        $message .= $data . "\n\n";
-        $message .= "--{$mimeBoundary}--";
-
-        $returnPath = "-f {$from}";
-        $sent = @mail($email, $subject, $message, $headers, $returnPath);
-
-        echo json_encode($sent
-            ? ['success' => true, 'message' => 'Email sent to ' . $email]
-            : ['success' => false, 'error' => 'Failed to send email. Check server mail config.']
-        );
+        try {
+            $client = new SMTPClient($smtpHost, $smtpPort, $smtpUser, $smtpPass, $smtpSecure);
+            $client->send(
+                $fromEmail,
+                $fromName,
+                $validEmails,
+                'Database Backup - ' . date('j-F-Y'),
+                "<h3>Database Backup</h3><p>Please find the database backup attached.</p>",
+                $filepath,
+                $file
+            );
+            echo json_encode(['success' => true, 'message' => 'Email sent to ' . implode(', ', $validEmails)]);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'error' => 'Error sending email: ' . $e->getMessage()]);
+        }
         exit;
     }
 
@@ -560,9 +614,11 @@ function cleanupOldBackups(string $dir): void
             });
         });
 
+        var preconfiguredEmails = <?php echo json_encode($preconfiguredEmails); ?>;
+
         $(document).on('click', '.email-btn', function() {
             $('#emailFileName').text($(this).data('file'));
-            $('#emailInput').val('');
+            $('#emailInput').val(preconfiguredEmails);
             $('#emailModal').modal('show');
         });
 
