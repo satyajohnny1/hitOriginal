@@ -38,6 +38,32 @@ $emailConfigRes = mysqli_query($conn, "SELECT `recipient_emails` FROM `tolly_ema
 $emailConfig = mysqli_fetch_assoc($emailConfigRes) ?: ['recipient_emails' => ''];
 $preconfiguredEmails = $emailConfig['recipient_emails'] ?? '';
 
+// Self-healing cron table creation
+mysqli_query($conn, "CREATE TABLE IF NOT EXISTS `tolly_cron_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cron_expression` varchar(100) DEFAULT '0 7 */7 * *',
+  `is_active` tinyint(1) DEFAULT 1,
+  `last_run` datetime DEFAULT NULL,
+  `next_run` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
+// Seed default row if empty
+$resSeedCron = mysqli_query($conn, "SELECT COUNT(*) FROM `tolly_cron_config`");
+$rowSeedCron = mysqli_fetch_row($resSeedCron);
+if ($rowSeedCron && $rowSeedCron[0] == 0) {
+    mysqli_query($conn, "INSERT INTO `tolly_cron_config` (`cron_expression`, `is_active`) VALUES ('0 7 */7 * *', 1)");
+}
+
+// Fetch cron config
+$cronConfigRes = mysqli_query($conn, "SELECT * FROM `tolly_cron_config` WHERE `id` = 1");
+$cronConfig = mysqli_fetch_assoc($cronConfigRes) ?: [
+    'cron_expression' => '0 7 */7 * *',
+    'is_active' => 0,
+    'last_run' => null,
+    'next_run' => null
+];
+
 
 $backupsDir = __DIR__ . '/backups';
 if (!is_dir($backupsDir)) {
@@ -63,6 +89,49 @@ $backups = array_slice($backups, 0, 5);
 
 if (isset($_GET['action'])) {
     header('Content-Type: application/json');
+
+    if ($_GET['action'] === 'save_cron') {
+        $cronExpr = trim($_POST['cron_expression'] ?? '');
+        if (empty($cronExpr)) {
+            echo json_encode(['success' => false, 'error' => 'Cron expression cannot be empty']);
+            exit;
+        }
+
+        $fields = explode(' ', $cronExpr);
+        if (count($fields) !== 5) {
+            echo json_encode(['success' => false, 'error' => 'Invalid cron format. Must contain exactly 5 space-separated fields.']);
+            exit;
+        }
+
+        require_once 'cron_helper.php';
+        try {
+            $nextRun = CronParser::getNextRunDate($cronExpr, time());
+            $nextRunStr = date('Y-m-d H:i:s', $nextRun);
+            
+            $stmt = mysqli_prepare($conn, "UPDATE `tolly_cron_config` SET `cron_expression` = ?, `is_active` = 1, `next_run` = ? WHERE `id` = 1");
+            mysqli_stmt_bind_param($stmt, "ss", $cronExpr, $nextRunStr);
+            if (mysqli_stmt_execute($stmt)) {
+                echo json_encode(['success' => true, 'message' => 'Backup scheduled successfully. Next run: ' . $nextRunStr, 'next_run' => $nextRunStr]);
+            } else {
+                echo json_encode(['success' => false, 'error' => 'Database error: ' . mysqli_stmt_error($stmt)]);
+            }
+            mysqli_stmt_close($stmt);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'error' => 'Error: ' . $e->getMessage()]);
+        }
+        exit;
+    }
+
+    if ($_GET['action'] === 'delete_cron') {
+        $stmt = mysqli_prepare($conn, "UPDATE `tolly_cron_config` SET `is_active` = 0, `next_run` = NULL WHERE `id` = 1");
+        if (mysqli_stmt_execute($stmt)) {
+            echo json_encode(['success' => true, 'message' => 'Schedule deactivated/deleted successfully.']);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Database error: ' . mysqli_stmt_error($stmt)]);
+        }
+        mysqli_stmt_close($stmt);
+        exit;
+    }
 
     if ($_GET['action'] === 'get_tables') {
         $tables = [];
@@ -438,6 +507,70 @@ function cleanupOldBackups(string $dir): void
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-white">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Automated Backup Scheduler (CRON)</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div id="cronAlert" class="alert alert-info" style="display:none; border-radius:4px;"></div>
+                                
+                                <form id="cronForm" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"><b>Current Status</b></label>
+                                        <div class="col-sm-9" style="padding-top: 7px;">
+                                            <?php if ((int)($cronConfig['is_active'] ?? 0) === 1): ?>
+                                                <span class="label label-success"><i class="fa fa-check"></i> Active</span>
+                                            <?php else: ?>
+                                                <span class="label label-danger"><i class="fa fa-times"></i> Inactive / Deleted</span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cron_expression" class="col-sm-3 control-label"><b>CRON Expression</b></label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="cron_expression" name="cron_expression" 
+                                                   value="<?php echo htmlspecialchars($cronConfig['cron_expression'] ?? '0 7 */7 * *'); ?>" placeholder="* * * * *">
+                                            <p class="help-block text-muted" style="font-size:11px; margin-top:5px;">
+                                                Format: <code>minute hour day-of-month month day-of-week</code> (e.g. <code>0 7 */7 * *</code> for every 7 days at 7:00 AM).
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <?php if ($cronConfig['last_run'] ?? null): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"><b>Last Executed</b></label>
+                                        <div class="col-sm-9" style="padding-top: 7px; color: #475569;">
+                                            <?php echo htmlspecialchars($cronConfig['last_run']); ?>
+                                        </div>
+                                    </div>
+                                    <?php endif; ?>
+                                    <?php if ((int)($cronConfig['is_active'] ?? 0) === 1 && ($cronConfig['next_run'] ?? null)): ?>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"><b>Next Scheduled Run</b></label>
+                                        <div class="col-sm-9" style="padding-top: 7px; color: #475569; font-weight: 600;">
+                                            <?php echo htmlspecialchars($cronConfig['next_run']); ?>
+                                        </div>
+                                    </div>
+                                    <?php endif; ?>
+                                    
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-3 col-sm-9">
+                                            <button type="button" id="saveCronBtn" class="btn btn-success">
+                                                <i class="fa fa-clock-o m-r-xs"></i> Schedule / Update Cron
+                                            </button>
+                                            <?php if ((int)($cronConfig['is_active'] ?? 0) === 1): ?>
+                                            <button type="button" id="deleteCronBtn" class="btn btn-danger m-l-xs">
+                                                <i class="fa fa-trash m-r-xs"></i> Delete Schedule
+                                            </button>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -636,6 +769,67 @@ function cleanupOldBackups(string $dir): void
                 error: function() {
                     toastr.error('Server error while sending email.');
                     btn.prop('disabled', false).html('<i class="fa fa-paper-plane m-r-xs"></i> Send');
+                }
+            });
+        });
+
+        $('#saveCronBtn').on('click', function() {
+            var btn = $(this);
+            var expr = $('#cron_expression').val();
+            var alertDiv = $('#cronAlert');
+            
+            btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Saving...');
+            alertDiv.hide().removeClass('alert-success alert-danger').addClass('alert-info').text('Saving schedule...');
+            alertDiv.show();
+
+            $.ajax({
+                url: 'bkp.php?action=save_cron',
+                type: 'POST',
+                data: { cron_expression: expr },
+                dataType: 'json',
+                success: function(res) {
+                    if (res.success) {
+                        alertDiv.removeClass('alert-info alert-danger').addClass('alert-success').text(res.message);
+                        setTimeout(function() { location.reload(); }, 1500);
+                    } else {
+                        alertDiv.removeClass('alert-info alert-success').addClass('alert-danger').text(res.error);
+                        btn.prop('disabled', false).html('<i class="fa fa-clock-o m-r-xs"></i> Schedule / Update Cron');
+                    }
+                },
+                error: function() {
+                    alertDiv.removeClass('alert-info alert-success').addClass('alert-danger').text('Server error while saving schedule.');
+                    btn.prop('disabled', false).html('<i class="fa fa-clock-o m-r-xs"></i> Schedule / Update Cron');
+                }
+            });
+        });
+
+        $('#deleteCronBtn').on('click', function() {
+            var btn = $(this);
+            var alertDiv = $('#cronAlert');
+            
+            if(!confirm('Are you sure you want to delete/deactivate this backup schedule?')) {
+                return;
+            }
+            
+            btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Deleting...');
+            alertDiv.hide().removeClass('alert-success alert-danger').addClass('alert-info').text('Deleting schedule...');
+            alertDiv.show();
+
+            $.ajax({
+                url: 'bkp.php?action=delete_cron',
+                dataType: 'json',
+                success: function(res) {
+                    if (res.success) {
+                        alertDiv.removeClass('alert-info alert-danger').addClass('alert-success').text(res.message);
+                        setTimeout(function() { location.reload(); }, 1500);
+                    } else {
+                        alertDiv.removeClass('alert-info alert-success').addClass('alert-danger').text(res.error);
+                        btn.prop('disabled', false).html('<i class="fa fa-trash m-r-xs"></i> Delete Schedule');
+                    }
+                },
+                error: function() {
+                    alertDiv.removeClass('alert-info alert-success').addClass('alert-danger').text('Server error while deleting schedule.');
+                    btn.prop('disabled', false).html('<i class="fa fa-trash m-r-xs"></i> Delete Schedule');
                 }
             });
         });
