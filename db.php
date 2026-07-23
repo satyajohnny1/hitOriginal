@@ -24,7 +24,7 @@ if (!$conn) {
 	// The lock is fingerprinted to the DB connection so switching DB_HOST/DB_NAME/etc. (e.g. a new
 	// server) automatically invalidates the cache instead of skipping migrations on the new, empty DB.
 	$migratedLock = __DIR__ . '/db/migrations/.migrated';
-	$dbFingerprint = md5($servername . '|' . $dbport . '|' . $dbname . '|' . $username);
+	$dbFingerprint = md5('v2|' . $servername . '|' . $dbport . '|' . $dbname . '|' . $username);
 	$lockIsCurrent = file_exists($migratedLock) && trim((string) @file_get_contents($migratedLock)) === $dbFingerprint;
 	if (!defined('PHINX_CONFIG_LOADED') && !defined('MIGRATING_DB') && !$lockIsCurrent) {
 		define('MIGRATING_DB', true);
@@ -69,9 +69,14 @@ if (!$conn) {
 			try {
 				$app = new \Phinx\Console\PhinxApplication();
 				$app->setAutoExit(false);
-				$app->run(new \Symfony\Component\Console\Input\StringInput('migrate'), new \Symfony\Component\Console\Output\NullOutput());
-				@file_put_contents($migratedLock, $dbFingerprint);
-			} catch (\Exception $e) {
+				$migrationOutput = new \Symfony\Component\Console\Output\BufferedOutput();
+				$exitCode = $app->run(new \Symfony\Component\Console\Input\StringInput('migrate'), $migrationOutput);
+				if ($exitCode === 0) {
+					@file_put_contents($migratedLock, $dbFingerprint);
+				} else {
+					error_log("Auto Migration Failed (exit code $exitCode): " . $migrationOutput->fetch());
+				}
+			} catch (\Throwable $e) {
 				error_log("Auto Migration Failed: " . $e->getMessage());
 			}
 		} else {
