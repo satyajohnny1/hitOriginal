@@ -5,13 +5,15 @@ include 'db.php';
 error_reporting(E_ERROR);
 
 // Self-healing table creation
-$checkCol = mysqli_query($conn, "SHOW COLUMNS FROM `tolly_email_config` LIKE 'smtp_host'");
+$checkCol = mysqli_query($conn, "SHOW COLUMNS FROM `tolly_email_config` LIKE 'email_provider'");
 if ($checkCol && mysqli_num_rows($checkCol) == 0) {
     mysqli_query($conn, "DROP TABLE IF EXISTS `tolly_email_config`");
 }
 
 mysqli_query($conn, "CREATE TABLE IF NOT EXISTS `tolly_email_config` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email_provider` varchar(50) DEFAULT 'smtp',
+  `mailersend_api_token` text DEFAULT NULL,
   `smtp_host` varchar(250) DEFAULT NULL,
   `smtp_port` int(11) DEFAULT 587,
   `smtp_username` varchar(250) DEFAULT NULL,
@@ -27,8 +29,8 @@ mysqli_query($conn, "CREATE TABLE IF NOT EXISTS `tolly_email_config` (
 $resSeed = mysqli_query($conn, "SELECT COUNT(*) FROM `tolly_email_config`");
 $rowSeed = mysqli_fetch_row($resSeed);
 if ($rowSeed && $rowSeed[0] == 0) {
-    mysqli_query($conn, "INSERT INTO `tolly_email_config` (`smtp_host`, `smtp_port`, `smtp_username`, `smtp_password`, `smtp_secure`, `from_email`, `from_name`, `recipient_emails`) 
-                         VALUES ('smtp.mailersend.net', 587, '', '', 'tls', 'backup@hitandfut.com', 'HitandFut Backup', '')");
+    mysqli_query($conn, "INSERT INTO `tolly_email_config` (`email_provider`, `mailersend_api_token`, `smtp_host`, `smtp_port`, `smtp_username`, `smtp_password`, `smtp_secure`, `from_email`, `from_name`, `recipient_emails`) 
+                         VALUES ('smtp', '', 'smtp.mailersend.net', 587, '', '', 'tls', 'backup@hitandfut.com', 'HitandFut Backup', '')");
 }
 
 // Fetch preconfigured emails
@@ -288,18 +290,9 @@ if (isset($_GET['action'])) {
         $configRes = mysqli_query($conn, "SELECT * FROM `tolly_email_config` WHERE `id` = 1");
         $config = mysqli_fetch_assoc($configRes);
 
-        $smtpHost = trim($config['smtp_host'] ?? '');
-        $smtpPort = (int)($config['smtp_port'] ?? 587);
-        $smtpUser = trim($config['smtp_username'] ?? '');
-        $smtpPass = trim($config['smtp_password'] ?? '');
-        $smtpSecure = trim($config['smtp_secure'] ?? 'tls');
         $fromEmail = trim($config['from_email'] ?? '');
         $fromName = trim($config['from_name'] ?? '');
 
-        if (empty($smtpHost)) {
-            echo json_encode(['success' => false, 'error' => 'SMTP Host is not configured. Please configure it in Tools > Email Config.']);
-            exit;
-        }
         if (empty($fromEmail)) {
             $fromEmail = 'backup@hitandfut.com';
         }
@@ -310,8 +303,8 @@ if (isset($_GET['action'])) {
         require_once 'smtp_helper.php';
 
         try {
-            $client = new SMTPClient($smtpHost, $smtpPort, $smtpUser, $smtpPass, $smtpSecure);
-            $client->send(
+            MailSender::send(
+                $config,
                 $fromEmail,
                 $fromName,
                 $validEmails,

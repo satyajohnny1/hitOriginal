@@ -46,9 +46,7 @@ class SMTPClient {
                 $this->sendCommand($socket, base64_encode($this->username), '334');
                 $this->sendCommand($socket, base64_encode($this->password), '235');
             } catch (Exception $loginEx) {
-                // If LOGIN auth fails, try PLAIN auth fallback
                 try {
-                    // Send EHLO again to reset authentication state on the connection
                     $this->sendCommand($socket, "EHLO localhost", '250');
                     $authStr = base64_encode("\0" . $this->username . "\0" . $this->password);
                     $this->sendCommand($socket, "AUTH PLAIN " . $authStr, '235');
@@ -91,7 +89,6 @@ class SMTPClient {
 
         $body .= "--$boundary--\r\n";
 
-        // Dot-stuffing according to RFC 821/822
         $emailContent = $headers . $body;
         $emailContent = str_replace("\r\n", "\n", $emailContent);
         $emailContent = str_replace("\r", "\n", $emailContent);
@@ -121,6 +118,88 @@ class SMTPClient {
         $code = substr($response, 0, 3);
         if ($code !== $expectedCode) {
             throw new Exception("SMTP Error: Expected code $expectedCode, got response: $response");
+        }
+    }
+}
+
+class MailSender {
+    public static function send(array $config, string $fromEmail, string $fromName, array $toEmails, string $subject, string $htmlContent, ?string $attachmentPath = null, ?string $attachmentName = null): bool {
+        $provider = $config['email_provider'] ?? 'smtp';
+
+        if ($provider === 'mailersend_api') {
+            $apiToken = trim($config['mailersend_api_token'] ?? '');
+            if (empty($apiToken)) {
+                throw new Exception("MailerSend API Token is not configured.");
+            }
+            return self::sendViaMailerSendAPI($apiToken, $fromEmail, $fromName, $toEmails, $subject, $htmlContent, $attachmentPath, $attachmentName);
+        }
+
+        $host = trim($config['smtp_host'] ?? '');
+        $port = (int)($config['smtp_port'] ?? 587);
+        $username = trim($config['smtp_username'] ?? '');
+        $password = trim($config['smtp_password'] ?? '');
+        $secure = trim($config['smtp_secure'] ?? 'tls');
+
+        if (empty($host)) {
+            throw new Exception("SMTP Host is not configured.");
+        }
+
+        $smtp = new SMTPClient($host, $port, $username, $password, $secure);
+        return $smtp->send($fromEmail, $fromName, $toEmails, $subject, $htmlContent, $attachmentPath, $attachmentName);
+    }
+
+    private static function sendViaMailerSendAPI(string $apiToken, string $fromEmail, string $fromName, array $toEmails, string $subject, string $htmlContent, ?string $attachmentPath = null, ?string $attachmentName = null): bool {
+        $to = [];
+        foreach ($toEmails as $email) {
+            $to[] = ['email' => $email];
+        }
+
+        $data = [
+            'from' => [
+                'email' => $fromEmail,
+                'name' => $fromName
+            ],
+            'to' => $to,
+            'subject' => $subject,
+            'html' => $htmlContent
+        ];
+
+        if ($attachmentPath && file_exists($attachmentPath)) {
+            $fileName = $attachmentName ?: basename($attachmentPath);
+            $fileContent = base64_encode(file_get_contents($attachmentPath));
+            $data['attachments'] = [
+                [
+                    'content' => $fileContent,
+                    'filename' => $fileName,
+                    'disposition' => 'attachment'
+                ]
+            ];
+        }
+
+        $payload = json_encode($data);
+
+        $ch = curl_init('https://api.mailersend.com/v1/email');
+        if (!$ch) {
+            throw new Exception("Failed to initialize curl connection.");
+        }
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $apiToken
+        ]);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($httpCode >= 200 && $httpCode < 300) {
+            return true;
+        } else {
+            $errDetail = $response ? ": " . $response : "";
+            throw new Exception("MailerSend API HTTP $httpCode$errDetail");
         }
     }
 }
