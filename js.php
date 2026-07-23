@@ -42,11 +42,33 @@
   <script src="share/js/rrssb.min.js"></script>
   <script>
   $(document).ready(function() {
+      function activateTab($link) {
+          var target = $link.attr('href');
+          if (!target || target.length < 2) return;
+          var targetId = target.charAt(0) === '#' ? target.substring(1) : target;
+          var $pane = $('#' + targetId);
+          if (!$pane.length) return;
+          var $navTabs = $link.closest('.nav-tabs');
+          var $contentContainer = $navTabs.siblings('.tab-content');
+          if (!$contentContainer.length) {
+              $contentContainer = $navTabs.parent().find('.tab-content').first();
+          }
+          $navTabs.find('li').removeClass('active');
+          $link.parent('li').addClass('active');
+          $contentContainer.children('.tab-pane').removeClass('active in');
+          $pane.addClass('active in');
+      }
+
+      $(document).on('click', '.nav-tabs a[data-toggle="tab"]', function(e) {
+          e.preventDefault();
+          activateTab($(this));
+      });
+
       var hash = window.location.hash;
       if (hash && hash.length > 1) {
-          var $link = $('.nav-tabs a[href="#' + hash.substring(1) + '"]');
+          var $link = $('.nav-tabs a[href="' + hash + '"]');
           if ($link.length) {
-              $link.tab('show');
+              activateTab($link);
           }
       }
   });
