@@ -41,9 +41,21 @@ class SMTPClient {
         }
 
         if (!empty($this->username)) {
-            $this->sendCommand($socket, "AUTH LOGIN", '334');
-            $this->sendCommand($socket, base64_encode($this->username), '334');
-            $this->sendCommand($socket, base64_encode($this->password), '235');
+            try {
+                $this->sendCommand($socket, "AUTH LOGIN", '334');
+                $this->sendCommand($socket, base64_encode($this->username), '334');
+                $this->sendCommand($socket, base64_encode($this->password), '235');
+            } catch (Exception $loginEx) {
+                // If LOGIN auth fails, try PLAIN auth fallback
+                try {
+                    // Send EHLO again to reset authentication state on the connection
+                    $this->sendCommand($socket, "EHLO localhost", '250');
+                    $authStr = base64_encode("\0" . $this->username . "\0" . $this->password);
+                    $this->sendCommand($socket, "AUTH PLAIN " . $authStr, '235');
+                } catch (Exception $plainEx) {
+                    throw new Exception("Authentication failed. (LOGIN: " . trim($loginEx->getMessage()) . " | PLAIN: " . trim($plainEx->getMessage()) . ")");
+                }
+            }
         }
 
         $this->sendCommand($socket, "MAIL FROM:<$fromEmail>", '250');
