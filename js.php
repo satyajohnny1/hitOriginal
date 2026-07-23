@@ -40,3 +40,14 @@
   <link rel="stylesheet" href="share/css/rrssb.css" />   
  
   <script src="share/js/rrssb.min.js"></script>
+  <script>
+  $(document).ready(function() {
+      var url = window.location.href;
+      if (url.indexOf("#") !== -1) {
+          var activeTab = url.substring(url.indexOf("#") + 1);
+          if (activeTab) {
+              $('.nav-tabs a[href="#' + activeTab + '"]').tab('show');
+          }
+      }
+  });
+  </script>
