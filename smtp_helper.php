@@ -34,8 +34,17 @@ class SMTPClient {
 
         if ($this->encryption === 'tls') {
             $this->sendCommand($socket, "STARTTLS", '220');
-            if (!stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
-                throw new Exception("Failed to establish TLS encryption");
+            
+            $cryptoMethod = STREAM_CRYPTO_METHOD_TLS_CLIENT;
+            if (defined('STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT')) {
+                $cryptoMethod = STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;
+                if (defined('STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT')) {
+                    $cryptoMethod |= STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT;
+                }
+            }
+            
+            if (!stream_socket_enable_crypto($socket, true, $cryptoMethod)) {
+                throw new Exception("Failed to establish TLS 1.2+ encryption");
             }
             $this->sendCommand($socket, "EHLO localhost", '250');
         }
