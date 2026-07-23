@@ -107,3 +107,24 @@ Minute	Hour	Day	Month	Weekday	Command	Actions
 ```
 If you got this error `This site requires Javascript to work, please enable Javascript in your browser or use a browser with Javascript support`,
 please check BACKUP_DIR in bkp.php & sendmail.php files
+
+---
+
+## 🛠️ Unified Database Migrations (Phinx)
+Database migrations are fully automated and synchronized dynamically inside the project:
+* **Migration Directory**: `db/migrations/` (contains raw `.sql` migration files and Phinx `.php` wrappers).
+* **Automatic Runs**: Migrations are executed programmatically and silently on page load or deployment in `db.php` if any new migration version is detected.
+* **Performance Caching**: Once migrations are completed, a local cache file `db/migrations/.migrated` is created. Subsequent requests skip all checks entirely, resulting in **0ms** runtime overhead.
+
+## 📅 Automated Backup Scheduler
+You can schedule automated database backups with dynamic CRON expressions:
+* **UI Management**: Manage the schedule directly via the *Automated Backup Scheduler (CRON)* panel on `bkp.php`.
+* **Execution Endpoint**: Trigger the schedule by configuring your external health check or cron ping service to hit **`https://hitapp.wasmer.app/cron.php`** periodically (e.g. every 15 minutes).
+* **Email Alerts**: Automatically sends success email notifications containing the `.sql` backup file, or failure notifications containing the error trace logs to configured recipients.
+
+## 🏥 Server Health Monitor
+A centralized dashboard and endpoint are exposed to check the application state:
+* **URL**: `https://hitapp.wasmer.app/health.php` (Web Dashboard)
+* **API URL**: `https://hitapp.wasmer.app/health.php?format=json` (JSON endpoint for monitoring services like UptimeRobot/Better Uptime).
+* **ChecksPerformed**: Server environment specs, MySQL connection status and latency, active mail provider config, SMTP network handshakes, and backups storage health.
+
