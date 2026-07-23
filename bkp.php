@@ -28,59 +28,136 @@ $backups = array_slice($backups, 0, 5);
 if (isset($_GET['action'])) {
     header('Content-Type: application/json');
 
-    if ($_GET['action'] === 'backup') {
+    if ($_GET['action'] === 'get_tables') {
         $tables = [];
         $res = mysqli_query($conn, 'SHOW TABLES');
         while ($row = mysqli_fetch_row($res)) {
             $tables[] = $row[0];
         }
+        $sessionFile = 'backup_' . date('Y-m-d_H-i-s') . '.sql';
+        $_SESSION['backup_file'] = $sessionFile;
+        $_SESSION['backup_tables'] = $tables;
+        $_SESSION['backup_index'] = 0;
 
-        $sql = "-- HitandFut Database Backup\n";
-        $sql .= "-- Date: " . date('Y-m-d H:i:s') . "\n";
-        $sql .= "-- Database: {$db}\n\n";
+        $fp = fopen($backupsDir . '/' . $sessionFile, 'w');
+        fwrite($fp, "-- HitandFut Database Backup\n");
+        fwrite($fp, "-- Date: " . date('Y-m-d H:i:s') . "\n");
+        fwrite($fp, "-- Database: {$db}\n\n");
+        fclose($fp);
 
-        foreach ($tables as $table) {
+        echo json_encode([
+            'success' => true,
+            'tables' => $tables,
+            'total' => count($tables),
+        ]);
+        exit;
+    }
+
+    if ($_GET['action'] === 'backup_table') {
+        $tables = $_SESSION['backup_tables'] ?? [];
+        $index  = (int)($_SESSION['backup_index'] ?? 0);
+        $file   = $_SESSION['backup_file'] ?? '';
+
+        if ($index >= count($tables)) {
+            echo json_encode(['success' => false, 'error' => 'No more tables to backup']);
+            exit;
+        }
+
+        $table = $tables[$index];
+        $filepath = $backupsDir . '/' . $file;
+        $rows = 0;
+
+        try {
             $createRes = mysqli_query($conn, 'SHOW CREATE TABLE `' . $table . '`');
+            if (!$createRes) {
+                throw new Exception("Failed to read structure for table: {$table}");
+            }
             $createRow = mysqli_fetch_row($createRes);
-            $sql .= "DROP TABLE IF EXISTS `{$table}`;\n";
-            $sql .= $createRow[1] . ";\n\n";
 
             $dataRes = mysqli_query($conn, "SELECT * FROM `{$table}`");
+            if (!$dataRes) {
+                throw new Exception("Failed to read data from table: {$table}");
+            }
             $numFields = mysqli_num_fields($dataRes);
             $numRows = mysqli_num_rows($dataRes);
+
+            $fp = fopen($filepath, 'a');
+            fwrite($fp, "DROP TABLE IF EXISTS `{$table}`;\n");
+            fwrite($fp, $createRow[1] . ";\n\n");
 
             $counter = 1;
             while ($row = mysqli_fetch_row($dataRes)) {
                 if ($counter === 1) {
-                    $sql .= "INSERT INTO `{$table}` VALUES(";
+                    fwrite($fp, "INSERT INTO `{$table}` VALUES(");
                 } else {
-                    $sql .= "(";
+                    fwrite($fp, "(");
                 }
                 for ($j = 0; $j < $numFields; $j++) {
                     $row[$j] = addslashes((string)$row[$j]);
-                    $sql .= '"' . $row[$j] . '"';
+                    fwrite($fp, '"' . $row[$j] . '"');
                     if ($j < $numFields - 1) {
-                        $sql .= ',';
+                        fwrite($fp, ',');
                     }
                 }
-                $sql .= ($numRows === $counter) ? ");\n" : "),\n";
+                fwrite($fp, ($numRows === $counter) ? ");\n" : "),\n");
                 $counter++;
+                $rows++;
             }
-            $sql .= "\n\n";
-        }
+            fwrite($fp, "\n\n");
+            fclose($fp);
 
-        $filename = 'backup_' . date('Y-m-d_H-i-s') . '.sql';
-        $filepath = $backupsDir . '/' . $filename;
-        file_put_contents($filepath, $sql);
+            $index++;
+            $_SESSION['backup_index'] = $index;
+
+            echo json_encode([
+                'success'   => true,
+                'table'     => $table,
+                'rows'      => $rows,
+                'current'   => $index,
+                'total'     => count($tables),
+                'remaining' => count($tables) - $index,
+            ]);
+        } catch (Exception $e) {
+            @unlink($filepath);
+            unset($_SESSION['backup_file'], $_SESSION['backup_tables'], $_SESSION['backup_index']);
+            echo json_encode([
+                'success' => false,
+                'error'   => $e->getMessage(),
+                'table'   => $table,
+            ]);
+        }
+        exit;
+    }
+
+    if ($_GET['action'] === 'finalize') {
+        $file = $_SESSION['backup_file'] ?? '';
+        $filepath = $backupsDir . '/' . $file;
+        unset($_SESSION['backup_file'], $_SESSION['backup_tables'], $_SESSION['backup_index']);
+
+        if (empty($file) || !file_exists($filepath)) {
+            echo json_encode(['success' => false, 'error' => 'Backup file not found']);
+            exit;
+        }
 
         cleanupOldBackups($backupsDir);
 
         echo json_encode([
             'success' => true,
-            'file' => $filename,
-            'size' => filesize($filepath),
-            'time' => filemtime($filepath),
+            'file'    => $file,
+            'size'    => filesize($filepath),
+            'time'    => filemtime($filepath),
         ]);
+        exit;
+    }
+
+    if ($_GET['action'] === 'cancel') {
+        $file = $_SESSION['backup_file'] ?? '';
+        $filepath = $backupsDir . '/' . $file;
+        if (!empty($file) && file_exists($filepath)) {
+            @unlink($filepath);
+        }
+        unset($_SESSION['backup_file'], $_SESSION['backup_tables'], $_SESSION['backup_index']);
+        echo json_encode(['success' => true]);
         exit;
     }
 
@@ -211,6 +288,16 @@ function cleanupOldBackups(string $dir): void
                                 <button id="backupBtn" class="btn btn-danger btn-lg btn-block m-t-md">
                                     <i class="fa fa-database m-r-xs"></i> Create Backup
                                 </button>
+                                <div id="backupProgress" class="m-t-md" style="display:none;">
+                                    <div class="progress progress-sm">
+                                        <div id="progressBar" class="progress-bar progress-bar-success" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                    <div id="progressStatus" class="m-t-xs text-muted"></div>
+                                    <div id="progressLog" class="m-t-sm" style="max-height:200px;overflow-y:auto;font-size:12px;"></div>
+                                    <button id="cancelBtn" class="btn btn-warning btn-sm m-t-sm" style="display:none;">
+                                        <i class="fa fa-times m-r-xs"></i> Cancel
+                                    </button>
+                                </div>
                                 <div id="backupResult" class="m-t-md" style="display:none;"></div>
                             </div>
                         </div>
@@ -305,23 +392,102 @@ function cleanupOldBackups(string $dir): void
             }
         });
 
+        var backupRunning = false;
+
+        function addLog(msg, type) {
+            var cls = type === 'error' ? 'text-danger' : type === 'success' ? 'text-success' : '';
+            $('#progressLog').append('<div class="' + cls + '">' + msg + '</div>');
+            var log = document.getElementById('progressLog');
+            log.scrollTop = log.scrollHeight;
+        }
+
         $('#backupBtn').click(function() {
+            if (backupRunning) return;
+            backupRunning = true;
             var btn = $(this);
-            btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Backing up...');
-            $.get('bkp.php', { action: 'backup' }, function(res) {
-                if (res.success) {
-                    var html = '<div class="alert alert-success">' +
-                        '<b>Backup created!</b> ' + res.file +
-                        ' (' + (res.size / 1024).toFixed(1) + ' KB)' +
-                        ' <a href="bkp.php?action=download&file=' + encodeURIComponent(res.file) + '" class="btn btn-sm btn-success m-l-sm"><i class="fa fa-download"></i> Download</a>' +
-                        ' <button class="btn btn-sm btn-info m-l-sm email-btn" data-file="' + res.file + '"><i class="fa fa-envelope"></i> Email</button>' +
-                        '</div>';
-                    $('#backupResult').html(html).show();
-                    setTimeout(function() { location.reload(); }, 2000);
-                } else {
-                    $('#backupResult').html('<div class="alert alert-danger">Error: ' + res.error + '</div>').show();
+            btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Starting...');
+            $('#backupResult').hide();
+            $('#backupProgress').show();
+            $('#progressBar').css('width', '0%').removeClass('progress-bar-danger progress-bar-success').addClass('progress-bar-striped active');
+            $('#progressLog').html('');
+            $('#progressStatus').text('Fetching table list...');
+            $('#cancelBtn').show();
+
+            $.get('bkp.php', { action: 'get_tables' }, function(res) {
+                if (!res.success) {
+                    addLog('Error: ' + res.error, 'error');
+                    $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
+                    $('#progressStatus').text('Failed to start backup.');
+                    btn.prop('disabled', false).html('<i class="fa fa-database m-r-xs"></i> Create Backup');
+                    backupRunning = false;
+                    $('#cancelBtn').hide();
+                    return;
                 }
-                btn.prop('disabled', false).html('<i class="fa fa-database m-r-xs"></i> Create Backup');
+
+                var tables = res.tables;
+                var total = res.total;
+                addLog('Found ' + total + ' tables. Starting backup...', 'info');
+                $('#progressStatus').text('Backing up 0 of ' + total + ' tables...');
+
+                var i = 0;
+                function backupNext() {
+                    if (i >= tables.length) {
+                        $.get('bkp.php', { action: 'finalize' }, function(fin) {
+                            if (fin.success) {
+                                addLog('Backup complete: ' + fin.file, 'success');
+                                $('#progressBar').css('width', '100%').removeClass('active progress-bar-striped').addClass('progress-bar-success');
+                                $('#progressStatus').text('Backup complete!');
+                                $('#cancelBtn').hide();
+                                var html = '<div class="alert alert-success">' +
+                                    '<b>Backup created!</b> ' + fin.file +
+                                    ' (' + (fin.size / 1024).toFixed(1) + ' KB)' +
+                                    ' <a href="bkp.php?action=download&file=' + encodeURIComponent(fin.file) + '" class="btn btn-sm btn-success m-l-sm"><i class="fa fa-download"></i> Download</a>' +
+                                    ' <button class="btn btn-sm btn-info m-l-sm email-btn" data-file="' + fin.file + '"><i class="fa fa-envelope"></i> Email</button>' +
+                                    '</div>';
+                                $('#backupResult').html(html).show();
+                                setTimeout(function() { location.reload(); }, 2000);
+                            } else {
+                                addLog('Error finalizing: ' + fin.error, 'error');
+                                $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
+                            }
+                            btn.prop('disabled', false).html('<i class="fa fa-database m-r-xs"></i> Create Backup');
+                            backupRunning = false;
+                        }, 'json');
+                        return;
+                    }
+
+                    addLog('Backing up table: ' + tables[i] + '...');
+                    $.get('bkp.php', { action: 'backup_table' }, function(res) {
+                        if (!res.success) {
+                            addLog('ERROR on table ' + (res.table || tables[i]) + ': ' + res.error, 'error');
+                            $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
+                            $('#progressStatus').text('Backup failed at table: ' + (res.table || tables[i]));
+                            $('#cancelBtn').hide();
+                            btn.prop('disabled', false).html('<i class="fa fa-database m-r-xs"></i> Create Backup');
+                            backupRunning = false;
+                            return;
+                        }
+                        var pct = Math.round((res.current / res.total) * 100);
+                        $('#progressBar').css('width', pct + '%');
+                        $('#progressStatus').text('Backed up ' + res.current + ' of ' + res.total + ' tables (' + res.rows + ' rows from ' + res.table + ')');
+                        addLog('&check; ' + res.table + ' (' + res.rows + ' rows)', 'success');
+                        i++;
+                        backupNext();
+                    }, 'json');
+                }
+                backupNext();
+            }, 'json');
+        });
+
+        $('#cancelBtn').click(function() {
+            if (!backupRunning) return;
+            $.get('bkp.php', { action: 'cancel' }, function() {
+                addLog('Backup cancelled by user.', 'error');
+                $('#progressBar').addClass('progress-bar-danger').removeClass('active progress-bar-striped');
+                $('#progressStatus').text('Backup cancelled.');
+                $('#cancelBtn').hide();
+                $('#backupBtn').prop('disabled', false).html('<i class="fa fa-database m-r-xs"></i> Create Backup');
+                backupRunning = false;
             }, 'json');
         });
 
