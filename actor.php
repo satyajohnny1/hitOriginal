@@ -371,10 +371,8 @@ $nme = $_GET['name'];
 
         <div class="cd-overlay"></div>
 
+        <script>alert('BEFORE js.php - page renders OK');</script>
         <?php include 'js.php';?>
-            <script>
-            alert('jQuery: ' + (typeof jQuery) + ' | $.fn.tab: ' + (typeof $.fn));
-            </script>
             <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['gauge']}]}"></script>
 
             <script type="text/javascript">
