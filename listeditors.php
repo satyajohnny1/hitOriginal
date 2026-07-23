@@ -51,6 +51,7 @@ session_start();
                                                                     <th>editor</th>
                                                                     <th>Remuneration</th>
                                                                     <th>Grade</th>
+                                                                    <th>Count</th>
                                                                     <th>PL</th>                                                                    
                                                                     
                                                                 </tr>
@@ -60,7 +61,14 @@ session_start();
                                                             <tbody>
                                                              <?php 
                                                     			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_editor";
+                                                    			$sql = "SELECT e.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl 
+                                                    			        FROM tolly_editor e
+                                                    			        LEFT JOIN (
+                                                    			            SELECT eid as editor_id, COUNT(DISTINCT rid) as movie_count, SUM(collection - budget) as total_pl
+                                                    			            FROM tolly_ready_for_shoot 
+                                                    			            WHERE status = 'out'
+                                                    			            GROUP BY eid
+                                                    			        ) m ON e.editor_id = m.editor_id";
                                                     			$result = mysqli_query($conn, $sql);
                                                     			
                                                     			if (mysqli_num_rows($result) > 0) {
@@ -71,12 +79,18 @@ session_start();
                                                     					$dir_rate = $row["editor_rate"];
                                                     					$dir_pic = $row["editor_pic"];                                                    					
                                                     					$dir_cr = round(($dir_rate/10000000),2);   
+                                                    					$pl_val = floatval($row["pl"]);
+                                                    					$pl_cr = round(($pl_val/10000000),2);
+                                                    					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
+                                                    					
                                                     					echo "<tr>";
                                                     					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='editor.php?id=$dir_id' class='btn'></a></td>";
                                                     					echo "<td><a href='editor.php?id=$dir_id' class='btn'>$dir_name</a></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
-                                                    					echo "<td>".$row["editor_rating"]."</td>";       
-																		echo "<td>".$row["pl"]."</td>";                                              					
+                                                     					echo "<td><b>".$dir_cr." CRORES</b></td>";
+                                                    					echo "<td>".$row["editor_rating"]."</td>";
+                                                    					echo "<td><b>".$row["movie_count"]."</b></td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr." CRORES</b></td>"; 
+                                                    					
                                                     					                                                    					
                                                     					echo  "</tr>"; 
                                                     					 

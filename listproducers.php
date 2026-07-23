@@ -51,6 +51,7 @@ session_start();
                                                                     <th>Name</th>
                                                                     <th>Balance</th> 
                                                                     <th>Banner</th>
+                                                                    <th>Count</th>
                                                                     <th>PL</th>
                                                                                                                                       
                                                                     
@@ -61,7 +62,14 @@ session_start();
                                                             <tbody>
                                                              <?php 
                                                     			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_user";
+                                                    			$sql = "SELECT u.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl 
+                                                    			        FROM tolly_user u
+                                                    			        LEFT JOIN (
+                                                    			            SELECT uid, COUNT(DISTINCT rid) as movie_count, SUM(collection - budget) as total_pl
+                                                    			            FROM tolly_ready_for_shoot 
+                                                    			            WHERE status = 'out'
+                                                    			            GROUP BY uid
+                                                    			        ) m ON u.uid = m.uid";
                                                     			$result = mysqli_query($conn, $sql);
                                                     			
                                                     			if (mysqli_num_rows($result) > 0) {
@@ -73,12 +81,18 @@ session_start();
                                                     					$dir_rate = $row["bal"];
                                                     					$dir_pic = $row["pic"];                                                    					
                                                     					$dir_cr = round(($dir_rate/10000000),2);   
+                                                    					$pl_val = floatval($row["pl"]);
+                                                    					$pl_cr = round(($pl_val/10000000),2);
+                                                    					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
+                                                    					
                                                     					echo "<tr>";
                                                     					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='actor.php?id=$dir_id' class='btn'></a></td>";
                                                     					echo "<td><a href='proddata.php?id=$dir_id' class='btn'>$dir_name</a></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
+                                                     					echo "<td><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$banner."</td>";
-																		echo "<td>".$row["pl"]."</td>";                                                    					
+                                                    					echo "<td><b>".$row["movie_count"]."</b></td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr." CRORES</b></td>"; 
+                                                    					
                                                     					                                                    					
                                                     					echo  "</tr>"; 
                                                     					 

@@ -51,6 +51,7 @@ session_start();
                                                                     <th>actor</th>
                                                                     <th>Remuneration</th>
                                                                     <th>Grade</th>
+                                                                    <th>Count</th>
                                                                     <th>PL</th>                                                                    
                                                                     
                                                                 </tr>
@@ -60,7 +61,19 @@ session_start();
                                                             <tbody>
                                                              <?php 
                                                     			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_actor";
+                                                    			$sql = "SELECT a.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl 
+                                                    			        FROM tolly_actor a
+                                                    			        LEFT JOIN (
+                                                    			            SELECT actor_id, COUNT(DISTINCT rid) as movie_count, SUM(collection - budget) as total_pl
+                                                    			            FROM (
+                                                    			                SELECT aid as actor_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out'
+                                                    			                UNION ALL
+                                                    			                SELECT a2 as actor_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND a2 > 0
+                                                    			                UNION ALL
+                                                    			                SELECT a3 as actor_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND a3 > 0
+                                                    			            ) t
+                                                    			            GROUP BY actor_id
+                                                    			        ) m ON a.actor_id = m.actor_id";
                                                     			$result = mysqli_query($conn, $sql);
                                                     			
                                                     			if (mysqli_num_rows($result) > 0) {
@@ -76,12 +89,17 @@ session_start();
 											                            $dir_pic = '/poster/actors/'.$lower.'.png';
                                                     					                                                   					
                                                     					$dir_cr = round(($dir_rate/10000000),2);   
+                                                    					$pl_val = floatval($row["pl"]);
+                                                    					$pl_cr = round(($pl_val/10000000),2);
+                                                    					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
+                                                    					
                                                     					echo "<tr>";
                                                     					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='actor.php?id=$dir_id' class='btn'></a></td>";
                                                     					echo "<td><a href='actor.php?id=$dir_id' class='btn'>$dir_name</a></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
+                                                     					echo "<td><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$row["actor_rating"]."</td>";
-																		echo "<td>".$row["pl"]."</td>"; 
+                                                    					echo "<td><b>".$row["movie_count"]."</b></td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr." CRORES</b></td>"; 
                                                     					
                                                     					                                                    					
                                                     					echo  "</tr>"; 

@@ -51,6 +51,7 @@ session_start();
                                                                     <th>director</th>
                                                                     <th>Remuneration</th>
                                                                     <th>Grade</th>
+                                                                    <th>Count</th>
                                                                     <th>PL</th>                                                    
                                                                     
                                                                 </tr>
@@ -60,7 +61,19 @@ session_start();
                                                             <tbody>
                                                              <?php 
                                                     			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_director";
+                                                    			$sql = "SELECT d.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl 
+                                                    			        FROM tolly_director d
+                                                    			        LEFT JOIN (
+                                                    			            SELECT director_id, COUNT(DISTINCT rid) as movie_count, SUM(collection - budget) as total_pl
+                                                    			            FROM (
+                                                    			                SELECT did as director_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out'
+                                                    			                UNION ALL
+                                                    			                SELECT d2 as director_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND d2 > 0
+                                                    			                UNION ALL
+                                                    			                SELECT d3 as director_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND d3 > 0
+                                                    			            ) t
+                                                    			            GROUP BY director_id
+                                                    			        ) m ON d.director_id = m.director_id";
                                                     			$result = mysqli_query($conn, $sql);
                                                     			
                                                     			if (mysqli_num_rows($result) > 0) {
@@ -71,12 +84,17 @@ session_start();
                                                     					$dir_rate = $row["director_rate"];
                                                     					$dir_pic = $row["director_pic"];                                                    					
                                                     					$dir_cr = round(($dir_rate/10000000),2);   
+                                                    					$pl_val = floatval($row["pl"]);
+                                                    					$pl_cr = round(($pl_val/10000000),2);
+                                                    					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
+                                                    					
                                                     					echo "<tr>";
                                                     					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='director.php?id=$dir_id' class='btn'></a></td>";
                                                     					echo "<td><a href='director.php?id=$dir_id' class='btn'>$dir_name</a></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
+                                                     					echo "<td><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$row["director_rating"]."</td>";   
-																		echo "<td>".$row["pl"]."</td>";                                                  					
+                                                    					echo "<td><b>".$row["movie_count"]."</b></td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr." CRORES</b></td>";                                                  					
                                                     					                                                    					
                                                     					echo  "</tr>"; 
                                                     					 
@@ -85,11 +103,9 @@ session_start();
                                                     			}  
                                                     			  
                                                                 ?>
-                                                            </tbody>                                          
-                                           
-                                        </tbody>
-                                       </table>  
-                                    </div>
+                                                             </tbody>
+                                        </table>  
+                                     </div>
                                 </div>
                             </div></div></div>
           
