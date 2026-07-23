@@ -170,64 +170,76 @@ $config = mysqli_fetch_assoc($configRes) ?: [
         margin-bottom: 30px;
     }
     .provider-cards {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin-bottom: 30px;
-        margin-top: 10px;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px !important;
+        margin-bottom: 30px !important;
+        margin-top: 10px !important;
+        width: 100% !important;
+        clear: both !important;
     }
     @media (max-width: 768px) {
         .provider-cards {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
         }
     }
     .provider-card {
-        border: 2px solid #e2e8f0;
-        border-radius: 10px;
-        padding: 20px;
-        cursor: pointer;
-        transition: all 0.25s ease-in-out;
-        position: relative;
-        background: #f8fafc;
+        border: 2px solid #e2e8f0 !important;
+        border-radius: 10px !important;
+        padding: 20px !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease-in-out !important;
+        position: relative !important;
+        background: #f8fafc !important;
+        display: block !important;
+        float: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
     .provider-card:hover {
-        border-color: #cbd5e1;
-        background: #f1f5f9;
+        border-color: #cbd5e1 !important;
+        background: #f1f5f9 !important;
     }
     .provider-card.active {
-        border-color: #22baa0;
-        background: #f0fdfa;
-        box-shadow: 0 4px 12px rgba(34, 186, 160, 0.06);
+        border-color: #22baa0 !important;
+        background: #f0fdfa !important;
+        box-shadow: 0 4px 12px rgba(34, 186, 160, 0.06) !important;
     }
     .provider-card input[type="radio"] {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        margin: 0;
-        cursor: pointer;
-        width: 18px;
-        height: 18px;
-        accent-color: #22baa0;
+        position: absolute !important;
+        top: 20px !important;
+        right: 20px !important;
+        margin: 0 !important;
+        cursor: pointer !important;
+        width: 18px !important;
+        height: 18px !important;
+        accent-color: #22baa0 !important;
+        float: none !important;
+        display: inline-block !important;
     }
     .provider-card-icon {
-        font-size: 28px;
-        color: #94a3b8;
-        margin-bottom: 12px;
-        transition: color 0.25s ease;
+        font-size: 28px !important;
+        color: #94a3b8 !important;
+        margin-bottom: 12px !important;
+        transition: color 0.25s ease !important;
+        display: block !important;
     }
     .provider-card.active .provider-card-icon {
-        color: #22baa0;
+        color: #22baa0 !important;
     }
     .provider-card-title {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1e293b;
-        margin-bottom: 6px;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #1e293b !important;
+        margin-bottom: 6px !important;
+        display: block !important;
     }
     .provider-card-desc {
-        font-size: 12px;
-        color: #64748b;
-        line-height: 1.5;
+        font-size: 12px !important;
+        color: #64748b !important;
+        line-height: 1.5 !important;
+        display: block !important;
     }
     .section-divider {
         font-size: 15px;
