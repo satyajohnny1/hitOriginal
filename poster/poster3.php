@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . '/safe_image.php';
 
 $b  = strtoupper($_GET["b"]);
 $p  = strtoupper($_GET["p"]);
@@ -67,7 +68,7 @@ $heroimg2 = "actors/".clean(strtolower($a2)).'.png';
 $heroimg3 = "actors/".clean(strtolower($a3)).'.png';
 
 
-$jpg_image = imagecreatefromjpeg($bg);
+$jpg_image = safe_imagecreatefromjpeg($bg, 1000, 1500);
 $fnt = "fonts/".rand(1,30).".ttf";
 $tfnt = "fonts/".rand(1,122).".ttf";
 $path = 'done/'.$tit.$rid.".jpeg";
@@ -108,7 +109,7 @@ if($num<15){
   //=================== HERO-I CODE ================================
   $width = 400;
   $height = 400;
-  $top_image = imagecreatefrompng($heroimg1);
+  $top_image = safe_imagecreatefrompng($heroimg1, $width, $height);
   imagesavealpha($top_image, true);
   imagealphablending($top_image, true);
   imagecopy($jpg_image, $top_image, 300, 0, 0, 0, $width, $height);
@@ -120,7 +121,7 @@ if($num<15){
   //=================== HERO-II CODE ================================
   $width = 400;
   $height = 400;
-  $top_image = imagecreatefrompng($heroimg2);
+  $top_image = safe_imagecreatefrompng($heroimg2, $width, $height);
   imagesavealpha($top_image, true);
   imagealphablending($top_image, true);
   imagecopy($jpg_image, $top_image, 70, 0, 0, 0, $width, $height);
@@ -131,7 +132,7 @@ if($num<15){
   //=================== HERO-III CODE ================================
   $width = 400;
   $height = 400;
-  $top_image = imagecreatefrompng($heroimg3);
+  $top_image = safe_imagecreatefrompng($heroimg3, $width, $height);
   imagesavealpha($top_image, true);
   imagealphablending($top_image, true);
   imagecopy($jpg_image, $top_image, 550, 0, 0, 0, $width, $height);
@@ -281,7 +282,7 @@ imagejpeg($jpg_image, $path);
 
   if($sev>0)
   {
-  	$jpg_image = imagecreatefromjpeg($ori);
+  	$jpg_image = safe_imagecreatefromjpeg($ori, 1000, 1500);
   	echo 'TEMP --- '.$temp;
   
   	//Days Data
@@ -313,7 +314,7 @@ imagejpeg($jpg_image, $path);
   
   if($hun>0)
   {
-  	$jpg_image = imagecreatefromjpeg($ori);
+  	$jpg_image = safe_imagecreatefromjpeg($ori, 1000, 1500);
   	echo 'TEMP --- '.$temp;
   
   		 
@@ -346,7 +347,7 @@ imagejpeg($jpg_image, $path);
 
   if($onf>0)
   {
-  	$jpg_image = imagecreatefromjpeg($ori);
+  	$jpg_image = safe_imagecreatefromjpeg($ori, 1000, 1500);
   	echo 'TEMP --- '.$temp;
   
   	$font_path = $fnt;
@@ -377,7 +378,7 @@ imagejpeg($jpg_image, $path);
 
   if($fiv>0)
   {
-  	$jpg_image = imagecreatefromjpeg($ori);
+  	$jpg_image = safe_imagecreatefromjpeg($ori, 1000, 1500);
   	//Days Data
   	$font_path = $fnt;
   	$text = "175";

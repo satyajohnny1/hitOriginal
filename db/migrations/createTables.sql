@@ -1,6 +1,6 @@
 
 -- Dumping structure for table hit.centers
-DROP TABLE IF EXISTS `centers`;
+-- DROP TABLE IF EXISTS `centers`;
 CREATE TABLE IF NOT EXISTS `centers` (
   `rid` int(11) DEFAULT 0,
   `25list` longtext DEFAULT NULL,
@@ -13,12 +13,12 @@ CREATE TABLE IF NOT EXISTS `centers` (
   `250list` longtext DEFAULT NULL,
   `300list` longtext DEFAULT NULL,
   `maxlist` longtext DEFAULT NULL,
-  KEY `idx_centers_rid` (`rid`)
+  PRIMARY KEY `idx_centers_rid` (`rid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 -- Dumping structure for table hit.thearterslist
-DROP TABLE IF EXISTS `thearterslist`;
+ 
 CREATE TABLE IF NOT EXISTS `thearterslist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `th_id` varchar(50) DEFAULT NULL,
@@ -31,8 +31,7 @@ CREATE TABLE IF NOT EXISTS `thearterslist` (
 
 
 
--- Dumping structure for table hit.tolly_director
-DROP TABLE IF EXISTS `tolly_director`;
+ 
 CREATE TABLE IF NOT EXISTS `tolly_director` (
   `director_id` int(11) NOT NULL AUTO_INCREMENT,
   `director_name` varchar(250) DEFAULT NULL,
@@ -42,12 +41,12 @@ CREATE TABLE IF NOT EXISTS `tolly_director` (
   `director_status` varchar(250) DEFAULT NULL,
   `director_rating` double DEFAULT 0,
   PRIMARY KEY (`director_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=utf8 COMMENT='director Details';
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8 COMMENT='director Details';
 
 
 
 -- Dumping structure for table hit.tolly_actor
-DROP TABLE IF EXISTS `tolly_actor`;
+ 
 CREATE TABLE IF NOT EXISTS `tolly_actor` (
   `actor_id` int(11) NOT NULL AUTO_INCREMENT,
   `actor_name` varchar(250) DEFAULT NULL,
@@ -57,13 +56,13 @@ CREATE TABLE IF NOT EXISTS `tolly_actor` (
   `actor_status` varchar(250) DEFAULT NULL,
   `actor_rating` double unsigned DEFAULT 0,
   PRIMARY KEY (`actor_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=82 DEFAULT CHARSET=utf8 COMMENT='actor Details';
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8 COMMENT='actor Details';
 
 
 
 
 -- Dumping structure for table hit.tolly_actress
-DROP TABLE IF EXISTS `tolly_actress`;
+-- DROP TABLE IF EXISTS `tolly_actress`;
 CREATE TABLE IF NOT EXISTS `tolly_actress` (
   `actress_id` int(11) NOT NULL AUTO_INCREMENT,
   `actress_name` varchar(250) DEFAULT NULL,
@@ -73,12 +72,12 @@ CREATE TABLE IF NOT EXISTS `tolly_actress` (
   `actress_status` varchar(250) DEFAULT NULL,
   `actress_rating` double unsigned DEFAULT 0,
   PRIMARY KEY (`actress_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COMMENT='actress Details';
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COMMENT='actress Details';
 
 
 
 -- Dumping structure for table hit.tolly_writer
-DROP TABLE IF EXISTS `tolly_writer`;
+-- DROP TABLE IF EXISTS `tolly_writer`;
 CREATE TABLE IF NOT EXISTS `tolly_writer` (
   `writer_id` int(11) NOT NULL AUTO_INCREMENT,
   `writer_name` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -88,11 +87,11 @@ CREATE TABLE IF NOT EXISTS `tolly_writer` (
   `writer_status` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `writer_rating` double NOT NULL DEFAULT 0,
   PRIMARY KEY (`writer_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
  
 -- Dumping structure for table hit.tolly_music
-DROP TABLE IF EXISTS `tolly_music`;
+-- DROP TABLE IF EXISTS `tolly_music`;
 CREATE TABLE IF NOT EXISTS `tolly_music` (
   `music_id` int(11) NOT NULL AUTO_INCREMENT,
   `music_name` varchar(250) DEFAULT NULL,
@@ -102,11 +101,11 @@ CREATE TABLE IF NOT EXISTS `tolly_music` (
   `music_status` varchar(250) DEFAULT NULL,
   `music_rating` double DEFAULT 0,
   PRIMARY KEY (`music_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='music Details';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='music Details';
  
 
 -- Dumping structure for table hit.tolly_cine
-DROP TABLE IF EXISTS `tolly_cine`;
+-- DROP TABLE IF EXISTS `tolly_cine`;
 CREATE TABLE IF NOT EXISTS `tolly_cine` (
   `cine_id` int(11) NOT NULL AUTO_INCREMENT,
   `cine_name` varchar(250) DEFAULT NULL,
@@ -116,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `tolly_cine` (
   `cine_status` varchar(250) DEFAULT NULL,
   `cine_rating` double unsigned DEFAULT 0,
   PRIMARY KEY (`cine_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='cine Details';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='cine Details';
 
 
 
@@ -124,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `tolly_cine` (
  
 
 -- Dumping structure for table hit.tolly_editor
-DROP TABLE IF EXISTS `tolly_editor`;
+-- DROP TABLE IF EXISTS `tolly_editor`;
 CREATE TABLE IF NOT EXISTS `tolly_editor` (
   `editor_id` int(11) NOT NULL AUTO_INCREMENT,
   `editor_name` varchar(250) DEFAULT NULL,
@@ -134,26 +133,26 @@ CREATE TABLE IF NOT EXISTS `tolly_editor` (
   `editor_status` varchar(250) DEFAULT NULL,
   `editor_rating` double unsigned DEFAULT 0,
   PRIMARY KEY (`editor_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='editor Details';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='editor Details';
 
 
 
 -- Dumping structure for table hit.tolly_news
-DROP TABLE IF EXISTS `tolly_news`;
+-- DROP TABLE IF EXISTS `tolly_news`;
 CREATE TABLE IF NOT EXISTS `tolly_news` (
   `nid` int(11) NOT NULL AUTO_INCREMENT,
   `news` longtext DEFAULT NULL,
   `heading` mediumtext DEFAULT NULL,
   `pic` mediumtext DEFAULT NULL,
   PRIMARY KEY (`nid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_news: 0 rows
 /*!40000 ALTER TABLE `tolly_news` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_news` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_ready_for_shoot
-DROP TABLE IF EXISTS `tolly_ready_for_shoot`;
+-- DROP TABLE IF EXISTS `tolly_ready_for_shoot`;
 CREATE TABLE IF NOT EXISTS `tolly_ready_for_shoot` (
   `rid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(11) DEFAULT NULL,
@@ -208,14 +207,14 @@ CREATE TABLE IF NOT EXISTS `tolly_ready_for_shoot` (
   KEY `idx_rfs_uid_status_dt` (`uid`, `status`, `dt`),
   KEY `idx_rfs_uid_rid` (`uid`, `rid`),
   PRIMARY KEY (`rid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_ready_for_shoot: 0 rows
 /*!40000 ALTER TABLE `tolly_ready_for_shoot` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_ready_for_shoot` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_release
-DROP TABLE IF EXISTS `tolly_release`;
+-- DROP TABLE IF EXISTS `tolly_release`;
 CREATE TABLE IF NOT EXISTS `tolly_release` (
   `uid` int(11) NOT NULL DEFAULT 0,
   `rid` int(11) NOT NULL DEFAULT 0,
@@ -269,14 +268,12 @@ CREATE TABLE IF NOT EXISTS `tolly_release` (
   `poster` varchar(50) NOT NULL DEFAULT 'no',
   KEY `idx_release_uid_rid` (`uid`, `rid`),
   PRIMARY KEY (`rid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table hit.tolly_release: 0 rows
-/*!40000 ALTER TABLE `tolly_release` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tolly_release` ENABLE KEYS */;
+
 
 -- Dumping structure for table hit.tolly_s1
-DROP TABLE IF EXISTS `tolly_s1`;
+-- DROP TABLE IF EXISTS `tolly_s1`;
 CREATE TABLE IF NOT EXISTS `tolly_s1` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -289,15 +286,15 @@ CREATE TABLE IF NOT EXISTS `tolly_s1` (
   `s1_status` varchar(50) DEFAULT NULL,
   `s1_best` double DEFAULT NULL,
   KEY `idx_s1_uid_sid` (`uid`, `sid`),
-  KEY `rid` (`sid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY `rid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s1: 0 rows
 /*!40000 ALTER TABLE `tolly_s1` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s1` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s2
-DROP TABLE IF EXISTS `tolly_s2`;
+-- DROP TABLE IF EXISTS `tolly_s2`;
 CREATE TABLE IF NOT EXISTS `tolly_s2` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -310,15 +307,15 @@ CREATE TABLE IF NOT EXISTS `tolly_s2` (
   `s2_status` varchar(50) DEFAULT NULL,
   `s2_best` double DEFAULT NULL,
   KEY `idx_s2_uid_sid` (`uid`, `sid`),
-  KEY `rid` (`sid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY `rid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s2: 0 rows
 /*!40000 ALTER TABLE `tolly_s2` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s2` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s3
-DROP TABLE IF EXISTS `tolly_s3`;
+-- DROP TABLE IF EXISTS `tolly_s3`;
 CREATE TABLE IF NOT EXISTS `tolly_s3` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -331,15 +328,15 @@ CREATE TABLE IF NOT EXISTS `tolly_s3` (
   `s3_status` varchar(50) DEFAULT NULL,
   `s3_best` double DEFAULT NULL,
   KEY `idx_s3_uid_sid` (`uid`, `sid`),
-  KEY `rid` (`sid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY `rid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s3: 0 rows
 /*!40000 ALTER TABLE `tolly_s3` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s3` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s4
-DROP TABLE IF EXISTS `tolly_s4`;
+-- DROP TABLE IF EXISTS `tolly_s4`;
 CREATE TABLE IF NOT EXISTS `tolly_s4` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -352,15 +349,15 @@ CREATE TABLE IF NOT EXISTS `tolly_s4` (
   `s4_status` varchar(50) DEFAULT NULL,
   `s4_best` double DEFAULT NULL,
   KEY `idx_s4_uid_sid` (`uid`, `sid`),
-  KEY `rid` (`sid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY `rid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s4: 0 rows
 /*!40000 ALTER TABLE `tolly_s4` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s4` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s5
-DROP TABLE IF EXISTS `tolly_s5`;
+-- DROP TABLE IF EXISTS `tolly_s5`;
 CREATE TABLE IF NOT EXISTS `tolly_s5` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -373,15 +370,15 @@ CREATE TABLE IF NOT EXISTS `tolly_s5` (
   `s5_status` varchar(50) DEFAULT NULL,
   `s5_best` double DEFAULT NULL,
   KEY `idx_s5_uid_sid` (`uid`, `sid`),
-  KEY `rid` (`sid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY `rid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s5: 0 rows
 /*!40000 ALTER TABLE `tolly_s5` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s5` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s6
-DROP TABLE IF EXISTS `tolly_s6`;
+-- DROP TABLE IF EXISTS `tolly_s6`;
 CREATE TABLE IF NOT EXISTS `tolly_s6` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -394,15 +391,15 @@ CREATE TABLE IF NOT EXISTS `tolly_s6` (
   `s6_status` varchar(50) DEFAULT NULL,
   `s6_best` double DEFAULT NULL,
   KEY `idx_s6_uid_sid` (`uid`, `sid`),
-  KEY `rid` (`sid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY `rid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s6: 0 rows
 /*!40000 ALTER TABLE `tolly_s6` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s6` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s7
-DROP TABLE IF EXISTS `tolly_s7`;
+-- DROP TABLE IF EXISTS `tolly_s7`;
 CREATE TABLE IF NOT EXISTS `tolly_s7` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -415,15 +412,15 @@ CREATE TABLE IF NOT EXISTS `tolly_s7` (
   `s7_status` varchar(50) DEFAULT NULL,
   `s7_best` double DEFAULT NULL,
   KEY `idx_s7_uid_sid` (`uid`, `sid`),
-  KEY `rid` (`sid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY `rid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s7: 0 rows
 /*!40000 ALTER TABLE `tolly_s7` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s7` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s8
-DROP TABLE IF EXISTS `tolly_s8`;
+-- DROP TABLE IF EXISTS `tolly_s8`;
 CREATE TABLE IF NOT EXISTS `tolly_s8` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -436,15 +433,15 @@ CREATE TABLE IF NOT EXISTS `tolly_s8` (
   `s8_status` varchar(50) DEFAULT NULL,
   `s8_best` double DEFAULT NULL,
   KEY `idx_s8_uid_sid` (`uid`, `sid`),
-  KEY `rid` (`sid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY `rid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s8: 0 rows
 /*!40000 ALTER TABLE `tolly_s8` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s8` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_s9
-DROP TABLE IF EXISTS `tolly_s9`;
+-- DROP TABLE IF EXISTS `tolly_s9`;
 CREATE TABLE IF NOT EXISTS `tolly_s9` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT 0,
@@ -457,15 +454,15 @@ CREATE TABLE IF NOT EXISTS `tolly_s9` (
   `s9_status` varchar(50) DEFAULT NULL,
   `s9_best` double DEFAULT NULL,
   KEY `idx_s9_uid_sid` (`uid`, `sid`),
-  KEY `rid` (`sid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY `rid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_s9: 0 rows
 /*!40000 ALTER TABLE `tolly_s9` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tolly_s9` ENABLE KEYS */;
 
 -- Dumping structure for table hit.tolly_user
-DROP TABLE IF EXISTS `tolly_user`;
+-- DROP TABLE IF EXISTS `tolly_user`;
 CREATE TABLE IF NOT EXISTS `tolly_user` (
   `uid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(50) DEFAULT NULL,
@@ -477,7 +474,7 @@ CREATE TABLE IF NOT EXISTS `tolly_user` (
   `banner` varchar(250) DEFAULT NULL,
   `utype` varchar(50) DEFAULT 'user',
   PRIMARY KEY (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hit.tolly_user: 2 rows
 /*!40000 ALTER TABLE `tolly_user` DISABLE KEYS */;

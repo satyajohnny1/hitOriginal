@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . '/safe_image.php';
 
 $b  = strtoupper($_GET["b"]);
 $p  = strtoupper($_GET["p"]);
@@ -59,7 +60,7 @@ function clean($string) {
 $bg = "bg/bg".rand(1,35).".jpg";
 $heroimg = clean(strtolower($a)).'.png';
 $heroimg = "actors/".$heroimg;
-$jpg_image = imagecreatefromjpeg($bg);
+$jpg_image = safe_imagecreatefromjpeg($bg, 1000, 1500);
 $fnt = "fonts/".rand(1,25).".ttf";
 $tfnt = "fonts/".rand(14,122).".ttf";
 $path = 'done/'.$tit.$rid.".jpeg";
@@ -133,7 +134,7 @@ if(0<$num &&  $num< 10){
   $width = 400;
   $height = 400;
  
-  $top_image = imagecreatefrompng($heroimg);
+  $top_image = safe_imagecreatefrompng($heroimg, $width, $height);
   imagesavealpha($top_image, true);
   imagealphablending($top_image, true);
   imagecopy($jpg_image, $top_image, 300, 0, 0, 0, $width, $height);
@@ -144,7 +145,7 @@ if(0<$num &&  $num< 10){
    //Merging  HITFUT imGE CODE--------------
   $width = 190;
   $height = 190;
-  $top_image = imagecreatefrompng("actors/hit.png");
+  $top_image = safe_imagecreatefrompng("actors/hit.png", $width, $height);
   imagesavealpha($top_image, true);
   imagealphablending($top_image, true);
   imagecopy($jpg_image, $top_image, 0, 60, 0, 0, $width, $height);
@@ -279,7 +280,7 @@ imagejpeg($jpg_image, $path);
 
   if($sev>0)
   {
-  	$jpg_image = imagecreatefromjpeg($ori);
+  	$jpg_image = safe_imagecreatefromjpeg($ori, 1000, 1500);
   	echo 'TEMP --- '.$temp;
   
   	$font_path = $fnt;
@@ -310,7 +311,7 @@ imagejpeg($jpg_image, $path);
   
   if($hun>0)
   {
-  	$jpg_image = imagecreatefromjpeg($ori);
+  	$jpg_image = safe_imagecreatefromjpeg($ori, 1000, 1500);
   	echo 'TEMP --- '.$temp;
   
   		$font_path = $fnt;
@@ -342,7 +343,7 @@ imagejpeg($jpg_image, $path);
 
   if($onf>0)
   {
-  	$jpg_image = imagecreatefromjpeg($ori);
+  	$jpg_image = safe_imagecreatefromjpeg($ori, 1000, 1500);
   	echo 'TEMP --- '.$temp;
   
   	$font_path = $fnt;
@@ -373,7 +374,7 @@ imagejpeg($jpg_image, $path);
 
   if($fiv>0)
   {
-  	$jpg_image = imagecreatefromjpeg($ori);
+  	$jpg_image = safe_imagecreatefromjpeg($ori, 1000, 1500);
   	//Days Data
   	$font_path = $fnt;
   	$text = "175";

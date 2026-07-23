@@ -362,7 +362,12 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                                 <img src="<?php echo $path_175?>" style="width: 100%">
                                             </div>
                                         </div>
-                                        
+                                        <div class="row">
+                                            <div class="col-md-12" style="text-align:center;">
+                                                <button type="button" class="btn btn-warning btn-rounded" id="posterRegenBtn">Regenerate Poster</button>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -690,9 +695,93 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                 		$("#pos_100").hide();
                 		$("#pos_175").hide();
                       }
-                 
 
-            
+
+                $('#posterRegenBtn').on('click', function(){
+                    var btn = $(this);
+                    btn.prop('disabled', true);
+
+                    var b   = '<?php echo addslashes($_SESSION['s_banner'] ?? ''); ?>';
+                    var p   = '<?php echo addslashes($_SESSION['s_user'] ?? ''); ?>';
+                    var d   = '<?php echo addslashes($dname); ?>';
+                    var a   = '<?php echo addslashes($aname); ?>';
+                    var ac  = '<?php echo addslashes($acname); ?>';
+                    var c   = '<?php echo addslashes($cinename); ?>';
+                    var e   = '<?php echo addslashes($ediname); ?>';
+                    var m   = '<?php echo addslashes($musname); ?>';
+                    var w   = '<?php echo addslashes($wriname); ?>';
+                    var tit = '<?php echo addslashes($title ?? ''); ?>';
+                    var rid = '<?php echo (int) $rid; ?>';
+
+                    var fif = '<?php echo (int) ($d25_cent ?? 0); ?>';
+                    var hun = '<?php echo (int) ($d100_cent ?? 0); ?>';
+                    var fiv = '<?php echo (int) ($wk1_cent ?? 0); ?>';
+                    var t5  = '<?php echo (int) ($d75_cent ?? 0); ?>';
+                    var sev = '<?php echo (int) ($wk2_cent ?? 0); ?>';
+                    var onf = '<?php echo (int) ($rel_cen ?? 0); ?>';
+
+                    var a2  = '<?php echo addslashes($_a2_name ?? ''); ?>';
+                    var a3  = '<?php echo addslashes($_a3_name ?? ''); ?>';
+                    var ac2 = '<?php echo addslashes($_ac2_name ?? ''); ?>';
+                    var ac3 = '<?php echo addslashes($_ac3_name ?? ''); ?>';
+                    var d2  = '<?php echo addslashes($_d2_name ?? ''); ?>';
+                    var d3  = '<?php echo addslashes($_d3_name ?? ''); ?>';
+                    var m2  = '<?php echo addslashes($_m2_name ?? ''); ?>';
+                    var m3  = '<?php echo addslashes($_m3_name ?? ''); ?>';
+                    var w2  = '<?php echo addslashes($_w2_name ?? ''); ?>';
+                    var w3  = '<?php echo addslashes($_w3_name ?? ''); ?>';
+
+                    var a2Chk = parseInt('<?php echo (int) ($_a2 ?? 0); ?>');
+                    var a3Chk = parseInt('<?php echo (int) ($_a3 ?? 0); ?>');
+
+                    var url = window.location.href;
+                    var arr = url.split("/");
+                    var hostname = arr[0] + "//" + arr[2];
+                    if (hostname.includes("localhost")) {
+                        hostname = hostname + "/hit";
+                    }
+
+                    var script = 'poster1.php';
+                    if (a3Chk > 0) {
+                        script = 'poster3.php';
+                    } else if (a2Chk > 0) {
+                        script = 'poster2.php';
+                    }
+
+                    var plink = hostname + '/poster/' + script + '?rid=' + rid
+                        + '&b=' + encodeURIComponent(b) + '&p=' + encodeURIComponent(p)
+                        + '&d=' + encodeURIComponent(d) + '&a=' + encodeURIComponent(a) + '&ac=' + encodeURIComponent(ac)
+                        + '&c=' + encodeURIComponent(c) + '&e=' + encodeURIComponent(e) + '&m=' + encodeURIComponent(m)
+                        + '&w=' + encodeURIComponent(w) + '&tit=' + encodeURIComponent(tit)
+                        + '&fif=' + fif + '&hun=' + hun + '&fiv=' + fiv + '&t5=' + t5 + '&sev=' + sev + '&onf=' + onf
+                        + '&a2=' + encodeURIComponent(a2) + '&a3=' + encodeURIComponent(a3)
+                        + '&ac2=' + encodeURIComponent(ac2) + '&ac3=' + encodeURIComponent(ac3)
+                        + '&d2=' + encodeURIComponent(d2) + '&d3=' + encodeURIComponent(d3)
+                        + '&w2=' + encodeURIComponent(w2) + '&w3=' + encodeURIComponent(w3)
+                        + '&m2=' + encodeURIComponent(m2) + '&m3=' + encodeURIComponent(m3);
+
+                    toastr.info("Regenerating poster...");
+
+                    $.ajax({
+                        type: "POST",
+                        url: plink,
+                        success: function(data) {
+                            toastr.success("<h2>Poster regenerated</h2>");
+                            var bust = (plink.indexOf('?') > -1 ? '&' : '?') + 'v=' + new Date().getTime();
+                            $('#pos_0 img').attr('src', '<?php echo $path?>' + bust);
+                            $('#pos_50 img').attr('src', '<?php echo $path_50?>' + bust);
+                            $('#pos_100 img').attr('src', '<?php echo $path_100?>' + bust);
+                            $('#pos_175 img').attr('src', '<?php echo $path_175?>' + bust);
+                            btn.prop('disabled', false);
+                        },
+                        error: function(xhr, status, errorThrown) {
+                            toastr.error("Poster regeneration failed: " + errorThrown);
+                            btn.prop('disabled', false);
+                        }
+                    });
+                });
+
+
             </script>
 
     </body>
