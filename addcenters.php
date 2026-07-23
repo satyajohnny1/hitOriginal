@@ -157,11 +157,13 @@ for($x = 1; $x <= 5; $x ++) {
 			$z = $c;
 		}
 		
-		$sql2 = "UPDATE tolly_" . $tab . " r  SET r." . $tab . "_best=" . $z . " WHERE  r.uid = " . $uid . " and r.sid = " . $sid;
+		$zVal = floatval($z);
+		
+		$sql2 = "UPDATE tolly_" . $tab . " r  SET r." . $tab . "_best=" . $zVal . " WHERE  r.uid = " . $uid . " and r.sid = " . $sid;
 		echo $sql2.'<br>';
 		mysqli_query ( $conn, $sql2 );
 	} // IF END
-	$ratesum = $ratesum + $z;
+	$ratesum = $ratesum + floatval($z);
 } // For Loop END
 $rateavg = number_format ( ( float ) ((($ratesum / 5)) / 2), 2, '.', '' );
 $ratefinal = $rateavg;
