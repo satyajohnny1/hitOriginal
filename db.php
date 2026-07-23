@@ -50,8 +50,9 @@ if (!$conn) {
 }else{
 	//echo "<h1> Connection Success. </h1>";
 	
-	// Silent Automated Migration Runner
-	if (!defined('PHINX_CONFIG_LOADED') && !defined('MIGRATING_DB')) {
+	// Silent Automated Migration Runner with local file cache check (0ms overhead on subsequent hits)
+	$migratedLock = __DIR__ . '/db/migrations/.migrated';
+	if (!defined('PHINX_CONFIG_LOADED') && !defined('MIGRATING_DB') && !file_exists($migratedLock)) {
 		define('MIGRATING_DB', true);
 		
 		$runMigrate = false;
@@ -95,9 +96,12 @@ if (!$conn) {
 				$app = new \Phinx\Console\PhinxApplication();
 				$app->setAutoExit(false);
 				$app->run(new \Symfony\Component\Console\Input\StringInput('migrate'), new \Symfony\Component\Console\Output\NullOutput());
+				@touch($migratedLock);
 			} catch (\Exception $e) {
 				error_log("Auto Migration Failed: " . $e->getMessage());
 			}
+		} else {
+			@touch($migratedLock);
 		}
 	}
 }
