@@ -21,7 +21,7 @@ return [
             'name' => $dbname,
             'user' => $username,
             'pass' => $password,
-            'port' => 3306,
+            'port' => $dbport,
             'charset' => 'utf8mb4'
         ]
     ],
