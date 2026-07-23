@@ -196,11 +196,19 @@ $config = mysqli_fetch_assoc($configRes) ?: [
 
                                 <form id="smtpForm" action="email_config.php" method="POST">
                                     <div class="form-group">
-                                        <label for="email_provider"><b>Email Delivery Method</b></label>
-                                        <select class="form-control" id="email_provider" name="email_provider">
-                                            <option value="smtp" <?php echo ($config['email_provider'] ?? 'smtp') === 'smtp' ? 'selected' : ''; ?>>General SMTP (Any Provider)</option>
-                                            <option value="mailersend_api" <?php echo ($config['email_provider'] ?? '') === 'mailersend_api' ? 'selected' : ''; ?>>MailerSend HTTP API (via API Token)</option>
-                                        </select>
+                                        <label><b>Email Delivery Method</b></label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="email_provider" value="smtp" <?php echo ($config['email_provider'] ?? 'smtp') === 'smtp' ? 'checked' : ''; ?>>
+                                                <strong>SMTP</strong> - Use your SMTP credentials to send emails, authenticate your account and track data.
+                                            </label>
+                                        </div>
+                                        <div class="radio" style="margin-top: 10px;">
+                                            <label>
+                                                <input type="radio" name="email_provider" value="mailersend_api" <?php echo ($config['email_provider'] ?? '') === 'mailersend_api' ? 'checked' : ''; ?>>
+                                                <strong>API token</strong> - API tokens authenticate requests made when sending emails and on server-specific endpoints.
+                                            </label>
+                                        </div>
                                     </div>
 
                                     <!-- MailerSend API Section -->
@@ -307,7 +315,7 @@ $config = mysqli_fetch_assoc($configRes) ?: [
     <script>
     $(document).ready(function() {
         function toggleSections() {
-            var provider = $('#email_provider').val();
+            var provider = $('input[name="email_provider"]:checked').val();
             if (provider === 'mailersend_api') {
                 $('#smtp_section').hide();
                 $('#mailersend_api_section').show();
@@ -317,7 +325,7 @@ $config = mysqli_fetch_assoc($configRes) ?: [
             }
         }
 
-        $('#email_provider').on('change', toggleSections);
+        $('input[name="email_provider"]').on('change', toggleSections);
         toggleSections(); // run on load
 
         function setupPasswordToggle(btnId, inputId) {
