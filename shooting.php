@@ -688,9 +688,11 @@ if (mysqli_num_rows($result) > 0) {
 //******************************************************************************************
 
                   $(".next").click(function() {
-                	  hideAll();
     				var s =  $(this).attr('id');  
-    			//	////alert(s);              
+                    if (s === 'lastnext') {
+                        return;
+                    }
+                	  hideAll();
                 	var cur = '#'+s.substring(0, 2);
                 	var nxt = '#'+s.substring(7, 10);
 

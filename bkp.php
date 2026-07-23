@@ -83,12 +83,41 @@ if (isset($_GET['action'])) {
             }
             $createRow = mysqli_fetch_row($createRes);
 
-            $dataRes = @mysqli_query($conn, "SELECT * FROM `{$table}`");
+            $limitedTables = [
+                'tolly_news' => 'nid',
+                'tolly_s1' => 'sid',
+                'tolly_s2' => 'sid',
+                'tolly_s3' => 'sid',
+                'tolly_s4' => 'sid',
+                'tolly_s5' => 'sid',
+                'tolly_s6' => 'sid',
+                'tolly_s7' => 'sid',
+                'tolly_s8' => 'sid',
+                'tolly_s9' => 'sid'
+            ];
+
+            if (isset($limitedTables[$table])) {
+                $orderBy = $limitedTables[$table];
+                $query = "SELECT * FROM `{$table}` ORDER BY `{$orderBy}` DESC LIMIT 20";
+            } else {
+                $query = "SELECT * FROM `{$table}`";
+            }
+
+            $dataRes = @mysqli_query($conn, $query);
             if (!$dataRes) {
                 throw new Exception("Failed to read data from table: {$table} - " . @mysqli_error($conn));
             }
             $numFields = mysqli_num_fields($dataRes);
-            $numRows = mysqli_num_rows($dataRes);
+            
+            $rowsData = [];
+            while ($row = mysqli_fetch_row($dataRes)) {
+                $rowsData[] = $row;
+            }
+
+            if (isset($limitedTables[$table])) {
+                $rowsData = array_reverse($rowsData);
+            }
+            $numRows = count($rowsData);
 
             $fp = @fopen($filepath, 'a');
             if (!$fp) {
@@ -98,7 +127,7 @@ if (isset($_GET['action'])) {
             fwrite($fp, $createRow[1] . ";\n\n");
 
             $counter = 1;
-            while ($row = mysqli_fetch_row($dataRes)) {
+            foreach ($rowsData as $row) {
                 if ($counter === 1) {
                     fwrite($fp, "INSERT INTO `{$table}` VALUES(");
                 } else {
