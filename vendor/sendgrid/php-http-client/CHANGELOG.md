@@ -3,6 +3,49 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+[2025-04-11] Version 4.1.3
+--------------------------
+**Library - Chore**
+- [PR #171](https://github.com/sendgrid/php-http-client/pull/171): revert #169. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2025-04-07] Version 4.1.2
+--------------------------
+**Library - Fix**
+- [PR #165](https://github.com/sendgrid/php-http-client/pull/165): implicitly nullable parameter deprecation in PHP 8.4. Thanks to [@theodorejb](https://github.com/theodorejb)!
+
+**Library - Chore**
+- [PR #169](https://github.com/sendgrid/php-http-client/pull/169): fix php 8.4 deprecation warning. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+- [PR #168](https://github.com/sendgrid/php-http-client/pull/168): update licence year. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+- [PR #166](https://github.com/sendgrid/php-http-client/pull/166): add tests for php new versions. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2023-12-14] Version 4.1.1
+--------------------------
+**Library - Chore**
+- [PR #162](https://github.com/sendgrid/php-http-client/pull/162): added test for setHost. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+
+[2023-12-01] Version 4.1.0
+--------------------------
+**Library - Feature**
+- [PR #161](https://github.com/sendgrid/php-http-client/pull/161): added setHost for client. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+**Library - Test**
+- [PR #155](https://github.com/sendgrid/php-http-client/pull/155): Adding misc as PR type. Thanks to [@rakatyal](https://github.com/rakatyal)!
+
+**Library - Docs**
+- [PR #154](https://github.com/sendgrid/php-http-client/pull/154): Update docs to align with SendGrid Support. Thanks to [@garethpaul](https://github.com/garethpaul)!
+
+
+[2022-05-04] Version 4.0.0
+--------------------------
+**Note:** This release contains breaking changes, check our [upgrade guide](./UPGRADE.md#2022-05-04-3xx-to-4xx) for detailed migration notes.
+
+**Library - Chore**
+- [PR #153](https://github.com/sendgrid/php-http-client/pull/153): drop support for EOL PHP versions and add support for PHP 8. Thanks to [@childish-sambino](https://github.com/childish-sambino)! **(breaking change)**
+
+
 [2022-03-09] Version 3.14.4
 ---------------------------
 **Library - Chore**
