@@ -430,7 +430,9 @@ if (mysqli_num_rows($result) > 0) {
                                             </div>
                                             <div class="col-md-4" style="border: 1px solid;">
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s3_a_btn" style="display: none;" class="btn btn-default btn-rounded">INTERVAL Scenes</button></h2>
+                                             <h2>
+												 <button type="button" id ="s3_a_btn" style="display: none;" class="btn btn-default btn-rounded">INTERVAL Scenes</button>
+											 </h2>
                                              
                                               <h2 style="display: none;" id="s3N"><b>Go To Next Short</b></h2>                                              
                                              </div>
@@ -501,8 +503,9 @@ if (mysqli_num_rows($result) > 0) {
                                             </div>
                                             <div class="col-md-4" style="border: 1px solid;">
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s4_a_btn" style="display: none;" class="btn btn-default btn-rounded">2nd Half Scenes</button></h2>
-                                             <button type="button" style="display: none;" id ="s4_b_btn" class="btn btn-default btn-rounded">Re-Shoot</button>
+                                             <h2>
+												 <button type="button" id ="s4_a_btn" style="display: none;" class="btn btn-default btn-rounded">2nd Half Scenes</button></h2>
+                                                 
                                               <h2 style="display: none;" id="s4N"><b>Go To Next Short</b></h2>                                                 
                                              </div>
                                             </div>
@@ -578,7 +581,11 @@ if (mysqli_num_rows($result) > 0) {
                                             </div>
                                             <div class="col-md-4" style="border: 1px solid;">
                                              <div class="panel-body"  style="margin: 0 auto; text-align: center;">
-                                             <h2><button type="button" id ="s5_a_btn" style="display: none;" class="btn btn-default btn-rounded">CLYMAX Scenes</button></h2>
+                                             <h2>
+												 <button type="button" id ="s5_a_btn" style="display: none;" class="btn btn-default btn-rounded">CLYMAX Scenes</button>
+			
+												 <button type="button" id ="s5_b_btn" style="display: none;" class="btn btn-default btn-rounded">CLYMAX Reshoot</button>
+											 </h2>
                                                 <h2 style="display: none;" id="shootCompleted"><b>Shooting Completed</b></h2>      
                                                                                              
                                              </div>
