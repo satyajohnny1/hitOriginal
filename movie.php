@@ -713,7 +713,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                     var tit = '<?php echo addslashes($title ?? ''); ?>';
                     var rid = '<?php echo (int) $rid; ?>';
 
-                    var fif = '<?php echo (int) ($d25_cent ?? 0); ?>';
+                    var fif = '<?php echo (int) ($d50_cent ?? 0); ?>';
                     var hun = '<?php echo (int) ($d100_cent ?? 0); ?>';
                     var fiv = '<?php echo (int) ($wk1_cent ?? 0); ?>';
                     var t5  = '<?php echo (int) ($d75_cent ?? 0); ?>';
