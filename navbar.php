@@ -5,7 +5,7 @@ include 'analyticstracking.php';
  <div class="navbar">
                 <div class="navbar-inner">
                     <div class="sidebar-pusher">
-                        <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar">
+                        <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar" onclick="alert('MENU CLICKED')">
                             <i class="fa fa-bars"></i>
                         </a>
                     </div>
