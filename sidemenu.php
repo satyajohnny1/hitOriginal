@@ -47,7 +47,12 @@
 
                                 </ul>
                             </li>
-			    <li><a href="pending.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-random"></span><p>Pending</p></a>
+	                            <li class="droplink"><a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-wrench"></span><p>Tools</p><span class="arrow"></span></a>
+                                <ul class="sub-menu">
+                                    <li><a href="bkp.php">Database Backup</a></li>
+                                </ul>
+                            </li>
+		    <li><a href="pending.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-random"></span><p>Pending</p></a>
 				    <li><a href="thInfo.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-info-sign"></span><p>TheatrInfo</p></a>
 							
 							      <li><a href="logoutAjax.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-edit"></span><p>Logout</p></a> </li>
