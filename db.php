@@ -49,4 +49,55 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }else{
 	//echo "<h1> Connection Success. </h1>";
+	
+	// Silent Automated Migration Runner
+	if (!defined('PHINX_CONFIG_LOADED') && !defined('MIGRATING_DB')) {
+		define('MIGRATING_DB', true);
+		
+		$runMigrate = false;
+		$resTab = @mysqli_query($conn, "SHOW TABLES LIKE 'schema_version'");
+		if (!$resTab || mysqli_num_rows($resTab) == 0) {
+			$runMigrate = true;
+		} else {
+			$migDir = __DIR__ . '/db/migrations';
+			$localVersions = [];
+			if (is_dir($migDir)) {
+				$files = glob($migDir . '/*.php');
+				if ($files !== false) {
+					foreach ($files as $f) {
+						$base = basename($f);
+						if (preg_match('/^(\d+)_/', $base, $matches)) {
+							$localVersions[] = $matches[1];
+						}
+					}
+				}
+			}
+			
+			$dbVersions = [];
+			$resVer = @mysqli_query($conn, "SELECT version FROM schema_version");
+			if ($resVer) {
+				while ($row = mysqli_fetch_assoc($resVer)) {
+					$dbVersions[] = (string)$row['version'];
+				}
+			}
+			
+			foreach ($localVersions as $lv) {
+				if (!in_array($lv, $dbVersions)) {
+					$runMigrate = true;
+					break;
+				}
+			}
+		}
+		
+		if ($runMigrate) {
+			require_once __DIR__ . '/vendor/autoload.php';
+			try {
+				$app = new \Phinx\Console\PhinxApplication();
+				$app->setAutoExit(false);
+				$app->run(new \Symfony\Component\Console\Input\StringInput('migrate'), new \Symfony\Component\Console\Output\NullOutput());
+			} catch (\Exception $e) {
+				error_log("Auto Migration Failed: " . $e->getMessage());
+			}
+		}
+	}
 }
