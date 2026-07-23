@@ -272,8 +272,6 @@ $nme = $_GET['name'];
 																
 																
 											$pl = round(($totColl-$totBud)/10000000, 2);
-											$sql = "UPDATE `tolly_editor` SET `pl`=".$pl." WHERE  `editor_id`=".$eid;
-											mysqli_query($conn, $sql);
                                             ?>
 
 

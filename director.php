@@ -273,9 +273,6 @@ $nme = $_GET['name'];
 																
 																
 											$pl = round(($totColl-$totBud)/10000000, 2);
-											$sql = "UPDATE `tolly_director` SET `pl`=".$pl." WHERE  `director_id`=".$did;
-											mysqli_query($conn, $sql);	
-												
                                             ?>
 
 

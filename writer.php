@@ -271,8 +271,6 @@ $nme = $_GET['name'];
                                                     			}
 																
 											$pl = round(($totColl-$totBud)/10000000, 2);
-											$sql = "UPDATE `tolly_writer` SET `pl`=".$pl." WHERE  `writer_id`=".$wid;
-											mysqli_query($conn, $sql);
                                             ?>
 
 
