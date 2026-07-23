@@ -25,3 +25,15 @@ ALTER TABLE `tolly_s4`
 
 ALTER TABLE `tolly_s5`
   ADD INDEX `idx_s5_uid_sid` (`uid`, `sid`);
+
+ALTER TABLE `tolly_s6`
+  ADD INDEX `idx_s6_uid_sid` (`uid`, `sid`);
+
+ALTER TABLE `tolly_s7`
+  ADD INDEX `idx_s7_uid_sid` (`uid`, `sid`);
+
+ALTER TABLE `tolly_s8`
+  ADD INDEX `idx_s8_uid_sid` (`uid`, `sid`);
+
+ALTER TABLE `tolly_s9`
+  ADD INDEX `idx_s9_uid_sid` (`uid`, `sid`);

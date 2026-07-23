@@ -393,6 +393,7 @@ CREATE TABLE IF NOT EXISTS `tolly_s6` (
   `s6_c_rate` double DEFAULT NULL,
   `s6_status` varchar(50) DEFAULT NULL,
   `s6_best` double DEFAULT NULL,
+  KEY `idx_s6_uid_sid` (`uid`, `sid`),
   KEY `rid` (`sid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -413,6 +414,7 @@ CREATE TABLE IF NOT EXISTS `tolly_s7` (
   `s7_c_rate` double DEFAULT NULL,
   `s7_status` varchar(50) DEFAULT NULL,
   `s7_best` double DEFAULT NULL,
+  KEY `idx_s7_uid_sid` (`uid`, `sid`),
   KEY `rid` (`sid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -433,6 +435,7 @@ CREATE TABLE IF NOT EXISTS `tolly_s8` (
   `s8_c_rate` double DEFAULT NULL,
   `s8_status` varchar(50) DEFAULT NULL,
   `s8_best` double DEFAULT NULL,
+  KEY `idx_s8_uid_sid` (`uid`, `sid`),
   KEY `rid` (`sid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -453,6 +456,7 @@ CREATE TABLE IF NOT EXISTS `tolly_s9` (
   `s9_c_rate` double DEFAULT NULL,
   `s9_status` varchar(50) DEFAULT NULL,
   `s9_best` double DEFAULT NULL,
+  KEY `idx_s9_uid_sid` (`uid`, `sid`),
   KEY `rid` (`sid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

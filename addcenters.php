@@ -3,9 +3,10 @@
 
 
 <?php
+declare(strict_types=1);
 include 'sessionCheck.php';
 error_reporting ( 0 );
-include 'db.php';
+include 'db_helper.php';
 include 'balance.php';
 session_start ();
 
@@ -108,6 +109,7 @@ $newbal = $s_bal-$addsofar;
 
 $budget = 0;
 
+db_begin_transaction();
 
 $sql = "DELETE FROM `tolly_release` WHERE  `rid`=".$sid ;
 $result = mysqli_query ( $conn, $sql );
@@ -137,7 +139,7 @@ for($x = 1; $x <= 5; $x ++) {
 	$sb = $tab . '_b_rate';
 	$sc = $tab . '_c_rate';
 	
-	$sql = "select * from tolly_" . $tab . " r WHERE r.uid = " . $uid . " and r.sid = " . $sid;
+	$sql = "select " . $sa . ", " . $sb . ", " . $sc . " from tolly_" . $tab . " r WHERE r.uid = " . $uid . " and r.sid = " . $sid;
 	echo $sql.'<br>';
 	$result = mysqli_query ( $conn, $sql );
 	if (mysqli_num_rows ( $result ) > 0) {
@@ -194,7 +196,9 @@ if ((1.25 > $rateavg)) {
 
 // Calculate The Avergaes
 $crate = 0;
-$sql = "SELECT * FROM tolly_ready_for_shoot r WHERE   r.uid = " . $uid . " and r.rid = " . $sid;
+$sql = "SELECT r.aid, r.acid, r.did, r.wid, r.mid, r.eid, r.cid, r.sofar, r.rid, r.title, r.dname, r.aname, r.acname,
+               r.a2, r.a3, r.ac2, r.ac3, r.d2, r.d3, r.m2, r.m3, r.w2, r.w3
+        FROM tolly_ready_for_shoot r WHERE   r.uid = " . $uid . " and r.rid = " . $sid;
 $result = mysqli_query ( $conn, $sql );
 if (mysqli_num_rows ( $result ) > 0) {
 	
@@ -1538,6 +1542,7 @@ $sqlCenters = "INSERT INTO centers (rid, 25list, 50list, 75list, 100list, 150lis
 echo "</p> <p> Query :".$sqlCenters;
 mysqli_query ( $conn, $sqlCenters );
 
+db_commit();
 
 header('released.php?news='.$news.'&rid='.$sid);
 echo "<h2> After Redirect</h2>";

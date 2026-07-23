@@ -3,6 +3,7 @@
 
 <head>
 <?php
+declare(strict_types=1);
 include 'sessionCheck.php'; 
 include 'db.php';
 session_start();

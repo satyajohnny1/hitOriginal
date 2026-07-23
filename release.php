@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 include 'sessionCheck.php'; 
 session_start(); 
 error_reporting(E_ERROR);
