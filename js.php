@@ -41,13 +41,37 @@
  
   <script src="share/js/rrssb.min.js"></script>
   <script>
-  $(document).ready(function() {
-      var url = window.location.href;
-      if (url.indexOf("#") !== -1) {
-          var activeTab = url.substring(url.indexOf("#") + 1);
-          if (activeTab) {
-              $('.nav-tabs a[href="#' + activeTab + '"]').tab('show');
-          }
+  function activateTabFromHash() {
+      var hash = window.location.hash;
+      if (!hash || hash.length < 2) {
+          return;
       }
-  });
+      var activeTab = hash.substring(1);
+      var $link = $('.nav-tabs a[href="#' + activeTab + '"]');
+      if ($link.length === 0) {
+          return;
+      }
+
+      // Primary path: let Bootstrap's tab plugin do the full show/hide (handles
+      // fade transitions, ARIA state, etc).
+      $link.tab('show');
+
+      // Defensive fallback: in case the plugin call above didn't take effect
+      // (e.g. markup loaded after this ran, or a plugin conflict), toggle the
+      // classes directly so the tab still switches.
+      window.setTimeout(function() {
+          var $pane = $('#' + activeTab);
+          if ($pane.length && !$pane.hasClass('active')) {
+              var $navContainer = $link.closest('.nav-tabs');
+              var $paneContainer = $pane.closest('.tab-content');
+              $navContainer.find('> li').removeClass('active');
+              $link.closest('li').addClass('active');
+              $paneContainer.children('.tab-pane').removeClass('active in');
+              $pane.addClass('active in');
+          }
+      }, 50);
+  }
+
+  $(document).ready(activateTabFromHash);
+  $(window).on('hashchange', activateTabFromHash);
   </script>
