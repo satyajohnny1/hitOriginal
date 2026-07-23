@@ -136,16 +136,16 @@ if (mysqli_num_rows($result) > 0) {
 		$cid       = 	$row["cid"];
 		
 		$budget    = 	$row["budget"];
-		$budget    = 	ceil($budget);
+		$budget    = 	ceil(floatval($budget));
 		
 		$collection= 	$row["collection"];
-		$collection    = 	ceil($collection);
+		$collection    = 	ceil(floatval($collection));
 		
 		$profit    = 	$row["profit"];
-		$profit    = 	ceil($profit);
+		$profit    = 	ceil(floatval($profit));
 		
 		$sofar     = 	$row["sofar"];
-		$sofar    = 	ceil($sofar);
+		$sofar    = 	ceil(floatval($sofar));
 		
 		
 		
