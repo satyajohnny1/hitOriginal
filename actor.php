@@ -373,13 +373,7 @@ $nme = $_GET['name'];
 
         <?php include 'js.php';?>
             <script>
-            if (typeof jQuery === 'undefined') {
-                document.body.innerHTML = '<h1 style="color:red">jQuery NOT loaded!</h1>';
-            } else if (typeof $.fn.tab === 'undefined') {
-                document.body.innerHTML = '<h1 style="color:red">jQuery loaded but Bootstrap Tab plugin MISSING! jQuery=' + jQuery.fn.jquery + '</h1>';
-            } else {
-                document.title = 'jQuery:' + jQuery.fn.jquery + ' Bootstrap:' + $.fn.tab.Constructor.VERSION;
-            }
+            alert('jQuery: ' + (typeof jQuery) + ' | $.fn.tab: ' + (typeof $.fn));
             </script>
             <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['gauge']}]}"></script>
 
