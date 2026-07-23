@@ -6,13 +6,51 @@ error_reporting(E_ERROR);
 $startTime = microtime(true);
 $errors = [];
 
-// 1. Check Database Connection
+// 1. Check Database Connection & Ensure Self-Healing DDL Tables Exist
 $dbStatus = 'healthy';
 $dbLatency = 0.0;
 if (!$conn) {
     $dbStatus = 'unhealthy';
     $errors[] = 'Database connection failed: ' . mysqli_connect_error();
 } else {
+    // Run self-healing table DDL structures
+    mysqli_query($conn, "CREATE TABLE IF NOT EXISTS `tolly_email_config` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `email_provider` varchar(50) DEFAULT 'smtp',
+      `mailersend_api_token` text DEFAULT NULL,
+      `smtp_host` varchar(250) DEFAULT NULL,
+      `smtp_port` int(11) DEFAULT 587,
+      `smtp_username` varchar(250) DEFAULT NULL,
+      `smtp_password` text DEFAULT NULL,
+      `smtp_secure` varchar(50) DEFAULT 'tls',
+      `from_email` varchar(250) DEFAULT NULL,
+      `from_name` varchar(250) DEFAULT NULL,
+      `recipient_emails` text DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+    
+    $resSeedEmail = mysqli_query($conn, "SELECT COUNT(*) FROM `tolly_email_config`");
+    $rowSeedEmail = mysqli_fetch_row($resSeedEmail);
+    if ($rowSeedEmail && $rowSeedEmail[0] == 0) {
+        mysqli_query($conn, "INSERT INTO `tolly_email_config` (`email_provider`, `mailersend_api_token`, `smtp_host`, `smtp_port`, `smtp_username`, `smtp_password`, `smtp_secure`, `from_email`, `from_name`, `recipient_emails`) 
+                             VALUES ('smtp', '', 'smtp.mailersend.net', 587, '', '', 'tls', 'backup@hitandfut.com', 'HitandFut Backup', '')");
+    }
+
+    mysqli_query($conn, "CREATE TABLE IF NOT EXISTS `tolly_cron_config` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `cron_expression` varchar(100) DEFAULT '0 7 */7 * *',
+      `is_active` tinyint(1) DEFAULT 1,
+      `last_run` datetime DEFAULT NULL,
+      `next_run` datetime DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+    
+    $resSeedCron = mysqli_query($conn, "SELECT COUNT(*) FROM `tolly_cron_config`");
+    $rowSeedCron = mysqli_fetch_row($resSeedCron);
+    if ($rowSeedCron && $rowSeedCron[0] == 0) {
+        mysqli_query($conn, "INSERT INTO `tolly_cron_config` (`cron_expression`, `is_active`) VALUES ('0 7 */7 * *', 1)");
+    }
+
     $dbStart = microtime(true);
     $dbQuery = @mysqli_query($conn, "SELECT 1");
     if (!$dbQuery) {
