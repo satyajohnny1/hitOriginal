@@ -41,7 +41,7 @@ $preconfiguredEmails = $emailConfig['recipient_emails'] ?? '';
 // Self-healing cron table creation
 mysqli_query($conn, "CREATE TABLE IF NOT EXISTS `tolly_cron_config` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cron_expression` varchar(100) DEFAULT '0 7 */7 * *',
+  `cron_expression` varchar(100) DEFAULT '0 5 * * 1',
   `is_active` tinyint(1) DEFAULT 1,
   `last_run` datetime DEFAULT NULL,
   `next_run` datetime DEFAULT NULL,
@@ -52,13 +52,13 @@ mysqli_query($conn, "CREATE TABLE IF NOT EXISTS `tolly_cron_config` (
 $resSeedCron = mysqli_query($conn, "SELECT COUNT(*) FROM `tolly_cron_config`");
 $rowSeedCron = mysqli_fetch_row($resSeedCron);
 if ($rowSeedCron && $rowSeedCron[0] == 0) {
-    mysqli_query($conn, "INSERT INTO `tolly_cron_config` (`cron_expression`, `is_active`) VALUES ('0 7 */7 * *', 1)");
+    mysqli_query($conn, "INSERT INTO `tolly_cron_config` (`cron_expression`, `is_active`) VALUES ('0 5 * * 1', 1)");
 }
 
 // Fetch cron config
 $cronConfigRes = mysqli_query($conn, "SELECT * FROM `tolly_cron_config` WHERE `id` = 1");
 $cronConfig = mysqli_fetch_assoc($cronConfigRes) ?: [
-    'cron_expression' => '0 7 */7 * *',
+    'cron_expression' => '0 5 * * 1',
     'is_active' => 0,
     'last_run' => null,
     'next_run' => null
@@ -531,9 +531,9 @@ function cleanupOldBackups(string $dir): void
                                         <label for="cron_expression" class="col-sm-3 control-label"><b>CRON Expression</b></label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control" id="cron_expression" name="cron_expression" 
-                                                   value="<?php echo htmlspecialchars($cronConfig['cron_expression'] ?? '0 7 */7 * *'); ?>" placeholder="* * * * *">
+                                                   value="<?php echo htmlspecialchars($cronConfig['cron_expression'] ?? '0 5 * * 1'); ?>" placeholder="* * * * *">
                                             <p class="help-block text-muted" style="font-size:11px; margin-top:5px;">
-                                                Format: <code>minute hour day-of-month month day-of-week</code> (e.g. <code>0 7 */7 * *</code> for every 7 days at 7:00 AM).
+                                                Format: <code>minute hour day-of-month month day-of-week</code> (e.g. <code>0 5 * * 1</code> for every 7 days at 7:00 AM).
                                             </p>
                                         </div>
                                     </div>

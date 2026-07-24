@@ -38,7 +38,7 @@ if (!$conn) {
 
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS `tolly_cron_config` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
-      `cron_expression` varchar(100) DEFAULT '0 7 */7 * *',
+      `cron_expression` varchar(100) DEFAULT '0 5 * * 1',
       `is_active` tinyint(1) DEFAULT 1,
       `last_run` datetime DEFAULT NULL,
       `next_run` datetime DEFAULT NULL,
@@ -48,7 +48,7 @@ if (!$conn) {
     $resSeedCron = mysqli_query($conn, "SELECT COUNT(*) FROM `tolly_cron_config`");
     $rowSeedCron = mysqli_fetch_row($resSeedCron);
     if ($rowSeedCron && $rowSeedCron[0] == 0) {
-        mysqli_query($conn, "INSERT INTO `tolly_cron_config` (`cron_expression`, `is_active`) VALUES ('0 7 */7 * *', 1)");
+        mysqli_query($conn, "INSERT INTO `tolly_cron_config` (`cron_expression`, `is_active`) VALUES ('0 5 * * 1', 1)");
     }
 
     $dbStart = microtime(true);
