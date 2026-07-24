@@ -1,3 +1,4 @@
 sendgrid.env
 backups/
 db/migrations/.migrated
+poster/done/
