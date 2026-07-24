@@ -46,6 +46,18 @@ error_reporting(E_ERROR);
                         <div class="panel panel-white">
                             <div class="panel-body">
                                 <div id="rootwizard">
+                                    <div class="row" style="margin-bottom:10px;">
+                                        <div class="col-md-3">
+                                            <select id="peopleFilter" class="form-control" onchange="filterPeople()">
+                                                <option value="pending" selected>Pending (No Movie in Range)</option>
+                                                <option value="all">All</option>
+                                                <option value="flop">Flop Only</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-9 text-muted" style="padding-top:7px;font-size:12px;">
+                                            Range: <?php echo $minid; ?> - <?php echo $maxid; ?> (Current RID: <?php echo $oriid; ?>)
+                                        </div>
+                                    </div>
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li role="presentation" class="active"><a href="#tab1" data-toggle="tab"><i class="fa fa-user m-r-xs"></i>Movie Details</a></li>
                                         <li role="presentation"><a href="#tab2" data-toggle="tab"><i class="fa fa-truck m-r-xs"></i>Director</a></li>
@@ -126,9 +138,58 @@ error_reporting(E_ERROR);
                                                             </thead>
 													<!-- Director serach code -->
                                                         
-                                                            <tbody>
+                                                             <tbody>
                                                              <?php 
                                                     			include 'db.php';
+
+                                                    			$rangeQ = @mysqli_query($conn, "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot");
+                                                    			$rangeRow = mysqli_fetch_assoc($rangeQ);
+                                                    			$oriid = intval($rangeRow["max_page"]);
+                                                    			$minid = floor($oriid/100)*100;
+                                                    			$maxid = ceil($oriid/100)*100;
+
+                                                    			$personStatus = [];
+                                                    			$flopResults = ['Flop','Below Average','Average'];
+
+                                                    			$rangeTypes = [
+                                                    			    ['cols'=>['did','d2','d3'], 'table'=>'tolly_director', 'pk'=>'director_id'],
+                                                    			    ['cols'=>['aid','a2','a3'], 'table'=>'tolly_actor', 'pk'=>'actor_id'],
+                                                    			    ['cols'=>['acid','ac2','ac3'], 'table'=>'tolly_actress', 'pk'=>'actress_id'],
+                                                    			    ['cols'=>['wid','w2','w3'], 'table'=>'tolly_writer', 'pk'=>'writer_id'],
+                                                    			];
+                                                    			foreach ($rangeTypes as $rt) {
+                                                    			    $unionParts = [];
+                                                    			    foreach ($rt['cols'] as $ci => $col) {
+                                                    			        $unionParts[] = "SELECT $col AS pid, result FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid AND status='out'" . ($ci > 0 ? " AND $col > 0" : "");
+                                                    			    }
+                                                    			    $rsql = "SELECT pid, GROUP_CONCAT(DISTINCT result) AS results FROM (" . implode(' UNION ALL ', $unionParts) . ") t GROUP BY pid";
+                                                    			    $rr = @mysqli_query($conn, $rsql);
+                                                    			    if ($rr) {
+                                                    			        while ($rw = mysqli_fetch_assoc($rr)) {
+                                                    			            $pid = intval($rw['pid']);
+                                                    			            $resList = array_map('trim', explode(',', $rw['results']));
+                                                    			            if (empty($resList[0])) {
+                                                    			                $personStatus[$rt['table']][$pid] = 'pending';
+                                                    			            } else {
+                                                    			                $allFlop = true;
+                                                    			                foreach ($resList as $rl) {
+                                                    			                    if (!in_array($rl, $flopResults)) { $allFlop = false; break; }
+                                                    			                }
+                                                    			                $personStatus[$rt['table']][$pid] = $allFlop ? 'flop' : 'active';
+                                                    			            }
+                                                    			        }
+                                                    			    }
+                                                    			    $allPeople = @mysqli_query($conn, "SELECT " . $rt['pk'] . " FROM " . $rt['table']);
+                                                    			    if ($allPeople) {
+                                                    			            while ($ap = mysqli_fetch_assoc($allPeople)) {
+                                                    			                $apid = intval($ap[$rt['pk']]);
+                                                    			                if (!isset($personStatus[$rt['table']][$apid])) {
+                                                    			                    $personStatus[$rt['table']][$apid] = 'pending';
+                                                    			                }
+                                                    			            }
+                                                    			    }
+                                                    			}
+
                                                     			$sql = "SELECT d.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl
                                                     			        FROM tolly_director d
                                                     			        LEFT JOIN (
@@ -162,7 +223,8 @@ error_reporting(E_ERROR);
                                                     					$pl_cr = round(($pl_val/10000000),2);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
-                                                    					echo "<tr>";
+                                                    					$dir_status = $personStatus['tolly_director'][$dir_id_raw] ?? 'pending';
+                                                    					echo "<tr data-filter='$dir_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["director_rating"]."</td>";
@@ -258,7 +320,8 @@ error_reporting(E_ERROR);
                                                     					$pl_cr = round(($pl_val/10000000),2);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
-                                                    					echo "<tr>";
+                                                    					$act_status = $personStatus['tolly_actor'][$act_id_raw] ?? 'pending';
+                                                    					echo "<tr data-filter='$act_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["actor_rating"]."</td>";
@@ -357,7 +420,8 @@ error_reporting(E_ERROR);
                                                     					$pl_cr = round(($pl_val/10000000),2);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
-                                                    					echo "<tr>";
+                                                    					$acs_status = $personStatus['tolly_actress'][$actress_id_raw] ?? 'pending';
+                                                    					echo "<tr data-filter='$acs_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
                                                     					echo "<td>".$row["actress_rating"]."</td>";
@@ -454,7 +518,8 @@ error_reporting(E_ERROR);
                                                     					$pl_cr = round(($pl_val/10000000),2);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
-                                                    					echo "<tr>";
+                                                    					$wri_status = $personStatus['tolly_writer'][$writer_id_raw] ?? 'pending';
+                                                    					echo "<tr data-filter='$wri_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CR</b>";
 																		echo "<td></td>";
@@ -1212,6 +1277,19 @@ error_reporting(E_ERROR);
 
 
 	
+
+	function filterPeople() {
+		var val = document.getElementById('peopleFilter').value;
+		var rows = document.querySelectorAll('#rootwizard table tbody tr[data-filter]');
+		for (var i = 0; i < rows.length; i++) {
+			if (val === 'all') {
+				rows[i].style.display = '';
+			} else {
+				rows[i].style.display = rows[i].getAttribute('data-filter') === val ? '' : 'none';
+			}
+		}
+	}
+	filterPeople();
 
 	
 	</script>

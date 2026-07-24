@@ -44,6 +44,18 @@ error_reporting(E_ERROR);
                         <div class="panel panel-white">
                             <div class="panel-body">
                                 <div id="rootwizard">
+                                    <div class="row" style="margin-bottom:10px;">
+                                        <div class="col-md-3">
+                                            <select id="peopleFilter2" class="form-control" onchange="filterPeople2()">
+                                                <option value="pending" selected>Pending (No Movie in Range)</option>
+                                                <option value="all">All</option>
+                                                <option value="flop">Flop Only</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-9 text-muted" style="padding-top:7px;font-size:12px;">
+                                            Range: <?php echo $minid; ?> - <?php echo $maxid; ?> (Current RID: <?php echo $oriid; ?>)
+                                        </div>
+                                    </div>
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li role="presentation" ><a href="#tab1" data-toggle="tab"><i class="fa fa-user m-r-xs"></i>Music Director</a></li>
                                         <li role="presentation"><a href="#tab2" data-toggle="tab"><i class="fa fa-truck m-r-xs"></i>Cinematographer</a></li>
@@ -94,9 +106,57 @@ error_reporting(E_ERROR);
                                                             </thead>
 													<!-- music serach code -->
                                                         
-                                                            <tbody>
+                                                             <tbody>
                                                              <?php 
                                                     			include 'db.php';
+
+                                                    			$rangeQ = @mysqli_query($conn, "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot");
+                                                    			$rangeRow = mysqli_fetch_assoc($rangeQ);
+                                                    			$oriid = intval($rangeRow["max_page"]);
+                                                    			$minid = floor($oriid/100)*100;
+                                                    			$maxid = ceil($oriid/100)*100;
+
+                                                    			$personStatus = [];
+                                                    			$flopResults = ['Flop','Below Average','Average'];
+
+                                                    			$rangeTypes = [
+                                                    			    ['cols'=>['mid','m2','m3'], 'table'=>'tolly_music', 'pk'=>'music_id'],
+                                                    			    ['cols'=>['cid'], 'table'=>'tolly_cine', 'pk'=>'cine_id'],
+                                                    			    ['cols'=>['eid'], 'table'=>'tolly_editor', 'pk'=>'editor_id'],
+                                                    			];
+                                                    			foreach ($rangeTypes as $rt) {
+                                                    			    $unionParts = [];
+                                                    			    foreach ($rt['cols'] as $ci => $col) {
+                                                    			        $unionParts[] = "SELECT $col AS pid, result FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid AND status='out'" . ($ci > 0 ? " AND $col > 0" : "");
+                                                    			    }
+                                                    			    $rsql = "SELECT pid, GROUP_CONCAT(DISTINCT result) AS results FROM (" . implode(' UNION ALL ', $unionParts) . ") t GROUP BY pid";
+                                                    			    $rr = @mysqli_query($conn, $rsql);
+                                                    			    if ($rr) {
+                                                    			        while ($rw = mysqli_fetch_assoc($rr)) {
+                                                    			            $pid = intval($rw['pid']);
+                                                    			            $resList = array_map('trim', explode(',', $rw['results']));
+                                                    			            if (empty($resList[0])) {
+                                                    			                $personStatus[$rt['table']][$pid] = 'pending';
+                                                    			            } else {
+                                                    			                $allFlop = true;
+                                                    			                foreach ($resList as $rl) {
+                                                    			                    if (!in_array($rl, $flopResults)) { $allFlop = false; break; }
+                                                    			                }
+                                                    			                $personStatus[$rt['table']][$pid] = $allFlop ? 'flop' : 'active';
+                                                    			            }
+                                                    			        }
+                                                    			    }
+                                                    			    $allPeople = @mysqli_query($conn, "SELECT " . $rt['pk'] . " FROM " . $rt['table']);
+                                                    			    if ($allPeople) {
+                                                    			            while ($ap = mysqli_fetch_assoc($allPeople)) {
+                                                    			                $apid = intval($ap[$rt['pk']]);
+                                                    			                if (!isset($personStatus[$rt['table']][$apid])) {
+                                                    			                    $personStatus[$rt['table']][$apid] = 'pending';
+                                                    			                }
+                                                    			            }
+                                                    			    }
+                                                    			}
+
                                                     			$sql = "SELECT mu.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl
                                                     			        FROM tolly_music mu
                                                     			        LEFT JOIN (
@@ -127,9 +187,10 @@ error_reporting(E_ERROR);
                                                     					$pl_cr = round(($pl_val/10000000),2);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
-                                                    					echo "<tr>";
+                                                    					$fstatus = $personStatus['tolly_music'][$music_id_raw] ?? 'pending';
+                                                    					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
-                                                     					echo "<td><b>".$dir_cr." CR</b></td>";
+                                                      					echo "<td><b>".$dir_cr." CR</b></td>";
 																		echo "<td></td>";
                                                     					echo "<td>".$row["music_rating"]."</td>";
                                                     					 echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
@@ -212,9 +273,10 @@ error_reporting(E_ERROR);
                                                     					$pl_cr = round(($pl_val/10000000),2);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
-                                                    					echo "<tr>";
+                                                    					$fstatus = $personStatus['tolly_cine'][$cine_id_raw] ?? 'pending';
+                                                    					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_cine' name='r_cine' value='".$dir_id."' />".$dir_name."</b></label></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b></td>";
+                                                      					echo "<td><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$row["cine_rating"]."</td>";
                                                     					 echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
                                                     					echo "<td><b>".$cine_movie_count."</b></td>";
@@ -294,9 +356,10 @@ error_reporting(E_ERROR);
                                                     					$pl_cr = round(($pl_val/10000000),2);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
-                                                    					echo "<tr>";
+                                                    					$fstatus = $personStatus['tolly_editor'][$editor_id_raw] ?? 'pending';
+                                                    					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_edi' name='r_edi' value='".$dir_id."' />".$dir_name."</b></label></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b></td>";
+                                                      					echo "<td><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$row["editor_rating"]."</td>";
 																		echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
                                                     					echo "<td><b>".$editor_movie_count."</b></td>";
@@ -1051,6 +1114,19 @@ error_reporting(E_ERROR);
 		    }
 		});
 
+
+	function filterPeople2() {
+		var val = document.getElementById('peopleFilter2').value;
+		var rows = document.querySelectorAll('#rootwizard table tbody tr[data-filter]');
+		for (var i = 0; i < rows.length; i++) {
+			if (val === 'all') {
+				rows[i].style.display = '';
+			} else {
+				rows[i].style.display = rows[i].getAttribute('data-filter') === val ? '' : 'none';
+			}
+		}
+	}
+	filterPeople2();
 
 	
 	
