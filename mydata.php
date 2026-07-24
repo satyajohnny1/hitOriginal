@@ -46,11 +46,64 @@ $uid = $_SESSION['s_uid'];
 				</div>
 
 			</div>
-	 
-            
-        
-            
-          
+
+			<?php
+			$sumSql = "SELECT s.result, COUNT(*) AS cnt, COALESCE(SUM(s.sofar),0) AS totbud, COALESCE(SUM(s.collection),0) AS totcoll
+				FROM tolly_ready_for_shoot s WHERE s.uid = " . intval($uid) . " AND s.status = 'out' GROUP BY s.result";
+			$sumResult = @mysqli_query($conn, $sumSql);
+			$verdicts = [];
+			$totalFilms = 0;
+			$totalBudget = 0;
+			$totalCollection = 0;
+			if ($sumResult) {
+				while ($sr = mysqli_fetch_assoc($sumResult)) {
+					$verdicts[] = $sr;
+					$totalFilms += $sr['cnt'];
+					$totalBudget += $sr['totbud'];
+					$totalCollection += $sr['totcoll'];
+				}
+			}
+			$totalPL = $totalCollection - $totalBudget;
+			?>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-white">
+						<div class="panel-heading clearfix">
+							<h4 class="panel-title">Summary</h4>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-3">
+									<button type="button" class="btn btn-primary btn-lg btn-block"><h4>Total Films: <?php echo $totalFilms; ?></h4></button>
+								</div>
+								<div class="col-md-3">
+									<button type="button" class="btn btn-warning btn-lg btn-block"><h4>Investment: <?php echo round($totalBudget/10000000, 2); ?> Cr</h4></button>
+								</div>
+								<div class="col-md-3">
+									<button type="button" class="btn btn-success btn-lg btn-block"><h4>Returns: <?php echo round($totalCollection/10000000, 2); ?> Cr</h4></button>
+								</div>
+								<div class="col-md-3">
+									<button type="button" class="btn <?php echo $totalPL >= 0 ? 'btn-success' : 'btn-danger'; ?> btn-lg btn-block"><h4>P&L: <?php echo round($totalPL/10000000, 2); ?> Cr</h4></button>
+								</div>
+							</div>
+							<br>
+							<table class="table table-bordered table-condensed" style="margin-bottom:0;">
+								<thead>
+									<tr><th>Verdict</th><th>Count</th></tr>
+								</thead>
+								<tbody>
+								<?php foreach ($verdicts as $v) { ?>
+									<tr>
+										<td><button type="button" class="btn btn-info btn-sm"><?php echo htmlspecialchars($v['result']); ?></button></td>
+										<td><button type="button" class="btn btn-primary btn-sm"><?php echo $v['cnt']; ?></button></td>
+									</tr>
+								<?php } ?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
               <div class="row">
                         <div class="col-md-12">
                             <div class="panel panel-white">
