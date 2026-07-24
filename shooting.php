@@ -1083,8 +1083,8 @@ if (mysqli_num_rows($result) > 0) {
                     				$("#s1_a_btn").hide();
                     		
 							
-									//	$("#s1_b_btn").show(); 					
-							        //  $("#s1_b_cost").show();
+										$("#s1_b_btn").show(); 					
+							            $("#s1_b_cost").show();
 
                         			$("#s1_nxt_s2").show();
                                 	$("#s1_prv_s1").show();
@@ -1131,8 +1131,8 @@ if (mysqli_num_rows($result) > 0) {
           				$("#s1_b_btn").hide();
           		
        	     			
-                  			$("#s1_c_cost").show();
-                  			$("#s1_c_btn").show();
+                  		//	$("#s1_c_cost").show();
+                  		//	$("#s1_c_btn").show();
                   			
                   			$("#s1_nxt_s2").show();
                           	$("#s1_prv_s1").show();
@@ -1235,8 +1235,8 @@ if (mysqli_num_rows($result) > 0) {
 										console.log("You are UnLucky...");
 									}
            	     			
-                  			$("#s2_b_cost").show();
-                  			$("#s2_b_btn").show();
+                  			//$("#s2_b_cost").show();
+                  			//$("#s2_b_btn").show();
                   			
                   			$("#s2_nxt_s3").show();
                           	$("#s2_prv_s1").show();
@@ -1386,6 +1386,7 @@ if (mysqli_num_rows($result) > 0) {
 									}
 							
                   			$("#s3_b_cost").show();
+						  	$("#s3_b_btn").show();
                   			
 
                   			$("#s3_nxt_s4").show();
@@ -1679,6 +1680,7 @@ if (mysqli_num_rows($result) > 0) {
 									}
 							
                   			$("#s5_b_cost").show();
+						  $("#s5_b_btn").show();
                   		
 
                   			
