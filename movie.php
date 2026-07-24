@@ -741,14 +741,7 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                         hostname = hostname + "/hit";
                     }
 
-                    var script = 'poster1.php';
-                    if (a3Chk > 0) {
-                        script = 'poster3.php';
-                    } else if (a2Chk > 0) {
-                        script = 'poster2.php';
-                    }
-
-                    var plink = hostname + '/poster/' + script + '?rid=' + rid
+                    var plink = hostname + '/poster/poster-v2.php?rid=' + rid
                         + '&b=' + encodeURIComponent(b) + '&p=' + encodeURIComponent(p)
                         + '&d=' + encodeURIComponent(d) + '&a=' + encodeURIComponent(a) + '&ac=' + encodeURIComponent(ac)
                         + '&c=' + encodeURIComponent(c) + '&e=' + encodeURIComponent(e) + '&m=' + encodeURIComponent(m)

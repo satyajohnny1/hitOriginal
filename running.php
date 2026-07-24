@@ -630,26 +630,13 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
 					//alert(hostname);
 				}
 					
-    			 var plink = hostname+'/poster/poster1.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
+    			 var plink = hostname+'/poster/poster-v2.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
    			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
    			 
     		
 				
-			
-    			if(a2Chk>0)
-    			{
-    				 plink = hostname+'/poster/poster2.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
-       			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
-       			 
-            	}
+    			// poster-v2.php auto-detects hero count from a2/a3 params
 
-    			
-    			if(a3Chk>0)
-    			{
-    				 plink = hostname+'/poster/poster3.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
-       			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
-       			 
-            	}
 				console.log("hostname : "+hostname);
     			console.log("plink ::"+plink);
 				document.cookie = 'plink='+plink;
