@@ -74,7 +74,7 @@ session_start();
                                                     					echo "<tr>";
                                                     					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='cine.php?id=$dir_id' class='btn'></a></td>";
                                                     					echo "<td><a href='cine.php?id=$dir_id' class='btn'>$dir_name</a></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
+                                                     					echo "<td data-order='".$dir_cr."'><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$row["cine_rating"]."</td>"; 
 																		echo "<td>".$row["pl"]."</td>";                                                    					
                                                     					                                                    					

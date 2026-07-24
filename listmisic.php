@@ -91,10 +91,10 @@ session_start();
                                                     					echo "<tr>";
                                                     					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='music.php?id=$dir_id' class='btn'></a></td>";
                                                     					echo "<td><a href='music.php?id=$dir_id' class='btn'>$dir_name</a></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b></td>";
+                                                     					echo "<td data-order='".$dir_cr."'><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$row["music_rating"]."</td>";
                                                     					echo "<td><b>".$row["movie_count"]."</b></td>";
-																		echo "<td class='$pl_class'><b>".$pl_cr." CRORES</b></td>"; 
+																		echo "<td data-order='".$pl_cr."' class='$pl_class'><b>".$pl_cr." CRORES</b></td>"; 
                                                     					
                                                     					                                                    					
                                                     					echo  "</tr>"; 
