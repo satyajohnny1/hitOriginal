@@ -176,22 +176,17 @@ if ($hero_count === 3) {
 }
 
 $milestones = [
-	['val' => $fif, 'label' => '50', 'fallback_val' => $t5, 'fallback_label' => '25', 'file' => $path_50],
-	['val' => $sev, 'label' => '75', 'fallback_val' => 0, 'fallback_label' => '', 'file' => $path_75],
-	['val' => $hun, 'label' => '100', 'fallback_val' => 0, 'fallback_label' => '', 'file' => $path_100],
-	['val' => $onf, 'label' => '150', 'fallback_val' => 0, 'fallback_label' => '', 'file' => $path_150],
-	['val' => $fiv, 'label' => '175', 'fallback_val' => 0, 'fallback_label' => '', 'file' => $path_175],
+	['val' => $fif, 'label' => '50', 'file' => $path_50],
+	['val' => $sev, 'label' => '75', 'file' => $path_75],
+	['val' => $hun, 'label' => '100', 'file' => $path_100],
+	['val' => $onf, 'label' => '150', 'file' => $path_150],
+	['val' => $fiv, 'label' => '175', 'file' => $path_175],
 ];
 
 $ms_count = 0;
 foreach ($milestones as $ms) {
 	$use_val = $ms['val'];
 	$use_label = $ms['label'];
-
-	if ($use_val == 0 && $ms['fallback_val'] > 0) {
-		$use_val = $ms['fallback_val'];
-		$use_label = $ms['fallback_label'];
-	}
 
 	if ($use_val > 0) {
 		$ms_count++;
