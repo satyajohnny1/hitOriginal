@@ -390,7 +390,22 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
                                                 <img alt='REFRESH Page'  src="<?php echo $path_175?>" style="width: 100%">
                                             </div>
                                         </div>
-                                        
+                                        <div class="row" style="margin-top:10px;">
+                                            <div class="col-md-12" style="text-align:center;">
+                                                <button type="button" class="btn btn-warning btn-rounded" id="posterRegenBtn">Regenerate Poster</button>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top:10px;">
+                                            <div class="col-md-12" style="text-align:center;">
+                                                <a href="<?php echo $path?>" target="_blank" class="btn btn-default btn-rounded btn-sm">Main</a>
+                                                <a href="<?php echo $path_50?>" target="_blank" class="btn btn-default btn-rounded btn-sm">50</a>
+                                                <a href="<?php echo $path_75?>" target="_blank" class="btn btn-default btn-rounded btn-sm">75</a>
+                                                <a href="<?php echo $path_100?>" target="_blank" class="btn btn-default btn-rounded btn-sm">100</a>
+                                                <a href="<?php echo $path_150?>" target="_blank" class="btn btn-default btn-rounded btn-sm">150</a>
+                                                <a href="<?php echo $path_175?>" target="_blank" class="btn btn-default btn-rounded btn-sm">175</a>
+                                            </div>
+                                        </div>
+
                                                  <div class="row">
                                             <div class="col-md-12">
                                                 <div class="row">
@@ -662,8 +677,68 @@ $path_75 = 'poster/done/'.$upp."_75.jpeg";
     			              
         }
 
+$('#posterRegenBtn').on('click', function(){
+    var btn = $(this);
+    btn.prop('disabled', true);
+    var b = '<?php echo addslashes($_SESSION["s_banner"] ?? ""); ?>';
+    var p = '<?php echo addslashes($_SESSION["s_user"] ?? ""); ?>';
+    var d = '<?php echo addslashes($dname); ?>';
+    var a = '<?php echo addslashes($aname); ?>';
+    var ac = '<?php echo addslashes($acname); ?>';
+    var c = '<?php echo addslashes($cinename); ?>';
+    var e = '<?php echo addslashes($ediname); ?>';
+    var m = '<?php echo addslashes($musname); ?>';
+    var w = '<?php echo addslashes($wriname); ?>';
+    var tit = '<?php echo addslashes($title); ?>';
+    var rid = '<?php echo (int) $rid; ?>';
+    var fif = '<?php echo (int) ($fif ?? 0); ?>';
+    var hun = '<?php echo (int) ($hun ?? 0); ?>';
+    var fiv = '<?php echo (int) ($five ?? 0); ?>';
+    var t5 = '<?php echo (int) ($t5 ?? 0); ?>';
+    var sev = '<?php echo (int) ($sev ?? 0); ?>';
+    var onf = '<?php echo (int) ($onf ?? 0); ?>';
+    var a2 = '<?php echo addslashes($_a2_name ?? ""); ?>';
+    var a3 = '<?php echo addslashes($_a3_name ?? ""); ?>';
+    var ac2 = '<?php echo addslashes($_ac2_name ?? ""); ?>';
+    var ac3 = '<?php echo addslashes($_ac3_name ?? ""); ?>';
+    var d2 = '<?php echo addslashes($_d2_name ?? ""); ?>';
+    var d3 = '<?php echo addslashes($_d3_name ?? ""); ?>';
+    var m2 = '<?php echo addslashes($_m2_name ?? ""); ?>';
+    var m3 = '<?php echo addslashes($_m3_name ?? ""); ?>';
+    var w2 = '<?php echo addslashes($_w2_name ?? ""); ?>';
+    var w3 = '<?php echo addslashes($_w3_name ?? ""); ?>';
+
+    var url = window.location.href;
+    var arr = url.split("/");
+    var hostname = arr[0] + "//" + arr[2];
+    if(hostname.includes("localhost")){ hostname = hostname+"/hit"; }
+
+    var plink = hostname+'/poster/poster-v2.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
+        +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
+
+    toastr.info("Regenerating poster...");
+    $.ajax({
+        type: "POST",
+        url: plink,
+        success: function(data) {
+            toastr.success("<h2>Poster regenerated</h2>");
+            var bust = '?v=' + new Date().getTime();
+            $('#pos_0 img').attr('src', '<?php echo $path?>' + bust);
+            $('#pos_50 img').attr('src', '<?php echo $path_50?>' + bust);
+            $('#pos_75 img').attr('src', '<?php echo $path_75?>' + bust);
+            $('#pos_100 img').attr('src', '<?php echo $path_100?>' + bust);
+            $('#pos_150 img').attr('src', '<?php echo $path_150?>' + bust);
+            $('#pos_175 img').attr('src', '<?php echo $path_175?>' + bust);
+            btn.prop('disabled', false);
+        },
+        error: function(xhr, status, errorThrown) {
+            toastr.error("Poster regeneration failed: " + errorThrown);
+            btn.prop('disabled', false);
+        }
+    });
+});
+
 			
-                
                 function ajaxCall() {
 
                 	////alert('Ajax Call');
