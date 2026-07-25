@@ -4,6 +4,7 @@ require_once 'db.php';
 
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'pending';
 $tab = isset($_GET['tab']) ? $_GET['tab'] : '';
+error_log("FILTER2_DEBUG: tab=$tab filter=$filter");
 
 $rangeQ = @mysqli_query($conn, "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot");
 $rangeRow = mysqli_fetch_assoc($rangeQ);
@@ -166,5 +167,10 @@ if ($tab === 'music') {
     }
 }
 
-echo ob_get_clean();
+$output = ob_get_clean();
+error_log("FILTER2_DEBUG: output length=" . strlen($output) . " chars, tab=$tab, filter=$filter");
+if (strlen($output) < 200) {
+    error_log("FILTER2_DEBUG: output=$output");
+}
+echo $output;
 mysqli_close($conn);

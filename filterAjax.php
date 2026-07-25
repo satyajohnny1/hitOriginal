@@ -5,6 +5,10 @@ require_once 'db.php';
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'pending';
 $tab = isset($_GET['tab']) ? $_GET['tab'] : '';
 
+error_log("FILTER_DEBUG: tab=$tab filter=$filter");
+
+$debug_output = [];
+
 $rangeQ = @mysqli_query($conn, "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot");
 $rangeRow = mysqli_fetch_assoc($rangeQ);
 $oriid = intval($rangeRow["max_page"]);
@@ -220,5 +224,10 @@ if ($tab === 'director') {
     }
 }
 
-echo ob_get_clean();
+$output = ob_get_clean();
+error_log("FILTER_DEBUG: output length=" . strlen($output) . " chars, tab=$tab, filter=$filter");
+if (strlen($output) < 200) {
+    error_log("FILTER_DEBUG: output=$output");
+}
+echo $output;
 mysqli_close($conn);

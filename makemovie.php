@@ -1352,17 +1352,43 @@ foreach ($rangeTypes as $rt) {
 
 	
 
+	var dtConfigs = {
+		example: { "columnDefs": [{ "type": "num", "targets": [2, 5] }] },
+		"example-editable": {},
+		example2: { "columnDefs": [{ "visible": false, "targets": 2 }], "order": [[ 2, 'asc' ]], "displayLength": 25,
+			"drawCallback": function(settings) {
+				var api = this.api();
+				var rows = api.rows({page:'current'}).nodes();
+				var last = null;
+				api.column(2, {page:'current'}).data().each(function(group, i) {
+					if (last !== group) {
+						$(rows).eq(i).before('<tr class="group"><td colspan="5">'+group+'</td></tr>');
+						last = group;
+					}
+				});
+			}
+		}
+	};
+
 	function filterTab(el) {
 		var val = el.value;
 		var tab = el.getAttribute('data-tab');
 		var tableIds = { director:'example', actor:'example3', actress:'example-editable', writer:'example2' };
+		var tableId = tableIds[tab];
+		if (!tableId) return;
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', 'filterAjax.php?filter=' + encodeURIComponent(val) + '&tab=' + tab);
 		xhr.onload = function() {
 			if (xhr.status === 200) {
-				var table = document.getElementById(tableIds[tab]);
+				if ($.fn.DataTable && $.fn.DataTable.isDataTable('#' + tableId)) {
+					$('#' + tableId).DataTable().destroy();
+				}
+				var table = document.getElementById(tableId);
 				if (table) {
 					table.querySelector('tbody').innerHTML = xhr.responseText;
+				}
+				if (dtConfigs[tableId]) {
+					$('#' + tableId).DataTable(dtConfigs[tableId]);
 				}
 			}
 		};

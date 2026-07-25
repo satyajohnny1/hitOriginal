@@ -1137,17 +1137,31 @@ foreach ($rangeTypes as $rt) {
 		});
 
 
+	var dtConfigs2 = {
+		example2: {},
+		"example-editable": {},
+		example: {}
+	};
+
 	function filterTab2(el) {
 		var val = el.value;
 		var tab = el.getAttribute('data-tab');
 		var tableIds = { music:'example2', cine:'example-editable', editor:'example' };
+		var tableId = tableIds[tab];
+		if (!tableId) return;
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', 'filterAjax2.php?filter=' + encodeURIComponent(val) + '&tab=' + tab);
 		xhr.onload = function() {
 			if (xhr.status === 200) {
-				var table = document.getElementById(tableIds[tab]);
+				if ($.fn.DataTable && $.fn.DataTable.isDataTable('#' + tableId)) {
+					$('#' + tableId).DataTable().destroy();
+				}
+				var table = document.getElementById(tableId);
 				if (table) {
 					table.querySelector('tbody').innerHTML = xhr.responseText;
+				}
+				if (dtConfigs2[tableId]) {
+					$('#' + tableId).DataTable(dtConfigs2[tableId]);
 				}
 			}
 		};
