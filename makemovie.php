@@ -1,20 +1,35 @@
 <?php
-error_log("DEBUG: makemovie.php START v2");
-header("X-Debug: makemovie-v2");
-include 'sessionCheck.php';
-error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/debug_makemovie.log');
+ini_set('error_reporting', E_ALL);
+error_reporting(E_ALL);
 ini_set('memory_limit', '256M');
 set_time_limit(60);
+
+set_error_handler(function($errno, $errstr, $errfile, $errline) {
+    $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
+    $traceStr = '';
+    foreach ($trace as $i => $frame) {
+        $traceStr .= "  #$i " . ($frame['function'] ?? '?') . "(" . ($frame['args'][0] ?? '') . ") called at [" . ($frame['file'] ?? '?') . ":" . ($frame['line'] ?? '?') . "]\n";
+    }
+    error_log("PHP ERROR [$errno]: $errstr in $errfile:$errline\nSTACK TRACE:\n$traceStr");
+    return true;
+});
+
 register_shutdown_function(function() {
     $err = error_get_last();
-    if ($err) {
-        $msg = "FATAL: " . $err['type'] . " in " . $err['file'] . ":" . $err['line'] . " - " . $err['message'];
-        error_log("DEBUG: " . $msg);
+    if ($err && in_array($err['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
+        $traceStr = '';
+        foreach ($trace as $i => $frame) {
+            $traceStr .= "  #$i " . ($frame['function'] ?? '?') . "(" . ($frame['args'][0] ?? '') . ") called at [" . ($frame['file'] ?? '?') . ":" . ($frame['line'] ?? '?') . "]\n";
+        }
+        error_log("PHP FATAL [$err[type]]: $err[message] in $err[file]:$err[line]\nSTACK TRACE:\n$traceStr");
     }
 });
+
+error_log("DEBUG: makemovie.php START v3");
+include 'sessionCheck.php';
 include 'db.php';
 error_log("DEBUG: db connected OK, conn=" . ($conn ? "valid" : "NULL"));
 
