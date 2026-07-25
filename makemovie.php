@@ -48,10 +48,11 @@ error_reporting(E_ERROR);
                                 <div id="rootwizard">
                                     <div class="row" style="margin-bottom:10px;">
                                         <div class="col-md-3">
-                                            <select id="peopleFilter" class="form-control" onchange="filterPeople()">
-                                                <option value="pending" selected>Pending (No Movie in Range)</option>
-                                                <option value="all">All</option>
-                                                <option value="flop">Flop Only</option>
+                                            <?php $curFilter = isset($_GET['filter']) ? $_GET['filter'] : 'pending'; ?>
+                                            <select id="peopleFilter" class="form-control" onchange="window.location.href='?filter='+this.value">
+                                                <option value="pending" <?php echo $curFilter==='pending'?'selected':''; ?>>Pending (No Movie in Range)</option>
+                                                <option value="all" <?php echo $curFilter==='all'?'selected':''; ?>>All</option>
+                                                <option value="flop" <?php echo $curFilter==='flop'?'selected':''; ?>>Flop Only</option>
                                             </select>
                                         </div>
                                         <div class="col-md-9 text-muted" style="padding-top:7px;font-size:12px;">
@@ -224,6 +225,7 @@ error_reporting(E_ERROR);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$dir_status = $personStatus['tolly_director'][$dir_id_raw] ?? 'pending';
+                                                    					if ($curFilter !== 'all' && $dir_status !== $curFilter) continue;
                                                     					echo "<tr data-filter='$dir_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
@@ -321,6 +323,7 @@ error_reporting(E_ERROR);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$act_status = $personStatus['tolly_actor'][$act_id_raw] ?? 'pending';
+                                                    					if ($curFilter !== 'all' && $act_status !== $curFilter) continue;
                                                     					echo "<tr data-filter='$act_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
@@ -421,6 +424,7 @@ error_reporting(E_ERROR);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$acs_status = $personStatus['tolly_actress'][$actress_id_raw] ?? 'pending';
+                                                    					if ($curFilter !== 'all' && $acs_status !== $curFilter) continue;
                                                     					echo "<tr data-filter='$acs_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
@@ -519,6 +523,7 @@ error_reporting(E_ERROR);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$wri_status = $personStatus['tolly_writer'][$writer_id_raw] ?? 'pending';
+                                                    					if ($curFilter !== 'all' && $wri_status !== $curFilter) continue;
                                                     					echo "<tr data-filter='$wri_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CR</b>";
@@ -1279,17 +1284,8 @@ error_reporting(E_ERROR);
 	
 
 	function filterPeople() {
-		var val = document.getElementById('peopleFilter').value;
-		var rows = document.querySelectorAll('#rootwizard table tbody tr[data-filter]');
-		for (var i = 0; i < rows.length; i++) {
-			if (val === 'all') {
-				rows[i].style.display = '';
-			} else {
-				rows[i].style.display = rows[i].getAttribute('data-filter') === val ? '' : 'none';
-			}
-		}
 	}
-	filterPeople();
+
 
 	
 	</script>
