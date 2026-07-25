@@ -1,7 +1,6 @@
 <?php
-file_put_contents(__DIR__ . '/debug_makemovie.log', date('c') . " makemovie.php START\n", FILE_APPEND);
+error_log("DEBUG: makemovie.php START");
 include 'sessionCheck.php';
-session_start(); 
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
@@ -11,12 +10,12 @@ set_time_limit(60);
 register_shutdown_function(function() {
     $err = error_get_last();
     if ($err) {
-        $msg = date('c') . " FATAL: " . $err['type'] . " in " . $err['file'] . ":" . $err['line'] . " - " . $err['message'] . "\n";
-        file_put_contents(__DIR__ . '/debug_makemovie.log', $msg, FILE_APPEND);
+        $msg = "FATAL: " . $err['type'] . " in " . $err['file'] . ":" . $err['line'] . " - " . $err['message'];
+        error_log("DEBUG: " . $msg);
     }
 });
 include 'db.php';
-file_put_contents(__DIR__ . '/debug_makemovie.log', date('c') . " db connected\n", FILE_APPEND);
+error_log("DEBUG: db connected OK, conn=" . ($conn ? "valid" : "NULL"));
 
 $rangeQ = @mysqli_query($conn, "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot");
 $rangeRow = mysqli_fetch_assoc($rangeQ);
@@ -65,7 +64,7 @@ foreach ($rangeTypes as $rt) {
         }
     }
 }
-file_put_contents(__DIR__ . '/debug_makemovie.log', date('c') . " status computation done\n", FILE_APPEND);
+error_log("DEBUG: status computation done");
 ?>
 <!DOCTYPE html>
 <html>
@@ -594,14 +593,14 @@ file_put_contents(__DIR__ . '/debug_makemovie.log', date('c') . " status computa
                                                                 </thead>
                                                                  <tbody>
                                                                  <?php
-                                                                 file_put_contents(__DIR__ . '/debug_makemovie.log', date('c') . " codir query start\n", FILE_APPEND);
+                                                                 error_log("DEBUG: codir query start");
                                                                  $codir_sql = "SELECT 'Actor' AS ptype, actor_name AS pname FROM tolly_actor
 	                                                                UNION ALL SELECT 'Actress', actress_name FROM tolly_actress
 	                                                                UNION ALL SELECT 'Director', director_name FROM tolly_director
 	                                                                UNION ALL SELECT 'Writer', writer_name FROM tolly_writer
 	                                                                ORDER BY pname";
 	                                                                $codir_result = @mysqli_query($conn, $codir_sql);
-	                                                                file_put_contents(__DIR__ . '/debug_makemovie.log', date('c') . " codir rows=" . ($codir_result ? mysqli_num_rows($codir_result) : 'FAIL') . "\n", FILE_APPEND);
+	                                                                error_log("DEBUG: codir rows=" . ($codir_result ? mysqli_num_rows($codir_result) : 'FAIL'));
 	                                                                if ($codir_result && mysqli_num_rows($codir_result) > 0):
 	                                                                while ($cr = mysqli_fetch_assoc($codir_result)):
 	                                                                ?>
@@ -1397,7 +1396,7 @@ file_put_contents(__DIR__ . '/debug_makemovie.log', date('c') . " status computa
 </html> 
  
 <?php 
-file_put_contents(__DIR__ . '/debug_makemovie.log', date('c') . " makemovie.php END\n", FILE_APPEND);
+error_log("DEBUG: makemovie.php END");
 if($conn!=null){
 mysqli_close($conn);
 }
