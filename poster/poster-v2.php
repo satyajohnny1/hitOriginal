@@ -43,6 +43,8 @@ $e   = strtoupper(safeGET("e"));
 $m   = strtoupper(safeGET("m"));
 $w   = strtoupper(safeGET("w"));
 $tit = strtoupper(safeGET("tit"));
+$disp_title = safeGET("raw_title");
+if (empty($disp_title)) $disp_title = $tit;
 $fif = intval(safeGET("fif"));
 $hun = intval(safeGET("hun"));
 $fiv = intval(safeGET("fiv"));
@@ -73,12 +75,12 @@ $bg   = $base . "/bg/bg" . rand(1, 35) . ".jpg";
 $fnt  = $base . "/fonts/" . rand(1, 30) . ".ttf";
 $tfnt = $base . "/fonts/" . rand(14, 122) . ".ttf";
 
-$path     = $base . '/done/' . $tit . $rid . ".jpeg";
-$path_50  = $base . '/done/' . $tit . $rid . "_50.jpeg";
-$path_75  = $base . '/done/' . $tit . $rid . "_75.jpeg";
-$path_100 = $base . '/done/' . $tit . $rid . "_100.jpeg";
-$path_150 = $base . '/done/' . $tit . $rid . "_150.jpeg";
-$path_175 = $base . '/done/' . $tit . $rid . "_175.jpeg";
+$path     = $base . '/done/' . $tit . ".jpeg";
+$path_50  = $base . '/done/' . $tit . "_50.jpeg";
+$path_75  = $base . '/done/' . $tit . "_75.jpeg";
+$path_100 = $base . '/done/' . $tit . "_100.jpeg";
+$path_150 = $base . '/done/' . $tit . "_150.jpeg";
+$path_175 = $base . '/done/' . $tit . "_175.jpeg";
 $ori      = $path;
 
 error_log("POSTER[5]: paths set bg=$bg fnt=$fnt");
@@ -147,14 +149,14 @@ error_log("POSTER[11]: actor text");
 
 $title_max_w = 760;
 $title_fonsiz = 80;
-$title_box = @imagettfbbox($title_fonsiz, 0, $tfnt, $tit);
+$title_box = @imagettfbbox($title_fonsiz, 0, $tfnt, $disp_title);
 $title_w = abs($title_box[4] - $title_box[0]);
 while ($title_w > $title_max_w && $title_fonsiz > 30) {
 	$title_fonsiz -= 2;
-	$title_box = @imagettfbbox($title_fonsiz, 0, $tfnt, $tit);
+	$title_box = @imagettfbbox($title_fonsiz, 0, $tfnt, $disp_title);
 	$title_w = abs($title_box[4] - $title_box[0]);
 }
-@imagettftext($jpg_image, $title_fonsiz, 0, 200, 490, $tclr, $tfnt, $tit);
+@imagettftext($jpg_image, $title_fonsiz, 0, 200, 490, $tclr, $tfnt, $disp_title);
 error_log("POSTER[12]: title text size=$title_fonsiz width=$title_w");
 
 @imagettftext($jpg_image, 35, 0, 100, 500, $tclr, $fnt, "______________________________________");

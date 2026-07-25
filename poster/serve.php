@@ -47,6 +47,7 @@ error_log("SERVE[4]: file_path=$file_path exists=" . (file_exists($file_path) ? 
 if (!file_exists($file_path)) {
 	$_GET['rid'] = $rid;
 	$_GET['tit'] = $upp;
+	$_GET['raw_title'] = strtoupper($row['title']);
 	$_GET['b']   = $_SESSION['s_banner'] ?? '';
 	$_GET['p']   = $_SESSION['s_user'] ?? '';
 	$_GET['d']   = $row['dname'];
