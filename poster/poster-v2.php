@@ -211,7 +211,7 @@ $notes_raw = trim(safeGET("notes"));
 
 if (!empty($notes_raw) && $notes_raw !== '-- NOTES--') {
 	$codir_text = 'Screenplay, CoDirection - ' . $notes_raw;
-	$codir_fonsiz = intval($crew_fonsiz * 0.75);
+	$codir_fonsiz = intval($crew_fonsiz * 0.80);
 	if ($codir_fonsiz < 9) $codir_fonsiz = 9;
 	$codir_box = @imagettfbbox($codir_fonsiz, 0, $fnt, $codir_text);
 	$codir_w = abs($codir_box[4] - $codir_box[0]);
@@ -221,7 +221,15 @@ if (!empty($notes_raw) && $notes_raw !== '-- NOTES--') {
 		$codir_w = abs($codir_box[4] - $codir_box[0]);
 	}
 	$codir_x = intval((1000 - $codir_w) / 2);
-	@imagettftext($jpg_image, $codir_fonsiz, 0, $codir_x, 650, $cclr, $fnt, $codir_text);
+	$bright_colors = [
+		[255,255,0], [255,0,255], [0,255,255], [255,128,0],
+		[128,0,255], [0,255,128], [255,0,128], [128,255,0],
+		[0,128,255], [255,200,0], [0,255,200], [200,0,255],
+	];
+	$bright = $bright_colors[array_rand($bright_colors)];
+	$ncr = imagecolorallocate($jpg_image, $bright[0], $bright[1], $bright[2]);
+	@imagettftext($jpg_image, $codir_fonsiz, 0, $codir_x + 1, 651, $ncr, $fnt, $codir_text);
+	@imagettftext($jpg_image, $codir_fonsiz, 0, $codir_x, 650, $ncr, $fnt, $codir_text);
 	error_log("POSTER[13a]: codirection text size=$codir_fonsiz text=$codir_text");
 }
 error_log("POSTER[13]: all text done title_size=$title_fonsiz dir_size=$fonsiz crew_size=$crew_fonsiz");
