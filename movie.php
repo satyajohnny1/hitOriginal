@@ -205,23 +205,7 @@ function clean($string) {
 	return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 }
 
-$serve_base = 'poster/serve.php?rid='.$rid.'&tit='.urlencode($upp)
-	.'&b='.urlencode($_SESSION['s_banner'] ?? '')
-	.'&p='.urlencode($_SESSION['s_user'] ?? '')
-	.'&d='.urlencode($dname)
-	.'&a='.urlencode($aname)
-	.'&ac='.urlencode($acname)
-	.'&c='.urlencode($cinename)
-	.'&e='.urlencode($ediname)
-	.'&m='.urlencode($musname)
-	.'&w='.urlencode($wriname)
-	.'&fif='.intval($d50_cent ?? 0).'&hun='.intval($d100_cent ?? 0).'&fiv='.intval($wk1_cent ?? 0)
-	.'&t5='.intval($d75_cent ?? 0).'&sev='.intval($wk2_cent ?? 0).'&onf='.intval($rel_cen ?? 0)
-	.'&a2='.urlencode($_a2_name ?? '').'&a3='.urlencode($_a3_name ?? '')
-	.'&ac2='.urlencode($_ac2_name ?? '').'&ac3='.urlencode($_ac3_name ?? '')
-	.'&d2='.urlencode($_d2_name ?? '').'&d3='.urlencode($_d3_name ?? '')
-	.'&m2='.urlencode($_m2_name ?? '').'&m3='.urlencode($_m3_name ?? '')
-	.'&w2='.urlencode($_w2_name ?? '').'&w3='.urlencode($_w3_name ?? '');
+$serve_base = 'poster/serve.php?rid='.$rid;
 
 $path = $serve_base.'&type=main';
 $path_50 = $serve_base.'&type=50';
