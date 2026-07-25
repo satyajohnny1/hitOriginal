@@ -60,7 +60,8 @@ $uid = $_SESSION['s_uid'];
                                                                             <th>100'Cen</th>
                                                                             <th>150'Cen</th>
                                                                             <th>175'Cen</th>
-                                                                            <th>Days</th>
+                                                                             <th>Days</th>
+                                                                             <th>PL</th>
                                             </tr>
                                         </thead>
                                    
@@ -110,6 +111,9 @@ $uid = $_SESSION['s_uid'];
 												echo "<td>".$c150."</td>";
                                              	echo "<td>".$c175."</td>";
 												echo "<td>".$days."</td>";
+											$pl = round(($collection - $budget) / 10000000, 2);
+											$pl_color = $pl >= 0 ? 'green' : 'red';
+											echo "<td style='color:".$pl_color."'><b>".$pl."</b></td>";
                                             	echo " </tr> ";
                                           
                                                     				}
