@@ -1,6 +1,4 @@
 <?php
-error_log("SERVE[1]: start rid=$rid type=$type");
-
 $cookie_lifetime = 48 * 60 * 60; // 48 hours
 ini_set('session.gc_maxlifetime', $cookie_lifetime);
 session_set_cookie_params($cookie_lifetime);
@@ -9,6 +7,7 @@ require_once __DIR__ . '/../db.php';
 
 $rid = isset($_GET['rid']) ? intval($_GET['rid']) : 0;
 $type = isset($_GET['type']) ? $_GET['type'] : '';
+error_log("SERVE[1]: start rid=$rid type=$type");
 
 $valid_types = ['main','50','75','100','150','175'];
 if ($rid <= 0 || !in_array($type, $valid_types)) {
@@ -90,8 +89,8 @@ if (!file_exists($file_path)) {
 
 error_log("SERVE[7]: serving $file_path size=" . filesize($file_path));
 header("Content-Type: image/jpeg");
-header("Cache-Control: public, max-age=604800");
-header("Expires: " . gmdate("D, d M Y H:i:s", time() + 604800) . " GMT");
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: 0");
 readfile($file_path);
 error_log("SERVE[8]: done");
 exit;
