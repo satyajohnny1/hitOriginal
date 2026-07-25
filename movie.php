@@ -210,6 +210,7 @@ function clean($string) {
 $path = 'poster/done/'.$upp.".jpeg";
 $path_50 = 'poster/done/'.$upp."_50.jpeg";
 $path_100 = 'poster/done/'.$upp."_100.jpeg";
+$path_150 = 'poster/done/'.$upp."_150.jpeg";
 $path_175 = 'poster/done/'.$upp."_175.jpeg";
 
 
@@ -365,6 +366,15 @@ $path_175 = 'poster/done/'.$upp."_175.jpeg";
                                         <div class="row">
                                             <div class="col-md-12" style="text-align:center;">
                                                 <button type="button" class="btn btn-warning btn-rounded" id="posterRegenBtn">Regenerate Poster</button>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top:10px;">
+                                            <div class="col-md-12" style="text-align:center;">
+                                                <a href="<?php echo $path?>" target="_blank" class="btn btn-default btn-rounded btn-sm">Main</a>
+                                                <a href="<?php echo $path_50?>" target="_blank" class="btn btn-default btn-rounded btn-sm">50</a>
+                                                <a href="<?php echo $path_100?>" target="_blank" class="btn btn-default btn-rounded btn-sm">100</a>
+                                                <a href="<?php echo $path_150?>" target="_blank" class="btn btn-default btn-rounded btn-sm">150</a>
+                                                <a href="<?php echo $path_175?>" target="_blank" class="btn btn-default btn-rounded btn-sm">175</a>
                                             </div>
                                         </div>
 
