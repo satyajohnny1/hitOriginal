@@ -881,8 +881,7 @@ foreach ($rangeTypes as $rt) {
 	//alert(s_bal);
 	
 	// ******************** DIRECTOR RATIO ACTIONS START ***********************
-	$('.r_dir').change(
-		    function(){
+	$(document).on('change', '.r_dir', function(){
 		    	var did='' ;
 		    	var dname='';
 		    	var drate=0;
@@ -928,8 +927,7 @@ foreach ($rangeTypes as $rt) {
 
 	
 	// ******************** ACTOR RATIO ACTIONS START ***********************
-	$('.r_act').change(
-		    function(){
+	$(document).on('change', '.r_act', function(){
 
  			 	var did='' ;
 		    	var dname='';
@@ -978,8 +976,7 @@ foreach ($rangeTypes as $rt) {
 	// ******************** ACTOR RATIO ACTIONS END  ***********************
 	
 	// ******************** Aactres RATIO ACTIONS START ***********************
-	$('.r_actress').change(
-		    function(){
+	$(document).on('change', '.r_actress', function(){
 		    	var did='' ;
 		    	var dname='';
 		    	var drate=0;
@@ -1024,8 +1021,7 @@ foreach ($rangeTypes as $rt) {
 
 	
 	// ******************** WRITER RATIO ACTIONS START ***********************
-	$('.r_writer').change(
-		    function(){
+	$(document).on('change', '.r_writer', function(){
 		    	var did='' ;
 		    	var dname='';
 		    	var drate=0;
@@ -1255,7 +1251,7 @@ foreach ($rangeTypes as $rt) {
 
 
 		
-	 $("input[name=r_dir]").change(function(){
+	 $(document).on('change', "input[name=r_dir]", function(){
 		    var max= 3;
 		    if($("input[name=r_dir]:checked").length >= max ){
 		    	toastr.info("<h3>Maximum 3 Directors Only</h3>");			   
@@ -1269,7 +1265,7 @@ foreach ($rangeTypes as $rt) {
 
 	
 		
-	 $("input[name=r_act]").change(function(){
+	 $(document).on('change', "input[name=r_act]", function(){
 		    var max= 3;
 		    if($("input[name=r_act]:checked").length >= max ){
 		    	toastr.info("<h3>Maximum 3 Actors Only</h3>");			   
@@ -1282,7 +1278,7 @@ foreach ($rangeTypes as $rt) {
 
 
 		
-	 $("input[name=r_actress]").change(function(){
+	 $(document).on('change', "input[name=r_actress]", function(){
 		    var max= 3;
 		    if($("input[name=r_actress]:checked").length >= max ){
 		    	toastr.info("<h3>Maximum 3 Heroins Only</h3>");			   
@@ -1295,7 +1291,7 @@ foreach ($rangeTypes as $rt) {
 
 	
 		
-	 $("input[name=r_writer]").change(function(){
+	 $(document).on('change', "input[name=r_writer]", function(){
 		    var max= 3;
 		    if($("input[name=r_writer]:checked").length >= max ){
 		    	toastr.info("<h3>Maximum 3 Writers Only</h3>");			   

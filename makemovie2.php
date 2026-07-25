@@ -794,8 +794,7 @@ foreach ($rangeTypes as $rt) {
 	//alert(s_bal);
 
 	// ******************** MUSIC RATIO ACTIONS START ***********************
-	$('.r_mus').change(
-		    function(){
+	$(document).on('change', '.r_mus', function(){
 		    	var did='' ;
 		    	var dname='';
 		    	var drate=0;
@@ -835,15 +834,13 @@ foreach ($rangeTypes as $rt) {
 		    	$("#s_mus_rem").hide();
 		    	sofar();
 		    	
-		    }
-		);	
+		    });
 	// ******************** MUSIC ACTIONS END  ***********************
 	
 	
 	
 	// ******************** EDITOR RATIO ACTIONS START ***********************
-	$('.r_edi').change(
-		    function(){
+	$(document).on('change', '.r_edi', function(){
 		    	var a = 	$(this).val();
 		    	var did = a.substr(0,a.indexOf("#"));
 		    	var dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2);
@@ -861,14 +858,12 @@ foreach ($rangeTypes as $rt) {
 		    	$("#s_edi_rem").hide();
 		    	sofar();
 		     
-		    }
-		);	
+		    });
 	// ******************** EDITOR RATIO ACTIONS END  ***********************
 	
 	
 	// ******************** cinematographer RATIO ACTIONS START ***********************
-	$('.r_cine').change(
-		    function(){
+	$(document).on('change', '.r_cine', function(){
 		    	var a = 	$(this).val();
 		    	var did = a.substr(0,a.indexOf("#"));
 		    	var dname = a.substr(a.indexOf("#")+1, a.indexOf("$")-2);
@@ -883,8 +878,7 @@ foreach ($rangeTypes as $rt) {
 		    	
 		    	sofar();
 		     
-		    }
-		);	
+		    });
 	// ******************** cinematographer RATIO ACTIONS END  ***********************
 		
 		$('#regButton').click(
@@ -1125,7 +1119,7 @@ foreach ($rangeTypes as $rt) {
 	
 	
 		
-	 $("input[name=r_mus]").change(function(){
+	 $(document).on('change', "input[name=r_mus]", function(){
 		    var max= 3;
 		    if($("input[name=r_mus]:checked").length >= max ){
 		    	toastr.info("<h3>Maximum 3 Musicians Only</h3>");			   
