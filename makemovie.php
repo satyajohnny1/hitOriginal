@@ -565,41 +565,16 @@ foreach ($rangeTypes as $rt) {
 									  <div class="tab-pane fade" id="tab6">
                                                 <div class="col-md-12">
                                                     <div class="panel-body">
-                                                        <h4>Co-Direction / Screenplay — Select people (names appear on poster)</h4>
-                                                        <div class="table-responsive">
-                                                            <table id="example-codir" class="display table" style="width: 100%; cellspacing: 0;">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th></th>
-                                                                        <th>Name</th>
-                                                                        <th>Type</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                 <tbody>
-                                                                 <?php
-                                                                 $codir_sql = "SELECT 'Actor' AS ptype, CONVERT(actor_name USING utf8mb4) AS pname FROM tolly_actor
-	                                                                UNION ALL SELECT 'Actress', CONVERT(actress_name USING utf8mb4) FROM tolly_actress
-	                                                                UNION ALL SELECT 'Director', CONVERT(director_name USING utf8mb4) FROM tolly_director
-	                                                                UNION ALL SELECT 'Writer', CONVERT(writer_name USING utf8mb4) FROM tolly_writer
-	                                                                ORDER BY pname";
-	                                                                $codir_result = @mysqli_query($conn, $codir_sql);
-	                                                                if ($codir_result && mysqli_num_rows($codir_result) > 0):
-	                                                                while ($cr = mysqli_fetch_assoc($codir_result)):
-	                                                                ?>
-	                                                                <tr>
-	                                                                    <td><input type="checkbox" class="codir_check" value="<?php echo htmlspecialchars($cr['pname']); ?>"></td>
-	                                                                    <td><?php echo htmlspecialchars($cr['pname']); ?></td>
-	                                                                    <td><?php echo htmlspecialchars($cr['ptype']); ?></td>
-	                                                                </tr>
-	                                                                <?php endwhile; endif; ?>
-	                                                                </tbody>
-                                                            </table>
+                                                        <h4>Notes / Co-Direction / Screenplay</h4>
+                                                        <p>Enter any extra credits (e.g. "Screenplay - Raja, CoDirection - Kiran"). This text will appear on the poster.</p>
+                                                        <div class="form-group" style="max-width:600px;">
+                                                            <textarea class="form-control" id="codir_names" name="codir_names" rows="3" placeholder="e.g. Screenplay - Raja, CoDirection - Kiran"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <ul class="pager wizard">
                                                 <li class="previous"><a href="#" class="btn btn-default">Previous</a></li>
-                                                <li class="next" style="display: none;" id="codir_next"><a href="#" class="btn btn-default">Next</a></li>
+                                                <li class="next" id="codir_next"><a href="#" class="btn btn-default">Next</a></li>
                                             </ul>
                                             </div>
 
@@ -657,12 +632,7 @@ foreach ($rangeTypes as $rt) {
                                         
                                           </div>
                                          
-                                          <div class="form-group" style="display:none;">
-                                            <label>Co-Direction</label>
-                                            <input type="text" class="form-control" id="codir_names" name="codir_names" value="">
-                                          </div>
-                                         
-                                          <div class="form-group">                                           
+                                           <div class="form-group">                                            
                                             <div class="col-sm-6 col-md-offset-4">
                                                  <button type="button" class="btn btn-primary" id="sub_btn" style="width: 100%"><h2>Proceed to Next Step</h2></button>
                                                  <button type="submit" class="btn btn-primary" id="nxt_btn" style="display: none;">Next</button>
@@ -1242,10 +1212,8 @@ foreach ($rangeTypes as $rt) {
 		    		 $("#_actress_id").val(acid);
 		    		 $("#_sofar").val(sf);
 		    		 
-		    		 var codirNames = [];
-		    		 $(".codir_check:checked").each(function(){ codirNames.push($(this).val()); });
-		    		 $("#codir_names").val(codirNames.join(' - '));
-		    		 $("#_codir_names").val(codirNames.join(' - '));
+		    		 var codirText = $("#codir_names").val().trim();
+		    		 $("#_codir_names").val(codirText);
 		    		 
 
 
