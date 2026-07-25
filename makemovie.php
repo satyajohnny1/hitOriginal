@@ -104,8 +104,7 @@ foreach ($rangeTypes as $rt) {
 										 <li role="presentation"><a href="#tab3" data-toggle="tab"><i class="fa fa-check m-r-xs"></i>Actors</a></li>
                                         <li role="presentation"><a href="#tab4" data-toggle="tab"><i class="fa fa-check m-r-xs"></i>Actress</a></li>
                                         <li role="presentation"><a href="#tab5" data-toggle="tab"><i class="fa fa-truck m-r-xs"></i>Writer</a></li>
-										  <li role="presentation"><a href="#tab6" data-toggle="tab"><i class="fa fa-users m-r-xs"></i>Co-Direction</a></li>
-										  <li role="presentation"><a href="#tab7" data-toggle="tab"><i class="fa fa-truck m-r-xs"></i>Make Sure</a></li>
+									  <li role="presentation"><a href="#tab7" data-toggle="tab"><i class="fa fa-truck m-r-xs"></i>Make Sure</a></li>
                                        
                                     </ul>
 
@@ -558,26 +557,10 @@ foreach ($rangeTypes as $rt) {
                                                 </div>
                                                  <ul class="pager wizard">
                                                 <li class="previous"><a href="#" class="btn btn-default">Previous</a></li>
-                                                <li class="next" style="display: none;" id="writer_next"><a href="#" class="btn btn-default">Next</a></li>
+                                                <li class="next" id="writer_next"><a href="#" class="btn btn-default">Next</a></li>
                                             </ul>
                                             </div>
 									
-									  <div class="tab-pane fade" id="tab6">
-                                                <div class="col-md-12">
-                                                    <div class="panel-body">
-                                                        <h4>Notes / Co-Direction / Screenplay</h4>
-                                                        <p>Enter any extra credits (e.g. "Screenplay - Raja, CoDirection - Kiran"). This text will appear on the poster.</p>
-                                                        <div class="form-group" style="max-width:600px;">
-                                                            <textarea class="form-control" id="codir_names" name="codir_names" rows="3" placeholder="e.g. Screenplay - Raja, CoDirection - Kiran"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <ul class="pager wizard">
-                                                <li class="previous"><a href="#" class="btn btn-default">Previous</a></li>
-                                                <li class="next" id="codir_next"><a href="#" class="btn btn-default">Next</a></li>
-                                            </ul>
-                                            </div>
-
 									  <div class="tab-pane fade" id="tab7">
                                               
                                                 <div class="col-md-12">
@@ -632,6 +615,12 @@ foreach ($rangeTypes as $rt) {
                                         
                                           </div>
                                          
+                                          
+                                          <div class="form-group" style="max-width:600px;">
+                                            <label>Notes / Co-Direction / Screenplay</label>
+                                            <textarea class="form-control" id="codir_names" name="codir_names" rows="3" placeholder="e.g. Screenplay - Raja, CoDirection - Kiran"></textarea>
+                                          </div>
+                                          
                                            <div class="form-group">                                            
                                             <div class="col-sm-6 col-md-offset-4">
                                                  <button type="button" class="btn btn-primary" id="sub_btn" style="width: 100%"><h2>Proceed to Next Step</h2></button>
