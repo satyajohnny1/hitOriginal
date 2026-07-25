@@ -2,6 +2,55 @@
 include 'sessionCheck.php';
 session_start(); 
 error_reporting(E_ERROR);
+include 'db.php';
+
+$rangeQ = @mysqli_query($conn, "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot");
+$rangeRow = mysqli_fetch_assoc($rangeQ);
+$oriid = intval($rangeRow["max_page"]);
+$minid = floor($oriid/100)*100;
+$maxid = ceil($oriid/100)*100;
+
+$personStatus = [];
+$flopResults = ['Flop','Below Average','Average'];
+
+$rangeTypes = [
+    ['cols'=>['did','d2','d3'], 'table'=>'tolly_director', 'pk'=>'director_id'],
+    ['cols'=>['aid','a2','a3'], 'table'=>'tolly_actor', 'pk'=>'actor_id'],
+    ['cols'=>['acid','ac2','ac3'], 'table'=>'tolly_actress', 'pk'=>'actress_id'],
+    ['cols'=>['wid','w2','w3'], 'table'=>'tolly_writer', 'pk'=>'writer_id'],
+];
+foreach ($rangeTypes as $rt) {
+    $unionParts = [];
+    foreach ($rt['cols'] as $ci => $col) {
+        $unionParts[] = "SELECT $col AS pid, result FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid AND status='out'" . ($ci > 0 ? " AND $col > 0" : "");
+    }
+    $rsql = "SELECT pid, GROUP_CONCAT(DISTINCT result) AS results FROM (" . implode(' UNION ALL ', $unionParts) . ") t GROUP BY pid";
+    $rr = @mysqli_query($conn, $rsql);
+    if ($rr) {
+        while ($rw = mysqli_fetch_assoc($rr)) {
+            $pid = intval($rw['pid']);
+            $resList = array_map('trim', explode(',', $rw['results']));
+            if (empty($resList[0])) {
+                $personStatus[$rt['table']][$pid] = 'pending';
+            } else {
+                $allFlop = true;
+                foreach ($resList as $rl) {
+                    if (!in_array($rl, $flopResults)) { $allFlop = false; break; }
+                }
+                $personStatus[$rt['table']][$pid] = $allFlop ? 'flop' : 'active';
+            }
+        }
+    }
+    $allPeople = @mysqli_query($conn, "SELECT " . $rt['pk'] . " FROM " . $rt['table']);
+    if ($allPeople) {
+        while ($ap = mysqli_fetch_assoc($allPeople)) {
+            $apid = intval($ap[$rt['pk']]);
+            if (!isset($personStatus[$rt['table']][$apid])) {
+                $personStatus[$rt['table']][$apid] = 'pending';
+            }
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -141,55 +190,6 @@ error_reporting(E_ERROR);
                                                         
                                                              <tbody>
                                                              <?php 
-                                                    			include 'db.php';
-
-                                                    			$rangeQ = @mysqli_query($conn, "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot");
-                                                    			$rangeRow = mysqli_fetch_assoc($rangeQ);
-                                                    			$oriid = intval($rangeRow["max_page"]);
-                                                    			$minid = floor($oriid/100)*100;
-                                                    			$maxid = ceil($oriid/100)*100;
-
-                                                    			$personStatus = [];
-                                                    			$flopResults = ['Flop','Below Average','Average'];
-
-                                                    			$rangeTypes = [
-                                                    			    ['cols'=>['did','d2','d3'], 'table'=>'tolly_director', 'pk'=>'director_id'],
-                                                    			    ['cols'=>['aid','a2','a3'], 'table'=>'tolly_actor', 'pk'=>'actor_id'],
-                                                    			    ['cols'=>['acid','ac2','ac3'], 'table'=>'tolly_actress', 'pk'=>'actress_id'],
-                                                    			    ['cols'=>['wid','w2','w3'], 'table'=>'tolly_writer', 'pk'=>'writer_id'],
-                                                    			];
-                                                    			foreach ($rangeTypes as $rt) {
-                                                    			    $unionParts = [];
-                                                    			    foreach ($rt['cols'] as $ci => $col) {
-                                                    			        $unionParts[] = "SELECT $col AS pid, result FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid AND status='out'" . ($ci > 0 ? " AND $col > 0" : "");
-                                                    			    }
-                                                    			    $rsql = "SELECT pid, GROUP_CONCAT(DISTINCT result) AS results FROM (" . implode(' UNION ALL ', $unionParts) . ") t GROUP BY pid";
-                                                    			    $rr = @mysqli_query($conn, $rsql);
-                                                    			    if ($rr) {
-                                                    			        while ($rw = mysqli_fetch_assoc($rr)) {
-                                                    			            $pid = intval($rw['pid']);
-                                                    			            $resList = array_map('trim', explode(',', $rw['results']));
-                                                    			            if (empty($resList[0])) {
-                                                    			                $personStatus[$rt['table']][$pid] = 'pending';
-                                                    			            } else {
-                                                    			                $allFlop = true;
-                                                    			                foreach ($resList as $rl) {
-                                                    			                    if (!in_array($rl, $flopResults)) { $allFlop = false; break; }
-                                                    			                }
-                                                    			                $personStatus[$rt['table']][$pid] = $allFlop ? 'flop' : 'active';
-                                                    			            }
-                                                    			        }
-                                                    			    }
-                                                    			    $allPeople = @mysqli_query($conn, "SELECT " . $rt['pk'] . " FROM " . $rt['table']);
-                                                    			    if ($allPeople) {
-                                                    			            while ($ap = mysqli_fetch_assoc($allPeople)) {
-                                                    			                $apid = intval($ap[$rt['pk']]);
-                                                    			                if (!isset($personStatus[$rt['table']][$apid])) {
-                                                    			                    $personStatus[$rt['table']][$apid] = 'pending';
-                                                    			                }
-                                                    			            }
-                                                    			    }
-                                                    			}
 
                                                     			$sql = "SELECT d.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl
                                                     			        FROM tolly_director d
@@ -295,7 +295,6 @@ error_reporting(E_ERROR);
                                                         
                                                             <tbody>
                                                              <?php 
-                                                    			include 'db.php';
                                                     			$sql = "SELECT a.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl
                                                     			        FROM tolly_actor a
                                                     			        LEFT JOIN (
@@ -400,7 +399,6 @@ error_reporting(E_ERROR);
                                                         
                                                             <tbody>
                                                              <?php 
-                                                    			include 'db.php';
                                                     			$sql = "SELECT a.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl
                                                     			        FROM tolly_actress a
                                                     			        LEFT JOIN (
@@ -506,7 +504,6 @@ error_reporting(E_ERROR);
                                                         
                                                             <tbody>
                                                              <?php 
-                                                    			include 'db.php';
                                                     			$sql = "SELECT w.*, COALESCE(m.movie_count, 0) as movie_count, COALESCE(m.total_pl, 0) as pl
                                                     			        FROM tolly_writer w
                                                     			        LEFT JOIN (
