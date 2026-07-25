@@ -160,8 +160,8 @@ if (strlen($d3) > 2) { $fonsiz = 25; $area = 70; }
 error_log("POSTER[13]: all text done");
 
 error_log("POSTER[14]: saving main to $path");
-$result = @imagejpeg($jpg_image, $path, 90);
-error_log("POSTER[15]: imagejpeg result=" . ($result ? 'OK' : 'FAIL') . " file_exists=" . (file_exists($path) ? 'YES' : 'NO'));
+$jpeg_ok = @imagejpeg($jpg_image, $path, 90);
+error_log("POSTER[15]: imagejpeg result=" . ($jpeg_ok ? 'OK' : 'FAIL') . " file_exists=" . (file_exists($path) ? 'YES' : 'NO'));
 
 if ($hero_count === 3) {
 	$m_day_x = 480;  $m_day_y = 800;
@@ -210,8 +210,8 @@ foreach ($milestones as $ms) {
 		@imagettftext($jpg_image, $days_sz, 0, $days_x, $days_y, $tclr, $fnt, "DAYS");
 		@imagettftext($jpg_image, $cen_sz, 0, $cen_x, $cen_y, $tclr, $fnt, $use_val . " CENTERS");
 
-		$result = @imagejpeg($jpg_image, $ms['file'], 90);
-		error_log("POSTER[17]: milestone $use_label result=" . ($result ? 'OK' : 'FAIL'));
+		$jpeg_ok = @imagejpeg($jpg_image, $ms['file'], 90);
+		error_log("POSTER[17]: milestone $use_label result=" . ($jpeg_ok ? 'OK' : 'FAIL'));
 		imagedestroy($jpg_image);
 	}
 }

@@ -3,7 +3,8 @@ session_start();
 $cookie_lifetime = 48 * 60 * 60;
 ini_set('session.gc_maxlifetime', $cookie_lifetime);
 session_set_cookie_params($cookie_lifetime);
-error_reporting(E_ERROR);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 if (!isset($_SESSION['s_uid'])) {
 	header("Location: ../login.php");
@@ -22,9 +23,9 @@ $sql = "SELECT r.rid, r.`50d_cen`, r.`75d_cen`, r.`100d_cen`, r.`150d_cen`, r.`1
         FROM tolly_release r
         JOIN tolly_ready_for_shoot s ON s.rid = r.rid
         ORDER BY r.rid DESC";
-$result = mysqli_query($conn, $sql);
+$db_result = mysqli_query($conn, $sql);
 
-$total = mysqli_num_rows($result);
+$total = mysqli_num_rows($db_result);
 $done = 0;
 $failed = 0;
 
@@ -32,7 +33,7 @@ echo "<h2>Regenerating All Posters</h2>";
 echo "<p>Total movies: $total</p><hr>";
 
 if ($total > 0) {
-	while ($row = mysqli_fetch_assoc($result)) {
+	while ($row = mysqli_fetch_assoc($db_result)) {
 		$rid = $row['rid'];
 		$title = $row['title'];
 		$upp = strtoupper($title . $rid);
@@ -66,9 +67,13 @@ if ($total > 0) {
 		$_GET['w2']   = $row['w2_name'] ?? '';
 		$_GET['w3']   = $row['w3_name'] ?? '';
 
-		ob_start();
-		include __DIR__ . '/poster-v2.php';
-		ob_end_clean();
+		try {
+			ob_start();
+			include __DIR__ . '/poster-v2.php';
+			ob_end_clean();
+		} catch (\Throwable $e) {
+			error_log("REGEN[ERR]: $rid - $title - " . $e->getMessage());
+		}
 
 		if (file_exists($file_path)) {
 			$done++;
