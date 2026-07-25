@@ -145,6 +145,7 @@ error_log("POSTER[10]: banner text");
 $actor_text = $a;
 if ($hero_count === 2) $actor_text = $a . ' - ' . $a2;
 if ($hero_count === 3) $actor_text = $a . ' - ' . $a2 . ' - ' . $a3;
+if (!empty($ac)) $actor_text .= ' - ' . $ac;
 @imagettftext($jpg_image, 17, 0, 300, 390, $cclr, $fnt, $actor_text);
 error_log("POSTER[11]: actor text");
 
