@@ -1,22 +1,35 @@
 <?php
 
+if (!function_exists('clean')) {
+	function clean($string) {
+		$string = str_replace(' ', '', $string);
+		return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+	}
+}
+
+if (!function_exists('safeGET')) {
+	function safeGET($key) {
+		return isset($_GET[$key]) ? $_GET[$key] : '';
+	}
+}
+
+if (!function_exists('drawHero')) {
+	function drawHero($jpg_image, $heroimg, $x) {
+		error_log("POSTER[7a]: drawHero heroimg=$heroimg x=$x");
+		$img = safe_imagecreatefrompng($heroimg, 400, 400);
+		imagesavealpha($img, true);
+		imagealphablending($img, true);
+		imagecopy($jpg_image, $img, $x, 0, 0, 0, 400, 400);
+		imagedestroy($img);
+		error_log("POSTER[7b]: drawHero done x=$x");
+	}
+}
+
 error_log("POSTER[1]: start");
 
 require_once __DIR__ . '/safe_image.php';
 
-if (!@mkdir(__DIR__ . '/done', 0755, true) && !is_dir(__DIR__ . '/done')) {
-	error_log("POSTER[ERR]: cannot create done/ dir: " . __DIR__ . '/done');
-}
-error_log("POSTER[2]: done/ dir check OK writable=" . (is_writable(__DIR__ . '/done') ? 'YES' : 'NO'));
-
-function clean($string) {
-	$string = str_replace(' ', '', $string);
-	return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
-}
-
-function safeGET($key) {
-	return isset($_GET[$key]) ? $_GET[$key] : '';
-}
+@mkdir(__DIR__ . '/done', 0755, true);
 
 $base = __DIR__;
 
@@ -69,7 +82,6 @@ $path_175 = $base . '/done/' . $tit . $rid . "_175.jpeg";
 $ori      = $path;
 
 error_log("POSTER[5]: paths set bg=$bg fnt=$fnt");
-error_log("POSTER[5a]: bg_exists=" . (file_exists($bg) ? 'YES' : 'NO') . " fnt_exists=" . (file_exists($fnt) ? 'YES' : 'NO'));
 
 $jpg_image = safe_imagecreatefromjpeg($bg, 1000, 1500);
 error_log("POSTER[6]: base image created type=" . gettype($jpg_image));
@@ -103,16 +115,6 @@ if ($num >= 1 && $num < 10) {
 
 error_log("POSTER[7]: colors set num=$num");
 
-function drawHero($jpg_image, $heroimg, $x) {
-	error_log("POSTER[7a]: drawHero heroimg=$heroimg x=$x");
-	$img = safe_imagecreatefrompng($heroimg, 400, 400);
-	imagesavealpha($img, true);
-	imagealphablending($img, true);
-	imagecopy($jpg_image, $img, $x, 0, 0, 0, 400, 400);
-	imagedestroy($img);
-	error_log("POSTER[7b]: drawHero done x=$x");
-}
-
 if ($hero_count === 1) {
 	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a)) . ".png", 300);
 } elseif ($hero_count === 2) {
@@ -143,21 +145,48 @@ error_log("POSTER[11]: actor text");
 
 @imagettftext($jpg_image, 35, 0, 100, 395, $tclr, $fnt, "______________________________________");
 
-@imagettftext($jpg_image, 80, 0, 200, 490, $tclr, $tfnt, $tit);
-error_log("POSTER[12]: title text");
+$title_max_w = 760;
+$title_fonsiz = 80;
+$title_box = @imagettfbbox($title_fonsiz, 0, $tfnt, $tit);
+$title_w = abs($title_box[4] - $title_box[0]);
+while ($title_w > $title_max_w && $title_fonsiz > 30) {
+	$title_fonsiz -= 2;
+	$title_box = @imagettfbbox($title_fonsiz, 0, $tfnt, $tit);
+	$title_w = abs($title_box[4] - $title_box[0]);
+}
+@imagettftext($jpg_image, $title_fonsiz, 0, 200, 490, $tclr, $tfnt, $tit);
+error_log("POSTER[12]: title text size=$title_fonsiz width=$title_w");
 
 @imagettftext($jpg_image, 35, 0, 100, 500, $tclr, $fnt, "______________________________________");
 
 $fonsiz = 35;
 $area = 300;
+$dir_text = trim($d . '  ' . $d2 . '  ' . $d3);
 if (strlen($d2) > 2) { $fonsiz = 30; $area = 200; }
 if (strlen($d3) > 2) { $fonsiz = 25; $area = 70; }
-@imagettftext($jpg_image, $fonsiz, 0, $area, 550, $cclr, $fnt, $d . '  ' . $d2 . '  ' . $d3);
+$dir_box = @imagettfbbox($fonsiz, 0, $fnt, $dir_text);
+$dir_w = abs($dir_box[4] - $dir_box[0]);
+$dir_max_w = 1000 - $area - 20;
+while ($dir_w > $dir_max_w && $fonsiz > 14) {
+	$fonsiz -= 2;
+	$dir_box = @imagettfbbox($fonsiz, 0, $fnt, $dir_text);
+	$dir_w = abs($dir_box[4] - $dir_box[0]);
+}
+@imagettftext($jpg_image, $fonsiz, 0, $area, 550, $cclr, $fnt, $dir_text);
 
 @imagettftext($jpg_image, 28, 0, 340, 600, $cclr, $fnt, $p);
 
-@imagettftext($jpg_image, 13, 0, 120, 630, $cclr, $fnt, $m . ' ' . $m2 . ' ' . $m3 . '-' . $w . ' ' . $w2 . ' ' . $w3 . ' - ' . $e . ' - ' . $c);
-error_log("POSTER[13]: all text done");
+$crew_text = $m . ' ' . $m2 . ' ' . $m3 . '-' . $w . ' ' . $w2 . ' ' . $w3 . ' - ' . $e . ' - ' . $c;
+$crew_box = @imagettfbbox(13, 0, $fnt, $crew_text);
+$crew_w = abs($crew_box[4] - $crew_box[0]);
+$crew_fonsiz = 13;
+while ($crew_w > 860 && $crew_fonsiz > 8) {
+	$crew_fonsiz--;
+	$crew_box = @imagettfbbox($crew_fonsiz, 0, $fnt, $crew_text);
+	$crew_w = abs($crew_box[4] - $crew_box[0]);
+}
+@imagettftext($jpg_image, $crew_fonsiz, 0, 120, 630, $cclr, $fnt, $crew_text);
+error_log("POSTER[13]: all text done title_size=$title_fonsiz dir_size=$fonsiz crew_size=$crew_fonsiz");
 
 error_log("POSTER[14]: saving main to $path");
 $jpeg_ok = @imagejpeg($jpg_image, $path, 90);
