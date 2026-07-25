@@ -1,6 +1,6 @@
 <?php
 include 'sessionCheck.php';
-session_start(); 
+include __DIR__ . '/session_init.php'; 
 error_reporting(E_ERROR);
 ?>
 <!DOCTYPE html>

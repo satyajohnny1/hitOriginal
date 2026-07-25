@@ -6,7 +6,7 @@
 <?php
 include 'sessionCheck.php'; 
 include 'db.php';
-session_start();
+include __DIR__ . '/session_init.php';
 error_reporting(E_ERROR);
 $uid = $_SESSION['s_uid'];
 $srs = $_SESSION['s_rs']; 

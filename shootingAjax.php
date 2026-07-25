@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ERROR);
 include 'db.php';
-session_start(); // Starting Session
+include __DIR__ . '/session_init.php'; // Starting Session
 
 $a = 0;
 $b=0; 

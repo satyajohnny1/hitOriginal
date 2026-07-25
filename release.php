@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 include 'sessionCheck.php'; 
-session_start(); 
+include __DIR__ . '/session_init.php'; 
 error_reporting(E_ERROR);
 
  

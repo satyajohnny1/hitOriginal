@@ -1,6 +1,6 @@
 <?php
 include "sessionCheck.php";
-session_start();
+include __DIR__ . '/session_init.php';
 ?>
 <!DOCTYPE html>
 <html>

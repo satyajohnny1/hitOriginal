@@ -3,7 +3,7 @@ declare(strict_types=1);
 error_reporting(0);
 include 'db_helper.php';
 
-session_start();
+include __DIR__ . '/session_init.php';
 
 $sid = (int)($_GET["rid"] ?? 0);
 $now = $_GET["now"] ?? '';

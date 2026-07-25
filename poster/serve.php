@@ -1,8 +1,5 @@
 <?php
-$cookie_lifetime = 48 * 60 * 60; // 48 hours
-ini_set('session.gc_maxlifetime', $cookie_lifetime);
-session_set_cookie_params($cookie_lifetime);
-session_start();
+include __DIR__ . "/../session_init.php";
 require_once __DIR__ . '/../db.php';
 
 $rid = isset($_GET['rid']) ? intval($_GET['rid']) : 0;
@@ -45,48 +42,15 @@ $file_path = __DIR__ . '/done/' . $filename;
 error_log("SERVE[4]: file_path=$file_path exists=" . (file_exists($file_path) ? 'YES' : 'NO'));
 
 if (!file_exists($file_path)) {
-	$_GET['rid'] = $rid;
-	$_GET['tit'] = $upp;
-	$_GET['raw_title'] = strtoupper($row['title']);
-	$_GET['b']   = $_SESSION['s_banner'] ?? '';
-	$_GET['p']   = $_SESSION['s_user'] ?? '';
-	$_GET['d']   = $row['dname'];
-	$_GET['a']   = $row['aname'];
-	$_GET['ac']  = $row['acname'];
-	$_GET['c']   = $row['cinename'];
-	$_GET['e']   = $row['ediname'];
-	$_GET['m']   = $row['musname'];
-	$_GET['w']   = $row['wriname'];
-	$_GET['fif'] = intval($row['50d_cen'] ?? 0);
-	$_GET['hun'] = intval($row['100d_cen'] ?? 0);
-	$_GET['fiv'] = intval($row['175d_cen'] ?? 0);
-	$_GET['t5']  = intval($row['25d_cen'] ?? 0);
-	$_GET['sev'] = intval($row['75d_cen'] ?? 0);
-	$_GET['onf'] = intval($row['150d_cen'] ?? 0);
-	$_GET['a2']  = $row['a2_name'] ?? '';
-	$_GET['a3']  = $row['a3_name'] ?? '';
-	$_GET['ac2'] = $row['ac2_name'] ?? '';
-	$_GET['ac3'] = $row['ac3_name'] ?? '';
-	$_GET['d2']  = $row['d2_name'] ?? '';
-	$_GET['d3']  = $row['d3_name'] ?? '';
-	$_GET['m2']  = $row['m2_name'] ?? '';
-	$_GET['m3']  = $row['m3_name'] ?? '';
-	$_GET['w2']  = $row['w2_name'] ?? '';
-	$_GET['w3']  = $row['w3_name'] ?? '';
-	$_GET['notes'] = $row['notes'] ?? '';
-	error_log("SERVE[5]: calling poster-v2.php include for rid=$rid title=$upp");
-
-	ob_start();
-	include __DIR__ . '/poster-v2.php';
-	ob_end_clean();
-
-	error_log("SERVE[6]: poster-v2.php returned, file exists=" . (file_exists($file_path) ? 'YES' : 'NO'));
-}
-
-if (!file_exists($file_path)) {
-	error_log("SERVE[ERR]: poster file STILL missing after generation: $file_path");
-	header("HTTP/1.0 404 Not Found");
-	exit("Poster not found");
+	error_log("SERVE[4b]: file missing, serving placeholder rid=$rid type=$type");
+	header("Content-Type: image/png");
+	header("Cache-Control: no-cache, must-revalidate");
+	$ph = imagecreatetruecolor(200, 300);
+	$bg = imagecolorallocate($ph, 220, 220, 220);
+	imagefill($ph, 0, 0, $bg);
+	imagepng($ph);
+	imagedestroy($ph);
+	exit;
 }
 
 error_log("SERVE[7]: serving $file_path size=" . filesize($file_path));

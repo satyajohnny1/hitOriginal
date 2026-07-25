@@ -8,7 +8,7 @@ include 'sessionCheck.php';
 error_reporting ( 0 );
 include 'db_helper.php';
 include 'balance.php';
-session_start ();
+include __DIR__ . '/session_init.php';
 
 $a_cent = 0;
 $a_bud = 0;

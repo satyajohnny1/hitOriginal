@@ -3,7 +3,7 @@ declare(strict_types=1);
 include 'sessionCheck.php'; 
 include 'db.php';
 error_reporting(E_ERROR);
-session_start(); 
+include __DIR__ . '/session_init.php'; 
 
  
 $s1_a_cost = 0;

@@ -3,7 +3,7 @@ include 'sessionCheck.php';
 include 'db.php';
 
 error_reporting(E_ERROR);
-session_start();
+include __DIR__ . '/session_init.php';
 $xuid = $_GET ["id"];
  
 ?>

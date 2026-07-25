@@ -5,7 +5,7 @@ include 'db.php';
 ob_start();
 include 'balance.php';
 ob_end_clean();
-session_start();
+include __DIR__ . '/session_init.php';
 $uid =  $_SESSION['s_uid'];
 $bal = $_SESSION['s_bal'];
 $max_coll = rand(100000,10000000);

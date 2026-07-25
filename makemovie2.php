@@ -1,8 +1,5 @@
 <?php
-$cookie_lifetime = 48 * 60 * 60; // 48 hours
-ini_set('session.gc_maxlifetime', $cookie_lifetime);
-session_set_cookie_params($cookie_lifetime);
-session_start(); 
+include __DIR__ . '/session_init.php';
 error_reporting(E_ERROR);
 include 'db.php';
 

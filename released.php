@@ -3,7 +3,7 @@ include 'sessionCheck.php';
 error_reporting(0);
 include 'db.php';
 include 'balance.php';
-session_start(); 
+include __DIR__ . '/session_init.php'; 
 
 date_default_timezone_set("America/New_York");
 $rel_date = date("Y-m-d h:i:s"); 

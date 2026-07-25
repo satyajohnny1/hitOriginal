@@ -3,7 +3,7 @@ include 'sessionCheck.php';
 include 'db.php';
 date_default_timezone_set("America/New_York");
 error_reporting(E_ERROR);
-session_start();  
+include __DIR__ . '/session_init.php';  
 $uid =  $_SESSION['s_uid'];
 $rid =  $_GET ["rid"];
 

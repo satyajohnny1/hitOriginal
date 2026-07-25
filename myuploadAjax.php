@@ -2,7 +2,7 @@
 
 include 'sessionCheck.php';
 include 'db.php';
-session_start(); // Starting Session
+include __DIR__ . '/session_init.php'; // Starting Session
 
 $s_uid = $_SESSION["s_uid"];
 $itype = $_POST["itype"];

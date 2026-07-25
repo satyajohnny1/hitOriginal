@@ -2,7 +2,7 @@
 error_reporting(E_ERROR);
 include 'sessionCheck.php';
 include 'db.php';
-session_start();
+include __DIR__ . '/session_init.php';
 $uid = $_SESSION['s_uid'];
 
 $countJson = '';

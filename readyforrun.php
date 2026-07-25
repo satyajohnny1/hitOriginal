@@ -1,5 +1,5 @@
 <?php
-include 'sessionCheck.php';session_start(); 
+include 'sessionCheck.php';include __DIR__ . '/session_init.php'; 
 error_reporting(E_ERROR);
 ?>
 <!DOCTYPE html>
