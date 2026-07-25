@@ -5,7 +5,6 @@ require_once __DIR__ . '/env.php';
 
 $cookie_lifetime = 72 * 60 * 60;
 ini_set('session.gc_maxlifetime', $cookie_lifetime);
-ini_set('session.save_handler', 'user');
 
 session_set_cookie_params([
     'lifetime' => $cookie_lifetime,
