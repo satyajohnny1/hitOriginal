@@ -87,7 +87,11 @@ $(document).ready(function() {
     });
     
     // Datatables
-    $('#example').DataTable();
+    $('#example').DataTable({
+        "columnDefs": [
+            { "type": "num", "targets": [2, 5] }
+        ]
+    });
     $('#example-editable').DataTable();
     
     var table = $('#example2').DataTable({
