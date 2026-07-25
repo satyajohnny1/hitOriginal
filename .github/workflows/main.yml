@@ -17,7 +17,6 @@ jobs:
           local_dir: "./"
           remote_dir: "/htdocs"
           delete: "false"
-          exclude: "poster/done/*"
 
       - name: Run database migrations
         uses: appleboy/ssh-action@v1

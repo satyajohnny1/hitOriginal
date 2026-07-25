@@ -207,13 +207,30 @@ function clean($string) {
 
 
 
-$path = 'poster/done/'.$upp.".jpeg";
-$path_50 = 'poster/done/'.$upp."_50.jpeg";
-$path_100 = 'poster/done/'.$upp."_100.jpeg";
-$path_175 = 'poster/done/'.$upp."_175.jpeg";
+$serve_base = 'poster/serve.php?rid='.$rid.'&tit='.urlencode($upp)
+	.'&b='.urlencode($_SESSION['s_banner'] ?? '')
+	.'&p='.urlencode($_SESSION['s_user'] ?? '')
+	.'&d='.urlencode($dname)
+	.'&a='.urlencode($aname)
+	.'&ac='.urlencode($acname)
+	.'&c='.urlencode($cinename)
+	.'&e='.urlencode($ediname)
+	.'&m='.urlencode($musname)
+	.'&w='.urlencode($wriname)
+	.'&fif='.intval($fif).'&hun='.intval($hun).'&fiv='.intval($five)
+	.'&t5='.intval($t5).'&sev='.intval($sev).'&onf='.intval($onf)
+	.'&a2='.urlencode($_a2_name ?? '').'&a3='.urlencode($_a3_name ?? '')
+	.'&ac2='.urlencode($_ac2_name ?? '').'&ac3='.urlencode($_ac3_name ?? '')
+	.'&d2='.urlencode($_d2_name ?? '').'&d3='.urlencode($_d3_name ?? '')
+	.'&m2='.urlencode($_m2_name ?? '').'&m3='.urlencode($_m3_name ?? '')
+	.'&w2='.urlencode($_w2_name ?? '').'&w3='.urlencode($_w3_name ?? '');
 
-$path_150 = 'poster/done/'.$upp."_150.jpeg";
-$path_75 = 'poster/done/'.$upp."_75.jpeg";
+$path = $serve_base.'&type=main';
+$path_50 = $serve_base.'&type=50';
+$path_75 = $serve_base.'&type=75';
+$path_100 = $serve_base.'&type=100';
+$path_150 = $serve_base.'&type=150';
+$path_175 = $serve_base.'&type=175';
 
 
 
