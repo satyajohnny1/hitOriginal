@@ -1,5 +1,6 @@
 <?php
-error_log("DEBUG: makemovie.php START");
+error_log("DEBUG: makemovie.php START v2");
+header("X-Debug: makemovie-v2");
 include 'sessionCheck.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
