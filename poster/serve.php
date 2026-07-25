@@ -1,4 +1,9 @@
 <?php
+error_log("SERVE[1]: start rid=$rid type=$type");
+
+$cookie_lifetime = 48 * 60 * 60; // 48 hours
+ini_set('session.gc_maxlifetime', $cookie_lifetime);
+session_set_cookie_params($cookie_lifetime);
 session_start();
 require_once __DIR__ . '/../db.php';
 
@@ -7,9 +12,11 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
 $valid_types = ['main','50','75','100','150','175'];
 if ($rid <= 0 || !in_array($type, $valid_types)) {
+	error_log("SERVE[ERR]: bad params rid=$rid type=$type");
 	header("HTTP/1.0 400 Bad Request");
 	exit("Missing or invalid parameters");
 }
+error_log("SERVE[2]: params OK rid=$rid type=$type");
 
 $sql = "SELECT s.title, s.dname, s.aname, s.acname, s.cinename, s.ediname, s.musname, s.wriname,
                s.a2_name, s.a3_name, s.ac2_name, s.ac3_name, s.d2_name, s.d3_name,
@@ -20,10 +27,12 @@ $sql = "SELECT s.title, s.dname, s.aname, s.acname, s.cinename, s.ediname, s.mus
         WHERE s.rid = $rid LIMIT 1";
 $result = @mysqli_query($conn, $sql);
 if (!$result || mysqli_num_rows($result) === 0) {
+	error_log("SERVE[ERR]: movie not found rid=$rid");
 	header("HTTP/1.0 404 Not Found");
 	exit("Movie not found");
 }
 $row = mysqli_fetch_assoc($result);
+error_log("SERVE[3]: DB OK title=" . ($row['title'] ?? 'NULL'));
 
 $upp = strtoupper($row['title'] . $rid);
 
@@ -34,6 +43,7 @@ if ($type === 'main') {
 }
 
 $file_path = __DIR__ . '/done/' . $filename;
+error_log("SERVE[4]: file_path=$file_path exists=" . (file_exists($file_path) ? 'YES' : 'NO'));
 
 if (!file_exists($file_path)) {
 	$_GET['rid'] = $rid;
@@ -63,19 +73,25 @@ if (!file_exists($file_path)) {
 	$_GET['m3']  = $row['m3_name'] ?? '';
 	$_GET['w2']  = $row['w2_name'] ?? '';
 	$_GET['w3']  = $row['w3_name'] ?? '';
+	error_log("SERVE[5]: calling poster-v2.php include for rid=$rid title=$upp");
 
 	ob_start();
 	include __DIR__ . '/poster-v2.php';
 	ob_end_clean();
+
+	error_log("SERVE[6]: poster-v2.php returned, file exists=" . (file_exists($file_path) ? 'YES' : 'NO'));
 }
 
 if (!file_exists($file_path)) {
+	error_log("SERVE[ERR]: poster file STILL missing after generation: $file_path");
 	header("HTTP/1.0 404 Not Found");
 	exit("Poster not found");
 }
 
+error_log("SERVE[7]: serving $file_path size=" . filesize($file_path));
 header("Content-Type: image/jpeg");
 header("Cache-Control: public, max-age=604800");
 header("Expires: " . gmdate("D, d M Y H:i:s", time() + 604800) . " GMT");
 readfile($file_path);
+error_log("SERVE[8]: done");
 exit;
