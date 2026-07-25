@@ -722,11 +722,18 @@ error_reporting(E_ERROR);
                                             </div>
                                         </div>
                                           
-                                         <div class="form-group"  style="display: none;">
+                                          <div class="form-group"  style="display: none;">
                                             <label for="input-Default" class="col-sm-2 control-label">SO-FAR</label>
                                             <div class="col-sm-10">
                                                  <input type="text" class="form-control" id="_sofar" name="_sofar" >
-                                                 
+                                               
+                                            </div>
+                                        </div>
+                                         
+                                         <div class="form-group"  style="display: none;">
+                                            <label for="input-Default" class="col-sm-2 control-label">CoDirection</label>
+                                            <div class="col-sm-10">
+                                                 <input type="text" class="form-control" id="_codir_names" name="_codir_names" value="<?php echo htmlspecialchars($_GET['_codir_names'] ?? ''); ?>">
                                             </div>
                                         </div>
                                         

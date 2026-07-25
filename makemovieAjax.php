@@ -58,6 +58,11 @@ $_m3_name = $_GET ["_m3_name"];
 $_d2_name = $_GET ["_d2_name"];
 $_d3_name = $_GET ["_d3_name"];
 
+$_codir_names = isset($_GET["_codir_names"]) ? trim($_GET["_codir_names"]) : '';
+if (empty($_codir_names) || $_codir_names === '') {
+	$_codir_names = '-- NOTES--';
+}
+
  
 
  if($budget>400000001)
@@ -90,7 +95,7 @@ else if (50000000>$budget && $budget>100000000){
 }
 	
 	$sql = "INSERT INTO tolly_ready_for_shoot (uid, title, aid, acid, did, wid, mid, eid, cid, 
-budget, sofar, grade, status, pic, dt,notes, dname, aname, acname,cinename, ediname, musname, wriname,progress,a2,a3,ac2,ac3,d2,d3,w2,w3,m2,m3,a2_name,a3_name,ac2_name,ac3_name,d2_name,d3_name,w2_name,w3_name,m2_name,m3_name) VALUES (".$uid.", '".$title."', ".$aid.", ".$acid.", ".$did.", ".$wid.", ".$mid.", ".$eid.", ".$cid.", ".$budget.", ".$sofar.", '".$grade."', 'ready','pic',CURDATE(),'-- NOTES--', '".$dname."', '".$aname."', '".$acname."', '".$cname."', '".$ename."', '".$mname."', '".$wname."',30
+budget, sofar, grade, status, pic, dt,notes, dname, aname, acname,cinename, ediname, musname, wriname,progress,a2,a3,ac2,ac3,d2,d3,w2,w3,m2,m3,a2_name,a3_name,ac2_name,ac3_name,d2_name,d3_name,w2_name,w3_name,m2_name,m3_name) VALUES (".$uid.", '".$title."', ".$aid.", ".$acid.", ".$did.", ".$wid.", ".$mid.", ".$eid.", ".$cid.", ".$budget.", ".$sofar.", '".$grade."', 'ready','pic',CURDATE(),'".$_codir_names."', '".$dname."', '".$aname."', '".$acname."', '".$cname."', '".$ename."', '".$mname."', '".$wname."',30
 		, ".$_a2.", ".$_a3.", ".$_ac2.", ".$_ac3.", ".$_d2.",".$_d3.", ".$_w2.", ".$_w3.", ".$_m2.", ".$_m3.", '".$_a2_name."', '".$_a3_name."', '".$_ac2_name."', '".$_ac3_name."', '".$_d2_name."','".$_d3_name."', '".$_w2_name."', '".$_w3_name."', '".$_m2_name."', '".$_m3_name."')"; 
 	
 echo "<br> <br> <hr>";	

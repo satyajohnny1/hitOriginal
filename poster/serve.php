@@ -19,7 +19,7 @@ error_log("SERVE[2]: params OK rid=$rid type=$type");
 
 $sql = "SELECT s.title, s.dname, s.aname, s.acname, s.cinename, s.ediname, s.musname, s.wriname,
                s.a2_name, s.a3_name, s.ac2_name, s.ac3_name, s.d2_name, s.d3_name,
-               s.m2_name, s.m3_name, s.w2_name, s.w3_name,
+               s.m2_name, s.m3_name, s.w2_name, s.w3_name, s.notes,
                r.`50d_cen`, r.`75d_cen`, r.`100d_cen`, r.`150d_cen`, r.`175d_cen`, r.`25d_cen`
         FROM tolly_ready_for_shoot s
         LEFT JOIN tolly_release r ON r.rid = s.rid
@@ -72,6 +72,7 @@ if (!file_exists($file_path)) {
 	$_GET['m3']  = $row['m3_name'] ?? '';
 	$_GET['w2']  = $row['w2_name'] ?? '';
 	$_GET['w3']  = $row['w3_name'] ?? '';
+	$_GET['notes'] = $row['notes'] ?? '';
 	error_log("SERVE[5]: calling poster-v2.php include for rid=$rid title=$upp");
 
 	ob_start();

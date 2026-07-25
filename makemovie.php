@@ -65,7 +65,8 @@ error_reporting(E_ERROR);
 										 <li role="presentation"><a href="#tab3" data-toggle="tab"><i class="fa fa-check m-r-xs"></i>Actors</a></li>
                                         <li role="presentation"><a href="#tab4" data-toggle="tab"><i class="fa fa-check m-r-xs"></i>Actress</a></li>
                                         <li role="presentation"><a href="#tab5" data-toggle="tab"><i class="fa fa-truck m-r-xs"></i>Writer</a></li>
-										  <li role="presentation"><a href="#tab6" data-toggle="tab"><i class="fa fa-truck m-r-xs"></i>Make Sure</a></li>
+										  <li role="presentation"><a href="#tab6" data-toggle="tab"><i class="fa fa-users m-r-xs"></i>Co-Direction</a></li>
+										  <li role="presentation"><a href="#tab7" data-toggle="tab"><i class="fa fa-truck m-r-xs"></i>Make Sure</a></li>
                                        
                                     </ul>
 
@@ -550,8 +551,70 @@ error_reporting(E_ERROR);
                                             </ul>
                                             </div>
 									
-											
 									  <div class="tab-pane fade" id="tab6">
+                                                <div class="col-md-12">
+                                                    <div class="panel-body">
+                                                        <h4>Select people for Co-Direction / Screenplay</h4>
+                                                        <p class="text-muted">Select one or more people. Names will appear on the poster as "Screenplay, CoDirection - Name1 - Name2"</p>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <h5>Actors</h5>
+                                                                <?php
+                                                                $allActors = @mysqli_query($conn, "SELECT actor_id, actor_name FROM tolly_actor ORDER BY actor_name");
+                                                                if ($allActors && mysqli_num_rows($allActors) > 0):
+                                                                    while ($aa = mysqli_fetch_assoc($allActors)):
+                                                                ?>
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" class="codir_check" value="<?php echo htmlspecialchars($aa['actor_name']); ?>"> <?php echo htmlspecialchars($aa['actor_name']); ?>
+                                                                </label><br>
+                                                                <?php endwhile; endif; ?>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <h5>Actresses</h5>
+                                                                <?php
+                                                                $allActresses = @mysqli_query($conn, "SELECT actress_id, actress_name FROM tolly_actress ORDER BY actress_name");
+                                                                if ($allActresses && mysqli_num_rows($allActresses) > 0):
+                                                                    while ($aac = mysqli_fetch_assoc($allActresses)):
+                                                                ?>
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" class="codir_check" value="<?php echo htmlspecialchars($aac['actress_name']); ?>"> <?php echo htmlspecialchars($aac['actress_name']); ?>
+                                                                </label><br>
+                                                                <?php endwhile; endif; ?>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <h5>Directors</h5>
+                                                                <?php
+                                                                $allDirs = @mysqli_query($conn, "SELECT director_id, director_name FROM tolly_director ORDER BY director_name");
+                                                                if ($allDirs && mysqli_num_rows($allDirs) > 0):
+                                                                    while ($ad = mysqli_fetch_assoc($allDirs)):
+                                                                ?>
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" class="codir_check" value="<?php echo htmlspecialchars($ad['director_name']); ?>"> <?php echo htmlspecialchars($ad['director_name']); ?>
+                                                                </label><br>
+                                                                <?php endwhile; endif; ?>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <h5>Writers</h5>
+                                                                <?php
+                                                                $allWriters = @mysqli_query($conn, "SELECT writer_id, writer_name FROM tolly_writer ORDER BY writer_name");
+                                                                if ($allWriters && mysqli_num_rows($allWriters) > 0):
+                                                                    while ($aw = mysqli_fetch_assoc($allWriters)):
+                                                                ?>
+                                                                <label class="checkbox-inline">
+                                                                    <input type="checkbox" class="codir_check" value="<?php echo htmlspecialchars($aw['writer_name']); ?>"> <?php echo htmlspecialchars($aw['writer_name']); ?>
+                                                                </label><br>
+                                                                <?php endwhile; endif; ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ul class="pager wizard">
+                                                <li class="previous"><a href="#" class="btn btn-default">Previous</a></li>
+                                                <li class="next" style="display: none;" id="codir_next"><a href="#" class="btn btn-default">Next</a></li>
+                                            </ul>
+                                            </div>
+
+									  <div class="tab-pane fade" id="tab7">
                                               
                                                 <div class="col-md-12">
                                                   <div class="panel-body">
@@ -603,8 +666,13 @@ error_reporting(E_ERROR);
                                             </div>
                                         </div>
                                         
-                                         </div>
-                                        
+                                          </div>
+                                         
+                                          <div class="form-group" style="display:none;">
+                                            <label>Co-Direction</label>
+                                            <input type="text" class="form-control" id="codir_names" name="codir_names" value="">
+                                          </div>
+                                         
                                           <div class="form-group">                                           
                                             <div class="col-sm-6 col-md-offset-4">
                                                  <button type="button" class="btn btn-primary" id="sub_btn" style="width: 100%"><h2>Proceed to Next Step</h2></button>
@@ -797,8 +865,15 @@ error_reporting(E_ERROR);
                                                  <input type="text" class="form-control" id="_sofar" name="_sofar">                                                 
                                             </div>
                                         </div>
-                                        
-                                        
+                                         
+                                         
+                                         
+                                          <div class="form-group" style="display: none;">
+                                            <label for="input-Default" class="col-sm-2 control-label">CoDirection</label>
+                                            <div class="col-sm-10">
+                                                 <input type="text" class="form-control" id="_codir_names" name="_codir_names">
+                                            </div>
+                                        </div>
                                         
                                           <div class="form-group" style="display: none;">                                           
                                             <div class="col-sm-6 col-md-offset-4">
@@ -1177,6 +1252,11 @@ error_reporting(E_ERROR);
 		    		 $("#_actress_name").val(acv);
 		    		 $("#_actress_id").val(acid);
 		    		 $("#_sofar").val(sf);
+		    		 
+		    		 var codirNames = [];
+		    		 $(".codir_check:checked").each(function(){ codirNames.push($(this).val()); });
+		    		 $("#codir_names").val(codirNames.join(' - '));
+		    		 $("#_codir_names").val(codirNames.join(' - '));
 		    		 
 
 

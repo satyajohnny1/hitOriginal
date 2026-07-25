@@ -186,6 +186,22 @@ while ($crew_w > 860 && $crew_fonsiz > 8) {
 	$crew_w = abs($crew_box[4] - $crew_box[0]);
 }
 @imagettftext($jpg_image, $crew_fonsiz, 0, 120, 630, $cclr, $fnt, $crew_text);
+
+$notes_raw = trim(safeGET("notes"));
+if (!empty($notes_raw) && $notes_raw !== '-- NOTES--') {
+	$codir_text = 'Screenplay, CoDirection - ' . $notes_raw;
+	$codir_fonsiz = intval($crew_fonsiz * 0.65);
+	if ($codir_fonsiz < 9) $codir_fonsiz = 9;
+	$codir_box = @imagettfbbox($codir_fonsiz, 0, $fnt, $codir_text);
+	$codir_w = abs($codir_box[4] - $codir_box[0]);
+	while ($codir_w > 860 && $codir_fonsiz > 7) {
+		$codir_fonsiz--;
+		$codir_box = @imagettfbbox($codir_fonsiz, 0, $fnt, $codir_text);
+		$codir_w = abs($codir_box[4] - $codir_box[0]);
+	}
+	@imagettftext($jpg_image, $codir_fonsiz, 0, 120, 650, $cclr, $fnt, $codir_text);
+	error_log("POSTER[13a]: codirection text size=$codir_fonsiz text=$codir_text");
+}
 error_log("POSTER[13]: all text done title_size=$title_fonsiz dir_size=$fonsiz crew_size=$crew_fonsiz");
 
 error_log("POSTER[14]: saving main to $path");
