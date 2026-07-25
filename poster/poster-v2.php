@@ -139,10 +139,7 @@ imagecopy($jpg_image, $hit_img, 0, 60, 0, 0, 190, 190);
 imagedestroy($hit_img);
 error_log("POSTER[9]: hit logo done");
 
-$banner_box = @imagettfbbox(22, 0, $fnt, $b);
-$banner_w = abs($banner_box[4] - $banner_box[0]);
-$banner_x = intval((1000 - $banner_w) / 2);
-@imagettftext($jpg_image, 22, 0, $banner_x, 55, $bclr, $fnt, $b);
+@imagettftext($jpg_image, 22, 0, 10, 55, $bclr, $fnt, $b);
 error_log("POSTER[10]: banner text");
 
 $actor_text = $a;
