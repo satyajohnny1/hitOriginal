@@ -211,7 +211,7 @@ $notes_raw = trim(safeGET("notes"));
 
 if (!empty($notes_raw) && $notes_raw !== '-- NOTES--') {
 	$codir_text = 'Screenplay, CoDirection - ' . $notes_raw;
-	$codir_fonsiz = intval($crew_fonsiz * 0.80);
+	$codir_fonsiz = intval($crew_fonsiz * 0.85);
 	if ($codir_fonsiz < 9) $codir_fonsiz = 9;
 	$codir_box = @imagettfbbox($codir_fonsiz, 0, $fnt, $codir_text);
 	$codir_w = abs($codir_box[4] - $codir_box[0]);
@@ -228,7 +228,6 @@ if (!empty($notes_raw) && $notes_raw !== '-- NOTES--') {
 	];
 	$bright = $bright_colors[array_rand($bright_colors)];
 	$ncr = imagecolorallocate($jpg_image, $bright[0], $bright[1], $bright[2]);
-	@imagettftext($jpg_image, $codir_fonsiz, 0, $codir_x + 1, 651, $ncr, $fnt, $codir_text);
 	@imagettftext($jpg_image, $codir_fonsiz, 0, $codir_x, 650, $ncr, $fnt, $codir_text);
 	error_log("POSTER[13a]: codirection text size=$codir_fonsiz text=$codir_text");
 }
