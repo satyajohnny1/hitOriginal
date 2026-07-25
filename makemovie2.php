@@ -50,7 +50,7 @@ error_reporting(E_ERROR);
                                     <div class="row" style="margin-bottom:10px;">
                                         <div class="col-md-3">
                                             <?php $curFilter = isset($_GET['filter']) ? $_GET['filter'] : 'pending'; ?>
-                                            <select id="peopleFilter2" class="form-control" onchange="window.location.href='makemovie2.php?filter='+this.value">
+                                            <select id="peopleFilter2" class="form-control" onchange="filterPeople2()">
                                                 <option value="pending" <?php echo $curFilter==='pending'?'selected':''; ?>>Pending (No Movie in Range)</option>
                                                 <option value="all" <?php echo $curFilter==='all'?'selected':''; ?>>All</option>
                                                 <option value="flop" <?php echo $curFilter==='flop'?'selected':''; ?>>Flop Only</option>
@@ -1123,6 +1123,22 @@ error_reporting(E_ERROR);
 
 
 	function filterPeople2() {
+		var val = document.getElementById('peopleFilter2').value;
+		var tabs = ['music','cine','editor'];
+		var tableIds = { music:'example2', cine:'example-editable', editor:'example' };
+		tabs.forEach(function(tab) {
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'filterAjax2.php?filter=' + encodeURIComponent(val) + '&tab=' + tab);
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+					var table = document.getElementById(tableIds[tab]);
+					if (table) {
+						table.querySelector('tbody').innerHTML = xhr.responseText;
+					}
+				}
+			};
+			xhr.send();
+		});
 	}
 
 	
