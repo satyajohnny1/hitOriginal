@@ -47,15 +47,7 @@ error_reporting(E_ERROR);
                             <div class="panel-body">
                                 <div id="rootwizard">
                                     <div class="row" style="margin-bottom:10px;">
-                                        <div class="col-md-3">
-                                            <?php $curFilter = isset($_GET['filter']) ? $_GET['filter'] : 'pending'; ?>
-                                            <select id="peopleFilter" class="form-control" onchange="filterPeople()">
-                                                <option value="pending" <?php echo $curFilter==='pending'?'selected':''; ?>>Pending (No Movie in Range)</option>
-                                                <option value="all" <?php echo $curFilter==='all'?'selected':''; ?>>All</option>
-                                                <option value="flop" <?php echo $curFilter==='flop'?'selected':''; ?>>Flop Only</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-9 text-muted" style="padding-top:7px;font-size:12px;">
+                                        <div class="col-md-12 text-muted" style="padding-top:7px;font-size:12px;">
                                             Range: <?php echo $minid; ?> - <?php echo $maxid; ?> (Current RID: <?php echo $oriid; ?>)
                                         </div>
                                     </div>
@@ -126,6 +118,13 @@ error_reporting(E_ERROR);
                                                  
                                                 </div>
                                                 <div class="col-md-9">
+                                                    <div style="margin-bottom:10px;">
+                                                        <select class="form-control tab-filter" data-tab="director" onchange="filterTab(this)" style="width:250px;display:inline-block;">
+                                                            <option value="pending">Pending (No Movie in Range)</option>
+                                                            <option value="all">All</option>
+                                                            <option value="flop">Flop Only</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="table-responsive">
                                                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
@@ -226,7 +225,6 @@ error_reporting(E_ERROR);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$dir_status = $personStatus['tolly_director'][$dir_id_raw] ?? 'pending';
-                                                    					if ($curFilter !== 'all' && $dir_status !== $curFilter) continue;
                                                     					echo "<tr data-filter='$dir_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
@@ -274,6 +272,13 @@ error_reporting(E_ERROR);
                                             </div>
                                                 </div>
                                                 <div class="col-md-9">
+                                                    <div style="margin-bottom:10px;">
+                                                        <select class="form-control tab-filter" data-tab="actor" onchange="filterTab(this)" style="width:250px;display:inline-block;">
+                                                            <option value="pending">Pending (No Movie in Range)</option>
+                                                            <option value="all">All</option>
+                                                            <option value="flop">Flop Only</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="table-responsive">
                                                         <table id="example3" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
@@ -324,7 +329,6 @@ error_reporting(E_ERROR);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$act_status = $personStatus['tolly_actor'][$act_id_raw] ?? 'pending';
-                                                    					if ($curFilter !== 'all' && $act_status !== $curFilter) continue;
                                                     					echo "<tr data-filter='$act_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
                                                      					echo "<td><b>".$dir_cr." CRORES</b>";
@@ -374,6 +378,13 @@ error_reporting(E_ERROR);
                                             </div>
                                                 </div>
                                                 <div class="col-md-9">
+                                                    <div style="margin-bottom:10px;">
+                                                        <select class="form-control tab-filter" data-tab="actress" onchange="filterTab(this)" style="width:250px;display:inline-block;">
+                                                            <option value="pending">Pending (No Movie in Range)</option>
+                                                            <option value="all">All</option>
+                                                            <option value="flop">Flop Only</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="table-responsive">
                                                         <table id="example-editable" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
@@ -425,7 +436,6 @@ error_reporting(E_ERROR);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$acs_status = $personStatus['tolly_actress'][$actress_id_raw] ?? 'pending';
-                                                    					if ($curFilter !== 'all' && $acs_status !== $curFilter) continue;
                                                     					echo "<tr data-filter='$acs_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
@@ -473,6 +483,13 @@ error_reporting(E_ERROR);
                                             </div>
                                                 </div>
                                                <div class="col-md-9">
+                                                    <div style="margin-bottom:10px;">
+                                                        <select class="form-control tab-filter" data-tab="writer" onchange="filterTab(this)" style="width:250px;display:inline-block;">
+                                                            <option value="pending">Pending (No Movie in Range)</option>
+                                                            <option value="all">All</option>
+                                                            <option value="flop">Flop Only</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="table-responsive">
                                                         <table id="example2" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
@@ -524,7 +541,6 @@ error_reporting(E_ERROR);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$wri_status = $personStatus['tolly_writer'][$writer_id_raw] ?? 'pending';
-                                                    					if ($curFilter !== 'all' && $wri_status !== $curFilter) continue;
                                                     					echo "<tr data-filter='$wri_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
                                                     					echo "<td><b>".$dir_cr." CR</b>";
@@ -554,57 +570,35 @@ error_reporting(E_ERROR);
 									  <div class="tab-pane fade" id="tab6">
                                                 <div class="col-md-12">
                                                     <div class="panel-body">
-                                                        <h4>Select people for Co-Direction / Screenplay</h4>
-                                                        <p class="text-muted">Select one or more people. Names will appear on the poster as "Screenplay, CoDirection - Name1 - Name2"</p>
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <h5>Actors</h5>
+                                                        <h4>Co-Direction / Screenplay — Select people (names appear on poster)</h4>
+                                                        <div class="table-responsive">
+                                                            <table id="example-codir" class="display table" style="width: 100%; cellspacing: 0;">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th>Name</th>
+                                                                        <th>Type</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
                                                                 <?php
-                                                                $allActors = @mysqli_query($conn, "SELECT actor_id, actor_name FROM tolly_actor ORDER BY actor_name");
-                                                                if ($allActors && mysqli_num_rows($allActors) > 0):
-                                                                    while ($aa = mysqli_fetch_assoc($allActors)):
-                                                                ?>
-                                                                <label class="checkbox-inline">
-                                                                    <input type="checkbox" class="codir_check" value="<?php echo htmlspecialchars($aa['actor_name']); ?>"> <?php echo htmlspecialchars($aa['actor_name']); ?>
-                                                                </label><br>
-                                                                <?php endwhile; endif; ?>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <h5>Actresses</h5>
-                                                                <?php
-                                                                $allActresses = @mysqli_query($conn, "SELECT actress_id, actress_name FROM tolly_actress ORDER BY actress_name");
-                                                                if ($allActresses && mysqli_num_rows($allActresses) > 0):
-                                                                    while ($aac = mysqli_fetch_assoc($allActresses)):
-                                                                ?>
-                                                                <label class="checkbox-inline">
-                                                                    <input type="checkbox" class="codir_check" value="<?php echo htmlspecialchars($aac['actress_name']); ?>"> <?php echo htmlspecialchars($aac['actress_name']); ?>
-                                                                </label><br>
-                                                                <?php endwhile; endif; ?>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <h5>Directors</h5>
-                                                                <?php
-                                                                $allDirs = @mysqli_query($conn, "SELECT director_id, director_name FROM tolly_director ORDER BY director_name");
-                                                                if ($allDirs && mysqli_num_rows($allDirs) > 0):
-                                                                    while ($ad = mysqli_fetch_assoc($allDirs)):
-                                                                ?>
-                                                                <label class="checkbox-inline">
-                                                                    <input type="checkbox" class="codir_check" value="<?php echo htmlspecialchars($ad['director_name']); ?>"> <?php echo htmlspecialchars($ad['director_name']); ?>
-                                                                </label><br>
-                                                                <?php endwhile; endif; ?>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <h5>Writers</h5>
-                                                                <?php
-                                                                $allWriters = @mysqli_query($conn, "SELECT writer_id, writer_name FROM tolly_writer ORDER BY writer_name");
-                                                                if ($allWriters && mysqli_num_rows($allWriters) > 0):
-                                                                    while ($aw = mysqli_fetch_assoc($allWriters)):
-                                                                ?>
-                                                                <label class="checkbox-inline">
-                                                                    <input type="checkbox" class="codir_check" value="<?php echo htmlspecialchars($aw['writer_name']); ?>"> <?php echo htmlspecialchars($aw['writer_name']); ?>
-                                                                </label><br>
-                                                                <?php endwhile; endif; ?>
-                                                            </div>
+                                                                $codir_sql = "SELECT 'Actor' AS ptype, actor_name AS pname FROM tolly_actor
+	                                                                UNION ALL SELECT 'Actress', actress_name FROM tolly_actress
+	                                                                UNION ALL SELECT 'Director', director_name FROM tolly_director
+	                                                                UNION ALL SELECT 'Writer', writer_name FROM tolly_writer
+	                                                                ORDER BY pname";
+	                                                                $codir_result = @mysqli_query($conn, $codir_sql);
+	                                                                if ($codir_result && mysqli_num_rows($codir_result) > 0):
+	                                                                while ($cr = mysqli_fetch_assoc($codir_result)):
+	                                                                ?>
+	                                                                <tr>
+	                                                                    <td><input type="checkbox" class="codir_check" value="<?php echo htmlspecialchars($cr['pname']); ?>"></td>
+	                                                                    <td><?php echo htmlspecialchars($cr['pname']); ?></td>
+	                                                                    <td><?php echo htmlspecialchars($cr['ptype']); ?></td>
+	                                                                </tr>
+	                                                                <?php endwhile; endif; ?>
+	                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1363,23 +1357,21 @@ error_reporting(E_ERROR);
 
 	
 
-	function filterPeople() {
-		var val = document.getElementById('peopleFilter').value;
-		var tabs = ['director','actor','actress','writer'];
+	function filterTab(el) {
+		var val = el.value;
+		var tab = el.getAttribute('data-tab');
 		var tableIds = { director:'example', actor:'example3', actress:'example-editable', writer:'example2' };
-		tabs.forEach(function(tab) {
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', 'filterAjax.php?filter=' + encodeURIComponent(val) + '&tab=' + tab);
-			xhr.onload = function() {
-				if (xhr.status === 200) {
-					var table = document.getElementById(tableIds[tab]);
-					if (table) {
-						table.querySelector('tbody').innerHTML = xhr.responseText;
-					}
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'filterAjax.php?filter=' + encodeURIComponent(val) + '&tab=' + tab);
+		xhr.onload = function() {
+			if (xhr.status === 200) {
+				var table = document.getElementById(tableIds[tab]);
+				if (table) {
+					table.querySelector('tbody').innerHTML = xhr.responseText;
 				}
-			};
-			xhr.send();
-		});
+			}
+		};
+		xhr.send();
 	}
 
 

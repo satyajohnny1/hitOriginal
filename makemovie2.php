@@ -48,15 +48,7 @@ error_reporting(E_ERROR);
                             <div class="panel-body">
                                 <div id="rootwizard">
                                     <div class="row" style="margin-bottom:10px;">
-                                        <div class="col-md-3">
-                                            <?php $curFilter = isset($_GET['filter']) ? $_GET['filter'] : 'pending'; ?>
-                                            <select id="peopleFilter2" class="form-control" onchange="filterPeople2()">
-                                                <option value="pending" <?php echo $curFilter==='pending'?'selected':''; ?>>Pending (No Movie in Range)</option>
-                                                <option value="all" <?php echo $curFilter==='all'?'selected':''; ?>>All</option>
-                                                <option value="flop" <?php echo $curFilter==='flop'?'selected':''; ?>>Flop Only</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-9 text-muted" style="padding-top:7px;font-size:12px;">
+                                        <div class="col-md-12 text-muted" style="padding-top:7px;font-size:12px;">
                                             Range: <?php echo $minid; ?> - <?php echo $maxid; ?> (Current RID: <?php echo $oriid; ?>)
                                         </div>
                                     </div>
@@ -95,7 +87,14 @@ error_reporting(E_ERROR);
                                             </div> 
                                             </div>
                                                 </div>
-                                                <div class="col-md-9">
+                                                    <div class="col-md-9">
+                                                    <div style="margin-bottom:10px;">
+                                                        <select class="form-control tab-filter" data-tab="music" onchange="filterTab2(this)" style="width:250px;display:inline-block;">
+                                                            <option value="pending">Pending (No Movie in Range)</option>
+                                                            <option value="all">All</option>
+                                                            <option value="flop">Flop Only</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="table-responsive">
                                                         <table id="example2" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
@@ -192,7 +191,6 @@ error_reporting(E_ERROR);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$fstatus = $personStatus['tolly_music'][$music_id_raw] ?? 'pending';
-                                                    					if ($curFilter !== 'all' && $fstatus !== $curFilter) continue;
                                                     					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                       					echo "<td><b>".$dir_cr." CR</b></td>";
@@ -237,6 +235,13 @@ error_reporting(E_ERROR);
                                             </div>
                                                 </div>
                                                 <div class="col-md-9">
+                                                    <div style="margin-bottom:10px;">
+                                                        <select class="form-control tab-filter" data-tab="cine" onchange="filterTab2(this)" style="width:250px;display:inline-block;">
+                                                            <option value="pending">Pending (No Movie in Range)</option>
+                                                            <option value="all">All</option>
+                                                            <option value="flop">Flop Only</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="table-responsive">
                                                         <table id="example-editable" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
@@ -279,7 +284,6 @@ error_reporting(E_ERROR);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$fstatus = $personStatus['tolly_cine'][$cine_id_raw] ?? 'pending';
-                                                    					if ($curFilter !== 'all' && $fstatus !== $curFilter) continue;
                                                     					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_cine' name='r_cine' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                       					echo "<td><b>".$dir_cr." CRORES</b></td>";
@@ -321,6 +325,13 @@ error_reporting(E_ERROR);
                                             </div>
                                                 </div>
                                                 <div class="col-md-9">
+                                                    <div style="margin-bottom:10px;">
+                                                        <select class="form-control tab-filter" data-tab="editor" onchange="filterTab2(this)" style="width:250px;display:inline-block;">
+                                                            <option value="pending">Pending (No Movie in Range)</option>
+                                                            <option value="all">All</option>
+                                                            <option value="flop">Flop Only</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="table-responsive">
                                                         <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
@@ -363,7 +374,6 @@ error_reporting(E_ERROR);
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$fstatus = $personStatus['tolly_editor'][$editor_id_raw] ?? 'pending';
-                                                    					if ($curFilter !== 'all' && $fstatus !== $curFilter) continue;
                                                     					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_edi' name='r_edi' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                       					echo "<td><b>".$dir_cr." CRORES</b></td>";
@@ -1129,23 +1139,21 @@ error_reporting(E_ERROR);
 		});
 
 
-	function filterPeople2() {
-		var val = document.getElementById('peopleFilter2').value;
-		var tabs = ['music','cine','editor'];
+	function filterTab2(el) {
+		var val = el.value;
+		var tab = el.getAttribute('data-tab');
 		var tableIds = { music:'example2', cine:'example-editable', editor:'example' };
-		tabs.forEach(function(tab) {
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', 'filterAjax2.php?filter=' + encodeURIComponent(val) + '&tab=' + tab);
-			xhr.onload = function() {
-				if (xhr.status === 200) {
-					var table = document.getElementById(tableIds[tab]);
-					if (table) {
-						table.querySelector('tbody').innerHTML = xhr.responseText;
-					}
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'filterAjax2.php?filter=' + encodeURIComponent(val) + '&tab=' + tab);
+		xhr.onload = function() {
+			if (xhr.status === 200) {
+				var table = document.getElementById(tableIds[tab]);
+				if (table) {
+					table.querySelector('tbody').innerHTML = xhr.responseText;
 				}
-			};
-			xhr.send();
-		});
+			}
+		};
+		xhr.send();
 	}
 
 	
