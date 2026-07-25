@@ -363,6 +363,9 @@ $path_175 = $serve_base.'&type=175';
                                             <div class="col-md-12" style="position:relative; display: none;"   id="pos_175">
                                                 <img src="<?php echo $path_175?>" style="width: 100%">
                                             </div>
+                                            <div class="col-md-12" style="position:relative; display: none;"   id="pos_150">
+                                                <img src="<?php echo $path_150?>" style="width: 100%">
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12" style="text-align:center;">
@@ -371,11 +374,11 @@ $path_175 = $serve_base.'&type=175';
                                         </div>
                                         <div class="row" style="margin-top:10px;">
                                             <div class="col-md-12" style="text-align:center;">
-                                                <a href="<?php echo $path?>" target="_blank" class="btn btn-default btn-rounded btn-sm">Main</a>
-                                                <a href="<?php echo $path_50?>" target="_blank" class="btn btn-default btn-rounded btn-sm">50</a>
-                                                <a href="<?php echo $path_100?>" target="_blank" class="btn btn-default btn-rounded btn-sm">100</a>
-                                                <a href="<?php echo $path_150?>" target="_blank" class="btn btn-default btn-rounded btn-sm">150</a>
-                                                <a href="<?php echo $path_175?>" target="_blank" class="btn btn-default btn-rounded btn-sm">175</a>
+                                                <a href="javascript:void(0)" onclick="showPoster('main')" class="btn btn-default btn-rounded btn-sm">Main</a>
+                                                <a href="javascript:void(0)" onclick="showPoster('50')" class="btn btn-default btn-rounded btn-sm">50</a>
+                                                <a href="javascript:void(0)" onclick="showPoster('100')" class="btn btn-default btn-rounded btn-sm">100</a>
+                                                <a href="javascript:void(0)" onclick="showPoster('150')" class="btn btn-default btn-rounded btn-sm">150</a>
+                                                <a href="javascript:void(0)" onclick="showPoster('175')" class="btn btn-default btn-rounded btn-sm">175</a>
                                             </div>
                                         </div>
 
@@ -707,6 +710,12 @@ $path_175 = $serve_base.'&type=175';
                 		$("#pos_175").hide();
                       }
 
+                function showPoster(type) {
+                    var ids = {'main':'pos_0','50':'pos_50','100':'pos_100','150':'pos_150','175':'pos_175'};
+                    $.each(ids, function(k, id){ $('#'+id).hide(); });
+                    var target = ids[type] || 'pos_0';
+                    $('#'+target).show();
+                }
 
                 $('#posterRegenBtn').on('click', function(){
                     var btn = $(this);
@@ -778,6 +787,7 @@ $path_175 = $serve_base.'&type=175';
                             $('#pos_50 img').attr('src', '<?php echo $path_50?>' + bust);
                             $('#pos_100 img').attr('src', '<?php echo $path_100?>' + bust);
                             $('#pos_175 img').attr('src', '<?php echo $path_175?>' + bust);
+                            $('#pos_150 img').attr('src', '<?php echo $path_150?>' + bust);
                             btn.prop('disabled', false);
                         },
                         error: function(xhr, status, errorThrown) {
