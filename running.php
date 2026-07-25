@@ -714,8 +714,8 @@ $('#posterRegenBtn').on('click', function(){
     var hostname = arr[0] + "//" + arr[2];
     if(hostname.includes("localhost")){ hostname = hostname+"/hit"; }
 
-    var plink = hostname+'/poster/poster-v2.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
-        +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
+    var plink = hostname+'/poster/poster-v2.php?rid='+rid+'&b='+encodeURIComponent(b)+'&p='+encodeURIComponent(p)+'&d='+encodeURIComponent(d)+'&a='+encodeURIComponent(a)+'&ac='+encodeURIComponent(ac)+'&c='+encodeURIComponent(c)+'&e='+encodeURIComponent(e)+'&m='+encodeURIComponent(m)+'&w='+encodeURIComponent(w)+'&tit='+encodeURIComponent(tit)+'&raw_title='+encodeURIComponent('<?php echo addslashes(strtoupper($title)); ?>')+'&notes='+encodeURIComponent('<?php echo addslashes($notes ?? ""); ?>')+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
+        +'&a2='+encodeURIComponent(a2)+'&a3='+encodeURIComponent(a3)+'&ac2='+encodeURIComponent(ac2)+'&ac3='+encodeURIComponent(ac3)+'&d2='+encodeURIComponent(d2)+'&d3='+encodeURIComponent(d3)+'&w2='+encodeURIComponent(w2)+'&w3='+encodeURIComponent(w3)+'&m2='+encodeURIComponent(m2)+'&m3='+encodeURIComponent(m3);
 
     toastr.info("Regenerating poster...");
     $.ajax({

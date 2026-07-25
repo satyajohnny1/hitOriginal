@@ -757,6 +757,8 @@ $path_175 = $serve_base.'&type=175';
                         + '&d=' + encodeURIComponent(d) + '&a=' + encodeURIComponent(a) + '&ac=' + encodeURIComponent(ac)
                         + '&c=' + encodeURIComponent(c) + '&e=' + encodeURIComponent(e) + '&m=' + encodeURIComponent(m)
                         + '&w=' + encodeURIComponent(w) + '&tit=' + encodeURIComponent(tit)
+                        + '&raw_title=' + encodeURIComponent('<?php echo addslashes(strtoupper($title ?? '')); ?>')
+                        + '&notes=' + encodeURIComponent('<?php echo addslashes($notes ?? ""); ?>')
                         + '&fif=' + fif + '&hun=' + hun + '&fiv=' + fiv + '&t5=' + t5 + '&sev=' + sev + '&onf=' + onf
                         + '&a2=' + encodeURIComponent(a2) + '&a3=' + encodeURIComponent(a3)
                         + '&ac2=' + encodeURIComponent(ac2) + '&ac3=' + encodeURIComponent(ac3)

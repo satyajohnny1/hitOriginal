@@ -43,12 +43,15 @@ $e   = strtoupper(safeGET("e"));
 $m   = strtoupper(safeGET("m"));
 $w   = strtoupper(safeGET("w"));
 $tit = strtoupper(safeGET("tit"));
+$rid = safeGET("rid");
 $disp_title = safeGET("raw_title");
 if (empty($disp_title)) $disp_title = $tit;
+if ($rid !== '' && substr($tit, -strlen($rid)) !== $rid) {
+	$tit .= $rid;
+}
 $fif = intval(safeGET("fif"));
 $hun = intval(safeGET("hun"));
 $fiv = intval(safeGET("fiv"));
-$rid = safeGET("rid");
 $t5  = intval(safeGET("t5"));
 $sev = intval(safeGET("sev"));
 $onf = intval(safeGET("onf"));
