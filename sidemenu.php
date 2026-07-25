@@ -54,10 +54,6 @@
                                     <li><a href="cron.php">Cron Scheduler</a></li>
                                     <li><a href="poster/regenallposters.php">Regen All Posters</a></li>
                                     <li><a href="email_config.php">Email Config</a></li>
-                                    <li><a href="test_smtp.php">Test SMTP</a></li>
-                                    <li><a href="activateMail.php">Test Activation Mail</a></li>
-                                    <li><a href="forgotMail.php">Test Forgot Password Mail</a></li>
-                                    <li><a href="setup.php">Actor Bulk Setup</a></li>
                                 </ul>
                             </li>
 		    <li><a href="pending.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-random"></span><p>Pending</p></a>
