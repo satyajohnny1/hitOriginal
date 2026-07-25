@@ -1,37 +1,6 @@
 <?php
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-ini_set('error_reporting', E_ALL);
-error_reporting(E_ALL);
-ini_set('memory_limit', '256M');
-set_time_limit(60);
-
-set_error_handler(function($errno, $errstr, $errfile, $errline) {
-    $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
-    $traceStr = '';
-    foreach ($trace as $i => $frame) {
-        $traceStr .= "  #$i " . ($frame['function'] ?? '?') . "(" . ($frame['args'][0] ?? '') . ") called at [" . ($frame['file'] ?? '?') . ":" . ($frame['line'] ?? '?') . "]\n";
-    }
-    error_log("PHP ERROR [$errno]: $errstr in $errfile:$errline\nSTACK TRACE:\n$traceStr");
-    return true;
-});
-
-register_shutdown_function(function() {
-    $err = error_get_last();
-    if ($err && in_array($err['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
-        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
-        $traceStr = '';
-        foreach ($trace as $i => $frame) {
-            $traceStr .= "  #$i " . ($frame['function'] ?? '?') . "(" . ($frame['args'][0] ?? '') . ") called at [" . ($frame['file'] ?? '?') . ":" . ($frame['line'] ?? '?') . "]\n";
-        }
-        error_log("PHP FATAL [$err[type]]: $err[message] in $err[file]:$err[line]\nSTACK TRACE:\n$traceStr");
-    }
-});
-
-error_log("DEBUG: makemovie.php START v3");
 include 'sessionCheck.php';
 include 'db.php';
-error_log("DEBUG: db connected OK, conn=" . ($conn ? "valid" : "NULL"));
 
 $rangeQ = @mysqli_query($conn, "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot");
 $rangeRow = mysqli_fetch_assoc($rangeQ);
@@ -80,7 +49,6 @@ foreach ($rangeTypes as $rt) {
         }
     }
 }
-error_log("DEBUG: status computation done");
 ?>
 <!DOCTYPE html>
 <html>
@@ -609,14 +577,12 @@ error_log("DEBUG: status computation done");
                                                                 </thead>
                                                                  <tbody>
                                                                  <?php
-                                                                 error_log("DEBUG: codir query start");
-                                                                 $codir_sql = "SELECT 'Actor' AS ptype, actor_name AS pname FROM tolly_actor
-	                                                                UNION ALL SELECT 'Actress', actress_name FROM tolly_actress
-	                                                                UNION ALL SELECT 'Director', director_name FROM tolly_director
-	                                                                UNION ALL SELECT 'Writer', writer_name FROM tolly_writer
+                                                                 $codir_sql = "SELECT 'Actor' AS ptype, CONVERT(actor_name USING utf8mb4) AS pname FROM tolly_actor
+	                                                                UNION ALL SELECT 'Actress', CONVERT(actress_name USING utf8mb4) FROM tolly_actress
+	                                                                UNION ALL SELECT 'Director', CONVERT(director_name USING utf8mb4) FROM tolly_director
+	                                                                UNION ALL SELECT 'Writer', CONVERT(writer_name USING utf8mb4) FROM tolly_writer
 	                                                                ORDER BY pname";
 	                                                                $codir_result = @mysqli_query($conn, $codir_sql);
-	                                                                error_log("DEBUG: codir rows=" . ($codir_result ? mysqli_num_rows($codir_result) : 'FAIL'));
 	                                                                if ($codir_result && mysqli_num_rows($codir_result) > 0):
 	                                                                while ($cr = mysqli_fetch_assoc($codir_result)):
 	                                                                ?>
@@ -1412,7 +1378,6 @@ error_log("DEBUG: status computation done");
 </html> 
  
 <?php 
-error_log("DEBUG: makemovie.php END");
 if($conn!=null){
 mysqli_close($conn);
 }
