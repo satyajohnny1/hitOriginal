@@ -139,17 +139,26 @@ imagecopy($jpg_image, $hit_img, 0, 60, 0, 0, 190, 190);
 imagedestroy($hit_img);
 error_log("POSTER[9]: hit logo done");
 
-@imagettftext($jpg_image, 22, 0, 10, 55, $bclr, $fnt, $b);
+$banner_box = @imagettfbbox(22, 0, $fnt, $b);
+$banner_w = abs($banner_box[4] - $banner_box[0]);
+$banner_x = intval((1000 - $banner_w) / 2);
+@imagettftext($jpg_image, 22, 0, $banner_x, 55, $bclr, $fnt, $b);
 error_log("POSTER[10]: banner text");
 
 $actor_text = $a;
 if ($hero_count === 2) $actor_text = $a . ' - ' . $a2;
 if ($hero_count === 3) $actor_text = $a . ' - ' . $a2 . ' - ' . $a3;
 if (!empty($ac)) $actor_text .= ' - ' . $ac;
-@imagettftext($jpg_image, 17, 0, 300, 390, $cclr, $fnt, $actor_text);
+$actor_box = @imagettfbbox(17, 0, $fnt, $actor_text);
+$actor_w = abs($actor_box[4] - $actor_box[0]);
+$actor_x = intval((1000 - $actor_w) / 2);
+@imagettftext($jpg_image, 17, 0, $actor_x, 390, $cclr, $fnt, $actor_text);
 error_log("POSTER[11]: actor text");
 
-@imagettftext($jpg_image, 35, 0, 100, 395, $tclr, $fnt, "______________________________________");
+$ul_box = @imagettfbbox(35, 0, $fnt, "______________________________________");
+$ul_w = abs($ul_box[4] - $ul_box[0]);
+$ul_x = intval((1000 - $ul_w) / 2);
+@imagettftext($jpg_image, 35, 0, $ul_x, 395, $tclr, $fnt, "______________________________________");
 
 $title_max_w = 760;
 $title_fonsiz = 80;
@@ -160,27 +169,34 @@ while ($title_w > $title_max_w && $title_fonsiz > 30) {
 	$title_box = @imagettfbbox($title_fonsiz, 0, $tfnt, $disp_title);
 	$title_w = abs($title_box[4] - $title_box[0]);
 }
-@imagettftext($jpg_image, $title_fonsiz, 0, 200, 490, $tclr, $tfnt, $disp_title);
+$title_x = intval((1000 - $title_w) / 2);
+@imagettftext($jpg_image, $title_fonsiz, 0, $title_x, 490, $tclr, $tfnt, $disp_title);
 error_log("POSTER[12]: title text size=$title_fonsiz width=$title_w");
 
-@imagettftext($jpg_image, 35, 0, 100, 500, $tclr, $fnt, "______________________________________");
+$ul2_box = @imagettfbbox(35, 0, $fnt, "______________________________________");
+$ul2_w = abs($ul2_box[4] - $ul2_box[0]);
+$ul2_x = intval((1000 - $ul2_w) / 2);
+@imagettftext($jpg_image, 35, 0, $ul2_x, 500, $tclr, $fnt, "______________________________________");
 
 $fonsiz = 35;
-$area = 300;
 $dir_text = trim($d . '  ' . $d2 . '  ' . $d3);
-if (strlen($d2) > 2) { $fonsiz = 30; $area = 200; }
-if (strlen($d3) > 2) { $fonsiz = 25; $area = 70; }
+if (strlen($d2) > 2) $fonsiz = 30;
+if (strlen($d3) > 2) $fonsiz = 25;
 $dir_box = @imagettfbbox($fonsiz, 0, $fnt, $dir_text);
 $dir_w = abs($dir_box[4] - $dir_box[0]);
-$dir_max_w = 1000 - $area - 20;
+$dir_max_w = 960;
 while ($dir_w > $dir_max_w && $fonsiz > 14) {
 	$fonsiz -= 2;
 	$dir_box = @imagettfbbox($fonsiz, 0, $fnt, $dir_text);
 	$dir_w = abs($dir_box[4] - $dir_box[0]);
 }
-@imagettftext($jpg_image, $fonsiz, 0, $area, 550, $cclr, $fnt, $dir_text);
+$dir_x = intval((1000 - $dir_w) / 2);
+@imagettftext($jpg_image, $fonsiz, 0, $dir_x, 550, $cclr, $fnt, $dir_text);
 
-@imagettftext($jpg_image, 28, 0, 340, 600, $cclr, $fnt, $p);
+$prod_box = @imagettfbbox(28, 0, $fnt, $p);
+$prod_w = abs($prod_box[4] - $prod_box[0]);
+$prod_x = intval((1000 - $prod_w) / 2);
+@imagettftext($jpg_image, 28, 0, $prod_x, 600, $cclr, $fnt, $p);
 
 $crew_text = $m . ' ' . $m2 . ' ' . $m3 . '-' . $w . ' ' . $w2 . ' ' . $w3 . ' - ' . $e . ' - ' . $c;
 $crew_box = @imagettfbbox(13, 0, $fnt, $crew_text);
@@ -191,7 +207,8 @@ while ($crew_w > 860 && $crew_fonsiz > 8) {
 	$crew_box = @imagettfbbox($crew_fonsiz, 0, $fnt, $crew_text);
 	$crew_w = abs($crew_box[4] - $crew_box[0]);
 }
-@imagettftext($jpg_image, $crew_fonsiz, 0, 120, 630, $cclr, $fnt, $crew_text);
+$crew_x = intval((1000 - $crew_w) / 2);
+@imagettftext($jpg_image, $crew_fonsiz, 0, $crew_x, 630, $cclr, $fnt, $crew_text);
 
 $notes_raw = trim(safeGET("notes"));
 
