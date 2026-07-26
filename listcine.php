@@ -30,7 +30,7 @@ include __DIR__ . '/session_init.php';
             <!-- Page Sidebar -->
 		    <div class="page-inner">
             <div class="page-title">
-                           
+                <h3>Cinematographers List</h3>                
             </div>
             
           
@@ -40,7 +40,7 @@ include __DIR__ . '/session_init.php';
                         <div class="col-md-12">
                             <div class="panel panel-white">
                                 <div class="panel-heading clearfix">
-                                    <h4 class="panel-title">Basic example</h4>
+                                     <button class="btn btn-success btn-sm pull-right" onclick="openAddModal()"><i class="fa fa-plus"></i> Add New</button>
                                 </div>
                                 <div class="panel-body">
                                    <div class="table-responsive">
@@ -51,50 +51,56 @@ include __DIR__ . '/session_init.php';
                                                                     <th>cine</th>
                                                                     <th>Remuneration</th>
                                                                     <th>Grade</th>
-                                                                    <th>PL</th>                                                                     
-                                                                    
+                                                                    <th>PL</th>
+                                                                    <th>Actions</th>
                                                                 </tr>
                                                             </thead>
-													<!-- cine serach code -->
+												<!-- cine serach code -->
                                                         
                                                             <tbody>
                                                              <?php 
-                                                    			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_cine";
-                                                    			$result = mysqli_query($conn, $sql);
-                                                    			
-                                                    			if (mysqli_num_rows($result) > 0) {
-                                                    				// output data of each row
-                                                    				while($row = mysqli_fetch_assoc($result)) {
-                                                    					$dir_id = $row["cine_id"];
-                                                    					$dir_name = $row["cine_name"];
-                                                    					$dir_rate = $row["cine_rate"];
-                                                    					$dir_pic = $row["cine_pic"];                                                    					
-                                                    					$dir_cr = round(($dir_rate/10000000),2);   
-                                                    					echo "<tr>";
-                                                    					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='cine.php?id=$dir_id' class='btn'></a></td>";
-                                                    					echo "<td><a href='cine.php?id=$dir_id' class='btn'>$dir_name</a></td>";
-                                                     					echo "<td data-order='".$dir_cr."'><b>".$dir_cr." CRORES</b></td>";
-                                                    					echo "<td>".$row["cine_rating"]."</td>"; 
-																		echo "<td>".$row["pl"]."</td>";                                                    					
-                                                    					                                                    					
-                                                    					echo  "</tr>"; 
-                                                    					 
-                                                    				
-                                                    				}
-                                                    			}  
-                                                    			  
+                                                   			include 'db.php'; 
+                                                   			$sql = "SELECT * FROM tolly_cine";
+                                                   			$result = mysqli_query($conn, $sql);
+                                                   			
+                                                   			if (mysqli_num_rows($result) > 0) {
+                                                   				while($row = mysqli_fetch_assoc($result)) {
+                                                   					$dir_id = $row["cine_id"];
+                                                   					$dir_name = $row["cine_name"];
+                                                   					$dir_rate = $row["cine_rate"];
+                                                   					$dir_grade = $row["cine_grade"];
+                                                   					$dir_status = $row["cine_status"];
+                                                   					$dir_rating = $row["cine_rating"];
+                                                   					$dir_pic = $row["cine_pic"];
+                                                   					$dir_cr = round(($dir_rate/10000000),2);
+                                                   					$pl_val = floatval($row["pl"]);
+                                                   					$pl_cr = round(($pl_val/10000000),2);
+                                                   					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
+                                                   					
+                                                   					echo "<tr data-id='$dir_id' data-table='cine'>";
+                                                   					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"></td>";
+                                                   					echo "<td class='cell-name'><a href='cine.php?id=$dir_id' class='btn'>$dir_name</a></td>";
+                                                   					echo "<td class='cell-rate' data-raw='$dir_rate'><b>".$dir_cr." CRORES</b></td>";
+                                                   					echo "<td class='cell-rating'>$dir_rating</td>";
+																		echo "<td class='$pl_class' data-order='".$pl_cr."'><b>".$pl_cr." CRORES</b></td>";
+																		echo "<td>";
+																		echo "<span class='edit-actions'><button class='btn btn-xs btn-primary' onclick='startEdit(this)'><i class='fa fa-pencil'></i></button> ";
+																		echo "<button class='btn btn-xs btn-danger' onclick='deleteRow(this)'><i class='fa fa-trash'></i></button></span> ";
+																		echo "<span class='save-actions' style='display:none'><button class='btn btn-xs btn-success' onclick='saveEdit(this)'><i class='fa fa-check'></i></button> ";
+																		echo "<button class='btn btn-xs btn-default' onclick='cancelEdit(this)'><i class='fa fa-times'></i></button></span>";
+																		echo "</td>";
+                                                   					echo  "</tr>"; 
+                                                   				}
+                                                   			}  
                                                                 ?>
-                                                            </tbody>                                          
-                                           
-                                        </tbody>
+                                                            </tbody>
                                        </table>  
                                     </div>
                                 </div>
                             </div></div></div>
           
             </div>
-            <!-- Main Wrapper   -->
+            <!-- Main Wrapper -->
 
    		 
             <div class="page-footer">
@@ -106,6 +112,29 @@ include __DIR__ . '/session_init.php';
     <!-- Page Content -->
   
     <div class="cd-overlay"></div>
+
+    <!-- Add New Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            <h4 class="modal-title">Add New Cinematographer</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group"><label>Name</label><input type="text" class="form-control" id="addName"></div>
+            <div class="form-group"><label>Rate</label><input type="number" class="form-control" id="addRate"></div>
+            <div class="form-group"><label>Grade</label><input type="text" class="form-control" id="addGrade"></div>
+            <div class="form-group"><label>Status</label><input type="text" class="form-control" id="addStatus" value="pending"></div>
+            <div class="form-group"><label>Rating</label><input type="number" class="form-control" id="addRating" value="0"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success" onclick="addNew()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 	<?php include 'js.php';?>
 	<script type="text/javascript">
@@ -127,13 +156,110 @@ include __DIR__ . '/session_init.php';
 			  "hideMethod": "fadeOut"
 			}
 
-	 
+	function openAddModal() {
+		$('#addName').val('');
+		$('#addRate').val('');
+		$('#addGrade').val('');
+		$('#addStatus').val('pending');
+		$('#addRating').val('0');
+		$('#addModal').modal('show');
+	}
+
+	function addNew() {
+		var name = $('#addName').val().trim();
+		var rate = $('#addRate').val();
+		var grade = $('#addGrade').val().trim();
+		var status = $('#addStatus').val().trim();
+		var rating = $('#addRating').val();
+		if (!name) { toastr.error('Name is required'); return; }
+		$.post('listAjax.php', {action:'add', table:'cine', name:name, rate:rate, grade:grade, status:status, rating:rating}, function(r) {
+			if (r.status === 'ok') {
+				var cr = (rate / 10000000).toFixed(2);
+				var pic = r.pic || '';
+				var row = '<tr data-id="'+r.id+'" data-table="cine">';
+				row += '<td><img class="img-circle avatar" src="'+pic+'" width="40" height="40"></td>';
+				row += '<td class="cell-name"><a href="cine.php?id='+r.id+'" class="btn">'+name+'</a></td>';
+				row += '<td class="cell-rate" data-raw="'+rate+'"><b>'+cr+' CRORES</b></td>';
+				row += '<td class="cell-rating">'+rating+'</td>';
+				row += '<td><b>0 CRORES</b></td>';
+				row += '<td><span class="edit-actions"><button class="btn btn-xs btn-primary" onclick="startEdit(this)"><i class="fa fa-pencil"></i></button> <button class="btn btn-xs btn-danger" onclick="deleteRow(this)"><i class="fa fa-trash"></i></button></span> <span class="save-actions" style="display:none"><button class="btn btn-xs btn-success" onclick="saveEdit(this)"><i class="fa fa-check"></i></button> <button class="btn btn-xs btn-default" onclick="cancelEdit(this)"><i class="fa fa-times"></i></button></span></td>';
+				row += '</tr>';
+				$('#example tbody').prepend(row);
+				$('#addModal').modal('hide');
+				toastr.success('Cinematographer added successfully');
+			} else {
+				toastr.error(r.msg);
+			}
+		}, 'json');
+	}
+
+	function startEdit(btn) {
+		var row = $(btn).closest('tr');
+		row.data('origName', row.find('.cell-name a').text());
+		row.data('origRate', row.find('.cell-rate').data('raw'));
+		row.data('origRating', row.find('.cell-rating').text());
+		row.find('.cell-name').html('<input type="text" class="form-control input-sm" value="'+row.data('origName')+'">');
+		row.find('.cell-rate').html('<input type="number" class="form-control input-sm" value="'+row.data('origRate')+'">');
+		row.find('.cell-rating').html('<input type="number" class="form-control input-sm" value="'+row.data('origRating')+'">');
+		row.find('.edit-actions').hide();
+		row.find('.save-actions').show();
+	}
+
+	function cancelEdit(btn) {
+		var row = $(btn).closest('tr');
+		var id = row.data('id');
+		row.find('.cell-name').html('<a href="cine.php?id='+id+'" class="btn">'+row.data('origName')+'</a>');
+		var cr = (row.data('origRate') / 10000000).toFixed(2);
+		row.find('.cell-rate').html('<b>'+cr+' CRORES</b>');
+		row.find('.cell-rating').text(row.data('origRating'));
+		row.find('.save-actions').hide();
+		row.find('.edit-actions').show();
+	}
+
+	function saveEdit(btn) {
+		var row = $(btn).closest('tr');
+		var id = row.data('id');
+		var name = row.find('.cell-name input').val().trim();
+		var rate = row.find('.cell-rate input').val();
+		var rating = row.find('.cell-rating input').val();
+		var grade = row.data('origGrade') || '';
+		var status = row.data('origStatus') || 'pending';
+		$.post('listAjax.php', {action:'update', table:'cine', id:id, name:name, rate:rate, grade:grade, status:status, rating:rating}, function(r) {
+			if (r.status === 'ok') {
+				var cr = (rate / 10000000).toFixed(2);
+				row.find('.cell-name').html('<a href="cine.php?id='+id+'" class="btn">'+name+'</a>');
+				row.find('.cell-rate').attr('data-raw', rate).html('<b>'+cr+' CRORES</b>');
+				row.find('.cell-rating').text(rating);
+				row.find('.save-actions').hide();
+				row.find('.edit-actions').show();
+				toastr.success('Updated successfully');
+			} else {
+				toastr.error(r.msg);
+				cancelEdit(btn);
+			}
+		}, 'json');
+	}
+
+	function deleteRow(btn) {
+		if (!confirm('Are you sure you want to delete this record?')) return;
+		var row = $(btn).closest('tr');
+		var id = row.data('id');
+		var table = row.data('table');
+		$.post('listAjax.php', {action:'delete', table:table, id:id}, function(r) {
+			if (r.status === 'ok') {
+				row.fadeOut(300, function(){ $(this).remove(); });
+				toastr.success('Deleted successfully');
+			} else {
+				toastr.error(r.msg);
+			}
+		}, 'json');
+	}
 	
 	</script>
 
 </body>
 
-</html>
+</html> 
  
 <?php 
 if($conn!=null){
