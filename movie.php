@@ -41,6 +41,7 @@ $cinename = '';
  $ediname = ''; 
  $musname = ''; 
  $wriname='';
+ $poster='';
 
 
 
@@ -98,6 +99,7 @@ if (mysqli_num_rows($result) > 0) {
 		$r2 = $row["r2"];
 		$r3 = $row["r3"];
 		$max_days = $row["max_days"];
+		$poster = $row["poster"];
 		
 		$rel_cen = $row["rel_cen"];
 		$wk1_cent = $row["1w_cen"];
@@ -709,6 +711,76 @@ $path_175 = $serve_base.'&type=175';
                 		$("#pos_100").hide();
                 		$("#pos_175").hide();
                       }
+
+                var poster = '<?php echo $poster?>';
+                if(poster=='no')
+                {
+                    var b   = '<?php echo addslashes($_SESSION['s_banner'] ?? ''); ?>';
+                    var p   = '<?php echo addslashes($_SESSION['s_user'] ?? ''); ?>';
+                    var d   = '<?php echo addslashes($dname); ?>';
+                    var a   = '<?php echo addslashes($aname); ?>';
+                    var ac  = '<?php echo addslashes($acname); ?>';
+                    var c   = '<?php echo addslashes($cinename); ?>';
+                    var e   = '<?php echo addslashes($ediname); ?>';
+                    var m   = '<?php echo addslashes($musname); ?>';
+                    var w   = '<?php echo addslashes($wriname); ?>';
+                    var tit = '<?php echo addslashes($title ?? ''); ?>';
+                    var rid = '<?php echo (int) $rid; ?>';
+                    var fif = '<?php echo (int) ($d50_cent ?? 0); ?>';
+                    var hun = '<?php echo (int) ($d100_cent ?? 0); ?>';
+                    var fiv = '<?php echo (int) ($wk1_cent ?? 0); ?>';
+                    var t5  = '<?php echo (int) ($d75_cent ?? 0); ?>';
+                    var sev = '<?php echo (int) ($wk2_cent ?? 0); ?>';
+                    var onf = '<?php echo (int) ($rel_cen ?? 0); ?>';
+                    var a2  = '<?php echo addslashes($_a2_name ?? ''); ?>';
+                    var a3  = '<?php echo addslashes($_a3_name ?? ''); ?>';
+                    var ac2 = '<?php echo addslashes($_ac2_name ?? ''); ?>';
+                    var ac3 = '<?php echo addslashes($_ac3_name ?? ''); ?>';
+                    var d2  = '<?php echo addslashes($_d2_name ?? ''); ?>';
+                    var d3  = '<?php echo addslashes($_d3_name ?? ''); ?>';
+                    var m2  = '<?php echo addslashes($_m2_name ?? ''); ?>';
+                    var m3  = '<?php echo addslashes($_m3_name ?? ''); ?>';
+                    var w2  = '<?php echo addslashes($_w2_name ?? ''); ?>';
+                    var w3  = '<?php echo addslashes($_w3_name ?? ''); ?>';
+
+                    var url = window.location.href;
+                    var arr = url.split("/");
+                    var hostname = arr[0] + "//" + arr[2];
+                    if (hostname.includes("localhost")) {
+                        hostname = hostname + "/hit";
+                    }
+
+                    var plink = hostname + '/poster/poster-v2.php?rid=' + rid
+                        + '&b=' + encodeURIComponent(b) + '&p=' + encodeURIComponent(p)
+                        + '&d=' + encodeURIComponent(d) + '&a=' + encodeURIComponent(a) + '&ac=' + encodeURIComponent(ac)
+                        + '&c=' + encodeURIComponent(c) + '&e=' + encodeURIComponent(e) + '&m=' + encodeURIComponent(m)
+                        + '&w=' + encodeURIComponent(w) + '&tit=' + encodeURIComponent(tit)
+                        + '&raw_title=' + encodeURIComponent('<?php echo addslashes(strtoupper($title ?? '')); ?>')
+                        + '&notes=' + encodeURIComponent('<?php echo addslashes($notes ?? ""); ?>')
+                        + '&fif=' + fif + '&hun=' + hun + '&fiv=' + fiv + '&t5=' + t5 + '&sev=' + sev + '&onf=' + onf
+                        + '&a2=' + encodeURIComponent(a2) + '&a3=' + encodeURIComponent(a3)
+                        + '&ac2=' + encodeURIComponent(ac2) + '&ac3=' + encodeURIComponent(ac3)
+                        + '&d2=' + encodeURIComponent(d2) + '&d3=' + encodeURIComponent(d3)
+                        + '&w2=' + encodeURIComponent(w2) + '&w3=' + encodeURIComponent(w3)
+                        + '&m2=' + encodeURIComponent(m2) + '&m3=' + encodeURIComponent(m3);
+
+                    toastr.info("Generating poster...");
+                    $.ajax({
+                        type: "POST",
+                        url: plink,
+                        success: function(data) {
+                            toastr.success("<h2>Poster generated</h2>");
+                            <?php
+                            $upd_sql = "UPDATE `tolly_release` SET `poster`='yes' WHERE `rid`=" . (int)$rid;
+                            mysqli_query($conn, $upd_sql);
+                            ?>
+                            setTimeout(function(){ location.reload(true); }, 2000);
+                        },
+                        error: function(xhr, status, errorThrown) {
+                            toastr.error("Poster generation failed: " + errorThrown);
+                        }
+                    });
+                }
 
                 function showPoster(type) {
                     var ids = {'main':'pos_0','50':'pos_50','100':'pos_100','150':'pos_150','175':'pos_175'};

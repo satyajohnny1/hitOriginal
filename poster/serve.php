@@ -1,5 +1,4 @@
 <?php
-include __DIR__ . "/../session_init.php";
 require_once __DIR__ . '/../db.php';
 
 $rid = isset($_GET['rid']) ? intval($_GET['rid']) : 0;
