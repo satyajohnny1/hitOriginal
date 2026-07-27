@@ -1134,6 +1134,11 @@ foreach ($rangeTypes as $rt) {
 		example: {}
 	};
 
+	if ($.fn.DataTable && $.fn.DataTable.isDataTable('#example')) {
+		$('#example').DataTable().destroy();
+	}
+	$('#example').DataTable(dtConfigs2['example']);
+
 	function filterTab2(el) {
 		var val = el.value;
 		var tab = el.getAttribute('data-tab');
