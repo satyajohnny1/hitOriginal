@@ -12,8 +12,6 @@ $oriid = intval($rangeRow["max_page"]);
 $minid = floor($oriid/100)*100;
 $maxid = ceil($oriid/100)*100;
 
-error_log("FILTER2_DEBUG: Range Query: SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot => max_page=$oriid, minid=$minid, maxid=$maxid");
-
 $personStatus = [];
 $flopResults = ['Flop','Below Average','Average'];
 
@@ -28,12 +26,9 @@ foreach ($rangeTypes as $rt) {
         $unionParts[] = "SELECT $col AS pid, result FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid AND status='out'" . ($ci > 0 ? " AND $col > 0" : "");
     }
     $rsql = "SELECT pid, GROUP_CONCAT(DISTINCT result) AS results FROM (" . implode(' UNION ALL ', $unionParts) . ") t GROUP BY pid";
-    error_log("FILTER2_DEBUG: Status Query [{$rt['table']}]: $rsql");
-    error_log("FILTER2_DEBUG: Status WHERE values: minid=$minid, maxid=$maxid, status='out', cols=" . implode(',', $rt['cols']));
+    error_log("FILTER2_DEBUG: [{$rt['table']}] STATUS_QUERY: $rsql");
     $rr = @mysqli_query($conn, $rsql);
     if ($rr) {
-        $rowCount = mysqli_num_rows($rr);
-        error_log("FILTER2_DEBUG: Status Query [{$rt['table']}] returned $rowCount rows");
         while ($rw = mysqli_fetch_assoc($rr)) {
             $pid = intval($rw['pid']);
             $resList = array_map('trim', explode(',', $rw['results']));
@@ -46,14 +41,9 @@ foreach ($rangeTypes as $rt) {
                 }
                 $personStatus[$rt['table']][$pid] = $allFlop ? 'flop' : 'active';
             }
-            error_log("FILTER2_DEBUG: [{$rt['table']}] pid=$pid results=" . $rw['results'] . " => status=" . $personStatus[$rt['table']][$pid]);
         }
-    } else {
-        error_log("FILTER2_DEBUG: Status Query [{$rt['table']}] FAILED: " . mysqli_error($conn));
     }
-    $allPeopleQ = "SELECT " . $rt['pk'] . " FROM " . $rt['table'];
-    error_log("FILTER2_DEBUG: AllPeople Query [{$rt['table']}]: $allPeopleQ");
-    $allPeople = @mysqli_query($conn, $allPeopleQ);
+    $allPeople = @mysqli_query($conn, "SELECT " . $rt['pk'] . " FROM " . $rt['table']);
     if ($allPeople) {
         while ($ap = mysqli_fetch_assoc($allPeople)) {
             $apid = intval($ap[$rt['pk']]);
@@ -85,10 +75,8 @@ if ($tab === 'music') {
                 ) t
                 GROUP BY music_id
             ) m ON mu.music_id = m.music_id";
-    error_log("FILTER2_DEBUG: [music] Main Query: $sql");
-    error_log("FILTER2_DEBUG: [music] WHERE values: status='out', m2>0, m3>0, filter=$filter");
+    error_log("FILTER2_DEBUG: [music] MAIN_QUERY: $sql");
     $result = mysqli_query($conn, $sql);
-    error_log("FILTER2_DEBUG: [music] Main query returned " . mysqli_num_rows($result) . " rows");
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             $dir_id = $row["music_id"];
@@ -102,7 +90,6 @@ if ($tab === 'music') {
             $pl_cr = round(($pl_val/10000000),2);
             $pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
             $fstatus = $personStatus['tolly_music'][$music_id_raw] ?? 'pending';
-            error_log("FILTER2_DEBUG: [music] pid=$music_id_raw name=$dir_name status=$fstatus filter=$filter");
             if (!shouldShow($filter, $fstatus)) continue;
             echo "<tr data-filter='$fstatus'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
@@ -124,10 +111,8 @@ if ($tab === 'music') {
                 WHERE status = 'out'
                 GROUP BY cid
             ) m ON c.cine_id = m.cid";
-    error_log("FILTER2_DEBUG: [cine] Main Query: $sql");
-    error_log("FILTER2_DEBUG: [cine] WHERE values: status='out', filter=$filter");
+    error_log("FILTER2_DEBUG: [cine] MAIN_QUERY: $sql");
     $result = mysqli_query($conn, $sql);
-    error_log("FILTER2_DEBUG: [cine] Main query returned " . mysqli_num_rows($result) . " rows");
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             $dir_id = $row["cine_id"];
@@ -141,7 +126,6 @@ if ($tab === 'music') {
             $pl_cr = round(($pl_val/10000000),2);
             $pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
             $fstatus = $personStatus['tolly_cine'][$cine_id_raw] ?? 'pending';
-            error_log("FILTER2_DEBUG: [cine] pid=$cine_id_raw name=$dir_name status=$fstatus filter=$filter");
             if (!shouldShow($filter, $fstatus)) continue;
             echo "<tr data-filter='$fstatus'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_cine' name='r_cine' value='".$dir_id."' />".$dir_name."</b></label></td>";
@@ -161,10 +145,8 @@ if ($tab === 'music') {
                 WHERE status = 'out'
                 GROUP BY eid
             ) m ON e.editor_id = m.eid";
-    error_log("FILTER2_DEBUG: [editor] Main Query: $sql");
-    error_log("FILTER2_DEBUG: [editor] WHERE values: status='out', filter=$filter");
+    error_log("FILTER2_DEBUG: [editor] MAIN_QUERY: $sql");
     $result = mysqli_query($conn, $sql);
-    error_log("FILTER2_DEBUG: [editor] Main query returned " . mysqli_num_rows($result) . " rows");
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             $dir_id = $row["editor_id"];
@@ -178,7 +160,6 @@ if ($tab === 'music') {
             $pl_cr = round(($pl_val/10000000),2);
             $pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
             $fstatus = $personStatus['tolly_editor'][$editor_id_raw] ?? 'pending';
-            error_log("FILTER2_DEBUG: [editor] pid=$editor_id_raw name=$dir_name status=$fstatus filter=$filter");
             if (!shouldShow($filter, $fstatus)) continue;
             echo "<tr data-filter='$fstatus'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_edi' name='r_edi' value='".$dir_id."' />".$dir_name."</b></label></td>";
@@ -192,9 +173,5 @@ if ($tab === 'music') {
 }
 
 $output = ob_get_clean();
-error_log("FILTER2_DEBUG: output length=" . strlen($output) . " chars, tab=$tab, filter=$filter");
-if (strlen($output) < 200) {
-    error_log("FILTER2_DEBUG: output=$output");
-}
 echo $output;
 mysqli_close($conn);

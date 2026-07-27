@@ -15,8 +15,6 @@ $oriid = intval($rangeRow["max_page"]);
 $minid = floor($oriid/100)*100;
 $maxid = ceil($oriid/100)*100;
 
-error_log("FILTER_DEBUG: Range Query: SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot => max_page=$oriid, minid=$minid, maxid=$maxid");
-
 $personStatus = [];
 $flopResults = ['Flop','Below Average','Average'];
 
@@ -32,12 +30,9 @@ foreach ($rangeTypes as $rt) {
         $unionParts[] = "SELECT $col AS pid, result FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid AND status='out'" . ($ci > 0 ? " AND $col > 0" : "");
     }
     $rsql = "SELECT pid, GROUP_CONCAT(DISTINCT result) AS results FROM (" . implode(' UNION ALL ', $unionParts) . ") t GROUP BY pid";
-    error_log("FILTER_DEBUG: Status Query [{$rt['table']}]: $rsql");
-    error_log("FILTER_DEBUG: Status WHERE values: minid=$minid, maxid=$maxid, status='out', cols=" . implode(',', $rt['cols']));
+    error_log("FILTER_DEBUG: [{$rt['table']}] STATUS_QUERY: $rsql");
     $rr = @mysqli_query($conn, $rsql);
     if ($rr) {
-        $rowCount = mysqli_num_rows($rr);
-        error_log("FILTER_DEBUG: Status Query [{$rt['table']}] returned $rowCount rows");
         while ($rw = mysqli_fetch_assoc($rr)) {
             $pid = intval($rw['pid']);
             $resList = array_map('trim', explode(',', $rw['results']));
@@ -50,14 +45,9 @@ foreach ($rangeTypes as $rt) {
                 }
                 $personStatus[$rt['table']][$pid] = $allFlop ? 'flop' : 'active';
             }
-            error_log("FILTER_DEBUG: [{$rt['table']}] pid=$pid results=" . $rw['results'] . " => status=" . $personStatus[$rt['table']][$pid]);
         }
-    } else {
-        error_log("FILTER_DEBUG: Status Query [{$rt['table']}] FAILED: " . mysqli_error($conn));
     }
-    $allPeopleQ = "SELECT " . $rt['pk'] . " FROM " . $rt['table'];
-    error_log("FILTER_DEBUG: AllPeople Query [{$rt['table']}]: $allPeopleQ");
-    $allPeople = @mysqli_query($conn, $allPeopleQ);
+    $allPeople = @mysqli_query($conn, "SELECT " . $rt['pk'] . " FROM " . $rt['table']);
     if ($allPeople) {
         while ($ap = mysqli_fetch_assoc($allPeople)) {
             $apid = intval($ap[$rt['pk']]);
@@ -89,10 +79,8 @@ if ($tab === 'director') {
                 ) t
                 GROUP BY director_id
             ) m ON d.director_id = m.director_id";
-    error_log("FILTER_DEBUG: [director] Main Query: $sql");
-    error_log("FILTER_DEBUG: [director] WHERE values: status='out', d2>0, d3>0, filter=$filter");
+    error_log("FILTER_DEBUG: [director] MAIN_QUERY: $sql");
     $result = mysqli_query($conn, $sql);
-    error_log("FILTER_DEBUG: [director] Main query returned " . mysqli_num_rows($result) . " rows");
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             $dir_id = $row["director_id"];
@@ -132,10 +120,8 @@ if ($tab === 'director') {
                 ) t
                 GROUP BY actor_id
             ) m ON a.actor_id = m.actor_id";
-    error_log("FILTER_DEBUG: [actor] Main Query: $sql");
-    error_log("FILTER_DEBUG: [actor] WHERE values: status='out', a2>0, a3>0, filter=$filter");
+    error_log("FILTER_DEBUG: [actor] MAIN_QUERY: $sql");
     $result = mysqli_query($conn, $sql);
-    error_log("FILTER_DEBUG: [actor] Main query returned " . mysqli_num_rows($result) . " rows");
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             $act_id = $row["actor_id"];
@@ -174,10 +160,8 @@ if ($tab === 'director') {
                 ) t
                 GROUP BY actress_id
             ) m ON a.actress_id = m.actress_id";
-    error_log("FILTER_DEBUG: [actress] Main Query: $sql");
-    error_log("FILTER_DEBUG: [actress] WHERE values: status='out', ac2>0, ac3>0, filter=$filter");
+    error_log("FILTER_DEBUG: [actress] MAIN_QUERY: $sql");
     $result = mysqli_query($conn, $sql);
-    error_log("FILTER_DEBUG: [actress] Main query returned " . mysqli_num_rows($result) . " rows");
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             $dir_id = $row["actress_id"];
@@ -216,10 +200,8 @@ if ($tab === 'director') {
                 ) t
                 GROUP BY writer_id
             ) m ON w.writer_id = m.writer_id";
-    error_log("FILTER_DEBUG: [writer] Main Query: $sql");
-    error_log("FILTER_DEBUG: [writer] WHERE values: status='out', w2>0, w3>0, filter=$filter");
+    error_log("FILTER_DEBUG: [writer] MAIN_QUERY: $sql");
     $result = mysqli_query($conn, $sql);
-    error_log("FILTER_DEBUG: [writer] Main query returned " . mysqli_num_rows($result) . " rows");
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             $dir_id = $row["writer_id"];
@@ -234,7 +216,6 @@ if ($tab === 'director') {
             $pl_cr = round(($pl_val/10000000),2);
             $pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
             $wri_status = $personStatus['tolly_writer'][$writer_id_raw] ?? 'pending';
-            error_log("FILTER_DEBUG: [writer] pid=$writer_id_raw name=$dir_name status=$wri_status filter=$filter");
             if (!shouldShow($filter, $wri_status)) continue;
             echo "<tr data-filter='$wri_status'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
@@ -244,18 +225,11 @@ if ($tab === 'director') {
             echo "<td>".$row["writer_rating"]."</td>";
             echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
             echo "<td><b>".$writer_movie_count."</b></td>";
-
             echo  "</tr>";
-
-
         }
     }
 }
 
 $output = ob_get_clean();
-error_log("FILTER_DEBUG: output length=" . strlen($output) . " chars, tab=$tab, filter=$filter");
-if (strlen($output) < 200) {
-    error_log("FILTER_DEBUG: output=$output");
-}
 echo $output;
 mysqli_close($conn);
