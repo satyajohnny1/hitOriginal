@@ -10,7 +10,7 @@ $minid = floor($oriid/100)*100;
 $maxid = ceil($oriid/100)*100;
 
 $personStatus = [];
-$flopResults = ['Flop','Below Average','Average'];
+$flopResults = ['FLOP','BELOW AVERAGE','AVERAGE'];
 
 $rangeTypes = [
     ['cols'=>['mid','m2','m3'], 'table'=>'tolly_music', 'pk'=>'music_id'],
@@ -35,7 +35,7 @@ foreach ($rangeTypes as $rt) {
                 foreach ($resList as $rl) {
                     if (!in_array($rl, $flopResults)) { $allFlop = false; break; }
                 }
-                $personStatus[$rt['table']][$pid] = $allFlop ? 'flop' : 'active';
+                $personStatus[$rt['table']][$pid] = $allFlop ? 'FLOP' : 'active';
             }
         }
     }
@@ -137,7 +137,7 @@ foreach ($rangeTypes as $rt) {
                                                         <select class="form-control tab-filter" data-tab="music" onchange="filterTab2(this)" style="width:250px;display:inline-block;">
                                                             <option value="pending">Pending (No Movie in Range)</option>
                                                             <option value="all">All</option>
-                                                            <option value="flop">Flop Only</option>
+                                                            <option value="FLOP">Flop Only</option>
                                                         </select>
                                                     </div>
                                                     <div class="table-responsive">
@@ -234,7 +234,7 @@ foreach ($rangeTypes as $rt) {
                                                         <select class="form-control tab-filter" data-tab="cine" onchange="filterTab2(this)" style="width:250px;display:inline-block;">
                                                             <option value="pending">Pending (No Movie in Range)</option>
                                                             <option value="all">All</option>
-                                                            <option value="flop">Flop Only</option>
+                                                            <option value="FLOP">Flop Only</option>
                                                         </select>
                                                     </div>
                                                     <div class="table-responsive">
@@ -323,7 +323,7 @@ foreach ($rangeTypes as $rt) {
                                                         <select class="form-control tab-filter" data-tab="editor" onchange="filterTab2(this)" style="width:250px;display:inline-block;">
                                                             <option value="pending">Pending (No Movie in Range)</option>
                                                             <option value="all">All</option>
-                                                            <option value="flop">Flop Only</option>
+                                                            <option value="FLOP">Flop Only</option>
                                                         </select>
                                                     </div>
                                                     <div class="table-responsive">
