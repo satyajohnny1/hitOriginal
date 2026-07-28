@@ -100,9 +100,9 @@ if ($tab === 'music') {
             if (!shouldShow($filter, $fstatus)) continue;
             echo "<tr data-filter='$fstatus'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
-            echo "<td><b>".$dir_cr." CR</b></td>";
+            echo "<td><b>".$dir_cr."</b></td>";
             echo "<td>".$row["music_rating"]."</td>";
-            echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
+            echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
             echo "<td><b>".$music_movie_count."</b></td>";
             echo "</tr>";
         }
@@ -134,9 +134,9 @@ if ($tab === 'music') {
             if (!shouldShow($filter, $fstatus)) continue;
             echo "<tr data-filter='$fstatus'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_cine' name='r_cine' value='".$dir_id."' />".$dir_name."</b></label></td>";
-            echo "<td><b>".$dir_cr." CRORES</b></td>";
+            echo "<td><b>".$dir_cr."</b></td>";
             echo "<td>".$row["cine_rating"]."</td>";
-            echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
+            echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
             echo "<td><b>".$cine_movie_count."</b></td>";
             echo "</tr>";
         }
@@ -168,9 +168,9 @@ if ($tab === 'music') {
             if (!shouldShow($filter, $fstatus)) continue;
             echo "<tr data-filter='$fstatus'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_edi' name='r_edi' value='".$dir_id."' />".$dir_name."</b></label></td>";
-            echo "<td><b>".$dir_cr." CRORES</b></td>";
+            echo "<td><b>".$dir_cr."</b></td>";
             echo "<td>".$row["editor_rating"]."</td>";
-            echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
+            echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
             echo "<td><b>".$editor_movie_count."</b></td>";
             echo "</tr>";
         }

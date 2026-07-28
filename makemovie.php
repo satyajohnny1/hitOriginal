@@ -539,7 +539,7 @@ foreach ($rangeTypes as $rt) {
                                                     					if (strtolower($wri_status) !== 'pending') continue;
                                                     					echo "<tr data-filter='$wri_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
-                                                    					echo "<td><b>".$dir_cr." CR</b></td>";
+                                                    					echo "<td><b>".$dir_cr."</b></td>";
                                                     					echo "<td>".$row["writer_rating"]."</td>";
                                                     					echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
                                                     					echo "<td><b>".$writer_movie_count."</b></td>";
