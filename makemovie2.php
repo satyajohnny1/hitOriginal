@@ -144,7 +144,7 @@ foreach ($rangeTypes as $rt) {
                                                         <table id="example2" class="display table" style="width: 100%; cellspacing: 0;">
                                                             <thead>
                                                                  <tr>
-                                                                     <th>Music</th>
+                                                                     <th>MusiK</th>
                                                                      <th>Rem</th>
                                                                      <th>Rat</th>
                                                                      <th>PL</th>
