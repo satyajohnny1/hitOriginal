@@ -9,7 +9,7 @@ $minid = floor($oriid/100)*100;
 $maxid = ceil($oriid/100)*100;
 
 $personStatus = [];
-$flopResults = ['Flop','Below Average','Average'];
+$flopResults = ['FLOP','BELOW AVERAGE','AVERAGE'];
 
 $rangeTypes = [
     ['cols'=>['did','d2','d3'], 'table'=>'tolly_director', 'pk'=>'director_id'],
@@ -35,7 +35,7 @@ foreach ($rangeTypes as $rt) {
                 foreach ($resList as $rl) {
                     if (!in_array($rl, $flopResults)) { $allFlop = false; break; }
                 }
-                $personStatus[$rt['table']][$pid] = $allFlop ? 'flop' : 'active';
+                $personStatus[$rt['table']][$pid] = $allFlop ? 'FLOP' : 'active';
             }
         }
     }
@@ -168,7 +168,7 @@ foreach ($rangeTypes as $rt) {
                                                         <select class="form-control tab-filter" data-tab="director" onchange="filterTab(this)" style="width:250px;display:inline-block;">
                                                             <option value="pending">Pending (No Movie in Range)</option>
                                                             <option value="all">All</option>
-                                                            <option value="flop">Flop Only</option>
+                                                            <option value="FLOP">Flop Only</option>
                                                         </select>
                                                     </div>
                                                     <div class="table-responsive">
@@ -176,8 +176,8 @@ foreach ($rangeTypes as $rt) {
                                                             <thead>
                                                                 <tr>
                                                                     <th>Director</th>
-                                                                    <th>Remuneration</th>
-                                                                    <th>Grade</th>
+                                                                    <th>Rem</th>
+                                                                    <th>Rat</th>
 																	<th>PL</th>
                                                                     <th>Movies</th>
                                                                     <th style="display: none;">pic</th>
@@ -224,9 +224,9 @@ foreach ($rangeTypes as $rt) {
                                                     					$dir_status = $personStatus['tolly_director'][$dir_id_raw] ?? 'pending';
                                                     					echo "<tr data-filter='$dir_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
+                                                     					echo "<td><b>".$dir_cr."</b>";
                                                     					echo "<td>".$row["director_rating"]."</td>";
-																		echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
                                                     					echo "<td><b>".$dir_movie_count."</b></td>";
                                                     					echo  "<td style='display: none;'>".$dir_pic."</td>";
 
@@ -273,7 +273,7 @@ foreach ($rangeTypes as $rt) {
                                                         <select class="form-control tab-filter" data-tab="actor" onchange="filterTab(this)" style="width:250px;display:inline-block;">
                                                             <option value="pending">Pending (No Movie in Range)</option>
                                                             <option value="all">All</option>
-                                                            <option value="flop">Flop Only</option>
+                                                            <option value="FLOP">Flop Only</option>
                                                         </select>
                                                     </div>
                                                     <div class="table-responsive">
@@ -281,9 +281,8 @@ foreach ($rangeTypes as $rt) {
                                                             <thead>
                                                                  <tr>
                                                                      <th>Actor</th>
-                                                                     <th>Remuneration</th>
-																	
-                                                                     <th>Grade</th>
+                                                                     <th>Rem</th>
+                                                                     <th>Rat</th>
 																	<th>PL</th>
                                                                     <th>Movies</th>
                                                                 </tr>
@@ -327,9 +326,9 @@ foreach ($rangeTypes as $rt) {
                                                     					$act_status = $personStatus['tolly_actor'][$act_id_raw] ?? 'pending';
                                                     					echo "<tr data-filter='$act_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
+                                                     					echo "<td><b>".$dir_cr."</b>";
                                                     					echo "<td>".$row["actor_rating"]."</td>";
-                                                    					 echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
+                                                    					 echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
                                                     					echo "<td><b>".$act_movie_count."</b></td>";
                                                     					echo  "</tr>";
 
@@ -378,7 +377,7 @@ foreach ($rangeTypes as $rt) {
                                                         <select class="form-control tab-filter" data-tab="actress" onchange="filterTab(this)" style="width:250px;display:inline-block;">
                                                             <option value="pending">Pending (No Movie in Range)</option>
                                                             <option value="all">All</option>
-                                                            <option value="flop">Flop Only</option>
+                                                            <option value="FLOP">Flop Only</option>
                                                         </select>
                                                     </div>
                                                     <div class="table-responsive">
@@ -386,8 +385,8 @@ foreach ($rangeTypes as $rt) {
                                                             <thead>
                                                                  <tr>
                                                                      <th>actress</th>
-                                                                     <th>Remuneration</th>
-                                                                     <th>Grade</th>
+                                                                     <th>Rem</th>
+                                                                     <th>Rat</th>
                                                                      <th>PL</th>
                                                                      <th>Movies</th>
                                                                 </tr>
@@ -433,9 +432,9 @@ foreach ($rangeTypes as $rt) {
                                                     					$acs_status = $personStatus['tolly_actress'][$actress_id_raw] ?? 'pending';
                                                     					echo "<tr data-filter='$acs_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
-                                                    					echo "<td><b>".$dir_cr." CRORES</b>";
+                                                    					echo "<td><b>".$dir_cr."</b>";
                                                     					echo "<td>".$row["actress_rating"]."</td>";
-																		echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
                                                     					echo "<td><b>".$actress_movie_count."</b></td>";
                                                     					echo  "</tr>";
 
@@ -482,7 +481,7 @@ foreach ($rangeTypes as $rt) {
                                                         <select class="form-control tab-filter" data-tab="writer" onchange="filterTab(this)" style="width:250px;display:inline-block;">
                                                             <option value="pending">Pending (No Movie in Range)</option>
                                                             <option value="all">All</option>
-                                                            <option value="flop">Flop Only</option>
+                                                            <option value="FLOP">Flop Only</option>
                                                         </select>
                                                     </div>
                                                     <div class="table-responsive">
@@ -540,7 +539,7 @@ foreach ($rangeTypes as $rt) {
                                                     					echo "<td><b>".$dir_cr." CR</b>";
 																		echo "<td></td>";
                                                     					echo "<td>".$row["writer_rating"]."</td>";
-																		echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
 																		echo "<td><b>".$writer_movie_count."</b></td>";
 
 

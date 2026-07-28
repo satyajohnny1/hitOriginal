@@ -146,7 +146,6 @@ foreach ($rangeTypes as $rt) {
                                                                  <tr>
                                                                      <th>Music</th>
                                                                      <th>Rem</th>
-                                                                     <th>DONT TOUCH</th>
                                                                      <th>Rat</th>
                                                                      <th>PL</th>
                                                                      <th>Movies</th>
@@ -190,10 +189,9 @@ foreach ($rangeTypes as $rt) {
                                                     					$fstatus = $personStatus['tolly_music'][$music_id_raw] ?? 'pending';
                                                     					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
-                                                      					echo "<td><b>".$dir_cr." CR</b></td>";
-																		echo "<td></td>";
+                                                      					echo "<td><b>".$dir_cr."</b></td>";
                                                     					echo "<td>".$row["music_rating"]."</td>";
-                                                    					 echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
+                                                    					echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
                                                     					echo "<td><b>".$music_movie_count."</b></td>";
                                                     					echo  "</tr>";
 
@@ -245,7 +243,7 @@ foreach ($rangeTypes as $rt) {
                                                                  <tr>
                                                                      <th>cine</th>
                                                                      <th>Remuneration</th>
-                                                                     <th>Grade</th>
+                                                                     <th>Rat</th>
                                                                      <th>PL</th>
                                                                      <th>Movies</th>
                                                                 </tr>
@@ -282,9 +280,9 @@ foreach ($rangeTypes as $rt) {
                                                     					$fstatus = $personStatus['tolly_cine'][$cine_id_raw] ?? 'pending';
                                                     					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_cine' name='r_cine' value='".$dir_id."' />".$dir_name."</b></label></td>";
-                                                      					echo "<td><b>".$dir_cr." CRORES</b></td>";
+                                                      					echo "<td><b>".$dir_cr."</b></td>";
                                                     					echo "<td>".$row["cine_rating"]."</td>";
-                                                    					 echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
+                                                    					 echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
                                                     					echo "<td><b>".$cine_movie_count."</b></td>";
                                                     					echo  "</tr>";
 
@@ -333,8 +331,8 @@ foreach ($rangeTypes as $rt) {
                                                             <thead>
                                                                  <tr>
                                                                      <th>editor</th>
-                                                                     <th>Remuneration</th>
-                                                                     <th>Grade</th>
+                                                                     <th>Rem</th>
+                                                                     <th>Rat</th>
                                                                      <th>PL</th>
                                                                      <th>Movies</th>
                                                                 </tr>
@@ -371,9 +369,9 @@ foreach ($rangeTypes as $rt) {
                                                     					$fstatus = $personStatus['tolly_editor'][$editor_id_raw] ?? 'pending';
                                                     					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_edi' name='r_edi' value='".$dir_id."' />".$dir_name."</b></label></td>";
-                                                      					echo "<td><b>".$dir_cr." CRORES</b></td>";
+                                                      					echo "<td><b>".$dir_cr."</b></td>";
                                                     					echo "<td>".$row["editor_rating"]."</td>";
-																		echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
+																		echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
                                                     					echo "<td><b>".$editor_movie_count."</b></td>";
                                                     					echo  "</tr>";
 
