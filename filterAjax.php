@@ -58,7 +58,7 @@ foreach ($rangeTypes as $rt) {
 
 function shouldShow($filter, $status) {
     if ($filter === 'all') return true;
-    return $status === $filter;
+    return strtolower($status) === strtolower($filter);
 }
 
 ob_start();
