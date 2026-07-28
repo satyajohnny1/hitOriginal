@@ -489,8 +489,7 @@ foreach ($rangeTypes as $rt) {
                                                             <thead>
                                                                  <tr>
                                                                      <th>writer</th>
-                                                                     <th>Rem</th>
-                                                                     <th>DONT TOUCH</th>
+                                                                     <th>Rem</th> 
                                                                      <th>Rat</th>
                                                                      <th>PL</th>
                                                                      <th>Movies</th>
