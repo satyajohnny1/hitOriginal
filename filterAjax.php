@@ -105,7 +105,7 @@ if ($tab === 'director') {
             if (!shouldShow($filter, $dir_status)) continue;
             echo "<tr data-filter='$dir_status'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
-            echo "<td><b>".$dir_cr." CRORES</b>";
+            echo "<td><b>".$dir_cr." CRORES</b></td>";
             echo "<td>".$row["director_rating"]."</td>";
             echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
             echo "<td><b>".$dir_movie_count."</b></td>";
@@ -146,7 +146,7 @@ if ($tab === 'director') {
             if (!shouldShow($filter, $act_status)) continue;
             echo "<tr data-filter='$act_status'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
-            echo "<td><b>".$dir_cr." CRORES</b>";
+            echo "<td><b>".$dir_cr." CRORES</b></td>";
             echo "<td>".$row["actor_rating"]."</td>";
             echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
             echo "<td><b>".$act_movie_count."</b></td>";
@@ -186,7 +186,7 @@ if ($tab === 'director') {
             if (!shouldShow($filter, $acs_status)) continue;
             echo "<tr data-filter='$acs_status'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
-            echo "<td><b>".$dir_cr." CRORES</b>";
+            echo "<td><b>".$dir_cr." CRORES</b></td>";
             echo "<td>".$row["actress_rating"]."</td>";
             echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
             echo "<td><b>".$actress_movie_count."</b></td>";
@@ -226,9 +226,7 @@ if ($tab === 'director') {
             if (!shouldShow($filter, $wri_status)) continue;
             echo "<tr data-filter='$wri_status'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
-            echo "<td><b>".$dir_cr." CR</b>";
-            echo "<td></td>";
-            echo "<td></td>";
+            echo "<td><b>".$dir_cr." CR</b></td>";
             echo "<td>".$row["writer_rating"]."</td>";
             echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
             echo "<td><b>".$writer_movie_count."</b></td>";

@@ -222,9 +222,10 @@ foreach ($rangeTypes as $rt) {
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$dir_status = $personStatus['tolly_director'][$dir_id_raw] ?? 'pending';
+                                                    					if (strtolower($dir_status) !== 'pending') continue;
                                                     					echo "<tr data-filter='$dir_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' width='4em' height='4em' class='r_dir' name='r_dir' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
-                                                     					echo "<td><b>".$dir_cr."</b>";
+                                                     					echo "<td><b>".$dir_cr."</b></td>";
                                                     					echo "<td>".$row["director_rating"]."</td>";
 																		echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
                                                     					echo "<td><b>".$dir_movie_count."</b></td>";
@@ -324,9 +325,10 @@ foreach ($rangeTypes as $rt) {
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$act_status = $personStatus['tolly_actor'][$act_id_raw] ?? 'pending';
+                                                    					if (strtolower($act_status) !== 'pending') continue;
                                                     					echo "<tr data-filter='$act_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_act' name='r_act' value='".$act_id."' />".$act_name."</b></label></td>";
-                                                     					echo "<td><b>".$dir_cr."</b>";
+                                                     					echo "<td><b>".$dir_cr."</b></td>";
                                                     					echo "<td>".$row["actor_rating"]."</td>";
                                                     					 echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
                                                     					echo "<td><b>".$act_movie_count."</b></td>";
@@ -430,9 +432,10 @@ foreach ($rangeTypes as $rt) {
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$acs_status = $personStatus['tolly_actress'][$actress_id_raw] ?? 'pending';
+                                                    					if (strtolower($acs_status) !== 'pending') continue;
                                                     					echo "<tr data-filter='$acs_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_actress' name='r_actress' value='".$dir_id."' />".$dir_name."</b></label></td>";
-                                                    					echo "<td><b>".$dir_cr."</b>";
+                                                    					echo "<td><b>".$dir_cr."</b></td>";
                                                     					echo "<td>".$row["actress_rating"]."</td>";
 																		echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
                                                     					echo "<td><b>".$actress_movie_count."</b></td>";
@@ -533,13 +536,13 @@ foreach ($rangeTypes as $rt) {
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$wri_status = $personStatus['tolly_writer'][$writer_id_raw] ?? 'pending';
+                                                    					if (strtolower($wri_status) !== 'pending') continue;
                                                     					echo "<tr data-filter='$wri_status'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_writer' name='r_writer' value='".$dir_id."' /><b>".$dir_name."</b></label></td>";
-                                                    					echo "<td><b>".$dir_cr." CR</b>";
-																		echo "<td></td>";
+                                                    					echo "<td><b>".$dir_cr." CR</b></td>";
                                                     					echo "<td>".$row["writer_rating"]."</td>";
-																		echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
-																		echo "<td><b>".$writer_movie_count."</b></td>";
+                                                    					echo "<td class='$pl_class'><b>".$pl_cr."</b></td>";
+                                                    					echo "<td><b>".$writer_movie_count."</b></td>";
 
 
                                                     					echo  "</tr>";
