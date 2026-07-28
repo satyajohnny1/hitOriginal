@@ -187,6 +187,7 @@ foreach ($rangeTypes as $rt) {
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$fstatus = $personStatus['tolly_music'][$music_id_raw] ?? 'pending';
+                                                    					if (strtolower($fstatus) !== 'pending') continue;
                                                     					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                       					echo "<td><b>".$dir_cr."</b></td>";
@@ -278,6 +279,7 @@ foreach ($rangeTypes as $rt) {
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$fstatus = $personStatus['tolly_cine'][$cine_id_raw] ?? 'pending';
+                                                    					if (strtolower($fstatus) !== 'pending') continue;
                                                     					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_cine' name='r_cine' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                       					echo "<td><b>".$dir_cr."</b></td>";
@@ -367,6 +369,7 @@ foreach ($rangeTypes as $rt) {
                                                     					$pl_class = ($pl_val >= 0) ? 'text-success' : 'text-danger';
 
                                                     					$fstatus = $personStatus['tolly_editor'][$editor_id_raw] ?? 'pending';
+                                                    					if (strtolower($fstatus) !== 'pending') continue;
                                                     					echo "<tr data-filter='$fstatus'>";
                                                     					echo "<td><label class='btn btn-primary btn-rounded' ><input type='radio' class='r_edi' name='r_edi' value='".$dir_id."' />".$dir_name."</b></label></td>";
                                                       					echo "<td><b>".$dir_cr."</b></td>";
