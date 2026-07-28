@@ -4,7 +4,6 @@ require_once 'db.php';
 
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'pending';
 $tab = isset($_GET['tab']) ? $_GET['tab'] : '';
-error_log("FILTER2_DEBUG: tab=$tab filter=$filter");
 
 $rangeQ = @mysqli_query($conn, "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot");
 $rangeRow = mysqli_fetch_assoc($rangeQ);
@@ -26,7 +25,6 @@ foreach ($rangeTypes as $rt) {
         $unionParts[] = "SELECT $col AS pid, result FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid AND status='out'" . ($ci > 0 ? " AND $col > 0" : "");
     }
     $rsql = "SELECT pid, GROUP_CONCAT(DISTINCT result) AS results FROM (" . implode(' UNION ALL ', $unionParts) . ") t GROUP BY pid";
-    error_log("FILTER2_DEBUG: [{$rt['table']}] STATUS_QUERY: $rsql");
     $rr = @mysqli_query($conn, $rsql);
     if ($rr) {
         while ($rw = mysqli_fetch_assoc($rr)) {
