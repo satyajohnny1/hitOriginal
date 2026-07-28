@@ -12,7 +12,12 @@ $minid = floor($oriid/100)*100;
 $maxid = ceil($oriid/100)*100;
 
 $personStatus = [];
-$flopResults = ['Flop','Below Average','Average'];
+$flopResults = ['Flop', 'Below Average', 'Average', 'Disaster', 'FLOP', 'BELOW AVERAGE', 'AVERAGE', 'DISASTER', 'disaster'];
+
+$resultCond = "";
+if (strtolower($filter) === 'flop') {
+    $resultCond = " AND result IN ('" . implode("','", $flopResults) . "')";
+}
 
 $rangeTypes = [
     ['cols'=>['mid','m2','m3'], 'table'=>'tolly_music', 'pk'=>'music_id'],
@@ -22,22 +27,26 @@ $rangeTypes = [
 foreach ($rangeTypes as $rt) {
     $unionParts = [];
     foreach ($rt['cols'] as $ci => $col) {
-        $unionParts[] = "SELECT $col AS pid, result FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid AND status='out'" . ($ci > 0 ? " AND $col > 0" : "");
+        $unionParts[] = "SELECT $col AS pid, result FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid AND status='out'{$resultCond}" . ($ci > 0 ? " AND $col > 0" : "");
     }
     $rsql = "SELECT pid, GROUP_CONCAT(DISTINCT result) AS results FROM (" . implode(' UNION ALL ', $unionParts) . ") t GROUP BY pid";
     $rr = @mysqli_query($conn, $rsql);
     if ($rr) {
         while ($rw = mysqli_fetch_assoc($rr)) {
             $pid = intval($rw['pid']);
-            $resList = array_map('trim', explode(',', $rw['results']));
-            if (empty($resList[0])) {
-                $personStatus[$rt['table']][$pid] = 'pending';
+            if (strtolower($filter) === 'flop') {
+                $personStatus[$rt['table']][$pid] = 'flop';
             } else {
-                $allFlop = true;
-                foreach ($resList as $rl) {
-                    if (!in_array($rl, $flopResults)) { $allFlop = false; break; }
+                $resList = array_map('trim', explode(',', $rw['results']));
+                if (empty($resList[0])) {
+                    $personStatus[$rt['table']][$pid] = 'pending';
+                } else {
+                    $allFlop = true;
+                    foreach ($resList as $rl) {
+                        if (!in_array($rl, $flopResults)) { $allFlop = false; break; }
+                    }
+                    $personStatus[$rt['table']][$pid] = $allFlop ? 'flop' : 'active';
                 }
-                $personStatus[$rt['table']][$pid] = $allFlop ? 'flop' : 'active';
             }
         }
     }
