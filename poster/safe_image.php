@@ -3,7 +3,7 @@
 // blank placeholder instead of a fatal TypeError.
 
 if (!function_exists('safe_imagecreatefrompng')) {
-    function safe_imagecreatefrompng(string $path, int $width = 400, int $height = 400): \GdImage {
+    function safe_imagecreatefrompng(string $path, int $width = 400, int $height = 400) {
         error_log("SAFE_PNG: trying path=$path");
         if (is_file($path)) {
             error_log("SAFE_PNG: file exists, attempting imagecreatefrompng");
@@ -26,7 +26,7 @@ if (!function_exists('safe_imagecreatefrompng')) {
 }
 
 if (!function_exists('safe_imagecreatefromjpeg')) {
-    function safe_imagecreatefromjpeg(string $path, int $width = 1000, int $height = 1500): \GdImage {
+    function safe_imagecreatefromjpeg(string $path, int $width = 1000, int $height = 1500) {
         error_log("SAFE_JPG: trying path=$path");
         if (is_file($path)) {
             error_log("SAFE_JPG: file exists, attempting imagecreatefromjpeg");
