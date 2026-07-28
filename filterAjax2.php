@@ -92,8 +92,6 @@ if ($tab === 'music') {
             echo "<tr data-filter='$fstatus'>";
             echo "<td><label class='btn btn-primary btn-rounded' ><input type='checkbox' class='r_mus' name='r_mus' value='".$dir_id."' />".$dir_name."</b></label></td>";
             echo "<td><b>".$dir_cr." CR</b></td>";
-            echo "<td></td>";
-            echo "<td></td>";
             echo "<td>".$row["music_rating"]."</td>";
             echo "<td class='$pl_class'><b>".$pl_cr." CR</b></td>";
             echo "<td><b>".$music_movie_count."</b></td>";
