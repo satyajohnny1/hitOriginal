@@ -1429,6 +1429,9 @@ echo '<pre>'; print_r($numbers); echo '</pre>';
 if($d25_cent > $finalCentSize ){
 	$d25_cent = $finalCentSize;
 }
+if($d50_cent > $finalCentSize ){
+	$d50_cent = $finalCentSize;
+}
 
 // Get city info for the selected theater pool
 $idsStr = implode(',', $numbers);
@@ -1457,7 +1460,11 @@ function buildMilestone($pool, $cityMap, $targetCount, $cap) {
     return $result;
 }
 
-// Caps per milestone: 25d=7, 50d=3, 75d=2, 100d=2, 150d=1, 175d=1, rest unlimited
+// Hard caps per milestone: 25d max 600 total, 50d max 300 total
+if ($d25_cent > 600) $d25_cent = 600;
+if ($d50_cent > 300) $d50_cent = 300;
+
+// Per-city caps per milestone: 25d=7, 50d=3, 75d=2, 100d=2, 150d=1, 175d=1, rest unlimited
 $d25_cent = buildMilestone($numbers, $cityMap, $d25_cent, 7);
 $d25_str  = implode(',', $d25_cent);
 
