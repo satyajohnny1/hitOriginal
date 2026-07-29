@@ -46,9 +46,24 @@ $result = mysqli_query($conn, $sql);
 				$d200_str = $row["200list"];
      			$d250_str = $row["250list"];
      			$d300_str = $row["300list"];
-				$dMax = $row["maxlist"]; 		
-     		}
-     	}
+      		$dMax = $row["maxlist"];
+      		// Trim leading commas from stored data (defensive)
+      		$d25_str = ltrim($d25_str, ',');
+      		$d50_str = ltrim($d50_str, ',');
+      		$d75_str = ltrim($d75_str, ',');
+      		$d100_str = ltrim($d100_str, ',');
+      		$d150_str = ltrim($d150_str, ',');
+      		$d175_str = ltrim($d175_str, ',');
+      		$d200_str = ltrim($d200_str, ',');
+      		$d250_str = ltrim($d250_str, ',');
+      		$d300_str = ltrim($d300_str, ',');
+      		$dMax = ltrim($dMax, ',');
+      		}
+      	}
+      	
+      	if (!isset($d25_str)) {
+      		$d25_str = $d50_str = $d75_str = $d100_str = $d150_str = $d175_str = $d200_str = $d250_str = $d300_str = $dMax = '0';
+      	}
 
 
 

@@ -1485,41 +1485,52 @@ $d250_str  = implode(',', $d250_cent);
 $d300_cent = buildMilestone($d250_cent, $cityMap, $d300_cent, null);
 $d300_str  = implode(',', $d300_cent);
 
+// Trim leading commas defensively before storing
+$d25_str  = ltrim($d25_str, ',');
+$d50_str  = ltrim($d50_str, ',');
+$d75_str  = ltrim($d75_str, ',');
+$d100_str = ltrim($d100_str, ',');
+$d150_str = ltrim($d150_str, ',');
+$d175_str = ltrim($d175_str, ',');
+$d200_str = ltrim($d200_str, ',');
+$d250_str = ltrim($d250_str, ',');
+$d300_str = ltrim($d300_str, ',');
 
-$dMax  = $numbers[0];
 
-if($d25_cent!=null){
+$dMax  = $numbers[0] ?? null;
+
+if(!empty($d25_cent)){
 	$dMax  = $d25_cent[0];
 }
-if($d50_cent!=null){
+if(!empty($d50_cent)){
 	$dMax  = $d50_cent[0];
 }
-if($d75_cent!=null){
+if(!empty($d75_cent)){
 	$dMax  = $d75_cent[0];
 }
 
-if($d100_cent!=null){
+if(!empty($d100_cent)){
 	$dMax  = $d100_cent[0];
 }
 
-if($d150_cent!=null){
+if(!empty($d150_cent)){
 	$dMax  = $d150_cent[0];
 }
 
-if($d175_cent!=null){
+if(!empty($d175_cent)){
 	$dMax  = $d175_cent[0];
 }
 
 
-if($d200_cent!=null){
+if(!empty($d200_cent)){
 	$dMax  = $d200_cent[0];
 }
 
-if($d250_cent!=null){
+if(!empty($d250_cent)){
 	$dMax  = $d250_cent[0];
 }
 
-if($d300_cent!=null){
+if(!empty($d300_cent)){
 	$dMax  = $d300_cent[0];
 }
 
