@@ -1416,7 +1416,7 @@ if (mysqli_num_rows($result) > 0) {
 
 
 
-array_unique($numbers);
+$numbers = array_unique($numbers);
 shuffle($numbers);
 shuffle($numbers);
 
@@ -1430,50 +1430,60 @@ if($d25_cent > $finalCentSize ){
 	$d25_cent = $finalCentSize;
 }
 
+// Get city info for the selected theater pool
+$idsStr = implode(',', $numbers);
+$citySql = "SELECT id, city FROM thearterslist WHERE id IN ($idsStr)";
+$cityResult = mysqli_query($conn, $citySql);
+$cityMap = [];
+while($row = mysqli_fetch_assoc($cityResult)) {
+    $cityMap[$row['id']] = $row['city'];
+}
 
-$d25_cent  =  array_slice($numbers, 0, $d25_cent);
+// Build milestone list respecting per-city cap
+// Iterates through pool order (already shuffled) and picks theaters
+// up to $targetCount while limiting to max $cap per city
+function buildMilestone($pool, $cityMap, $targetCount, $cap) {
+    $cityCount = [];
+    $result = [];
+    foreach ($pool as $id) {
+        if (count($result) >= $targetCount) break;
+        $city = $cityMap[$id] ?? '';
+        if (!isset($cityCount[$city])) $cityCount[$city] = 0;
+        if ($cap === null || $cityCount[$city] < $cap) {
+            $result[] = $id;
+            $cityCount[$city]++;
+        }
+    }
+    return $result;
+}
+
+// Caps per milestone: 25d=7, 50d=3, 75d=2, 100d=2, 150d=1, 175d=1, rest unlimited
+$d25_cent = buildMilestone($numbers, $cityMap, $d25_cent, 7);
 $d25_str  = implode(',', $d25_cent);
-shuffle($d25_cent);
 
- 
-$d50_cent  = array_slice($d25_cent,0,$d50_cent);
+$d50_cent = buildMilestone($d25_cent, $cityMap, $d50_cent, 3);
 $d50_str  = implode(',', $d50_cent);
-shuffle($d50_cent);
- 
 
- 
-$d75_cent  = array_slice($d50_cent,0,$d75_cent);
+$d75_cent = buildMilestone($d50_cent, $cityMap, $d75_cent, 2);
 $d75_str  = implode(',', $d75_cent);
-shuffle($d75_cent);
 
- 
-$d100_cent  = array_slice($d75_cent,0,$d100_cent);
+$d100_cent = buildMilestone($d75_cent, $cityMap, $d100_cent, 2);
 $d100_str  = implode(',', $d100_cent);
-shuffle($d100_cent);
 
-
-$d150_cent  = array_slice($d100_cent,0,$d150_cent);
+$d150_cent = buildMilestone($d100_cent, $cityMap, $d150_cent, 1);
 $d150_str  = implode(',', $d150_cent);
-shuffle($d150_cent);
- 
 
-$d175_cent  = array_slice($d150_cent,0,$d175_cent);
+$d175_cent = buildMilestone($d150_cent, $cityMap, $d175_cent, 1);
 $d175_str  = implode(',', $d175_cent);
-shuffle($d175_cent);
 
-$d200_cent  = array_slice($d175_cent,0,$d200_cent);
+$d200_cent = buildMilestone($d175_cent, $cityMap, $d200_cent, null);
 $d200_str  = implode(',', $d200_cent);
-shuffle($d200_cent);
 
-
-$d250_cent  = array_slice($d200_cent,0,$d250_cent);
+$d250_cent = buildMilestone($d200_cent, $cityMap, $d250_cent, null);
 $d250_str  = implode(',', $d250_cent);
-shuffle($d250_cent);
 
-
-$d300_cent  = array_slice($d250_cent,0,$d300_cent);
+$d300_cent = buildMilestone($d250_cent, $cityMap, $d300_cent, null);
 $d300_str  = implode(',', $d300_cent);
-shuffle($d300_cent);
 
 
 $dMax  = $numbers[0];
