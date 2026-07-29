@@ -1442,17 +1442,32 @@ while($row = mysqli_fetch_assoc($cityResult)) {
     $cityMap[$row['id']] = $row['city'];
 }
 
+// Count total theaters per city in the full pool (for dynamic caps)
+$cityTotal = [];
+foreach ($numbers as $id) {
+    $city = $cityMap[$id] ?? '';
+    if (!isset($cityTotal[$city])) $cityTotal[$city] = 0;
+    $cityTotal[$city]++;
+}
+
 // Build milestone list respecting per-city cap
-// Iterates through pool order (already shuffled) and picks theaters
-// up to $targetCount while limiting to max $cap per city
-function buildMilestone($pool, $cityMap, $targetCount, $cap) {
+// $capMode = ['max'=>N, 'ratio'=>R] means max(N, ceil(total*R))
+// $capMode = null or integer means static cap (backwards compatible)
+function buildMilestone($pool, $cityMap, $cityTotal, $targetCount, $capMode) {
     $cityCount = [];
     $result = [];
     foreach ($pool as $id) {
         if (count($result) >= $targetCount) break;
         $city = $cityMap[$id] ?? '';
         if (!isset($cityCount[$city])) $cityCount[$city] = 0;
-        if ($cap === null || $cityCount[$city] < $cap) {
+        if ($capMode === null) {
+            $effectiveCap = 999999;
+        } elseif (is_array($capMode)) {
+            $effectiveCap = min($capMode['max'], max(1, ceil($cityTotal[$city] * $capMode['ratio'])));
+        } else {
+            $effectiveCap = $capMode;
+        }
+        if ($cityCount[$city] < $effectiveCap) {
             $result[] = $id;
             $cityCount[$city]++;
         }
@@ -1465,32 +1480,32 @@ function buildMilestone($pool, $cityMap, $targetCount, $cap) {
 if ($d25_cent > 600) $d25_cent = rand(400, 600);
 if ($d50_cent > 300) $d50_cent = rand(100, 300);
 
-// Per-city caps per milestone: 25d=7, 50d=3, 75d=2, 100d=2, 150d=1, 175d=1, rest unlimited
-$d25_cent = buildMilestone($numbers, $cityMap, $d25_cent, 7);
+// Per-city caps per milestone: 25d dynamic (max 7, ~35% of city theaters)
+$d25_cent = buildMilestone($numbers, $cityMap, $cityTotal, $d25_cent, ['max'=>7, 'ratio'=>0.35]);
 $d25_str  = implode(',', $d25_cent);
 
-$d50_cent = buildMilestone($d25_cent, $cityMap, $d50_cent, 3);
+$d50_cent = buildMilestone($d25_cent, $cityMap, $cityTotal, $d50_cent, 3);
 $d50_str  = implode(',', $d50_cent);
 
-$d75_cent = buildMilestone($d50_cent, $cityMap, $d75_cent, 2);
+$d75_cent = buildMilestone($d50_cent, $cityMap, $cityTotal, $d75_cent, 2);
 $d75_str  = implode(',', $d75_cent);
 
-$d100_cent = buildMilestone($d75_cent, $cityMap, $d100_cent, 2);
+$d100_cent = buildMilestone($d75_cent, $cityMap, $cityTotal, $d100_cent, 2);
 $d100_str  = implode(',', $d100_cent);
 
-$d150_cent = buildMilestone($d100_cent, $cityMap, $d150_cent, 1);
+$d150_cent = buildMilestone($d100_cent, $cityMap, $cityTotal, $d150_cent, 1);
 $d150_str  = implode(',', $d150_cent);
 
-$d175_cent = buildMilestone($d150_cent, $cityMap, $d175_cent, 1);
+$d175_cent = buildMilestone($d150_cent, $cityMap, $cityTotal, $d175_cent, 1);
 $d175_str  = implode(',', $d175_cent);
 
-$d200_cent = buildMilestone($d175_cent, $cityMap, $d200_cent, null);
+$d200_cent = buildMilestone($d175_cent, $cityMap, $cityTotal, $d200_cent, null);
 $d200_str  = implode(',', $d200_cent);
 
-$d250_cent = buildMilestone($d200_cent, $cityMap, $d250_cent, null);
+$d250_cent = buildMilestone($d200_cent, $cityMap, $cityTotal, $d250_cent, null);
 $d250_str  = implode(',', $d250_cent);
 
-$d300_cent = buildMilestone($d250_cent, $cityMap, $d300_cent, null);
+$d300_cent = buildMilestone($d250_cent, $cityMap, $cityTotal, $d300_cent, null);
 $d300_str  = implode(',', $d300_cent);
 
 // Trim leading commas defensively before storing
