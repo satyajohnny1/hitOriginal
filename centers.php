@@ -47,16 +47,16 @@ $result = mysqli_query($conn, $sql);
      			$d250_str = $row["250list"];
      			$d300_str = $row["300list"];
       		$dMax = $row["maxlist"];
-      		// Trim leading commas from stored data (defensive)
-      		$d25_str = ltrim($d25_str, ',');
-      		$d50_str = ltrim($d50_str, ',');
-      		$d75_str = ltrim($d75_str, ',');
-      		$d100_str = ltrim($d100_str, ',');
-      		$d150_str = ltrim($d150_str, ',');
-      		$d175_str = ltrim($d175_str, ',');
-      		$d200_str = ltrim($d200_str, ',');
-      		$d250_str = ltrim($d250_str, ',');
-      		$d300_str = ltrim($d300_str, ',');
+      		// Sanitize comma-separated IDs (handles leading/trailing/consecutive commas)
+      		$d25_str = implode(',', array_filter(explode(',', $d25_str)));
+      		$d50_str = implode(',', array_filter(explode(',', $d50_str)));
+      		$d75_str = implode(',', array_filter(explode(',', $d75_str)));
+      		$d100_str = implode(',', array_filter(explode(',', $d100_str)));
+      		$d150_str = implode(',', array_filter(explode(',', $d150_str)));
+      		$d175_str = implode(',', array_filter(explode(',', $d175_str)));
+      		$d200_str = implode(',', array_filter(explode(',', $d200_str)));
+      		$d250_str = implode(',', array_filter(explode(',', $d250_str)));
+      		$d300_str = implode(',', array_filter(explode(',', $d300_str)));
       		$dMax = ltrim($dMax, ',');
       		}
       	}
