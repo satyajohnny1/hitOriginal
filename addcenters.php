@@ -1461,8 +1461,9 @@ function buildMilestone($pool, $cityMap, $targetCount, $cap) {
 }
 
 // Hard caps per milestone: 25d max 600 total, 50d max 300 total
-if ($d25_cent > 600) $d25_cent = 600;
-if ($d50_cent > 300) $d50_cent = 300;
+// If over cap, randomize within a range for variety
+if ($d25_cent > 600) $d25_cent = rand(400, 600);
+if ($d50_cent > 300) $d50_cent = rand(150, 300);
 
 // Per-city caps per milestone: 25d=7, 50d=3, 75d=2, 100d=2, 150d=1, 175d=1, rest unlimited
 $d25_cent = buildMilestone($numbers, $cityMap, $d25_cent, 7);
