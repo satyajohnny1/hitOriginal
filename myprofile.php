@@ -9,9 +9,9 @@ $email = '';
 $banner = '';
 $pic = '';
 $balnc = 0.0;
+$debtnc = 0.0;
 
 $sql = "SELECT * FROM tolly_user s WHERE  s.uid = ".$uid;
-//echo $sql;
 $result = mysqli_query ( $conn, $sql );
 if (mysqli_num_rows($result) > 0) {
 	$row = mysqli_fetch_assoc($result);
@@ -21,6 +21,7 @@ if (mysqli_num_rows($result) > 0) {
 		$banner = $row["banner"];
 		$pic = $row["pic"];	
 		$balnc =  $row["bal"];
+		$debtnc =  $row["debt"] ?? 0;
 
 		$_SESSION["s_user"] = $row["username"];
 		$_SESSION['s_banner'] = $row["banner"];
@@ -178,6 +179,36 @@ if (mysqli_num_rows($result) > 0) {
 
                                                     </form>
 
+                                                    <hr>
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading"><h4 class="panel-title">Loan Management</h4></div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label>Current Debt</label>
+                                                                    <input type="text" class="form-control" id="currentDebt" readonly value="<?php echo round($debtnc/10000000, 2); ?> Cr">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label>Loan Amount (Cr)</label>
+                                                                    <div class="input-group">
+                                                                        <input type="number" class="form-control" id="loanAmount" placeholder="Enter Cr" min="0" step="0.01">
+                                                                        <span class="input-group-btn">
+                                                                            <button class="btn btn-success" onclick="doLoan('take_loan')">Take Loan</button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label>Clear Amount (Cr)</label>
+                                                                    <div class="input-group">
+                                                                        <input type="number" class="form-control" id="clearAmount" placeholder="Enter Cr" min="0" step="0.01">
+                                                                        <span class="input-group-btn">
+                                                                            <button class="btn btn-warning" onclick="doLoan('clear_debt')">Clear Debt</button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane fade" id="tab10">
@@ -275,25 +306,35 @@ if (mysqli_num_rows($result) > 0) {
                 
 
                 $("#pwdbtn").click(function() {                   
-              	  var str = $("#pwd_form").serialize();			    
-              	  //alert('CHANGE PWD '+str);
-        		    $.ajax({
-        		     type: "POST",
-        		      url: "myprofileAjax.php",
-        		      data: str,
-        	          success: function( data ) {	
-            	          //alert('DATA '+data);
-        	        	  //toastr.info(data," Notification "); 
-        	        	  var obj = jQuery.parseJSON(data);
-                          var msg = obj.msg;                
-                          var status = obj.status;                    
-        	              toastr.info(msg," Notification ");  
-        	           } 
-        		    })
-                	  });
+               	  var str = $("#pwd_form").serialize();			    
+         		    $.ajax({
+         		     type: "POST",
+         		      url: "myprofileAjax.php",
+         		      data: str,
+         	          success: function( data ) {	
+         	        	  var obj = jQuery.parseJSON(data);
+                           var msg = obj.msg;                
+                           var status = obj.status;                    
+         	              toastr.info(msg," Notification ");  
+         	           } 
+         		    })
+                 	  });
 
+    function doLoan(act) {
+        var inp = act === 'take_loan' ? '#loanAmount' : '#clearAmount';
+        var amt = parseFloat($(inp).val());
+        if (!amt || amt <= 0) { toastr.error('Enter valid amount'); return; }
+        $.post('loanAjax.php', {action:act, amount:amt}, function(r) {
+            if (r.status === 'ok') {
+                $('#currentDebt').val(r.new_debt);
+                $('#balcr').text(r.new_bal);
+                $('#debtcr').text(r.new_debt);
+                $(inp).val('');
+            }
+            toastr[r.status === 'ok' ? 'success' : 'error'](r.msg);
+        }, 'json');
+    }
 
-                
             </script>
 
     </body>

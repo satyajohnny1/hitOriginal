@@ -30,44 +30,6 @@ include __DIR__ . '/session_init.php';
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading"><h4 class="panel-title">Loan Management</h4></div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Current Debt</label>
-                                        <input type="text" class="form-control" id="currentDebt" readonly value="<?php echo round(($_SESSION['s_debt'] ?? 0)/10000000, 2); ?> Cr">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Loan Amount (Cr)</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="loanAmount" placeholder="Enter Cr" min="0" step="0.01">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-success" onclick="takeLoan()">Take Loan</button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Clear Amount (Cr)</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="clearAmount" placeholder="Enter Cr" min="0" step="0.01">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-warning" onclick="clearDebt()">Clear Debt</button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>&nbsp;</label>
-                                        <div><span id="balcr_local"><i class="fa fa-inr"></i> <?php echo $_SESSION['s_rs']?></span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
                                 <button class="btn btn-success btn-sm pull-right" onclick="openAddModal()"><i class="fa fa-plus"></i> Add New</button>
@@ -265,41 +227,6 @@ include __DIR__ . '/session_init.php';
                 toastr.error(r.msg);
             }
         }, 'json');
-    }
-
-    function takeLoan() {
-        var amount = parseFloat($('#loanAmount').val());
-        if (!amount || amount <= 0) { toastr.error('Enter a valid loan amount'); return; }
-        $.post('loanAjax.php', {action:'take_loan', amount:amount}, function(r) {
-            if (r.status === 'ok') {
-                toastr.success(r.msg);
-                refreshLoanUI(r.new_bal, r.new_debt);
-                $('#loanAmount').val('');
-            } else {
-                toastr.error(r.msg);
-            }
-        }, 'json');
-    }
-
-    function clearDebt() {
-        var amount = parseFloat($('#clearAmount').val());
-        if (!amount || amount <= 0) { toastr.error('Enter a valid clear amount'); return; }
-        $.post('loanAjax.php', {action:'clear_debt', amount:amount}, function(r) {
-            if (r.status === 'ok') {
-                toastr.success(r.msg);
-                refreshLoanUI(r.new_bal, r.new_debt);
-                $('#clearAmount').val('');
-            } else {
-                toastr.error(r.msg);
-            }
-        }, 'json');
-    }
-
-    function refreshLoanUI(newBal, newDebt) {
-        $('#currentDebt').val(newDebt);
-        $('#balcr_local').html('<i class="fa fa-inr"></i> ' + newBal);
-        $('#balcr').text(newBal);
-        $('#debtcr').text(newDebt);
     }
     </script>
 </body>
