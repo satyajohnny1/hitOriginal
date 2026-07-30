@@ -29,14 +29,58 @@ function clean($string) {
    return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 }
 
+$picPath = null;
+$deletePic = isset($_POST['delete_pic']) && $_POST['delete_pic'] === '1';
 
+if ($table === 'actor' || $table === 'actress') {
+    if (isset($_FILES['actor_pic']) && $_FILES['actor_pic']['error'] === UPLOAD_ERR_OK) {
+        $validFormats = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        $tmpName = $_FILES['actor_pic']['tmp_name'];
+        $origName = $_FILES['actor_pic']['name'];
+        $ext = strtolower(pathinfo($origName, PATHINFO_EXTENSION));
+        if (!in_array($ext, $validFormats)) {
+            echo '<h1>Invalid image format. Allowed: jpg, jpeg, png, gif, webp</h1>';
+            exit;
+        }
+        $picPath = 'poster/' . clean($name) . '.png';
+        $picPathDb = $picPath;
+        move_uploaded_file($tmpName, $picPath);
+    } elseif ($deletePic) {
+        $picPathDb = '';
+    }
+}
 
+if ($table === 'actor') {
+    if ($picPath !== null) {
+        $oldSql = "SELECT actor_pic FROM tolly_actor WHERE actor_id=" . $aid;
+        $oldRes = mysqli_query($conn, $oldSql);
+        $oldRow = mysqli_fetch_assoc($oldRes);
+        if ($oldRow && !empty($oldRow['actor_pic']) && $oldRow['actor_pic'] !== $picPath) {
+            $oldFile = $oldRow['actor_pic'];
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+    } elseif ($deletePic) {
+        $oldSql = "SELECT actor_pic FROM tolly_actor WHERE actor_id=" . $aid;
+        $oldRes = mysqli_query($conn, $oldSql);
+        $oldRow = mysqli_fetch_assoc($oldRes);
+        if ($oldRow && !empty($oldRow['actor_pic'])) {
+            $oldFile = $oldRow['actor_pic'];
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+    }
 
+    $picSet = '';
+    if ($picPath !== null) {
+        $picSet = "`actor_pic`='" . mysqli_real_escape_string($conn, $picPath) . "', ";
+    } elseif ($deletePic) {
+        $picSet = "`actor_pic`='', ";
+    }
 
-if($table=='actor')
-{
-
-		$sql1 = "UPDATE `tolly_actor` SET `actor_name`='".$xname."', `actor_rate`='".$rate."', `actor_grade`='".$grade."', `actor_status`='".$status."', `actor_rating`='".$rating."' WHERE  `actor_id`=".$aid	;
+    $sql1 = "UPDATE `tolly_actor` SET " . $picSet . "`actor_name`='".$xname."', `actor_rate`='".$rate."', `actor_grade`='".$grade."', `actor_status`='".$status."', `actor_rating`='".$rating."' WHERE  `actor_id`=".$aid	;
 		 
 		
 		echo $sql1;
@@ -57,8 +101,36 @@ if($table=='actor')
 
 if($table=='actress')
 {
+    if ($picPath !== null) {
+        $oldSql = "SELECT actress_pic FROM tolly_actress WHERE actress_id=" . $aid;
+        $oldRes = mysqli_query($conn, $oldSql);
+        $oldRow = mysqli_fetch_assoc($oldRes);
+        if ($oldRow && !empty($oldRow['actress_pic']) && $oldRow['actress_pic'] !== $picPath) {
+            $oldFile = $oldRow['actress_pic'];
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+    } elseif ($deletePic) {
+        $oldSql = "SELECT actress_pic FROM tolly_actress WHERE actress_id=" . $aid;
+        $oldRes = mysqli_query($conn, $oldSql);
+        $oldRow = mysqli_fetch_assoc($oldRes);
+        if ($oldRow && !empty($oldRow['actress_pic'])) {
+            $oldFile = $oldRow['actress_pic'];
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+    }
 
-		$sql1 = "UPDATE `tolly_actress` SET `actress_name`='".$xname."', `actress_rate`='".$rate."', `actress_grade`='".$grade."', `actress_status`='".$status."', `actress_rating`='".$rating."' WHERE  `actress_id`=".$aid	;
+    $picSet = '';
+    if ($picPath !== null) {
+        $picSet = "`actress_pic`='" . mysqli_real_escape_string($conn, $picPath) . "', ";
+    } elseif ($deletePic) {
+        $picSet = "`actress_pic`='', ";
+    }
+
+    $sql1 = "UPDATE `tolly_actress` SET " . $picSet . "`actress_name`='".$xname."', `actress_rate`='".$rate."', `actress_grade`='".$grade."', `actress_status`='".$status."', `actress_rating`='".$rating."' WHERE  `actress_id`=".$aid	;
 
 	echo $sql1;
 

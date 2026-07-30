@@ -142,7 +142,23 @@ $nme = $_GET['name'];
                                             <label for="exampleInputPassword1">rating</label>
                                             <input type="number" class="form-control" id="arating"  value="<?php echo $rating ?>"  name="arating"  placeholder="Remuranation">
                                         </div>
-                                         
+
+                                        <div class="form-group">
+                                            <label><b>Photo</b></label>
+                                            <div>
+                                                <?php if (!empty($pic) && file_exists($pic)): ?>
+                                                    <div style="margin-bottom:8px;">
+                                                        <img src="<?php echo $pic ?>" style="max-width:120px; max-height:120px; border:1px solid #ddd; border-radius:4px;">
+                                                        <label style="display:block; margin-top:4px;">
+                                                            <input type="checkbox" name="delete_pic" value="1"> Delete current photo
+                                                        </label>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <input type="file" class="form-control modern-input" name="actor_pic" accept="image/png,image/jpeg,image/gif,image/webp">
+                                                <p class="help-block text-muted" style="font-size:11px;">Upload PNG, JPG, GIF or WebP. Will be stored as poster/{name}.png</p>
+                                            </div>
+                                        </div>
+                                          
                                       <?php 
 									  
 									  if($_SESSION['s_type'] == 'admin')

@@ -24,43 +24,46 @@ function clean($string) {
 
 if($table=='actor')
 {
+    $picSql = "SELECT actor_pic FROM tolly_actor WHERE actor_id=" . $aid;
+    $picRes = mysqli_query($conn, $picSql);
+    $picRow = mysqli_fetch_assoc($picRes);
+    if ($picRow && !empty($picRow['actor_pic']) && file_exists($picRow['actor_pic'])) {
+        unlink($picRow['actor_pic']);
+    }
 
-		$sql1 = "DELETE FROM `tolly_actor` WHERE  `actor_id`=".$aid	;
-		
-		 
-		
-		echo $sql1;
-		
-		
-		
-		$t = mysqli_query ( $conn, $sql1 );
-		//echo $t;
-		if ($t) {
-			echo '<h1>'.$table.'    DATA RECORD DELETED  <h1>';
-			
-		} else {
-			echo 'ERROR';
-		}
+    $sql1 = "DELETE FROM `tolly_actor` WHERE  `actor_id`=".$aid;
+    
+    echo $sql1;
+    
+    $t = mysqli_query ( $conn, $sql1 );
+    if ($t) {
+        echo '<h1>'.$table.'    DATA RECORD DELETED  <h1>';
+    } else {
+        echo 'ERROR';
+    }
 }
 
 
 
 if($table=='actress')
 {
-		$sql1 = "DELETE FROM `tolly_actress` WHERE  `actress_id`=".$aid	;
-		 
-	echo $sql1;
+    $picSql = "SELECT actress_pic FROM tolly_actress WHERE actress_id=" . $aid;
+    $picRes = mysqli_query($conn, $picSql);
+    $picRow = mysqli_fetch_assoc($picRes);
+    if ($picRow && !empty($picRow['actress_pic']) && file_exists($picRow['actress_pic'])) {
+        unlink($picRow['actress_pic']);
+    }
 
+    $sql1 = "DELETE FROM `tolly_actress` WHERE  `actress_id`=".$aid;
+     
+    echo $sql1;
 
-
-	$t = mysqli_query ( $conn, $sql1 );
-	//echo $t;
-	if ($t) {
-		echo '<h1>'.$table.'    DATA RECORD DELETED  <h1>';
-			
-	} else {
-		echo 'ERROR';
-	}
+    $t = mysqli_query ( $conn, $sql1 );
+    if ($t) {
+        echo '<h1>'.$table.'    DATA RECORD DELETED  <h1>';
+    } else {
+        echo 'ERROR';
+    }
 }
 
 
