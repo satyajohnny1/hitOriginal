@@ -37,6 +37,7 @@ $password=$_POST['password'];
 	$_SESSION['s_banner'] = $row["banner"];
 	$_SESSION['s_type'] = $row["utype"];
 	$_SESSION['s_rs'] = 0;
+	error_log("[LOGIN] uid={$row['uid']} user={$row['username']} sid=" . session_id());
 	$status = $row["status"];
 	
 	$status='active';

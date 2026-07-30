@@ -9,8 +9,7 @@ ini_set('session.gc_maxlifetime', $cookie_lifetime);
 session_set_cookie_params([
     'lifetime' => $cookie_lifetime,
     'path'     => '/',
-    'domain'   => '',
-    'secure'   => false,
+    'secure'   => true,
     'httponly'  => false,
     'samesite' => 'Lax',
 ]);
@@ -34,30 +33,39 @@ if (!function_exists('_sess_conn')) {
 
     function db_session_read($id) {
         $c = _sess_conn();
-        if (!$c) return '';
+        if (!$c) { error_log("[SESS] read($id) FAIL: no connection"); return ''; }
         $id = mysqli_real_escape_string($c, $id);
         $result = mysqli_query($c, "SELECT sess_data, sess_lifetime, sess_time FROM db_sessions WHERE sess_id = '$id' LIMIT 1");
         if ($result && $row = mysqli_fetch_assoc($result)) {
             if (time() - $row['sess_time'] < $row['sess_lifetime']) {
+                $has_uid = strpos($row['sess_data'], 's_uid') !== false ? 'HAS_UID' : 'NO_UID';
+                error_log("[SESS] read($id) OK $has_uid size=" . strlen($row['sess_data']));
+                error_log("[SESS] read($id) raw=" . bin2hex(substr($row['sess_data'], 0, 200)));
                 return $row['sess_data'];
             }
+            error_log("[SESS] read($id) EXPIRED");
             mysqli_query($c, "DELETE FROM db_sessions WHERE sess_id = '$id'");
+        } else {
+            error_log("[SESS] read($id) NOT FOUND" . ($result ? '' : ' query_failed'));
         }
         return '';
     }
 
     function db_session_write($id, $data) {
         $c = _sess_conn();
-        if (!$c) return false;
+        if (!$c) { error_log("[SESS] write($id) FAIL: no connection"); return false; }
         $id = mysqli_real_escape_string($c, $id);
         $data = mysqli_real_escape_string($c, $data);
         $time = time();
         $lifetime = 72 * 60 * 60;
+        $has_uid = strpos($data, 's_uid') !== false ? 'HAS_UID' : 'NO_UID';
         $exists = @mysqli_query($c, "SELECT 1 FROM db_sessions WHERE sess_id = '$id' LIMIT 1");
         if ($exists && mysqli_num_rows($exists) > 0) {
             mysqli_query($c, "UPDATE db_sessions SET sess_data='$data', sess_time=$time, sess_lifetime=$lifetime WHERE sess_id='$id'");
+            error_log("[SESS] write($id) UPDATE $has_uid size=" . strlen($data));
         } else {
             mysqli_query($c, "INSERT INTO db_sessions (sess_id, sess_data, sess_time, sess_lifetime) VALUES ('$id', '$data', $time, $lifetime)");
+            error_log("[SESS] write($id) INSERT $has_uid size=" . strlen($data));
         }
         return true;
     }
