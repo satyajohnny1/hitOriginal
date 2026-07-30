@@ -211,7 +211,7 @@ $notes_raw = trim(safeGET("notes"));
 
 if (!empty($notes_raw) && $notes_raw !== '-- NOTES--') {
 	$codir_text = 'Screenplay, CoDirection - ' . $notes_raw;
-	$codir_fonsiz = intval($crew_fonsiz * 0.85);
+	$codir_fonsiz = intval($crew_fonsiz * 1.25);
 	if ($codir_fonsiz < 9) $codir_fonsiz = 9;
 	$codir_box = @imagettfbbox($codir_fonsiz, 0, $fnt, $codir_text);
 	$codir_w = abs($codir_box[4] - $codir_box[0]);
