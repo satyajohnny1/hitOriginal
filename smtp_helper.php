@@ -199,16 +199,33 @@ class MailSender {
             'Content-Type: application/json',
             'Authorization: Bearer ' . $apiToken
         ]);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
         $response = curl_exec($ch);
+        $curlError = curl_error($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
         if ($httpCode >= 200 && $httpCode < 300) {
             return true;
-        } else {
-            $errDetail = $response ? ": " . $response : "";
-            throw new Exception("MailerSend API HTTP $httpCode$errDetail");
         }
+
+        $errParts = [];
+        if ($httpCode === 0 && !empty($curlError)) {
+            $errParts[] = "cURL error: $curlError";
+        }
+        if ($response) {
+            $decoded = json_decode($response, true);
+            if (isset($decoded['message'])) {
+                $errParts[] = $decoded['message'];
+            } else {
+                $errParts[] = $response;
+            }
+        }
+        $errDetail = $errParts ? ': ' . implode(' | ', $errParts) : '';
+        throw new Exception("MailerSend API HTTP $httpCode" . $errDetail);
     }
 }
