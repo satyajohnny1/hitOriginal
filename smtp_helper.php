@@ -203,6 +203,7 @@ class MailSender {
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . '/cacert.pem');
 
         $response = curl_exec($ch);
         $curlError = curl_error($ch);
