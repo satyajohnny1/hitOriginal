@@ -54,6 +54,8 @@
                                     <li><a href="cron.php">Cron Scheduler</a></li>
                                     <li><a href="poster/regenallposters.php">Regen All Posters</a></li>
                                     <li><a href="email_config.php">Email Config</a></li>
+                                    <li><a href="updateallpage.php">Update All</a></li>
+                                    <li><a href="deleteallpage.php">Delete All</a></li>
                                 </ul>
                             </li>
 		    <li><a href="pending.php" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-random"></span><p>Pending</p></a>
