@@ -228,7 +228,8 @@ if (!empty($notes_raw) && $notes_raw !== '-- NOTES--') {
 	];
 	$bright = $bright_colors[array_rand($bright_colors)];
 	$ncr = imagecolorallocate($jpg_image, $bright[0], $bright[1], $bright[2]);
-	@imagettftext($jpg_image, $codir_fonsiz, 0, $codir_x, 650, $ncr, $fnt, $codir_text);
+	$codir_y = 630 + $crew_fonsiz + $codir_fonsiz + 4;
+	@imagettftext($jpg_image, $codir_fonsiz, 0, $codir_x, $codir_y, $ncr, $fnt, $codir_text);
 	error_log("POSTER[13a]: codirection text size=$codir_fonsiz text=$codir_text");
 }
 error_log("POSTER[13]: all text done title_size=$title_fonsiz dir_size=$fonsiz crew_size=$crew_fonsiz");
