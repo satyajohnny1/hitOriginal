@@ -1370,53 +1370,56 @@ echo ' <h2> RESULT ' . $result.'</h2>';
 
 // Centers ================== Calculation ============== Start 
 
-$centSQl = "SELECT s.city, COUNT(s.name) as tcount, GROUP_CONCAT(s.id) AS idlist FROM thearterslist s GROUP BY s.city having tcount > 10 ORDER BY tcount DESC";
+$mainCities = ['hyderabad','vijayawada','vizag','guntur','nellore',
+               'tirupati','warangal','rajahmundry','kakinada','kurnool'];
+
+$numbers = [];
+
+$centSQl = "SELECT LOWER(TRIM(s.city)) as city_key, s.city as orig_city, COUNT(s.name) as tcount, GROUP_CONCAT(s.id) AS idlist FROM thearterslist s GROUP BY city_key ORDER BY tcount DESC";
 $result = mysqli_query($conn, $centSQl);
-//$numbers = range(1, 1340);
-$numbers = []; 
-$cityArray = [];
-echo $centSQl;
-                                                    			
+
+$mainById = [];
+$other = [];
+
 if (mysqli_num_rows($result) > 0) {
-	// output data of each row
 	while($row = mysqli_fetch_assoc($result)) {
 		$idlist = $row["idlist"];
 		$tcount = $row["tcount"];
-		$city = $row["city"];
-	
-		$thlimit = ceil($tcount/6);
-		$idArray = explode(',', $idlist);
-		
-		shuffle($idArray);
-	        shuffle($idArray);
-		
-		$subNums = array_slice($idArray, 0, ($thlimit+1));
-		$numbers = array_merge($numbers, $subNums); 
-		array_push($cityArray, $city);
-	}
-}  
-$cityStr = "'" . implode ( "', '", $cityArray ) . "'";
-rtrim($cityStr, ',');
-$centSQl = "SELECT GROUP_CONCAT(s.id) AS idlist FROM thearterslist s WHERE s.city NOT IN (".$cityStr.")";
-echo $centSQl;
-$result = mysqli_query($conn, $centSQl);
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while($row = mysqli_fetch_assoc($result)) {
-		$idlist = $row["idlist"];
+		$city_key = $row["city_key"];
 		$idArray = explode(',', $idlist);
 		shuffle($idArray);
 		shuffle($idArray);
-		echo 'Sub Centers Connt : '.count($idArray);
-		$numbers = array_merge($numbers, $idArray); 
+
+		if (in_array($city_key, $mainCities)) {
+			$mainById[$city_key] = $idArray;
+		} else {
+			$thlimit = ceil($tcount/6);
+			$subNums = array_slice($idArray, 0, ($thlimit+1));
+			$other = array_merge($other, $subNums);
+		}
 	}
-}  
+}
 
-
-
-
+if ($d25_cent >= 10) {
+	foreach ($mainCities as $city) {
+		if (!empty($mainById[$city])) {
+			$numbers[] = array_shift($mainById[$city]);
+		}
+	}
+	foreach ($mainById as $ids) {
+		$numbers = array_merge($numbers, $ids);
+	}
+	$numbers = array_merge($numbers, $other);
+} else {
+	foreach ($mainCities as $city) {
+		if (!empty($mainById[$city])) {
+			$numbers = array_merge($numbers, $mainById[$city]);
+		}
+	}
+}
 
 $numbers = array_unique($numbers);
+shuffle($numbers);
 shuffle($numbers);
 shuffle($numbers);
 
