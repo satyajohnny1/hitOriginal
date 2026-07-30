@@ -1400,7 +1400,7 @@ if (mysqli_num_rows($result) > 0) {
 	}
 }
 
-if ($d25_cent >= 10) {
+if ($d25_cent >= 10 || $d50_cent >= 10 || $d75_cent >= 10 || $d100_cent >= 10 || $d125_cent >= 10 || $d150_cent >= 10 || $d175_cent >= 10 || $d200_cent >= 10) {
 	foreach ($mainCities as $city) {
 		if (!empty($mainById[$city])) {
 			$numbers[] = array_shift($mainById[$city]);
