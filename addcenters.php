@@ -1442,7 +1442,7 @@ $citySql = "SELECT id, city FROM thearterslist WHERE id IN ($idsStr)";
 $cityResult = mysqli_query($conn, $citySql);
 $cityMap = [];
 while($row = mysqli_fetch_assoc($cityResult)) {
-    $cityMap[$row['id']] = $row['city'];
+    $cityMap[$row['id']] = trim(strtolower($row['city']));
 }
 
 // Count total theaters per city in the full pool (for dynamic caps)
