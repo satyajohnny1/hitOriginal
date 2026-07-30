@@ -5,10 +5,11 @@ include __DIR__ . '/session_init.php';
 ?>
 
 <?php
-//echo "after Include";
-if(isset($_SESSION['login_user'])){
+error_log("[LOGIN_PAGE] session_check: s_uid=" . ($_SESSION['s_uid'] ?? 'NOT_SET') . " login_user=" . ($_SESSION['login_user'] ?? 'NOT_SET') . " sid=" . session_id());
+if(isset($_SESSION['s_uid'])){
+error_log("[LOGIN_PAGE] already logged in uid={$_SESSION['s_uid']}, redirecting to dashboard");
 header("location: userdashboard.php");
-//echo "In Header";
+exit;
 }
 ?>
 

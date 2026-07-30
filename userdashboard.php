@@ -10,6 +10,7 @@ include __DIR__ . '/session_init.php';
 error_reporting(E_ERROR);
 $uid = $_SESSION['s_uid'];
 $srs = $_SESSION['s_rs']; 
+error_log("[DASHBOARD] loaded uid=$uid user={$_SESSION['s_user']} sid=" . session_id() . " cookie=" . ($_COOKIE['PHPSESSID'] ?? 'NO_COOKIE'));
 ?>
 <?php include('css.php');  ?> 
        

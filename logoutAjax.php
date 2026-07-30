@@ -1,8 +1,10 @@
 <?php
-if(isset($_SESSION['login_user'])){
-	unset($_SESSION['login_user']);  //Is Used To Destroy Specified Session
+include __DIR__ . '/session_init.php';
+error_log("[LOGOUT] s_uid=" . ($_SESSION['s_uid'] ?? 'NOT_SET') . " sid=" . session_id());
+if(isset($_SESSION['s_uid'])){
+	unset($_SESSION['s_uid']);
 }
-session_destroy(); // Is Used To Destroy All Sessions
+session_destroy();
 header("location: login.php");
 
 

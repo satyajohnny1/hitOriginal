@@ -6,13 +6,17 @@ require_once __DIR__ . '/env.php';
 $cookie_lifetime = 72 * 60 * 60;
 ini_set('session.gc_maxlifetime', $cookie_lifetime);
 
+$is_https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+    || (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on');
 session_set_cookie_params([
     'lifetime' => $cookie_lifetime,
     'path'     => '/',
-    'secure'   => true,
+    'secure'   => $is_https,
     'httponly'  => false,
     'samesite' => 'Lax',
 ]);
+error_log("[SESS_INIT] secure=" . ($is_https ? 'true' : 'false') . " scheme=" . ($_SERVER['REQUEST_SCHEME'] ?? 'n/a') . " https=" . ($_SERVER['HTTPS'] ?? 'n/a'));
 
 if (!function_exists('_sess_conn')) {
     function _sess_conn() {
