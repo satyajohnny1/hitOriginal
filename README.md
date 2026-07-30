@@ -128,3 +128,31 @@ A centralized dashboard and endpoint are exposed to check the application state:
 * **API URL**: `https://hitapp.wasmer.app/health.php?format=json` (JSON endpoint for monitoring services like UptimeRobot/Better Uptime).
 * **ChecksPerformed**: Server environment specs, MySQL connection status and latency, active mail provider config, SMTP network handshakes, and backups storage health.
 
+---
+
+## 💰 Loan / Debt System
+Producers can take loans and clear debt from **My Profile** page.
+* **Take Loan**: Enter amount in Cr → adds to balance + debt. Max debt cap: **500 Cr**.
+* **Clear Debt**: Enter amount in Cr → deducted from balance, reduces debt.
+* **Backend**: `loanAjax.php` handles `take_loan` / `clear_debt` actions.
+* **DB**: `debt` column (double, default 0) in `tolly_user` table.
+* **Display**: Debt shown in navbar (`₹ X.XXCr | Debt: ₹ Y.YYCr`) and producers table.
+
+## 🏙️ Main Cities Rule for Theater Centers
+Theater center selection in `addcenters.php` ensures releases cover key Andhra cities:
+* **10 main cities**: Hyderabad, Vijayawada, Vizag, Guntur, Nellore, Tirupati, Warangal, Rajahmundry, Kakinada, Kurnool.
+* **If centers >= 10**: At least 1 theater from **each** of the 10 cities is guaranteed.
+* **If centers < 10**: All theaters are picked exclusively from these 10 cities (no outside).
+* City matching is **case-insensitive** (`LOWER(TRIM(city))`).
+
+## 🖼️ Poster Generation
+* **Active generator**: `poster/poster-v2.php`
+* **Notes font**: 125% of music/editor crew font size (dynamic gap to avoid overlap).
+* **Crew text**: Music + Writer + Editor + Cinematographer combined line, auto-shrinks if too wide.
+* **Batch regen**: `poster/regenallposters.php`
+
+## 🔐 Session & Login
+* Custom database-backed session handler (table: `db_sessions`).
+* Session cookie `secure` flag auto-detects HTTPS (fixes login loop on HTTP).
+* `sessionCheck.php` guards all authenticated pages; missing session redirects to login with error.
+
