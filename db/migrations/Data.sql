@@ -4,25 +4,25 @@
 
 TRUNCATE TABLE tolly_user;
 
-INSERT INTO `tolly_user` (`uid`, `username`, `password`, `email`, `status`, `pic`, `bal`, `banner`, `utype`) VALUES
-(95, 'admin', 'admin', 'admin', 'active', 'pic/u1.jpg', 2769910120, 'USER PRODUCTIONS', 'admin'),
-(96, 'ALLU ARAVIND', 'allu', 'allu', 'active', 'pic/u1.jpg', 2000000000, 'GEETHA ARTS', 'admin'),
-(97, 'DIL RAJU', 'raju', 'raju', 'active', 'pic/u1.jpg', 2000000000, 'SRI VENKATESWARA CREATIONS', 'admin'),
-(98, 'Naveen Yerneni- Ravi Shankar Mohan-Cherukuri', 'mythri', 'mythri', 'active', 'pic/u1.jpg', 2000000000, ' Mythri Movie Makers', 'admin'),
-(99, 'Suresh - Venkatesh', 'suresh', 'suresh', 'active', 'pic/u1.jpg', 2000000000, 'Suresh Productions - D.Ramanaidu Presents', 'admin'),
-(100, 'Ram Achanta, Gopichand Achanta, Anil Sunkar', '14reels', '14reels', 'active', 'pic/u1.jpg', 2000000000, '14 Reels Entertainment', 'admin'),
-(101, 'Nagarjuna - Supriya Akkineni', 'nag', 'nag', 'active', 'pic/u1.jpg', 2000000000, 'Annapurna Studios', 'admin'),
-(102, 'NTR - Nanadamuri Kalyam Ram', 'ntr', 'ntr', 'active', 'pic/u1.jpg', 2000000000, ' N. T. R. Arts', 'admin'),
-(103, 'Dr. M. MohanBabu - Vishnu Manchu', 'manchu', 'manchu', 'active', 'pic/u1.jpg', 2000000000, 'Sree Lakshmi Prasanna Pictures', 'admin'),
-(104, 'C.AswiniDutt', 'vyjayanti', 'vyjayanti', 'active', 'pic/u1.jpg', 2000000000, 'Vyjayanthi Movies', 'admin'),
-(105, 'Ram Charan - Pawan Kalyan', 'chiru', 'chiru', 'active', 'pic/u1.jpg', 2000000000, 'Konidela Production Company', 'admin'),
-(106, 'Pramod - Vamsi', 'prabas', 'prabas', 'active', 'pic/u1.jpg', 2000000000, 'UV Creations - Prabas Presents', 'admin'),
-(107, 'G.Mahesh Babu', 'mahesh', 'mahesh', 'active', 'pic/u1.jpg', 2000000000, 'GMB Entertainment - Krishna Presents', 'admin'),
-(110, 'Satya Kaveti', 'satya', 'satya', 'active', 'pic/u1.jpg', 2000000000, 'A I T H E ARTS - Ramalayam Vendithera ', 'admin'),
-(108, 'S.Chinababu', 'sitara', 'sitara', 'active', 'pic/u1.jpg', 2000000000, 'Sitara Entertainments', 'admin'),
-(114, 'Danayya D. V. V.', 'dvv', 'dvv', 'active', 'pic/u1.jpg', 2000000000, 'DVV Entertainment', 'admin'),
-(119, 'Sunil Narang', 'asin', 'asin', 'active', 'pic/u1.jpg', 2000000000, 'Asian Cinemas', 'admin'),
-(130, 'T.G.Viswa Prasad', 'ppl', 'ppl', 'active', 'pic/u1.jpg', 2000000000, 'People Media Factory', 'admin');
+INSERT INTO `tolly_user` (`uid`, `username`, `password`, `email`, `status`, `pic`, `bal`, `debt`, `banner`, `utype`) VALUES
+(95, 'admin', 'admin', 'admin', 'active', 'pic/u1.jpg', 2769910120, 0, 'USER PRODUCTIONS', 'admin'),
+(96, 'ALLU ARAVIND', 'allu', 'allu', 'active', 'pic/u1.jpg', 2000000000, 0, 'GEETHA ARTS', 'admin'),
+(97, 'DIL RAJU', 'raju', 'raju', 'active', 'pic/u1.jpg', 2000000000, 0, 'SRI VENKATESWARA CREATIONS', 'admin'),
+(98, 'Naveen Yerneni- Ravi Shankar Mohan-Cherukuri', 'mythri', 'mythri', 'active', 'pic/u1.jpg', 2000000000, 0, ' Mythri Movie Makers', 'admin'),
+(99, 'Suresh - Venkatesh', 'suresh', 'suresh', 'active', 'pic/u1.jpg', 2000000000, 0, 'Suresh Productions - D.Ramanaidu Presents', 'admin'),
+(100, 'Ram Achanta, Gopichand Achanta, Anil Sunkar', '14reels', '14reels', 'active', 'pic/u1.jpg', 2000000000, 0, '14 Reels Entertainment', 'admin'),
+(101, 'Nagarjuna - Supriya Akkineni', 'nag', 'nag', 'active', 'pic/u1.jpg', 2000000000, 0, 'Annapurna Studios', 'admin'),
+(102, 'NTR - Nanadamuri Kalyam Ram', 'ntr', 'ntr', 'active', 'pic/u1.jpg', 2000000000, 0, ' N. T. R. Arts', 'admin'),
+(103, 'Dr. M. MohanBabu - Vishnu Manchu', 'manchu', 'manchu', 'active', 'pic/u1.jpg', 2000000000, 0, 'Sree Lakshmi Prasanna Pictures', 'admin'),
+(104, 'C.AswiniDutt', 'vyjayanti', 'vyjayanti', 'active', 'pic/u1.jpg', 2000000000, 0, 'Vyjayanthi Movies', 'admin'),
+(105, 'Ram Charan - Pawan Kalyan', 'chiru', 'chiru', 'active', 'pic/u1.jpg', 2000000000, 0, 'Konidela Production Company', 'admin'),
+(106, 'Pramod - Vamsi', 'prabas', 'prabas', 'active', 'pic/u1.jpg', 2000000000, 0, 'UV Creations - Prabas Presents', 'admin'),
+(107, 'G.Mahesh Babu', 'mahesh', 'mahesh', 'active', 'pic/u1.jpg', 2000000000, 0, 'GMB Entertainment - Krishna Presents', 'admin'),
+(110, 'Satya Kaveti', 'satya', 'satya', 'active', 'pic/u1.jpg', 2000000000, 0, 'A I T H E ARTS - Ramalayam Vendithera ', 'admin'),
+(108, 'S.Chinababu', 'sitara', 'sitara', 'active', 'pic/u1.jpg', 2000000000, 0, 'Sitara Entertainments', 'admin'),
+(114, 'Danayya D. V. V.', 'dvv', 'dvv', 'active', 'pic/u1.jpg', 2000000000, 0, 'DVV Entertainment', 'admin'),
+(119, 'Sunil Narang', 'asin', 'asin', 'active', 'pic/u1.jpg', 2000000000, 0, 'Asian Cinemas', 'admin'),
+(130, 'T.G.Viswa Prasad', 'ppl', 'ppl', 'active', 'pic/u1.jpg', 2000000000, 0, 'People Media Factory', 'admin');
 
 
 

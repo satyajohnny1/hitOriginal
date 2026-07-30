@@ -25,7 +25,7 @@ include 'analyticstracking.php';
                             <ul class="nav navbar-nav navbar-right">
                                <li>
                                    <div class="logo-box">
-                       					 <a class="logo-text"><i class="fa fa-inr">&nbsp;</i><span id="balcr"><?php echo $_SESSION['s_rs']?></span><span id="bal_id" style="display: none;"><?php include 'balance.php';?></span></a>
+                        					 <a class="logo-text"><i class="fa fa-inr">&nbsp;</i><span id="balcr"><?php echo $_SESSION['s_rs']?></span>&nbsp;|&nbsp;Debt:&nbsp;<span id="debtcr" style="color:#ff6b6b;"><?php echo $_SESSION['s_debt_rs'] ?? '0Cr'?></span><span id="bal_id" style="display: none;"><?php include 'balance.php';?></span></a>
                   				  </div>
                                 </li>
                            		  

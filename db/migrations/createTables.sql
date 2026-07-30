@@ -471,6 +471,7 @@ CREATE TABLE IF NOT EXISTS `tolly_user` (
   `status` varchar(50) DEFAULT NULL,
   `pic` varchar(50) NOT NULL DEFAULT 'pic/u1.jpg',
   `bal` double unsigned DEFAULT 50000000,
+  `debt` double NOT NULL DEFAULT 0,
   `banner` varchar(250) DEFAULT NULL,
   `utype` varchar(50) DEFAULT 'user',
   PRIMARY KEY (`uid`)
@@ -478,7 +479,7 @@ CREATE TABLE IF NOT EXISTS `tolly_user` (
 
 -- Dumping data for table hit.tolly_user: 2 rows
 /*!40000 ALTER TABLE `tolly_user` DISABLE KEYS */;
-INSERT INTO `tolly_user` (`uid`, `username`, `password`, `email`, `status`, `pic`, `bal`, `banner`, `utype`) VALUES
-	(93, 'admin', 'admin', 'admin', 'active', 'pic/u1.jpg', 996176585980, 'satya', 'admin'),
-	(95, 'user', 'user', 'user', 'active', 'pic/u1.jpg', 2769910120, 'USER PRODUCTIONS', 'user');
+INSERT INTO `tolly_user` (`uid`, `username`, `password`, `email`, `status`, `pic`, `bal`, `debt`, `banner`, `utype`) VALUES
+	(93, 'admin', 'admin', 'admin', 'active', 'pic/u1.jpg', 996176585980, 0, 'satya', 'admin'),
+	(95, 'user', 'user', 'user', 'active', 'pic/u1.jpg', 2769910120, 0, 'USER PRODUCTIONS', 'user');
 /*!40000 ALTER TABLE `tolly_user` ENABLE KEYS */;
