@@ -1308,6 +1308,7 @@ foreach ($rangeTypes as $rt) {
 
 	var dtConfigs = {
 		example: { "columnDefs": [{ "type": "num", "targets": [2, 5] }] },
+		example3: { "columnDefs": [{ "type": "num", "targets": [1, 2, 3, 4] }] },
 		"example-editable": {},
 		example2: { "columnDefs": [{ "visible": false, "targets": 2 }], "order": [[ 2, 'asc' ]], "displayLength": 25,
 			"drawCallback": function(settings) {
