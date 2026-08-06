@@ -252,6 +252,10 @@ if (mysqli_num_rows ( $result ) > 0) {
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_actor` SET `actor_rate`=".$rem.", `actor_rating`=".$ratt." WHERE  `actor_id`=". $aid;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -277,6 +281,10 @@ if (mysqli_num_rows ( $result ) > 0) {
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_actress` SET `actress_rate`=".$rem.", `actress_rating`=".$ratt." WHERE  `actress_id`=". $acid;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -302,6 +310,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_director` SET `director_rate`=".$rem.", `director_rating`=".$ratt." WHERE  `director_id`=". $did;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -324,6 +336,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_writer` SET `writer_rate`=".$rem.", `writer_rating`=".$ratt." WHERE  `writer_id`=". $wid;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -347,6 +363,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_music` SET `music_rate`=".$rem.", `music_rating`=".$ratt." WHERE  `music_id`=". $mid;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -373,6 +393,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_cine` SET `cine_rate`=".$rem.", `cine_rating`=".$ratt." WHERE  `cine_id`=". $cid;
 	echo "CINE  ==============> ".$sql3;
 	mysqli_query ( $conn, $sql3 );
@@ -398,6 +422,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_editor` SET `editor_rate`=".$rem.", `editor_rating`=".$ratt." WHERE  `editor_id`=". $eid;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -424,6 +452,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_actress` SET `actress_rate`=".$rem.", `actress_rating`=".$ratt." WHERE  `actress_id`=". $ac2;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -448,6 +480,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 		$ratt = $ratt+$point;
+		if($ratt<0)
+		{
+			$ratt=0;
+		}
 		$sql3="UPDATE `tolly_actor` SET `actor_rate`=".$rem.", `actor_rating`=".$ratt." WHERE  `actor_id`=". $a2;
 		mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -471,6 +507,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_actor` SET `actor_rate`=".$rem.", `actor_rating`=".$ratt." WHERE  `actor_id`=". $a3;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -494,6 +534,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_actress` SET `actress_rate`=".$rem.", `actress_rating`=".$ratt." WHERE  `actress_id`=". $ac3;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -517,6 +561,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_music` SET `music_rate`=".$rem.", `music_rating`=".$ratt." WHERE  `music_id`=". $m2;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -540,6 +588,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_music` SET `music_rate`=".$rem.", `music_rating`=".$ratt." WHERE  `music_id`=". $m3;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -563,6 +615,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_writer` SET `writer_rate`=".$rem.", `writer_rating`=".$ratt." WHERE  `writer_id`=". $w2;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -586,6 +642,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_writer` SET `writer_rate`=".$rem.", `writer_rating`=".$ratt." WHERE  `writer_id`=". $w3;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -609,6 +669,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_director` SET `director_rate`=".$rem.", `director_rating`=".$ratt." WHERE  `director_id`=". $d2;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -632,6 +696,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_director` SET `director_rate`=".$rem.", `director_rating`=".$ratt." WHERE  `director_id`=". $d3;
 	mysqli_query ( $conn, $sql3 );
 		$count++;

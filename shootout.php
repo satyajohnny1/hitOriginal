@@ -208,6 +208,10 @@ if (mysqli_num_rows ( $result ) > 0) {
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_actor` SET `actor_rate`=".$rem.", `actor_rating`=".$ratt." WHERE  `actor_id`=". $aid;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -233,6 +237,10 @@ if (mysqli_num_rows ( $result ) > 0) {
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_actress` SET `actress_rate`=".$rem.", `actress_rating`=".$ratt." WHERE  `actress_id`=". $acid;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -258,6 +266,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_director` SET `director_rate`=".$rem.", `director_rating`=".$ratt." WHERE  `director_id`=". $did;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -280,6 +292,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_writer` SET `writer_rate`=".$rem.", `writer_rating`=".$ratt." WHERE  `writer_id`=". $wid;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -303,6 +319,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_music` SET `music_rate`=".$rem.", `music_rating`=".$ratt." WHERE  `music_id`=". $mid;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -329,6 +349,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_cine` SET `cine_rate`=".$rem.", `cine_rating`=".$ratt." WHERE  `cine_id`=". $cid;
 	echo "CINE  ==============> ".$sql3;
 	mysqli_query ( $conn, $sql3 );
@@ -354,6 +378,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_editor` SET `editor_rate`=".$rem.", `editor_rating`=".$ratt." WHERE  `editor_id`=". $eid;
 	mysqli_query ( $conn, $sql3 );
 	$count++;
@@ -380,6 +408,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_actress` SET `actress_rate`=".$rem.", `actress_rating`=".$ratt." WHERE  `actress_id`=". $ac2;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -404,6 +436,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 		$ratt = $ratt+$point;
+		if($ratt<0)
+		{
+			$ratt=0;
+		}
 		$sql3="UPDATE `tolly_actor` SET `actor_rate`=".$rem.", `actor_rating`=".$ratt." WHERE  `actor_id`=". $a2;
 		mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -427,6 +463,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_actor` SET `actor_rate`=".$rem.", `actor_rating`=".$ratt." WHERE  `actor_id`=". $a3;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -450,6 +490,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_actress` SET `actress_rate`=".$rem.", `actress_rating`=".$ratt." WHERE  `actress_id`=". $ac3;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -473,6 +517,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_music` SET `music_rate`=".$rem.", `music_rating`=".$ratt." WHERE  `music_id`=". $m2;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -496,6 +544,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_music` SET `music_rate`=".$rem.", `music_rating`=".$ratt." WHERE  `music_id`=". $m3;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -519,6 +571,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_writer` SET `writer_rate`=".$rem.", `writer_rating`=".$ratt." WHERE  `writer_id`=". $w2;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -542,6 +598,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_writer` SET `writer_rate`=".$rem.", `writer_rating`=".$ratt." WHERE  `writer_id`=". $w3;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -565,6 +625,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_director` SET `director_rate`=".$rem.", `director_rating`=".$ratt." WHERE  `director_id`=". $d2;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -588,6 +652,10 @@ if($rem<100000)
 		$ratt=16;
 	}
 	$ratt = $ratt+$point;
+	if($ratt<0)
+	{
+		$ratt=0;
+	}
 	$sql3="UPDATE `tolly_director` SET `director_rate`=".$rem.", `director_rating`=".$ratt." WHERE  `director_id`=". $d3;
 	mysqli_query ( $conn, $sql3 );
 		$count++;
@@ -1335,7 +1403,7 @@ echo "BUDGET IS  " . $budget;
 echo 'Update --->' . $sql1;
 mysqli_query ( $conn, $sql1 );
 
-$sql = "INSERT INTO tolly_release (uid, rid, rel_cen, a1_cen, a2_cen, a3_cen, a4_cen, a5_cen, a1, a2, a3, a4, a5, a6, 1w_coll, 2w_coll, 25d_coll, 50d_coll, 75d_coll, 100d_coll, 125d_coll, 150d_coll, 175d_coll, total_coll, 1w_cen, 2w_cen, 25d_cen, 50d_cen, 75d_cen, 100d_cen, 125d_cen, 150d_cen, 175d_cen, 200d_cen, 250d_cen, 300d_cen, 350d_cen, 400d_cen, max_days, max_cent, 50cen, 100cen, 175cen, notes,r1,r2,r3) VALUES
+$sql = "REPLACE INTO tolly_release (uid, rid, rel_cen, a1_cen, a2_cen, a3_cen, a4_cen, a5_cen, a1, a2, a3, a4, a5, a6, 1w_coll, 2w_coll, 25d_coll, 50d_coll, 75d_coll, 100d_coll, 125d_coll, 150d_coll, 175d_coll, total_coll, 1w_cen, 2w_cen, 25d_cen, 50d_cen, 75d_cen, 100d_cen, 125d_cen, 150d_cen, 175d_cen, 200d_cen, 250d_cen, 300d_cen, 350d_cen, 400d_cen, max_days, max_cent, 50cen, 100cen, 175cen, notes,r1,r2,r3) VALUES
  		 (" . $uid . ", " . $sid . ", " . $rel_cent . ", " . $a_cent . ", " . $a_cent . ", " . $a_cent . ", " . $a_cent . ", " . $a_cent . ", " . $a_bud . ", " . $a_bud . ", " . $a_bud . ", " . $a_bud . ", " . $a_bud . ", " . $a_bud . ", " . $wk1_coll . ", " . $wk2_coll . ", " . $d25_coll . ", " . $d50_coll . ", " . $d75_coll . ",
  		 		 " . $d100_coll . ", " . $d125_coll . ", " . $d150_coll . ", " . $d175_coll . ", " . $max_coll . ", " . $wk1_cent . ", " . $wk2_cent . ", " . $d25_cent . ", " . $d50_cent . ", " . $d75_cent . ", " . $d100_cent . ", " . $d125_cent . ", " . $d150_cent . ",  " . $d175_cent . ", " . $d200_cent . ", " . $d250_cent . ", " . $d300_cent . ", " . $d350_cent . ", " . $d400_cent . ", " . $max_days . ", 'AAA', 'ALANKAR', '$100cent', '$175cent', 'notes', " . $r1 . ", " . $r2 . ", " . $r3 . ")";
 echo $sql;
@@ -1530,7 +1598,7 @@ echo "</p> <p> Max Days :".$dMax;
 
 
 
-$sqlCenters = "INSERT INTO centers (rid, 25list, 50list, 75list, 100list, 150list, 175list, 200list, 250list, 300list, maxlist) VALUES ( '" .$rid . "', '" .$d25_str . "', '" .$d50_str . "', '" .$d75_str . "', '" .$d100_str . "', '" .$d150_str . "', '" .$d175_str . "', '" .$d200_str . "', '" .$d250_str . "', '" .$d300_str . "', '" .$dMax . "')";
+$sqlCenters = "REPLACE INTO centers (rid, 25list, 50list, 75list, 100list, 150list, 175list, 200list, 250list, 300list, maxlist) VALUES ( '" .$rid . "', '" .$d25_str . "', '" .$d50_str . "', '" .$d75_str . "', '" .$d100_str . "', '" .$d150_str . "', '" .$d175_str . "', '" .$d200_str . "', '" .$d250_str . "', '" .$d300_str . "', '" .$dMax . "')";
 
 echo "</p> <p> Query :".$sqlCenters;
 
