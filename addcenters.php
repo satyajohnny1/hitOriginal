@@ -165,7 +165,7 @@ for($x = 1; $x <= 5; $x ++) {
 	} // IF END
 	$ratesum = $ratesum + floatval($z);
 } // For Loop END
-$rateavg = number_format ( ( float ) ((($ratesum / 5)) / 2), 2, '.', '' );
+$rateavg = (float) number_format ( ( float ) ((($ratesum / 5)) / 2), 2, '.', '' );
 $ratefinal = $rateavg;
 echo '<br> <h2>rating SUM ' . $ratesum . ' ---->  FINAL RATING : ' . $rateavg.'</h2>';
 
@@ -1443,7 +1443,7 @@ $mainCities = ['hyderabad','vijayawada','vizag','guntur','nellore',
 
 $numbers = [];
 
-$centSQl = "SELECT LOWER(TRIM(s.city)) as city_key, s.city as orig_city, COUNT(s.name) as tcount, GROUP_CONCAT(s.id) AS idlist FROM thearterslist s GROUP BY city_key ORDER BY tcount DESC";
+$centSQl = "SELECT LOWER(TRIM(s.city)) as city_key, ANY_VALUE(s.city) as orig_city, COUNT(s.name) as tcount, GROUP_CONCAT(s.id) AS idlist FROM thearterslist s GROUP BY city_key ORDER BY tcount DESC";
 $result = mysqli_query($conn, $centSQl);
 
 $mainById = [];
@@ -1461,7 +1461,7 @@ if (mysqli_num_rows($result) > 0) {
 		if (in_array($city_key, $mainCities)) {
 			$mainById[$city_key] = $idArray;
 		} else {
-			$thlimit = ceil($tcount/6);
+			$thlimit = (int) ceil($tcount/6);
 			$subNums = array_slice($idArray, 0, ($thlimit+1));
 			$other = array_merge($other, $subNums);
 		}
