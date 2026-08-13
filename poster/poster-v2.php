@@ -25,6 +25,18 @@ if (!function_exists('drawHero')) {
 	}
 }
 
+if (!function_exists('poster_base_canvas')) {
+	// Force an exact 1000x800 canvas so every poster matches the historical size,
+	// regardless of the source background's native dimensions.
+	function poster_base_canvas($bgPath) {
+		$src = safe_imagecreatefromjpeg($bgPath, 1000, 800);
+		$canvas = imagecreatetruecolor(1000, 800);
+		imagecopyresampled($canvas, $src, 0, 0, 0, 0, 1000, 800, imagesx($src), imagesy($src));
+		imagedestroy($src);
+		return $canvas;
+	}
+}
+
 error_log("POSTER[1]: start");
 
 require_once __DIR__ . '/safe_image.php';
@@ -96,7 +108,7 @@ $ori      = $path;
 
 error_log("POSTER[5]: paths set bg=$bg fnt=$fnt");
 
-$jpg_image = safe_imagecreatefromjpeg($bg, 1000, 1500);
+$jpg_image = poster_base_canvas($bg);
 error_log("POSTER[6]: base image created type=" . gettype($jpg_image));
 
 $num = rand(1, 50);
@@ -277,8 +289,8 @@ foreach ($milestones as $ms) {
 	if ($use_val > 0) {
 		$ms_count++;
 		error_log("POSTER[16]: milestone $use_label saving to " . $ms['file']);
-		$ms_img = imagecreatetruecolor(1000, 1500);
-		imagecopy($ms_img, $jpg_image, 0, 0, 0, 0, 1000, 1500);
+		$ms_img = imagecreatetruecolor(1000, 800);
+		imagecopy($ms_img, $jpg_image, 0, 0, 0, 0, 1000, 800);
 
 		$day_angle = $m_ang;
 		if ($hero_count === 3 && in_array($use_label, ['75', '150', '175'])) {
