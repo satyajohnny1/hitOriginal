@@ -9,6 +9,7 @@ if (!isset($_SESSION['s_uid'])) {
 }
 
 include __DIR__ . '/../db.php';
+require_once __DIR__ . '/storage.php';
 
 $base = __DIR__;
 @mkdir($base . '/done', 0755, true);
@@ -72,7 +73,7 @@ if ($total > 0) {
 			error_log("REGEN[ERR]: $rid - $title - " . $e->getMessage());
 		}
 
-		if (file_exists($file_path)) {
+		if (poster_storage_exists($upp . '.jpeg')) {
 			$done++;
 			echo "<p style='color:green'>OK</p> #$rid - $title";
 		} else {

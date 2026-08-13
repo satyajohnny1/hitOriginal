@@ -2,3 +2,5 @@ sendgrid.env
 backups/
 db/migrations/.migrated
 poster/done/
+poster/.cloudinary_versions.json
+.env

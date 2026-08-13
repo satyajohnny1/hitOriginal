@@ -150,6 +150,10 @@ Theater center selection in `addcenters.php` ensures releases cover key Andhra c
 * **Notes font**: 125% of music/editor crew font size (dynamic gap to avoid overlap).
 * **Crew text**: Music + Writer + Editor + Cinematographer combined line, auto-shrinks if too wide.
 * **Batch regen**: `poster/regenallposters.php`
+* **Storage**: posters can be saved to the local filesystem (`poster/done/`) or to a Cloudinary CDN.
+  * Set `POSTER_STORAGE=cloudinary` in `.env` to enable Cloudinary; any other value, empty, or a missing key uses the filesystem.
+  * Cloudinary credentials: `CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>`.
+  * When Cloudinary is enabled, `poster/serve.php` redirects to the CDN URL (versioned to bust cache on regeneration) and falls back to a local copy if an upload failed.
 
 ## 🔐 Session & Login
 * Custom database-backed session handler (table: `db_sessions`).

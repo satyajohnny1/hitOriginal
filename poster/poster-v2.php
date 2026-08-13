@@ -28,6 +28,7 @@ if (!function_exists('drawHero')) {
 error_log("POSTER[1]: start");
 
 require_once __DIR__ . '/safe_image.php';
+require_once __DIR__ . '/storage.php';
 
 @mkdir(__DIR__ . '/done', 0755, true);
 
@@ -78,12 +79,19 @@ $bg   = $base . "/bg/bg" . rand(1, 35) . ".jpg";
 $fnt  = $base . "/fonts/" . rand(1, 30) . ".ttf";
 $tfnt = $base . "/fonts/" . rand(14, 122) . ".ttf";
 
-$path     = $base . '/done/' . $tit . ".jpeg";
-$path_50  = $base . '/done/' . $tit . "_50.jpeg";
-$path_75  = $base . '/done/' . $tit . "_75.jpeg";
-$path_100 = $base . '/done/' . $tit . "_100.jpeg";
-$path_150 = $base . '/done/' . $tit . "_150.jpeg";
-$path_175 = $base . '/done/' . $tit . "_175.jpeg";
+$file_main     = $tit . ".jpeg";
+$file_50       = $tit . "_50.jpeg";
+$file_75       = $tit . "_75.jpeg";
+$file_100      = $tit . "_100.jpeg";
+$file_150      = $tit . "_150.jpeg";
+$file_175      = $tit . "_175.jpeg";
+
+$path     = $base . '/done/' . $file_main;
+$path_50  = $base . '/done/' . $file_50;
+$path_75  = $base . '/done/' . $file_75;
+$path_100 = $base . '/done/' . $file_100;
+$path_150 = $base . '/done/' . $file_150;
+$path_175 = $base . '/done/' . $file_175;
 $ori      = $path;
 
 error_log("POSTER[5]: paths set bg=$bg fnt=$fnt");
@@ -234,9 +242,12 @@ if (!empty($notes_raw) && $notes_raw !== '-- NOTES--') {
 }
 error_log("POSTER[13]: all text done title_size=$title_fonsiz dir_size=$fonsiz crew_size=$crew_fonsiz");
 
-error_log("POSTER[14]: saving main to $path");
-$jpeg_ok = @imagejpeg($jpg_image, $path, 90);
-error_log("POSTER[15]: imagejpeg result=" . ($jpeg_ok ? 'OK' : 'FAIL') . " file_exists=" . (file_exists($path) ? 'YES' : 'NO'));
+error_log("POSTER[14]: saving main to $file_main backend=" . poster_storage_backend());
+ob_start();
+$jpeg_ok = @imagejpeg($jpg_image, null, 90);
+$main_bytes = ob_get_clean();
+$main_saved = poster_storage_save($file_main, $main_bytes);
+error_log("POSTER[15]: imagejpeg result=" . ($jpeg_ok ? 'OK' : 'FAIL') . " storage=" . ($main_saved ? 'OK' : 'FAIL') . " bytes=" . strlen($main_bytes));
 
 if ($hero_count === 3) {
 	$m_day_x = 480;  $m_day_y = 800;
@@ -251,11 +262,11 @@ if ($hero_count === 3) {
 }
 
 $milestones = [
-	['val' => $fif, 'label' => '50', 'file' => $path_50],
-	['val' => $sev, 'label' => '75', 'file' => $path_75],
-	['val' => $hun, 'label' => '100', 'file' => $path_100],
-	['val' => $onf, 'label' => '150', 'file' => $path_150],
-	['val' => $fiv, 'label' => '175', 'file' => $path_175],
+	['val' => $fif, 'label' => '50', 'file' => $file_50],
+	['val' => $sev, 'label' => '75', 'file' => $file_75],
+	['val' => $hun, 'label' => '100', 'file' => $file_100],
+	['val' => $onf, 'label' => '150', 'file' => $file_150],
+	['val' => $fiv, 'label' => '175', 'file' => $file_175],
 ];
 
 $ms_count = 0;
@@ -266,7 +277,8 @@ foreach ($milestones as $ms) {
 	if ($use_val > 0) {
 		$ms_count++;
 		error_log("POSTER[16]: milestone $use_label saving to " . $ms['file']);
-		$jpg_image = safe_imagecreatefromjpeg($ori, 1000, 1500);
+		$ms_img = imagecreatetruecolor(1000, 1500);
+		imagecopy($ms_img, $jpg_image, 0, 0, 0, 0, 1000, 1500);
 
 		$day_angle = $m_ang;
 		if ($hero_count === 3 && in_array($use_label, ['75', '150', '175'])) {
@@ -281,13 +293,16 @@ foreach ($milestones as $ms) {
 			$cen_x = $m_cen_x; $cen_y = $m_cen_y; $cen_sz = $m_cen_sz;
 		}
 
-		@imagettftext($jpg_image, 180, $day_angle, $day_x, $day_y, $tclr, $fnt, $use_label);
-		@imagettftext($jpg_image, $days_sz, 0, $days_x, $days_y, $tclr, $fnt, "DAYS");
-		@imagettftext($jpg_image, $cen_sz, 0, $cen_x, $cen_y, $tclr, $fnt, $use_val . " CENTERS");
+		@imagettftext($ms_img, 180, $day_angle, $day_x, $day_y, $tclr, $fnt, $use_label);
+		@imagettftext($ms_img, $days_sz, 0, $days_x, $days_y, $tclr, $fnt, "DAYS");
+		@imagettftext($ms_img, $cen_sz, 0, $cen_x, $cen_y, $tclr, $fnt, $use_val . " CENTERS");
 
-		$jpeg_ok = @imagejpeg($jpg_image, $ms['file'], 90);
-		error_log("POSTER[17]: milestone $use_label result=" . ($jpeg_ok ? 'OK' : 'FAIL'));
-		imagedestroy($jpg_image);
+		ob_start();
+		$jpeg_ok = @imagejpeg($ms_img, null, 90);
+		$ms_bytes = ob_get_clean();
+		$ms_saved = poster_storage_save($ms['file'], $ms_bytes);
+		error_log("POSTER[17]: milestone $use_label result=" . ($jpeg_ok ? 'OK' : 'FAIL') . " storage=" . ($ms_saved ? 'OK' : 'FAIL'));
+		imagedestroy($ms_img);
 	}
 }
 error_log("POSTER[18]: $ms_count milestones done");

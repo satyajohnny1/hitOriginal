@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/storage.php';
 
 $rid = isset($_GET['rid']) ? intval($_GET['rid']) : 0;
 $type = isset($_GET['type']) ? $_GET['type'] : '';
@@ -35,6 +36,36 @@ if ($type === 'main') {
 	$filename = $upp . ".jpeg";
 } else {
 	$filename = $upp . "_" . $type . ".jpeg";
+}
+
+error_log("SERVE[4]: filename=$filename backend=" . poster_storage_backend());
+
+if (poster_storage_backend() === 'cloudinary') {
+	if (poster_storage_exists($filename)) {
+		$url = poster_storage_url($filename);
+		error_log("SERVE[5]: redirecting to $url");
+		header("Location: " . $url);
+		exit;
+	}
+	// fall back to a local copy (e.g. after a failed upload)
+	$file_path = __DIR__ . '/done/' . $filename;
+	if (is_file($file_path)) {
+		error_log("SERVE[5b]: serving local fallback $file_path size=" . filesize($file_path));
+		header("Content-Type: image/jpeg");
+		header("Cache-Control: no-cache, must-revalidate");
+		header("Expires: 0");
+		readfile($file_path);
+		exit;
+	}
+	error_log("SERVE[4b]: file missing, serving placeholder rid=$rid type=$type");
+	header("Content-Type: image/png");
+	header("Cache-Control: no-cache, must-revalidate");
+	$ph = imagecreatetruecolor(200, 300);
+	$bg = imagecolorallocate($ph, 220, 220, 220);
+	imagefill($ph, 0, 0, $bg);
+	imagepng($ph);
+	imagedestroy($ph);
+	exit;
 }
 
 $file_path = __DIR__ . '/done/' . $filename;
