@@ -117,9 +117,24 @@ if (!function_exists('cloudinary_versions')) {
 if (!function_exists('cloudinary_store_version')) {
     function cloudinary_store_version(string $publicId, string $version) {
         if ($version === '') return;
-        $arr = cloudinary_versions();
-        $arr[$publicId] = $version;
-        @file_put_contents(__DIR__ . '/.cloudinary_versions.json', json_encode($arr), LOCK_EX);
+        $path = __DIR__ . '/.cloudinary_versions.json';
+        // Re-read and rewrite under an exclusive lock so concurrent poster
+        // generations don't drop each other's entries (which would make the
+        // CDN URL lose its version and serve a stale cached image).
+        $fp = @fopen($path, 'c+');
+        if ($fp === false) return;
+        if (@flock($fp, LOCK_EX)) {
+            $raw = stream_get_contents($fp);
+            $arr = $raw ? json_decode($raw, true) : null;
+            if (!is_array($arr)) $arr = [];
+            $arr[$publicId] = $version;
+            @ftruncate($fp, 0);
+            @rewind($fp);
+            @fwrite($fp, json_encode($arr));
+            @fflush($fp);
+            @flock($fp, LOCK_UN);
+        }
+        @fclose($fp);
     }
 }
 

@@ -70,3 +70,26 @@ if (!function_exists('poster_storage_url')) {
         return poster_storage_done_dir() . '/' . $filename;
     }
 }
+
+// Browser-usable URL for a generated poster. Cloudinary -> versioned CDN URL,
+// filesystem -> web-relative path so <img> tags can load it directly.
+if (!function_exists('poster_storage_web_url')) {
+    function poster_storage_web_url(string $filename) {
+        if (poster_storage_config() === 'cloudinary') {
+            return cloudinary_public_url($filename);
+        }
+        return 'poster/done/' . rawurlencode($filename);
+    }
+}
+
+// Canonical poster filename for a movie: MAIN -> "TITLE<rid>.jpeg", others ->
+// "TITLE<rid>_<type>.jpeg" (type in 50,75,100,150,175). Matches poster-v2.php.
+if (!function_exists('poster_filename_for')) {
+    function poster_filename_for(string $title, $rid, string $type): string {
+        $base = strtoupper(trim($title) . (string) $rid);
+        if ($type === 'main') {
+            return $base . '.jpeg';
+        }
+        return $base . '_' . $type . '.jpeg';
+    }
+}

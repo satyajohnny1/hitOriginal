@@ -207,14 +207,14 @@ function clean($string) {
 	return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 }
 
-$serve_base = 'poster/serve.php?rid='.$rid;
+require_once __DIR__ . '/poster/storage.php';
 
-$path = $serve_base.'&type=main';
-$path_50 = $serve_base.'&type=50';
-$path_75 = $serve_base.'&type=75';
-$path_100 = $serve_base.'&type=100';
-$path_150 = $serve_base.'&type=150';
-$path_175 = $serve_base.'&type=175';
+$path     = poster_storage_web_url(poster_filename_for($title, $rid, 'main'));
+$path_50  = poster_storage_web_url(poster_filename_for($title, $rid, '50'));
+$path_75  = poster_storage_web_url(poster_filename_for($title, $rid, '75'));
+$path_100 = poster_storage_web_url(poster_filename_for($title, $rid, '100'));
+$path_150 = poster_storage_web_url(poster_filename_for($title, $rid, '150'));
+$path_175 = poster_storage_web_url(poster_filename_for($title, $rid, '175'));
 
 
 ?>
@@ -351,22 +351,22 @@ $path_175 = $serve_base.'&type=175';
 
                                         <div class="row">
                                            <div class="col-md-12" style="position:relative;display: none;" id="pos_0">
-                                                <img src="<?php echo $path?>" style="width: 100%">
+                                                <img src="<?php echo $path?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                             </div>
                                             
                                             <div class="col-md-12" style="position:relative; display: none;"   id="pos_50">
-                                                <img src="<?php echo $path_50?>" style="width: 100%">
+                                                <img src="<?php echo $path_50?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                             </div>
                                             
                                             <div class="col-md-12" style="position:relative; display: none;"   id="pos_100">
-                                                <img src="<?php echo $path_100?>" style="width: 100%">
+                                                <img src="<?php echo $path_100?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                             </div>
                                             
                                             <div class="col-md-12" style="position:relative; display: none;"   id="pos_175">
-                                                <img src="<?php echo $path_175?>" style="width: 100%">
+                                                <img src="<?php echo $path_175?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                             </div>
                                             <div class="col-md-12" style="position:relative; display: none;"   id="pos_150">
-                                                <img src="<?php echo $path_150?>" style="width: 100%">
+                                                <img src="<?php echo $path_150?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -770,11 +770,11 @@ $path_175 = $serve_base.'&type=175';
                         url: plink,
                         success: function(data) {
                             toastr.success("<h2>Poster generated</h2>");
-                            <?php
-                            $upd_sql = "UPDATE `tolly_release` SET `poster`='yes' WHERE `rid`=" . (int)$rid;
-                            mysqli_query($conn, $upd_sql);
-                            ?>
-                            setTimeout(function(){ location.reload(true); }, 2000);
+                            $('#pos_0 img').attr('src', posterBust('<?php echo $path?>'));
+                            $('#pos_50 img').attr('src', posterBust('<?php echo $path_50?>'));
+                            $('#pos_100 img').attr('src', posterBust('<?php echo $path_100?>'));
+                            $('#pos_175 img').attr('src', posterBust('<?php echo $path_175?>'));
+                            $('#pos_150 img').attr('src', posterBust('<?php echo $path_150?>'));
                         },
                         error: function(xhr, status, errorThrown) {
                             toastr.error("Poster generation failed: " + errorThrown);
@@ -787,6 +787,10 @@ $path_175 = $serve_base.'&type=175';
                     $.each(ids, function(k, id){ $('#'+id).hide(); });
                     var target = ids[type] || 'pos_0';
                     $('#'+target).show();
+                }
+
+                function posterBust(src) {
+                    return src + (src.indexOf('?') > -1 ? '&' : '?') + 'v=' + new Date().getTime();
                 }
 
                 $('#posterRegenBtn').on('click', function(){
@@ -854,12 +858,11 @@ $path_175 = $serve_base.'&type=175';
                         url: plink,
                         success: function(data) {
                             toastr.success("<h2>Poster regenerated</h2>");
-                            var bust = (plink.indexOf('?') > -1 ? '&' : '?') + 'v=' + new Date().getTime();
-                            $('#pos_0 img').attr('src', '<?php echo $path?>' + bust);
-                            $('#pos_50 img').attr('src', '<?php echo $path_50?>' + bust);
-                            $('#pos_100 img').attr('src', '<?php echo $path_100?>' + bust);
-                            $('#pos_175 img').attr('src', '<?php echo $path_175?>' + bust);
-                            $('#pos_150 img').attr('src', '<?php echo $path_150?>' + bust);
+                            $('#pos_0 img').attr('src', posterBust('<?php echo $path?>'));
+                            $('#pos_50 img').attr('src', posterBust('<?php echo $path_50?>'));
+                            $('#pos_100 img').attr('src', posterBust('<?php echo $path_100?>'));
+                            $('#pos_175 img').attr('src', posterBust('<?php echo $path_175?>'));
+                            $('#pos_150 img').attr('src', posterBust('<?php echo $path_150?>'));
                             btn.prop('disabled', false);
                         },
                         error: function(xhr, status, errorThrown) {

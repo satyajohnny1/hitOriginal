@@ -90,10 +90,11 @@ if (mysqli_num_rows($result) > 0) {
 
 	}
 }
-$path = 'poster/serve.php?rid='.$rid.'&type=main';
-$path_50 = 'poster/serve.php?rid='.$rid.'&type=50';
-$path_100 = 'poster/serve.php?rid='.$rid.'&type=100';
-$path_175 = 'poster/serve.php?rid='.$rid.'&type=175';
+require_once __DIR__ . '/poster/storage.php';
+$path     = poster_storage_web_url(poster_filename_for($title, $rid, 'main'));
+$path_50  = poster_storage_web_url(poster_filename_for($title, $rid, '50'));
+$path_100 = poster_storage_web_url(poster_filename_for($title, $rid, '100'));
+$path_175 = poster_storage_web_url(poster_filename_for($title, $rid, '175'));
 
 
 $sql = "SELECT * FROM tolly_release s WHERE s.uid = ".$uid." and s.rid = ".$rid;
@@ -163,18 +164,18 @@ if (mysqli_num_rows($result) > 0) {
 
                                         <div class="row">
                                             <div class="col-md-12" style="position:relative;">
-                                                <img src="<?php echo $path?>" style="width: 100%">
+                                                <img src="<?php echo $path?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                                 <br><br>
                                                  <span class="share"><?php include 'share.php';?></span>
                                             </div>
                                             
                                             <div class="col-md-12" style="position:relative;"><br><br>
-                                                <img src="<?php echo $path_50?>" style="width: 100%"><br><br>
+                                                <img src="<?php echo $path_50?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'"><br><br>
                                                  <span class="share"><?php include 'share.php';?></span>
                                             </div>
                                             
                                             <div class="col-md-12" style="position:relative;"><br><br>
-                                                <img src="<?php echo $path_100?>" style="width: 100%"><br><br>
+                                                <img src="<?php echo $path_100?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'"><br><br>
                                                  <span class="share"><?php include 'share.php';?></span>
                                             </div>
                                            

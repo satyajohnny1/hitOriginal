@@ -205,16 +205,14 @@ function clean($string) {
 	return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 }
 
+require_once __DIR__ . '/poster/storage.php';
 
-
-$serve_base = 'poster/serve.php?rid='.$rid;
-
-$path = $serve_base.'&type=main';
-$path_50 = $serve_base.'&type=50';
-$path_75 = $serve_base.'&type=75';
-$path_100 = $serve_base.'&type=100';
-$path_150 = $serve_base.'&type=150';
-$path_175 = $serve_base.'&type=175';
+$path     = poster_storage_web_url(poster_filename_for($title, $rid, 'main'));
+$path_50  = poster_storage_web_url(poster_filename_for($title, $rid, '50'));
+$path_75  = poster_storage_web_url(poster_filename_for($title, $rid, '75'));
+$path_100 = poster_storage_web_url(poster_filename_for($title, $rid, '100'));
+$path_150 = poster_storage_web_url(poster_filename_for($title, $rid, '150'));
+$path_175 = poster_storage_web_url(poster_filename_for($title, $rid, '175'));
 
 
 
@@ -365,30 +363,30 @@ $path_175 = $serve_base.'&type=175';
                                
                                         <div class="row">
                                            <div class="col-md-12" style="position:relative;display: none;" id="pos_0">
-                                                <img alt='REFRESH Page'  src="<?php echo $path?>" style="width: 100%">
+                                                <img alt='REFRESH Page'  src="<?php echo $path?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                             </div>
                                             
                                             <div class="col-md-12" style="position:relative; display: none;"   id="pos_150">
-                                                <img alt='REFRESH Page'  src="<?php echo $path_150?>" style="width: 100%">
+                                                <img alt='REFRESH Page'  src="<?php echo $path_150?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                             </div>
                                             
                                              <div class="col-md-12" style="position:relative; display: none;"   id="pos_75">
-                                                <img alt='REFRESH Page'  src="<?php echo $path_75?>" style="width: 100%">
+                                                <img alt='REFRESH Page'  src="<?php echo $path_75?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                             </div>
                                             
                                             
                                              <div class="col-md-12" style="position:relative; display: none;"   id="pos_50">
-                                                <img alt='REFRESH Page'  src="<?php echo $path_50?>" style="width: 100%">
+                                                <img alt='REFRESH Page'  src="<?php echo $path_50?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                             </div>
                                             
                                             <div class="col-md-12" style="position:relative; display: none;"   id="pos_100">
-                                                <img alt='REFRESH Page'  src="<?php echo $path_100?>" style="width: 100%">
+                                                <img alt='REFRESH Page'  src="<?php echo $path_100?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                             </div>
                                             
                                             
                                             
                                             <div class="col-md-12" style="position:relative; display: none;"   id="pos_175">
-                                                <img alt='REFRESH Page'  src="<?php echo $path_175?>" style="width: 100%">
+                                                <img alt='REFRESH Page'  src="<?php echo $path_175?>" style="width: 100%" onerror="this.onerror=null;this.src='poster/placeholder.png'">
                                             </div>
                                         </div>
                                         <div class="row" style="margin-top:10px;">
@@ -603,39 +601,36 @@ $path_175 = $serve_base.'&type=175';
          //alert(poster);
 
        // 
-       if(poster=='no')
+        if(poster=='no')
         {
-            	var b 	= 		'<?php echo $_SESSION['s_banner']; ?>';
-    			var p 	= 		'<?php echo $_SESSION['s_user']; ?>';
-    			var d	=		'<?php echo $dname; ?>' ;   
-    			var a 	=		'<?php echo $aname; ?>' ;   
-    			var ac	=		'<?php echo $acname; ?>' ;  
-    			var c 	=		'<?php echo $cinename; ?>' ;
-    			var e	=		'<?php echo $ediname; ?>' ; 
-    			var m	=		'<?php echo $musname; ?>' ; 
-    			var w	=		'<?php echo $wriname; ?>' ;
-    			var tit =		'<?php echo $title; ?>' ;
-    			var fif	=		'<?php echo $fif; ?>' ; 
-    			var hun	=		'<?php echo $hun; ?>' ; 
-    			var fiv	=		'<?php echo $five; ?>' ; 
-    			var rid = 		'<?php echo $rid?>';
-    			var t5 = 		'<?php echo $t5?>';
-    			var sev = 		'<?php echo $sev?>';
-    			var onf = 		'<?php echo $onf?>';
+            	var b 	= 		'<?php echo addslashes($_SESSION['s_banner'] ?? ''); ?>';
+    			var p 	= 		'<?php echo addslashes($_SESSION['s_user'] ?? ''); ?>';
+    			var d	=		'<?php echo addslashes($dname); ?>' ;   
+    			var a 	=		'<?php echo addslashes($aname); ?>' ;   
+    			var ac	=		'<?php echo addslashes($acname); ?>' ;  
+    			var c 	=		'<?php echo addslashes($cinename); ?>' ;
+    			var e	=		'<?php echo addslashes($ediname); ?>' ; 
+    			var m	=		'<?php echo addslashes($musname); ?>' ; 
+    			var w	=		'<?php echo addslashes($wriname); ?>' ;
+    			var tit =		'<?php echo addslashes($title); ?>' ;
+    			var fif	=		'<?php echo (int) ($fif ?? 0); ?>' ; 
+    			var hun	=		'<?php echo (int) ($hun ?? 0); ?>' ; 
+    			var fiv	=		'<?php echo (int) ($five ?? 0); ?>' ; 
+    			var rid = 		'<?php echo (int) $rid; ?>';
+    			var t5 = 		'<?php echo (int) ($t5 ?? 0); ?>';
+    			var sev = 		'<?php echo (int) ($sev ?? 0); ?>';
+    			var onf = 		'<?php echo (int) ($onf ?? 0); ?>';
 
-    			var a2 = 		'<?php echo $_a2_name?>';
-    			var a3 = 		'<?php echo $_a3_name?>';
-    			var ac2 = 		'<?php echo $_ac2_name?>';
-    			var ac3 = 		'<?php echo $_ac3_name?>';
-    			var d2 = 		'<?php echo $_d2_name?>';
-    			var d3 = 		'<?php echo $_d3_name?>';
-    			var m2 = 		'<?php echo $_m2_name?>';
-    			var m3 = 		'<?php echo $_m3_name?>';
-    			var w2 = 		'<?php echo $_w2_name?>';
-    			var w3 = 		'<?php echo $_w3_name?>';
-
-    			var a2Chk = '<?php echo $_a2?>';
-    			var a3Chk = '<?php echo $_a3?>';
+    			var a2 = 		'<?php echo addslashes($_a2_name ?? ''); ?>';
+    			var a3 = 		'<?php echo addslashes($_a3_name ?? ''); ?>';
+    			var ac2 = 		'<?php echo addslashes($_ac2_name ?? ''); ?>';
+    			var ac3 = 		'<?php echo addslashes($_ac3_name ?? ''); ?>';
+    			var d2 = 		'<?php echo addslashes($_d2_name ?? ''); ?>';
+    			var d3 = 		'<?php echo addslashes($_d3_name ?? ''); ?>';
+    			var m2 = 		'<?php echo addslashes($_m2_name ?? ''); ?>';
+    			var m3 = 		'<?php echo addslashes($_m3_name ?? ''); ?>';
+    			var w2 = 		'<?php echo addslashes($_w2_name ?? ''); ?>';
+    			var w3 = 		'<?php echo addslashes($_w3_name ?? ''); ?>';
 
 				var url = window.location.href;
 				var arr = url.split("/"); 
@@ -643,15 +638,13 @@ $path_175 = $serve_base.'&type=175';
 				
 				if(hostname.includes("localhost")){
 					hostname = hostname+"/hit";
-					//alert(hostname);
 				}
 					
-    			 var plink = hostname+'/poster/poster-v2.php?rid='+rid+'&b='+b+'&p='+p+'&d='+d+'&a='+a+'&ac='+ac+'&c='+c+'&e='+e+'&m='+m+'&w='+w+'&tit='+tit+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
-   			  +'&a2='+a2+'&a3='+a3+'&ac2='+ac2+'&ac3='+ac3+'&d2='+d2+'&d3='+d3+'&w2='+w2+'&w3='+w3+'&m2='+m2+'&m3='+m3;
-   			 
-    		
-				
-    			// poster-v2.php auto-detects hero count from a2/a3 params
+    			 var plink = hostname+'/poster/poster-v2.php?rid='+rid+'&b='+encodeURIComponent(b)+'&p='+encodeURIComponent(p)+'&d='+encodeURIComponent(d)+'&a='+encodeURIComponent(a)+'&ac='+encodeURIComponent(ac)+'&c='+encodeURIComponent(c)+'&e='+encodeURIComponent(e)+'&m='+encodeURIComponent(m)+'&w='+encodeURIComponent(w)+'&tit='+encodeURIComponent(tit)+'&raw_title='+encodeURIComponent('<?php echo addslashes(strtoupper($title)); ?>')+'&notes='+encodeURIComponent('<?php echo addslashes($notes ?? ""); ?>')+'&fif='+fif+'&hun='+hun+'&fiv='+fiv+'&t5='+t5+'&sev='+sev+'&onf='+onf
+   			  +'&a2='+encodeURIComponent(a2)+'&a3='+encodeURIComponent(a3)+'&ac2='+encodeURIComponent(ac2)+'&ac3='+encodeURIComponent(ac3)+'&d2='+encodeURIComponent(d2)+'&d3='+encodeURIComponent(d3)+'&w2='+encodeURIComponent(w2)+'&w3='+encodeURIComponent(w3)+'&m2='+encodeURIComponent(m2)+'&m3='+encodeURIComponent(m3);
+
+    			// poster-v2.php auto-detects hero count from a2/a3 params and
+    			// sets tolly_release.poster='yes' only after a successful save.
 
 				console.log("hostname : "+hostname);
     			console.log("plink ::"+plink);
@@ -664,17 +657,17 @@ $path_175 = $serve_base.'&type=175';
     			                url: plink,
     			                success: function(data) {
     			                    toastr.success("<h2>Poster done </h2>");
-    			                    <?php 
-    	    			                    $sql = "UPDATE `tolly_release` SET `poster`='yes' WHERE  `rid`=".$rid;
-    	    			                    mysqli_query($conn, $sql);
-
-    										?>
+    			                    $('#pos_0 img').attr('src', posterBust('<?php echo $path?>'));
+    			                    $('#pos_50 img').attr('src', posterBust('<?php echo $path_50?>'));
+    			                    $('#pos_75 img').attr('src', posterBust('<?php echo $path_75?>'));
+    			                    $('#pos_100 img').attr('src', posterBust('<?php echo $path_100?>'));
+    			                    $('#pos_150 img').attr('src', posterBust('<?php echo $path_150?>'));
+    			                    $('#pos_175 img').attr('src', posterBust('<?php echo $path_175?>'));
     			                },
     			                error: function(xhr, status, errorThrown) {
     			                    toastr.error(errorThrown+"Sorry!"+xhr+" --- "+status);
     			                }
     			            })
-    			            setTimeout("location.reload(true);", 15000);  
     			              
         }
 
@@ -683,6 +676,10 @@ function showPoster(type) {
     $.each(ids, function(k, id){ $('#'+id).hide(); });
     var target = ids[type] || 'pos_0';
     $('#'+target).show();
+}
+
+function posterBust(src) {
+    return src + (src.indexOf('?') > -1 ? '&' : '?') + 'v=' + new Date().getTime();
 }
 
 $('#posterRegenBtn').on('click', function(){
@@ -730,13 +727,12 @@ $('#posterRegenBtn').on('click', function(){
         url: plink,
         success: function(data) {
             toastr.success("<h2>Poster regenerated</h2>");
-            var bust = '?v=' + new Date().getTime();
-            $('#pos_0 img').attr('src', '<?php echo $path?>' + bust);
-            $('#pos_50 img').attr('src', '<?php echo $path_50?>' + bust);
-            $('#pos_75 img').attr('src', '<?php echo $path_75?>' + bust);
-            $('#pos_100 img').attr('src', '<?php echo $path_100?>' + bust);
-            $('#pos_150 img').attr('src', '<?php echo $path_150?>' + bust);
-            $('#pos_175 img').attr('src', '<?php echo $path_175?>' + bust);
+            $('#pos_0 img').attr('src', posterBust('<?php echo $path?>'));
+            $('#pos_50 img').attr('src', posterBust('<?php echo $path_50?>'));
+            $('#pos_75 img').attr('src', posterBust('<?php echo $path_75?>'));
+            $('#pos_100 img').attr('src', posterBust('<?php echo $path_100?>'));
+            $('#pos_150 img').attr('src', posterBust('<?php echo $path_150?>'));
+            $('#pos_175 img').attr('src', posterBust('<?php echo $path_175?>'));
             btn.prop('disabled', false);
         },
         error: function(xhr, status, errorThrown) {

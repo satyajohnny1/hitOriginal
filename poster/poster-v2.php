@@ -26,12 +26,12 @@ if (!function_exists('drawHero')) {
 }
 
 if (!function_exists('poster_base_canvas')) {
-	// Force an exact 1000x800 canvas so every poster matches the historical size,
-	// regardless of the source background's native dimensions.
+	// Force an exact 1200x800 canvas so every poster is consistent, regardless
+	// of the source background's native dimensions.
 	function poster_base_canvas($bgPath) {
-		$src = safe_imagecreatefromjpeg($bgPath, 1000, 800);
-		$canvas = imagecreatetruecolor(1000, 800);
-		imagecopyresampled($canvas, $src, 0, 0, 0, 0, 1000, 800, imagesx($src), imagesy($src));
+		$src = safe_imagecreatefromjpeg($bgPath, 1200, 800);
+		$canvas = imagecreatetruecolor(1200, 800);
+		imagecopyresampled($canvas, $src, 0, 0, 0, 0, 1200, 800, imagesx($src), imagesy($src));
 		imagedestroy($src);
 		return $canvas;
 	}
@@ -141,14 +141,14 @@ if ($num >= 1 && $num < 10) {
 error_log("POSTER[7]: colors set num=$num");
 
 if ($hero_count === 1) {
-	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a)) . ".png", 300);
+	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a)) . ".png", 400);
 } elseif ($hero_count === 2) {
-	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a)) . ".png", 450);
-	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a2)) . ".png", 100);
+	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a)) . ".png", 575);
+	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a2)) . ".png", 225);
 } else {
-	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a)) . ".png", 300);
-	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a2)) . ".png", 70);
-	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a3)) . ".png", 550);
+	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a)) . ".png", 390);
+	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a2)) . ".png", 160);
+	drawHero($jpg_image, $base . "/actors/" . clean(strtolower($a3)) . ".png", 640);
 }
 error_log("POSTER[8]: heroes drawn");
 
@@ -168,13 +168,13 @@ if ($hero_count === 3) $actor_text = $a . ' - ' . $a2 . ' - ' . $a3;
 if (!empty($ac)) $actor_text .= ' - ' . $ac;
 $actor_box = @imagettfbbox(17, 0, $fnt, $actor_text);
 $actor_w = abs($actor_box[4] - $actor_box[0]);
-$actor_x = intval((1000 - $actor_w) / 2);
+$actor_x = intval((1200 - $actor_w) / 2);
 @imagettftext($jpg_image, 17, 0, $actor_x, 390, $cclr, $fnt, $actor_text);
 error_log("POSTER[11]: actor text");
 
 $ul_box = @imagettfbbox(35, 0, $fnt, "______________________________________");
 $ul_w = abs($ul_box[4] - $ul_box[0]);
-$ul_x = intval((1000 - $ul_w) / 2);
+$ul_x = intval((1200 - $ul_w) / 2);
 @imagettftext($jpg_image, 35, 0, $ul_x, 395, $tclr, $fnt, "______________________________________");
 
 $title_max_w = 760;
@@ -186,13 +186,13 @@ while ($title_w > $title_max_w && $title_fonsiz > 30) {
 	$title_box = @imagettfbbox($title_fonsiz, 0, $tfnt, $disp_title);
 	$title_w = abs($title_box[4] - $title_box[0]);
 }
-$title_x = intval((1000 - $title_w) / 2);
+$title_x = intval((1200 - $title_w) / 2);
 @imagettftext($jpg_image, $title_fonsiz, 0, $title_x, 490, $tclr, $tfnt, $disp_title);
 error_log("POSTER[12]: title text size=$title_fonsiz width=$title_w");
 
 $ul2_box = @imagettfbbox(35, 0, $fnt, "______________________________________");
 $ul2_w = abs($ul2_box[4] - $ul2_box[0]);
-$ul2_x = intval((1000 - $ul2_w) / 2);
+$ul2_x = intval((1200 - $ul2_w) / 2);
 @imagettftext($jpg_image, 35, 0, $ul2_x, 500, $tclr, $fnt, "______________________________________");
 
 $fonsiz = 35;
@@ -207,12 +207,12 @@ while ($dir_w > $dir_max_w && $fonsiz > 14) {
 	$dir_box = @imagettfbbox($fonsiz, 0, $fnt, $dir_text);
 	$dir_w = abs($dir_box[4] - $dir_box[0]);
 }
-$dir_x = intval((1000 - $dir_w) / 2);
+$dir_x = intval((1200 - $dir_w) / 2);
 @imagettftext($jpg_image, $fonsiz, 0, $dir_x, 550, $cclr, $fnt, $dir_text);
 
 $prod_box = @imagettfbbox(28, 0, $fnt, $p);
 $prod_w = abs($prod_box[4] - $prod_box[0]);
-$prod_x = intval((1000 - $prod_w) / 2);
+$prod_x = intval((1200 - $prod_w) / 2);
 @imagettftext($jpg_image, 28, 0, $prod_x, 600, $cclr, $fnt, $p);
 
 $crew_text = $m . ' ' . $m2 . ' ' . $m3 . '-' . $w . ' ' . $w2 . ' ' . $w3 . ' - ' . $e . ' - ' . $c;
@@ -224,7 +224,7 @@ while ($crew_w > 860 && $crew_fonsiz > 8) {
 	$crew_box = @imagettfbbox($crew_fonsiz, 0, $fnt, $crew_text);
 	$crew_w = abs($crew_box[4] - $crew_box[0]);
 }
-$crew_x = intval((1000 - $crew_w) / 2);
+$crew_x = intval((1200 - $crew_w) / 2);
 @imagettftext($jpg_image, $crew_fonsiz, 0, $crew_x, 630, $cclr, $fnt, $crew_text);
 
 $notes_raw = trim(safeGET("notes"));
@@ -240,7 +240,7 @@ if (!empty($notes_raw) && $notes_raw !== '-- NOTES--') {
 		$codir_box = @imagettfbbox($codir_fonsiz, 0, $fnt, $codir_text);
 		$codir_w = abs($codir_box[4] - $codir_box[0]);
 	}
-	$codir_x = intval((1000 - $codir_w) / 2);
+	$codir_x = intval((1200 - $codir_w) / 2);
 	$bright_colors = [
 		[255,255,0], [255,0,255], [0,255,255], [255,128,0],
 		[128,0,255], [0,255,128], [255,0,128], [128,255,0],
@@ -262,14 +262,14 @@ $main_saved = poster_storage_save($file_main, $main_bytes);
 error_log("POSTER[15]: imagejpeg result=" . ($jpeg_ok ? 'OK' : 'FAIL') . " storage=" . ($main_saved ? 'OK' : 'FAIL') . " bytes=" . strlen($main_bytes));
 
 if ($hero_count === 3) {
-	$m_day_x = 480;  $m_day_y = 800;
-	$m_days_x = 700; $m_days_y = 800; $m_days_sz = 25;
-	$m_cen_x = 300;  $m_cen_y = 700;  $m_cen_sz = 30;
+	$m_day_x = 580;  $m_day_y = 800;
+	$m_days_x = 800; $m_days_y = 800; $m_days_sz = 25;
+	$m_cen_x = 400;  $m_cen_y = 700;  $m_cen_sz = 30;
 	$m_ang = 0;
 } else {
-	$m_day_x = 680;  $m_day_y = 275;
-	$m_days_x = 820; $m_days_y = 320; $m_days_sz = 34;
-	$m_cen_x = 750;  $m_cen_y = 55;   $m_cen_sz = 32;
+	$m_day_x = 780;  $m_day_y = 275;
+	$m_days_x = 920; $m_days_y = 320; $m_days_sz = 34;
+	$m_cen_x = 850;  $m_cen_y = 55;   $m_cen_sz = 32;
 	$m_ang = 0;
 }
 
@@ -289,15 +289,15 @@ foreach ($milestones as $ms) {
 	if ($use_val > 0) {
 		$ms_count++;
 		error_log("POSTER[16]: milestone $use_label saving to " . $ms['file']);
-		$ms_img = imagecreatetruecolor(1000, 800);
-		imagecopy($ms_img, $jpg_image, 0, 0, 0, 0, 1000, 800);
+		$ms_img = imagecreatetruecolor(1200, 800);
+		imagecopy($ms_img, $jpg_image, 0, 0, 0, 0, 1200, 800);
 
 		$day_angle = $m_ang;
 		if ($hero_count === 3 && in_array($use_label, ['75', '150', '175'])) {
 			$day_angle = 20;
-			$day_x = 680; $day_y = 500;
-			$days_x = 900; $days_y = 320; $days_sz = 34;
-			$cen_x = 790; $cen_y = 490; $cen_sz = 30;
+			$day_x = 780; $day_y = 500;
+			$days_x = 1000; $days_y = 320; $days_sz = 34;
+			$cen_x = 890; $cen_y = 490; $cen_sz = 30;
 		} else {
 			$day_angle = 0;
 			$day_x = $m_day_x; $day_y = $m_day_y;
@@ -321,3 +321,17 @@ error_log("POSTER[18]: $ms_count milestones done");
 
 imagedestroy($jpg_image);
 error_log("POSTER[19]: COMPLETE");
+
+// Mark the poster as generated only after the main image actually saved.
+// This keeps tolly_release.poster='no' when generation fails or the request
+// is killed mid-way, so the next page load retries automatically instead of
+// leaving a placeholder that requires a manual regenerate.
+if ($rid !== '' && $main_saved) {
+	require_once __DIR__ . '/../db.php';
+	if (!empty($conn)) {
+		$rid_i = intval($rid);
+		@mysqli_query($conn, "UPDATE tolly_release SET poster='yes' WHERE rid=$rid_i");
+		@mysqli_close($conn);
+		error_log("POSTER[20]: DB poster=yes rid=$rid_i");
+	}
+}
