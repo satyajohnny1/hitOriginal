@@ -57,61 +57,61 @@ include __DIR__ . '/session_init.php';
                                                             </thead>
 													<!-- actor serach code -->
                                                         
-                                                            <tbody>
+                                                             <tbody>
                                                              <?php 
                                                     			include 'db.php'; 
 
-                                                                
-
                                                             $sql = "SELECT MAX(rid) AS max_page FROM tolly_ready_for_shoot";
-                                                                echo '<p>'.$sql.'</p>';
                                                                 $result = mysqli_query ( $conn, $sql );	 
                                                                 if (mysqli_num_rows ( $result ) > 0) {
                                                                 $row = mysqli_fetch_assoc($result);
-                                                                
-                                                            
                                                                 $oriid = $row["max_page"];
-
-                                                                
                                                                 $minid = floor($oriid/100)*100;
                                                                 $maxid = ceil($oriid/100)*100; 
-                                                                echo "<p> Check me : $minid, $maxid , $oriid</p> ";
-                                                                }    
+                                                                } else {
+                                                                $minid = 0;
+                                                                $maxid = 0;
+                                                                }
 
-                                                    			$sql = "SELECT * FROM `tolly_actor` WHERE 
-`actor_id` NOT IN (SELECT `aid` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) AND 
-`actor_id` NOT IN (SELECT `a2` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) AND 
-`actor_id` NOT IN (SELECT `a3` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) ";
+                                                    			$sql = "SELECT a.*, COALESCE(m.total_pl, 0) AS pl
+FROM `tolly_actor` a
+LEFT JOIN (
+    SELECT actor_id, SUM(collection - budget) AS total_pl
+    FROM (
+        SELECT aid AS actor_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out'
+        UNION ALL
+        SELECT a2 AS actor_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND a2 > 0
+        UNION ALL
+        SELECT a3 AS actor_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND a3 > 0
+    ) t
+    GROUP BY actor_id
+) m ON a.actor_id = m.actor_id
+WHERE a.actor_id NOT IN (SELECT `aid` FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid)
+  AND a.actor_id NOT IN (SELECT `a2` FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid)
+  AND a.actor_id NOT IN (SELECT `a3` FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid)";
 
-                                                                 echo '<code>'.$sql.'</code>';
                                                     			$result = mysqli_query($conn, $sql);
                                                     			
                                                     			if (mysqli_num_rows($result) > 0) {
-                                                    				// output data of each row
                                                     				while($row = mysqli_fetch_assoc($result)) {
                                                     					$dir_id = $row["actor_id"];
                                                     					$dir_name = $row["actor_name"];
                                                     					$dir_rate = $row["actor_rate"];
                                                     					$dir_pic = $row["actor_pic"];                                                    					
-                                                    					$dir_cr = round(($dir_rate/10000000),2);   
+                                                    					$dir_cr = round(($dir_rate/10000000),2);
+                                                    					$pl_cr = round(($row["pl"]/10000000),2);   
                                                     					echo "<tr>";
                                                     					echo  "<td><img class=\"img-circle avatar\" src=\"$dir_pic\" width=\"40\" height=\"40\"><a href='actor.php?id=$dir_id' class='btn'></a></td>";
                                                     					echo "<td><a href='actor.php?id=$dir_id' class='btn'>$dir_name</a></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
+                                                    					echo "<td data-order='$dir_cr'><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$row["actor_rating"]."</td>";
-																		echo "<td>".$row["pl"]."</td>"; 
-                                                    					
-                                                    					                                                    					
+                                                    					echo "<td data-order='$pl_cr'><b>".$pl_cr." CRORES</b></td>"; 
                                                     					echo  "</tr>"; 
-                                                    					 
-                                                    				
                                                     				}
                                                     			}  
                                                     			  
                                                                 ?>
-                                                            </tbody>                                          
-                                           
-                                        </tbody>
+                                                            </tbody>
                                        </table>  
                                     </div>
                                 </div>
@@ -149,34 +149,43 @@ include __DIR__ . '/session_init.php';
                                                             <tbody>
                                                              <?php 
                                                     			include 'db.php'; 
-                                                    			$sql = "SELECT * FROM tolly_director WHERE `director_id` NOT IN (SELECT `did` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) AND `director_id` NOT IN (SELECT `d2` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid) AND `director_id` NOT IN (SELECT `d3` FROM tolly_ready_for_shoot where rid BETWEEN $minid AND $maxid)";
+                                                    			$sql = "SELECT d.*, COALESCE(m.total_pl, 0) AS pl
+FROM tolly_director d
+LEFT JOIN (
+    SELECT director_id, SUM(collection - budget) AS total_pl
+    FROM (
+        SELECT did AS director_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out'
+        UNION ALL
+        SELECT d2 AS director_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND d2 > 0
+        UNION ALL
+        SELECT d3 AS director_id, rid, collection, budget FROM tolly_ready_for_shoot WHERE status = 'out' AND d3 > 0
+    ) t
+    GROUP BY director_id
+) m ON d.director_id = m.director_id
+WHERE d.director_id NOT IN (SELECT `did` FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid)
+  AND d.director_id NOT IN (SELECT `d2` FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid)
+  AND d.director_id NOT IN (SELECT `d3` FROM tolly_ready_for_shoot WHERE rid BETWEEN $minid AND $maxid)";
                                                     			$result = mysqli_query($conn, $sql);
                                                     			
                                                     			if (mysqli_num_rows($result) > 0) {
-                                                    				// output data of each row
                                                     				while($row = mysqli_fetch_assoc($result)) {
                                                     					$dir_id = $row["director_id"];
                                                     					$dir_name = $row["director_name"];
                                                     					$dir_rate = $row["director_rate"];
-                                                    					                                               					
-                                                    					$dir_cr = round(($dir_rate/10000000),2);   
+                                                    					$dir_cr = round(($dir_rate/10000000),2);
+                                                    					$pl_cr = round(($row["pl"]/10000000),2);   
                                                     					echo "<tr>";
                                                     					
                                                     					echo "<td><a href='director.php?id=$dir_id' class='btn'>$dir_name</a></td>";
-                                                     					echo "<td><b>".$dir_cr." CRORES</b>";
+                                                    					echo "<td data-order='$dir_cr'><b>".$dir_cr." CRORES</b></td>";
                                                     					echo "<td>".$row["director_rating"]."</td>";   
-																		echo "<td>".$row["pl"]."</td>";                                                  					
-                                                    					                                                    					
+                                                    					echo "<td data-order='$pl_cr'><b>".$pl_cr." CRORES</b></td>";                                                  					
                                                     					echo  "</tr>"; 
-                                                    					 
-                                                    				
                                                     				}
                                                     			}  
                                                     			  
                                                                 ?>
-                                                            </tbody>                                          
-                                           
-                                        </tbody>
+                                                            </tbody>
                                        </table>  
                                     </div>
                                 </div>

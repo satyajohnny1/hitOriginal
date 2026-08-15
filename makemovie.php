@@ -1310,19 +1310,7 @@ foreach ($rangeTypes as $rt) {
 		example: { "columnDefs": [{ "type": "num", "targets": [2, 5] }] },
 		example3: { "columnDefs": [{ "type": "html-num", "targets": [1, 2, 3, 4] }] },
 		"example-editable": {},
-		example2: { "columnDefs": [{ "visible": false, "targets": 2 }], "order": [[ 2, 'asc' ]], "displayLength": 25,
-			"drawCallback": function(settings) {
-				var api = this.api();
-				var rows = api.rows({page:'current'}).nodes();
-				var last = null;
-				api.column(2, {page:'current'}).data().each(function(group, i) {
-					if (last !== group) {
-						$(rows).eq(i).before('<tr class="group"><td colspan="5">'+group+'</td></tr>');
-						last = group;
-					}
-				});
-			}
-		}
+		example2: { "columnDefs": [{ "type": "html-num", "targets": [1, 2, 3, 4] }] }
 	};
 
 	$(function() {
@@ -1330,6 +1318,11 @@ foreach ($rangeTypes as $rt) {
 			$('#example3').DataTable().destroy();
 		}
 		$('#example3').DataTable(dtConfigs['example3']);
+
+		if ($.fn.DataTable && $.fn.DataTable.isDataTable('#example2')) {
+			$('#example2').DataTable().destroy();
+		}
+		$('#example2').DataTable(dtConfigs['example2']);
 	});
 
 	function filterTab(el) {

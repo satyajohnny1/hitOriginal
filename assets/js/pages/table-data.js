@@ -89,11 +89,18 @@ $(document).ready(function() {
     }
     
     if ($('#example').length > 0 && !$.fn.DataTable.isDataTable('#example')) {
-        $('#example').DataTable({
-            "columnDefs": [
-                { "type": "num", "targets": [2, 5] }
-            ]
+        var exampleTargets = [2, 5].filter(function (t) {
+            return t < $('#example thead th').length;
         });
+        if (exampleTargets.length) {
+            $('#example').DataTable({
+                "columnDefs": [
+                    { "type": "num", "targets": exampleTargets }
+                ]
+            });
+        } else {
+            $('#example').DataTable();
+        }
     }
     if ($('#example-editable').length > 0 && !$.fn.DataTable.isDataTable('#example-editable')) {
         $('#example-editable').DataTable();
