@@ -232,7 +232,7 @@ h3 {
                                 $array150 = array_diff($array150,$array175);
                                 $array175 = array_diff($array175,$array200);
                                 $array200 = array_diff($array200,$array250);
-                                $array250 = array_diff($array250,$array275);
+                                $array250 = array_diff($array250,$array300);
                                 
 
 
